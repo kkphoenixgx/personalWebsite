@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"aaron-bond.better-comments",
+			"alefragnani.Bookmarks",
+			"dzhavat.bracket-pair-toggler",
+			"dbaeumer.vscode-eslint",
+			"PKief.material-icon-theme",
+			"christian-kohler.path-intellisense",
+			"tinaciousdesign.theme-tinaciousdesign",
+			"Angular.ng-template",
+			"formulahendry.auto-close-tag",
+			"moppitz.vscode-extension-auto-import",
+			"formulahendry.auto-rename-tag",
+			"christian-kohler.npm-intellisense",
+			"sibiraj-s.vscode-scss-formatter"
+		]
+	},
+	"settings": {
+		"workbench.iconTheme": "material-icon-theme",
+		"workbench.colorTheme": "Tinacious Design (High Contrast)"
+	}
+}

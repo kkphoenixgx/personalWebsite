@@ -1,0 +1,13 @@
+<header>
+
+  <div class="container">
+    <mat-icon style="color: white; margin-left: 2vw;">menu</mat-icon>
+    <div class="canvas" id="canvas"></div>
+    <mat-icon style="color: white; margin-right: 2vw;" (click)="handleMenuClick()" >settings</mat-icon>
+  </div>
+
+  <div *ngIf="toogleLamp" >
+    <app-lamp></app-lamp>
+  </div>
+
+</header>
