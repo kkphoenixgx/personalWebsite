@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { LampComponent } from './lamp/lamp.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -10,11 +11,13 @@ import { LampComponent } from './lamp/lamp.component';
   imports: [
     CommonModule,
     HeaderComponent,
-    LampComponent
+    LampComponent,
+    FooterComponent
   ],
   exports: [
     HeaderComponent,
-    LampComponent
+    LampComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

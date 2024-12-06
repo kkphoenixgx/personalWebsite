@@ -1,89 +1,201 @@
-import { Component, OnInit } from '@angular/core';
-
-// Icons
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+  Injector,
+  ComponentRef
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-
-import * as THREE from 'three';
-// Add-ons Three.js
-
-import {FontLoader} from "three/examples/jsm/loaders/FontLoader.js"
-import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js"
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CommonModule } from '@angular/common';
-import { LampComponent } from '../lamp/lamp.component';
+import { Text3dComponent } from '../text3d/text3d.component';
+import { SideMenuComponent } from '../side-menu/side-menu.component';
+import { AnimationControllerService } from '../../service/animation-controller.service';
+import { DarkModeControllerService } from '../../service/dark-mode-controller.service';
+import { SideBarMenuControllerService } from '../../service/side-bar-menu-controller.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIconModule, CommonModule, LampComponent],
+  imports: [MatIconModule, CommonModule, Text3dComponent, SideMenuComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss']
 })
+export class HeaderComponent implements OnInit, AfterViewInit {
+  public toogleConfigMenu = false;
+  public toogleSideBarMenu = false;
+  public toogleSettingsAnimate = false;
+  public readyToContent = false;
+  public toogleLamp = false;
+  public isDarkMode = true;
+  public toogleBtnDarkMode = true;
+  public toogleAnimations = true;
+  public toogleDarkMode = true;
 
-export class HeaderComponent implements OnInit {
-  
-    public toogleLamp: boolean = false;
-  
-    ngOnInit(): void {
-  
-      const canvas = document.querySelector("#canvas") as HTMLCanvasElement ;
-      const renderer = new THREE.WebGLRenderer();
-  
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color('black');
-      scene.fog = new THREE.Fog(0xffffff, 0, 750);
-  
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7)
-      scene.add(ambientLight)
-  
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100);
-      // camera.position.y = 2;
-      camera.position.z = 2;
-  
-  
-      const controls = new OrbitControls(camera, renderer.domElement);
-  
-      renderer.setSize( window.innerWidth *0.15, window.innerHeight * 0.15 );
-      canvas?.appendChild( renderer.domElement );
-  
-      //Fonts
-      const fontLoader = new FontLoader()
-      fontLoader.load(
-          '../../../assets/fonts/Merriweather_Regular.json', (font) => {
-              const textGeometry = new TextGeometry(
-                  'KKPHOENIX',
-                  {
-                      font: font,
-                      size: 0.5,
-                      height: 0.1,
-                      curveSegments: 12,
-                      bevelEnabled: true,
-                      bevelThickness: 0.001,
-                      bevelSize: 0.002,
-                      bevelOffset: 0,
-                      bevelSegments: 1
-                  }
-              )
-  
-              const textMaterial = new THREE.MeshBasicMaterial()
-              const text = new THREE.Mesh(textGeometry, textMaterial)
-              text.position.x-=2
-              text.position.y = -0.2
-              scene.add(text)
-          }
-      )
-  
-      const animate = () => {
-          requestAnimationFrame(animate)
-          renderer.render(scene, camera);
-      }
-  
-      animate();
-    }
-  
-    handleMenuClick(): void {
-      this.toogleLamp = !this.toogleLamp;
+  @ViewChild('lampContainer', { read: ViewContainerRef }) lampContainer!: ViewContainerRef;
 
+  private lampComponentRef!: ComponentRef<any>;
+
+  constructor(
+    private animateService: AnimationControllerService,
+    private darkModeService: DarkModeControllerService,
+    private sideBarService: SideBarMenuControllerService,
+    private injector: Injector
+  ) {}
+
+  ngOnInit(): void {
+    // Observers para estado de animação e modo escuro
+    this.animateService.getAnimationState().subscribe((state) => {
+      this.toogleAnimations = state;
+    });
+    this.darkModeService.getDarkModeState().subscribe((state) => {
+      this.toogleDarkMode = state;
+    });
+    this.sideBarService.getSideBarState().subscribe((state) => {
+      this.toogleSideBarMenu = state;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.readyToContent = true;
+    }, 5000);
+  }
+
+  async loadLampComponent() {
+    if (this.toogleLamp && !this.lampComponentRef) {
+      // Importa o LampComponent dinamicamente
+      const { LampComponent } = await import('../lamp/lamp.component');
+      // Cria a instância do componente
+      this.lampComponentRef = this.lampContainer.createComponent(LampComponent, {
+        injector: this.injector
+      });
+    } else if (!this.toogleLamp && this.lampComponentRef) {
+      // Remove o componente se toggle estiver desativado
+      this.lampComponentRef.destroy();
+      this.lampComponentRef = null as any;
     }
-  
+  }
+
+  handleToogleLamp() {
+    this.toogleLamp = !this.toogleLamp;
+    this.toogleBtnDarkMode = !this.toogleBtnDarkMode;
+    this.loadLampComponent();
+  }
+
+  handleToogleAnimations() {
+    this.animateService.setAnimations(!this.toogleAnimations);
+  }
+
+  handleMenuClick(): void {
+    const menu = document.querySelector('#configMenuContainer') as HTMLDivElement;
+
+    if (!this.toogleConfigMenu) {
+      menu.style.right = '0vw';
+      this.toogleConfigMenu = true;
+      this.toogleSettingsAnimate = true;
+    } else {
+      menu.style.right = '-50vw';
+      this.toogleConfigMenu = false;
+      this.toogleSettingsAnimate = false;
+    }
+  }
+
+  handleSideBarMenu(): void {
+    this.sideBarService.setSideBar(!this.toogleSideBarMenu);
+  }
 }
+
+
+// import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
+
+// // Icons
+// import { MatIconModule } from '@angular/material/icon';
+
+
+// import { CommonModule } from '@angular/common';
+// import { LampComponent } from '../lamp/lamp.component';
+// import { AnimationControllerService } from '../../service/animation-controller.service';
+// import { DarkModeControllerService } from '../../service/dark-mode-controller.service';
+// import { Text3dComponent } from "../text3d/text3d.component";
+// import { SideMenuComponent } from '../side-menu/side-menu.component';
+// import { SideBarMenuControllerService } from '../../service/side-bar-menu-controller.service';
+
+// @Component({
+//   selector: 'app-header',
+//   standalone: true,
+//   imports: [MatIconModule, CommonModule, LampComponent, Text3dComponent, SideMenuComponent],
+//   templateUrl: './header.component.html',
+//   styleUrl: './header.component.scss'
+// })
+
+// export class HeaderComponent implements OnInit, AfterViewInit {
+
+
+//   public toogleConfigMenu: boolean = false;
+//   public toogleSideBarMenu :boolean = false;
+
+//   public toogleSettingsAnimate: boolean = false;
+
+//   public readyToContent :boolean = false;
+
+//   public toogleLamp: boolean = false;
+//   public isDarkMode: boolean = true;
+//   public toogleBtnDarkMode: boolean = true;
+
+//   public toogleAnimations: boolean = true;
+//   public toogleDarkMode :boolean = true;
+  
+//   constructor(
+//     private animateService :AnimationControllerService,
+//     private darkModeService :DarkModeControllerService,
+//     private sideBarService :SideBarMenuControllerService
+//   ){}
+
+//   handleToogleLamp(){
+//     this.toogleLamp = !this.toogleLamp;
+//     this.toogleBtnDarkMode = !this.toogleBtnDarkMode;
+//   }
+//   handleToogleAnimations(){
+//     this.animateService.setAnimations(!this.toogleAnimations);
+//   }
+//   handleMenuClick(): void {
+//     const menu = document.querySelector("#configMenuContainer") as HTMLDivElement;
+
+//     if(!this.toogleConfigMenu){
+//       menu.style.right = "0vw"
+//       this.toogleConfigMenu = true;
+//       this.toogleSettingsAnimate = true;
+//     }
+//     else{
+//       menu.style.right = "-50vw"
+//       this.toogleConfigMenu = false;
+//       this.toogleSettingsAnimate = false;
+//     }
+//   }
+//   handleSideBarMenu():void {
+//     this.sideBarService.setSideBar(!this.toogleSideBarMenu)
+//   }
+
+//   ngOnInit(): void {
+
+//     this.animateService.getAnimationState().subscribe(state=>{
+//       this.toogleAnimations = state;
+//     });
+//     this.darkModeService.getDarkModeState().subscribe(state=>{
+//       this.toogleDarkMode= state;
+//     });
+//     this.sideBarService.getSideBarState().subscribe(state=>{
+//       this.toogleSideBarMenu= state;
+//     });
+
+//   }
+
+//   ngAfterViewInit(): void {
+//     setTimeout(() => {
+//       this.readyToContent = true;
+//     }, 5000);
+//   }
+  
+// }

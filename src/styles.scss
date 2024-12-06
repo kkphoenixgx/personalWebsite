@@ -40,6 +40,7 @@ $personal-website-theme: mat.define-light-theme((
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
+    overflow-x: hidden;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,14 @@
+.canvas{
+  display: flex;
+  justify-content: center;
+}
+
+
+// ----------- Helpers -----------
+
+.hide-canvas{
+  display: none;
+}
+.show-canvas{
+  display: flex;
+}

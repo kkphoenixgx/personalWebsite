@@ -1,11 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import Matter, { Engine, Render, World, Bodies, Constraint, Runner, MouseConstraint, Mouse, Svg, Common, Vertices, Vector, Query } from 'matter-js';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import Matter, { Engine, Render, World, Bodies, Constraint, Runner, MouseConstraint, Mouse, Query } from 'matter-js';
+import { DarkModeControllerService } from '../../service/dark-mode-controller.service';
+import { Text3dService } from '../../service/text3d.service';
 
 @Component({
   selector: 'app-lamp',
   standalone: true,
   templateUrl: './lamp.component.html',
-  styleUrl: './lamp.component.scss'
+  styleUrls: ['./lamp.component.scss']
 })
 export class LampComponent implements OnInit, OnDestroy {
 
@@ -13,26 +15,79 @@ export class LampComponent implements OnInit, OnDestroy {
   private render: Matter.Render | undefined;
   private runner: Matter.Runner | undefined;
 
+  public isDarkMode: boolean = true;
+  private rotationInterval: any; // Para controlar a rotação do texto
+
+  constructor(
+    private darkModeService: DarkModeControllerService,
+    private text3dService: Text3dService,
+    private rendererTwo :Renderer2
+  ) {}
+
+  toogleDarkMode() {    
+    this.darkModeService.setDarkMode(!this.isDarkMode);
+  }
+
+  createBodyFromSVGImage(svgImage: HTMLImageElement, x: number, y: number, width: number, height: number) {
+    const body = Bodies.rectangle(x, y, width, height, {
+      render: {
+        sprite: {
+          texture: svgImage.src, 
+          xScale: 1, 
+          yScale: 1
+        }
+      }
+    });
+    return body;
+  }
+
+  private startTextRotation() {
+
+    if (this.rotationInterval) {
+      clearInterval(this.rotationInterval);
+      this.text3dService.resetRotationProgress();
+    }
+
+    this.rotationInterval = setInterval(() => {
+      this.text3dService.rotateTextOnce(0.5); // Ajuste a velocidade conforme necessário
+    }, 50);
+}
+
+
   ngOnInit(): void {
+    // on init lampcomponent
+
+    this.darkModeService.getDarkModeState().subscribe(state => {
+      this.isDarkMode = state;
+    });
+
+    // ----------- Lamp -----------
+
+    const canvas = this.rendererTwo.createElement('canvas');
+    const canvasContainer = document.querySelector('#canvas-container');
+    this.rendererTwo.appendChild(canvasContainer, canvas);
+    this.rendererTwo.setStyle(canvas, 'position','absolute');
+    this.rendererTwo.setStyle(canvas, 'top', '0px');
+    
 
     const engine = Engine.create();
     const runner = Runner.create();
     const render = Render.create({
       element: document.body,
       engine: engine,
+      canvas: canvas,
       options: {
         width: 700,
-        height: 400,
+        height: 300,
         wireframes: false,
         background: 'transparent',
       }
     });
+
     render.canvas.id = 'lampCanvas';
-    console.log(render.canvas);
-    
 
     engine.gravity.y = 0.5;
-  
+
     const string = Bodies.rectangle(100, 1, 40, 8, {
       isStatic: true,
       render: {
@@ -42,37 +97,34 @@ export class LampComponent implements OnInit, OnDestroy {
       }
     });
 
-    let onOFfToogle = false;
-    let lamp: Matter.Body
+    let onOffToggle = false;
+    let lamp: Matter.Body;
 
-    const createLampWithConstraint = () =>{
-
+    const createLampWithConstraint = () => {
       const svgImage = new Image();
-      svgImage.src = onOFfToogle? '../../../assets/lamp-on.svg' : '../../../assets/lamp-off.svg' ;
+      svgImage.src = onOffToggle ? '../../../assets/lamp-on.svg' : '../../../assets/lamp-off.svg';
 
       svgImage.onload = () => {
         lamp = this.createBodyFromSVGImage(svgImage, 0, 0, svgImage.width, svgImage.height);
 
         const constraint = Constraint.create({
           bodyA: lamp,
-          pointA: { x: 0, y: svgImage.height / 2 }, // Ponto de conexão na lâmpada
+          pointA: { x: 0, y: svgImage.height / 2 },
           bodyB: string,
-          pointB: { x: 0, y: 10 }, // Ponto de conexão na linha
-          length: 300, // Comprimento inicial da corda (definido como um valor maior)
-          stiffness: 0.1, // Rigidez da restrição (valor menor para tornar a corda mais mole)
+          pointB: { x: 0, y: 10 },
+          length: 170,
+          stiffness: 0.1,
           render: {
-            strokeStyle: '#2e2e2e' // Cor da corda
+            strokeStyle: '#2e2e2e'
           }
         });
       
         World.add(engine.world, [lamp as unknown as Matter.Body, string, constraint]);
-
       };
-      
     }
-  
+
     createLampWithConstraint();
-    
+
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
@@ -91,46 +143,39 @@ export class LampComponent implements OnInit, OnDestroy {
         y: event.clientY - render.canvas.getBoundingClientRect().top
       };
       const bodiesUnderMouse = Query.point(engine.world.bodies, mousePosition);
-    
+
       bodiesUnderMouse.forEach((body) => {
         if (body === lamp) {
-
-          onOFfToogle = !onOFfToogle;
+          onOffToggle = !onOffToggle;
           let svgImage = new Image();
-          svgImage.src = onOFfToogle ? '../../../assets/lamp-on.svg' : '../../../assets/lamp-off.svg';
+          svgImage.src = onOffToggle ? '../../../assets/lamp-on.svg' : '../../../assets/lamp-off.svg';
           
           if (lamp.render && lamp.render.sprite && lamp.render.sprite.texture !== svgImage.src) {
             lamp.render.sprite.texture = svgImage.src;
           }
+
+          this.toogleDarkMode();
+          
+          // Rotaciona o texto quando a lâmpada é clicada
+          this.startTextRotation(); 
           
           console.log("click");
         }
       });
     });
 
-  
     World.add(engine.world, mouseConstraint);
-  
-    // Executar a simulação
+
     Runner.run(runner, engine);
     Render.run(render);
 
     this.engine = engine;
     this.render = render;
     this.runner = runner;
-
-    let canvas = document.querySelector("#lampCanvas") as HTMLCanvasElement
-    canvas.style.position = "absolute"
-    canvas.style.top = "0px"
     
-  
   }
 
   ngOnDestroy(): void {
-
-    console.log("destroyed");
-    
-
     if (this.runner) Runner.stop(this.runner);
     if (this.engine) {
       World.clear(this.engine.world, false); // Limpa todos os corpos no mundo
@@ -141,23 +186,16 @@ export class LampComponent implements OnInit, OnDestroy {
       if (this.render.canvas && this.render.canvas.parentNode) {
         this.render.canvas.parentNode.removeChild(this.render.canvas); // Remove o canvas do DOM
       }
+      this.render.textures = {};
+      this.render.canvas.remove();
+      this.render = undefined;
+
     }
-    
+
+    // Limpa o intervalo da rotação do texto
+    if (this.rotationInterval) {
+      clearInterval(this.rotationInterval);
+      this.rotationInterval = null;
+    }
   }
-
-  //Methods
-  createBodyFromSVGImage(svgImage: HTMLImageElement, x: number, y: number, width: number, height: number) {
-    const body = Bodies.rectangle(x, y, width, height, {
-      render: {
-        sprite: {
-          texture: svgImage.src, 
-          xScale: 1, 
-          yScale: 1
-        }
-      }
-    });
-    return body;
-  }
-
-
 }

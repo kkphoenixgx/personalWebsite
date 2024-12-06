@@ -1,0 +1,26 @@
+// .ulFileNavigator{
+//   padding: 5%;
+// }
+.liFileNavigator, .detailsFileNavigator{
+  margin-top: 3%;
+}
+
+.liFileNavigator{
+  list-style: none;
+  color: #fff;
+  margin-top: 2%;
+}
+.liFileNavigator a{
+  text-decoration: none;
+  color: white;
+}
+
+.detailsFileNavigator{
+  color: #fff;
+}
+
+.summaryFileNavigator{
+  border-bottom: 1px solid red;
+  padding: 3%;
+  background-color: #242323;
+}

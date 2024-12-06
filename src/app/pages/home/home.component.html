@@ -1,1 +1,56 @@
-<p>home works!</p>
+<div class="first-container"
+  [ngClass]="{
+    'backgroundHelloContainerDarkMode': isDarkMode,
+    'backgroundHelloContainerWhiteMode': !isDarkMode
+  }"
+>
+  <div *ngIf="readyToContent" #helloBackground class="background"></div>
+
+  <div class="hello-container">
+
+    <div class="image-container">
+      <img src="/assets/logoCompleta.png" alt="logo-Kauã-Alves-Santos">
+      <p>Kauã Alves Santos</p>
+      <p>kkphoenix</p>
+    </div>
+    <div class="text-effect-container">
+        <h2 *ngIf="animate">{{text}}<span></span></h2>
+      <ng-template [ngIf]="!animate">
+        <h2>Wellcome!! My name is Kauã Alves Santos, I am a fullstack web developer, please checkout my portifolio and enjoy my site.</h2>
+      </ng-template>
+
+      <div class="links">
+
+        <a class="info-button" href="https://www.linkedin.com/in/kkphoenix/">
+          <img src="assets/githubIcon.png" alt="">
+          <p>LinkedIn</p>
+        </a>
+
+        <a class="info-button" href="https://github.com/kkphoenixgx">
+          <img src="assets/LinkedIn.png" alt="linkedIn icon">
+          <p>GitHub</p>
+        </a>
+
+        <a class="info-button" href="assets/Curriculo-English.pdf" download="Curriculo-English.pdf">
+          <img src="assets/pdfIcon.png" alt="pdf icon">
+          <p>Baixar PDF</p>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<nav class="choice-hsitory">
+  <ul>
+    <li #firstTab class="currentTab" (click)="handleHistoryLiClick($event)" >History</li>
+    <li (click)="handleHistoryLiClick($event)" >Profissional History</li>
+    <li (click)="handleHistoryLiClick($event)" >Portifolio</li>
+    <li (click)="handleHistoryLiClick($event)" >Hire Me</li>
+  </ul>
+</nav>
+
+

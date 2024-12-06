@@ -1,0 +1,7 @@
+<nav class="menu-container" 
+  [style.left]="toogleSideBar ? '0' : '-50vw' "
+>
+  <div class="x-icon" (click)="handleSideBarMenu()"></div>
+
+  <app-file-navigator [items]="studyArray.response"></app-file-navigator>
+</nav>
