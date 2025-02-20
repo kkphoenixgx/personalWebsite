@@ -1,0 +1,43 @@
+@use "../../../../styles/variables.scss" as *;
+
+.container-hire-me{
+  width: 100vw;
+  height: 90vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+}
+
+.container-me-logo img{
+  width: 200px;
+}
+.container-me-logo h3{
+  font-size: 1rem;
+  text-align: center;
+}
+
+.container-me-info{
+  margin-left: 2vw;
+}
+
+
+// ----------- Helpers -----------
+
+.darkMode{
+  background-color: $gray-second;
+  color: white;
+}
+.whiteMode{
+  background-color: $offwhite-default;
+  color: black;
+}
+
+.text-darkMode{
+  color: white;
+}
+.text-whiteMode{
+  color: black;
+}
+
+

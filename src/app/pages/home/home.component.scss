@@ -1,0 +1,233 @@
+@use "../../styles/variables.scss" as *;
+
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/assets/fonts/Rajdhani-Regular.ttf");
+}
+
+.first-container{
+  width: 100vw;
+  height: 85vh;
+  max-height: 85vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+}
+
+// ----------- Hello -----------
+
+.background{
+  width: 100vw;
+  height: 85vh;
+  overflow: hidden;
+}
+.background img{
+  width: 70px;
+  height: 70px; 
+  position: relative;
+  will-change: transform;
+}
+
+.hello-container{
+  display: flex;
+  width: 100%;
+  height: 85vh;
+  align-items: center;
+  position: absolute;
+  justify-content: space-between;
+  top: 3vh;
+}
+.image-container{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  margin-left: 6vw;
+}
+.image-container img{
+  width: 15rem;
+  background-color: $gray-second;
+  padding: 1rem;
+  display: inline-block;
+  clip-path: circle();
+  margin-bottom: 0.5rem;
+}
+
+.text-effect-container{
+  width: 60vw;
+}
+.text-effect-container h2{
+  margin-left: 2vw;
+  font-family: "Rajdhani";
+  word-break: break-word;
+  margin-right: 3vw;
+  margin-top: 5%;
+}
+.text-effect-container h2 span::after{
+  content: '';
+  margin-left: 1%;
+  animation: cursor 0.8s infinite;
+}
+
+.links{
+  display: flex;
+  margin-top: 2%;
+}
+.info-button{
+  width: 18vw;
+  height: 8vh;
+  background-color: #ddd;
+  align-items: center;
+  display: flex;
+  border: 3px solid black;
+  overflow-y: hidden;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #383838;
+  text-decoration: none;
+  color: white;
+  font-family: "";
+}
+.info-button img{
+  width: 28px;
+  margin: 4%;
+}
+
+.info-button p{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6%;
+}
+
+.responsive-links{
+  display: none;
+  width: 100vw;
+  justify-content: center;
+}
+
+.responsive-info-button{
+  width: 30vw;
+  height: 8vh;
+  background-color: #ddd;
+  align-items: center;
+  display: flex;
+  border: 3px solid black;
+  overflow-y: hidden;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #383838;
+  text-decoration: none;
+  color: white;
+  font-family: "";
+  margin-top: 4%;
+}
+.responsive-info-button img{
+  width: 28px;
+  margin: 4%;
+}
+.responsive-info-button p{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6%;
+}
+
+/*
+  width: 67%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+*/
+
+// ----------- Nice to meet you -----------
+
+.choice-hsitory{
+  display: flex;
+  background-color: #000000;
+  width: 100vw;
+  text-align: center;
+}
+.choice-hsitory ul{
+  display: flex;
+  color: white;
+  width: 100vw;
+}
+.choice-hsitory li{
+  padding: 2%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+
+// ----------- Dark mode -----------
+.backgroundHelloContainerDarkMode{
+  background-color: $gray-second;
+  color: #ffffff;
+}
+.backgroundHelloContainerWhiteMode{
+  background-color: $offwhite-default;
+  color: #000000;
+}
+
+// ----------- Helpers -----------
+
+.currentTab{
+  border-bottom: 3px solid $purple-default;
+}
+
+
+// ----------- Animations -----------
+
+@keyframes cursor {
+  50%{
+    border-right: 4px solid #000000;
+  }
+}
+@keyframes moveY {
+  from {
+    transform: translateY(0);
+  }
+  to {
+      transform: translateY(550px);
+  }
+}
+
+// ----------- Mobile -----------
+
+/* Smartphones (portrait) */
+@media only screen and (max-device-width: 767px) {
+  
+  .hello-container{
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    top: 0vh;
+  }
+  .image-container{
+    margin-left: 0vw;
+  }
+  .links{
+    display: none;
+  }
+  .responsive-links{
+    display: flex;
+  }
+
+} 
+// /* iPads (portrait and landscape) */
+// @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+// }
+// /* Desktops and laptops */
+// @media only screen and (min-width: 1224px) {
+// }

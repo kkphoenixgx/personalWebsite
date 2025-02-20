@@ -1,0 +1,65 @@
+<!-- ../../../../../ -->
+
+<div class="history-component">
+  
+  <div class="three-container" #threeContainer ></div>
+  
+  <div class="content-container">
+      
+    <h3>Who I am</h3>
+    
+    <div class="photoProfile-container">
+
+      <div class="mySelfImage">
+        <img src="/assets/myselfCutted.png" alt="Kauã Alves photo">
+        <div class="container-photo-text">
+          <p>I am a full-stack developer with a deep passion for coding and system architecture.</p>
+          <p>I love creating 3D content and crafting beautiful details that make customers happy through engaging interactions!</p>
+          <p>A proud Brazilian developer!!! 🇧🇷</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container-center first-container">
+
+      <p #pFadeInY ><strong>Passion for Astronomy and Journey to Software Development</strong>: During my school years, I was deeply passionate about astronomy. I was captivated by the beauty of nebulas, the scientific discoveries, and the relentless pursuit of understanding the universe. However, my journey took an unexpected turn when I discovered coding as a hobby and began learning programming independently.</p>
+      <p #pFadeInY >With the onset of the COVID-19 pandemic, my country implemented strict lockdowns, which disrupted my access to proper education in physics and other disciplines. This period of isolation gave me time to reflect on my future. Leveraging my self-taught skills, I delved deeper into software development and began envisioning a career in software architecture. I committed myself to rigorous study, day and night, to pave my path toward higher education.</p>
+
+      <p><strong>Discovering My True Passion</strong>: Through this journey, I found my true calling. Coding combines pure logic with intellectual creativity — two elements I deeply value. It offers a perfect blend of problem-solving, innovative thinking, and the opportunity to deliver impactful solutions to clients. Moreover, I developed a passion for business-driven technology, where creativity meets practicality to achieve meaningful outcomes.</p>
+
+      
+    </div>
+
+    <h3 style="margin-top: 5%;" >Carreira Acadêmica</h3>
+    
+    <div class="container-right">
+      
+      <div class="imgCiep-contanier">
+        <img #pFadeInX src="assets/ciep358.png" alt="middle scholl">
+        <p class="description" >Ciep 358 - Nova Iguaçu-Rj</p>
+      </div>
+
+      <p #pFadeInX >In high school, I learned a lot of things and developed a deep passion for entrepreneurship and business. I dived deeply into JavaScript, created numerous projects, and learned various programming languages and concepts while studying for ENEM, CCAA, and school.</p> 
+
+      <p #pFadeInX #pPortuguese *ngIf="!isGreatingsInEnglish" >Gostaria de deixar aqui um carinho e um cantinho especial ao professor Ricardo, à professora Caroline Brito, ao professor Canedo, à professora Cicília, ao professor Marcelo, à diretora Maristela e todos os professores que contribuíram para a minha jornada até aqui, cada um de vocês, para vocês, eu só desejo o melhor, um grande abraço.</p>
+      
+      <p #pFadeInX #pEnglish *ngIf="isGreatingsInEnglish" >I would like to express my heartfelt gratitude and dedicate a special note to Professor Ricardo, Professor Caroline Brito, Professor Canedo, Professor Cicília, Professor Marcelo, Director Maristela, and all the teachers who contributed to my journey so far. To each of you, I wish nothing but the best. A big hug to all of you.</p>
+      
+      <button (click)="handleChangeGreatings()">Toggle Language Please</button>
+
+      
+    </div>
+
+    <div class="container-left">
+      <div class="cefet-container">
+        <img #pFadeInX src="assets/cefet.jpg" alt="collage">
+        <p class="description">Centro Federal de Educação Tecnológica Celso Suckow da Fonseca (CEFET/RJ) Uned Nova Friburgo</p>
+      </div>
+
+      <p #pFadeInX ><strong>In collage</strong>I am currently graduating in the best federal System Information course of Brasil. And why system of information? I think that I will handle more results understanding business logic of your company and developing results then understanding hardware and a lot of mathematics as Computer Cience and others, I really prefer a pratical approach, not a theorical one, however, I really love logic and math, sure it is important.</p>
+      <p #pFadeInX >In my collage, I am currently working in my TCC that will Facilitate the development of embedded AI systems by creating a 3D simulated space of agents with embedded artificial intelligence</p>
+    </div>  
+  </div>
+
+</div>

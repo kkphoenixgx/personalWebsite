@@ -1,0 +1,26 @@
+<div class="container-hire-me"  
+  [class.darkMode]="darkMode$ | async" 
+  [class.whiteMode]="!(darkMode$ | async)" 
+>
+
+  <div class="container-me-logo">
+    <img src="/assets/logoCompleta.png">
+    <h3 
+      [class.text-darkMode]=" darkMode$ | async" 
+      [class.text-whiteMode]=" !(darkMode$ | async)" 
+    >
+      kkphoenix
+    </h3>
+  </div>
+  <div class="container-me-info"
+    [class.text-darkMode]=" darkMode$ | async" 
+    [class.text-whiteMode]=" !(darkMode$ | async)" 
+  >
+    <p> <a href="tel:+5521993344251">Cellphone: {{"+55 (21)993344251"}}</a></p>
+    <p>Email: <a href="mailto:kauaAlvesWorkplace@gmail.com">{{"kauaAlvesWorkplace@gmail.com"}}</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/kkphoenix/">{{"https://www.linkedin.com/in/kkphoenix/"}}</a></p>
+    <p>GitHub: <a href="https://github.com/kkphoenixgx">{{"https://github.com/kkphoenixgx"}}</a></p>
+  </div>
+
+</div>
+

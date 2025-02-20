@@ -1,0 +1,148 @@
+@use "../../../../styles/variables.scss" as *;
+
+.history-component{
+  background-color: $gray-second;
+}
+
+.photoProfile-container{
+  position: relative;
+}
+.mySelfImage{
+  width: 80vw;
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 7vw;
+  justify-content: space-evenly;
+}
+.mySelfImage img{
+  position: relative;
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 200px;
+  max-height: 200px;
+  background: #0d0d0d;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  top: 20px;
+  z-index: 3;
+}
+
+.container-photo-text{
+  display: flex;
+  flex-flow: column;
+  margin-top: 5%;
+}
+.container-photo-text p{
+  color: white;
+  max-width: 40vw;
+}
+
+.three-container {
+  width: 100vw;
+  height: 350vh;
+  position: absolute;
+}
+
+
+.content-container{
+  position: relative;
+  color: #fff;
+  z-index: 4;
+}
+
+.content-container p{
+  margin-bottom: 2.3%;
+  margin-left: 6%;
+  margin-right: 6%;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.content-container h3 {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 3%;
+  padding: 3%;
+  text-decoration: overline;
+}
+
+.first-container{
+  margin-top: 3vh
+}
+
+.container-center{
+  align-items: center;
+  text-align: center;
+}
+.container-center p{
+  transform: translateY(20px);
+  opacity: 0;
+  transition: 2s ease;
+}
+
+.container-right{
+  align-items: right;
+  text-align: right;
+  margin-left: 39%;
+}
+.container-right p{
+  text-align: right;
+}
+.container-right p, .container-right img{
+  transform: translateX(100px);
+  opacity: 0;
+  transition: 2s ease;
+}
+.container-right button{
+  min-width: 12vw;
+  height: 5vh;
+  margin-right: 6%;
+  background-color: rgba(144, 144, 144, 0.64);
+  border-radius: 6%;
+  border: none;
+  color: #ede3e3;
+}
+
+.container-left{
+  align-items: left;
+  text-align: left;
+}
+.container-left p{
+  text-align: left;
+}
+.container-left p, .container-left img{
+  transform: translateX(-100px);
+  opacity: 0;
+  transition: 2s ease;
+}
+
+.imgCiep-contanier img, .cefet-container img{
+  width: 400px;
+  margin: 0 6% 2vw 6%;
+}
+.cefet-container img{
+  margin-top: 3vh;
+}
+
+
+// ----------- Helpers -----------
+
+.description{
+  font-weight: bold;
+  color: #FFF;
+}
+.fadeInOnScrollY{
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+}
+.fadeInOnScrollX{
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+}
+
+@media only screen and (max-device-width: 767px) {
+  .container-right{
+    margin-left: 18%;
+  }
+} 
