@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject, PLATFORM_ID  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import * as THREE from 'three';
+import { isPlatformBrowser } from '@angular/common';
 
+import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { Text3dService } from '../../../../services/text3d.service.service';
-
-import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-text3d',

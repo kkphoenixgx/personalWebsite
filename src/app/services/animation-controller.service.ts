@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AnimationControllerService {
 
-  private animationState = new BehaviorSubject<boolean>(true)
+  private animationState = new BehaviorSubject<boolean>(true);
+  public animationDelayInMs :number = 2000;
 
 
   setAnimations(state :boolean){

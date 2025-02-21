@@ -8,10 +8,10 @@ import { DarkModeControllerService } from '../../services/dark-mode-controller.s
 
 // Frameworks
 import gsap from "gsap"
-import { HireMeComponent } from './particles/hire-me/hire-me.component';
-import { HistoryComponent } from './particles/history/history.component';
-import { ProfissionalHistoryComponent } from './particles/profissional-history/profissional-history.component';
-import { PortifolioComponent } from './particles/portifolio/portifolio.component';
+import { HireMeComponent } from './partials/hire-me/hire-me.component';
+import { HistoryComponent } from './partials/history/history.component';
+import { ProfissionalHistoryComponent } from './partials/profissional-history/profissional-history.component';
+import { PortifolioComponent } from './partials/portifolio/portifolio.component';
 
 @Component({
   selector: 'app-home',
