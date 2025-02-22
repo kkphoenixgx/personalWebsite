@@ -1,0 +1,25 @@
+<ul class="ulFileNavigator">
+  <ng-container *ngFor="let item of items">
+    <!-- Arquivo solto -->
+    <ng-container *ngIf="isString(item); else folderTemplate">
+      <li class="liFileNavigator" [ngStyle]="{'margin-left': depth * 20 + 'px'}">
+        <a [routerLink]="['/file', item]" (click)="logClick(item)">{{ item }}</a>
+      </li>
+    </ng-container>
+
+
+    <!-- Pasta -->
+    <ng-template #folderTemplate>
+      <ng-container *ngIf="isObject(item)">
+        <details class="detailsFileNavigator" [ngStyle]="{'margin-left': depth * 20 + 'px'}">
+          <summary class="summaryFileNavigator">{{ item.title }}</summary>
+
+          <!-- Só renderiza se item.response tiver conteúdo válido -->
+          <ng-container *ngIf="item.response && item.response.length > 0">
+            <app-file-navigator [items]="item.response" [depth]="depth + 1"></app-file-navigator>
+          </ng-container>
+        </details>
+      </ng-container>
+    </ng-template>
+  </ng-container>
+</ul>

@@ -10,24 +10,24 @@ import { FileNavigatorComponent } from './file-navigator/file-navigator.componen
   selector: 'app-side-menu',
   standalone: true,
   imports: [CommonModule, FileNavigatorComponent],
-  templateUrl: './side-menu.component.html',
-  styleUrl: './side-menu.component.scss'
+  styleUrl: './side-menu.component.scss',
+  templateUrl: './side-menu.component.html'
 }) 
 export class SideMenuComponent implements OnInit{
   public studyArray: ITitlesResponse = {
     response: [
       {
-        tittle: 'Pasta 1',
+        title: 'Pasta 1',
         path: '/pasta1',
         response: [
           {
-            tittle: 'Subpasta 1.1',
+            title: 'Subpasta 1.1',
             path: '/pasta1/subpasta1',
             response: [
               'Arquivo 1.1.1',
               'Arquivo 1.1.2',
               {
-                tittle: 'Subpasta 1.1.1',
+                title: 'Subpasta 1.1.1',
                 path: '/pasta1/subpasta1/subpasta1.1',
                 response: [
                   'Arquivo 1.1.1.1',
@@ -40,12 +40,12 @@ export class SideMenuComponent implements OnInit{
         ]
       },
       {
-        tittle: 'Pasta 2',
+        title: 'Pasta 2',
         path: '/pasta2',
         response: [
           'Arquivo 2.1',
           {
-            tittle: 'Subpasta 2.1',
+            title: 'Subpasta 2.1',
             path: '/pasta2/subpasta2.1',
             response: ['Arquivo 2.1.1', 'Arquivo 2.1.2']
           }

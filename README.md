@@ -6,22 +6,22 @@ O + enter
 
 ## To Do
 
-- [] Diminuir o tempo de load dos componentes
-- [] Alterar animation-service para definir tempo de loading para os componentes
-- [] Testes unitários para os componentes: Certeza que os compoenntes three não estão deixando garbage
-- [] Fazer Mobile para os componetes já existentes
-- [] Footer com os planets
-- [] hire-me partial
-- [] portifolio partial
-- [] profissional-history partial
-- [] Change mouse. Opção para desativar isso.
-- [] Backend Java com microservice em node para o Menu
+- [ ] Fazer Mobile para os componetes já existentes
+- [ ] Footer com os planets
+- [ ] hire-me partial
+- [ ] portifolio partial
+- [ ] profissional-history partial
+- [ ] Change mouse. Opção para desativar isso.
+- [ ] Backend Java com microservice em node para o Menu
 
 ## Completed
 
 - [X] Perfromance No app Component
 - [X] Fazer o zoom do text ser atualizado de acordo com a tela do usuário
 - [X] Definir o tamanho correto do header
+- [X] Diminuir o tempo de load dos componentes
+- [X] Alterar animation-service para definir tempo de loading para os componentes
+- [X] Testes unitários para os componentes: Certeza que os compoenntes three não estão deixando garbage
 
 ## Running unit tests
 

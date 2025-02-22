@@ -1,21 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HireMeComponent } from './hire-me.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('HireMeComponent', () => {
   let component: HireMeComponent;
   let fixture: ComponentFixture<HireMeComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HireMeComponent]
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [HireMeComponent],
+      schemas: [NO_ERRORS_SCHEMA] // Add NO_ERRORS_SCHEMA to ignore unknown elements and attributes
     })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(HireMeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    .compileComponents()
+    .then(() => {
+      fixture = TestBed.createComponent(HireMeComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

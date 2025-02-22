@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-
 import { AnimationControllerService } from '../animation-controller.service';
 
 describe('AnimationControllerService', () => {
   let service: AnimationControllerService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [AnimationControllerService]
+    });
     service = TestBed.inject(AnimationControllerService);
   });
 

@@ -7,15 +7,21 @@ import { BehaviorSubject } from 'rxjs';
 export class AnimationControllerService {
 
   private animationState = new BehaviorSubject<boolean>(true);
-  public animationDelayInMs :number = 2000;
+  private readonly _animationDelayInMs :number = 1500;
 
 
   setAnimations(state :boolean){
-    this.animationState.next(state)
+    this.animationState.next(state);
   }
+  
   getAnimationState(){
     return this.animationState.asObservable();
   }
+  
+  public get animationDelayInMs() : number {
+    return this._animationDelayInMs;
+  }
+  
 
 }
 

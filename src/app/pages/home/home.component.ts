@@ -42,13 +42,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
     "angular", "bootstrap", "c", "csharp", "css", "docker", "electron", "express", "flutter", "git", "html", "java", "jest", "jquery", "js", "linux", "mongodb", "nest", "node", "php", "prisma", "prometheus", "react", "saas", "treejs", "ts"
   ];
   
-  public tl = gsap.timeline({ repeat: -1, yoyo: false });
+  public tl;
+
   constructor(
     private animationService: AnimationControllerService,
     private darkModeService: DarkModeControllerService,
     @Inject(PLATFORM_ID) private PLATAFORM_ID: Object,
     private render: Renderer2
-  ) {}
+  ) {
+    this.tl = gsap.timeline({ 
+      repeat: -1, 
+      yoyo: true, 
+      delay: (this.animationService.animationDelayInMs/1000) + 2
+    });
+  }
 
   // ----------- Methods -----------
 
@@ -74,23 +81,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public animateBackground(): void {
     if (isPlatformBrowser(this.PLATAFORM_ID)) {
       
-      if (!this.animate) this.tl.clear();
-      else {
+    if (!this.animate) this.tl.clear();
+    else {
 
-        const svgElements: NodeListOf<Element> = document.querySelectorAll(".background img");
+      const svgElements: NodeListOf<Element> = document.querySelectorAll(".background img");
 
-        setTimeout(() => {
-          svgElements.forEach((svg: Element, index: number) => {
-            this.tl.to(svg, {
-              y: 750,             // translateY(550px)
-              duration: 5,        // Duração
-              ease: "linear"      // Suavização
-            },
-              index * 0.8);      // Delay
-          });
-        }, 2000);
+      setTimeout(() => {
+        svgElements.forEach((svg: Element, index: number) => {
+          this.tl.to(svg, {
+            y: 750,             // translateY(550px)
+            duration: 5,        // Duração
+            ease: "linear"      // Suavização
+          },
+            index * 0.8);      // Delay
+        });
+        
+      }, 80);
 
-      }
+    }
     }
   }
 
@@ -102,17 +110,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       this.listOfFrameworks.forEach(language => {
         let image = this.render.createElement("img");
-  
-        this.render.setAttribute(image, 'src', `assets/svg/${language}.svg`);
-        
-        if (this.helloBackgroundDiv.nativeElement) {
-          this.render.appendChild(this.helloBackgroundDiv.nativeElement, image);
-        }
+        this.render.setAttribute(image, 'src', `assets/svg/${language}.svg`); 
+      
+        if (this.helloBackgroundDiv.nativeElement)
+          this.render.appendChild(this.helloBackgroundDiv.nativeElement, image);  
 
       });
         
       this.animateBackground();
-    }, 5000)
+    }, this.animationService.animationDelayInMs)
 
   }
 
@@ -158,6 +164,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       // Gera o fundo com lazy loading
       this.generateBackground();
-    }, 5000);
+    }, this.animationService.animationDelayInMs);
   }
 }

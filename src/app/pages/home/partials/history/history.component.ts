@@ -1,7 +1,6 @@
 
 import {
   Component,
-  OnInit,
   OnDestroy,
   AfterViewInit,
   ViewChild,
@@ -15,6 +14,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import * as THREE from 'three';
 
+import { AnimationControllerService } from '../../../../services/animation-controller.service';
+
 @Component({
   selector: 'app-history',
   standalone: true,
@@ -22,19 +23,19 @@ import * as THREE from 'three';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
 })
-export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HistoryComponent implements AfterViewInit, OnDestroy {
   @ViewChild('threeContainer', { static: true }) threeContainer: ElementRef | undefined;
   @ViewChildren('pFadeInY', { read: ElementRef }) centerParagraphs!: QueryList<ElementRef>;
   @ViewChildren('pFadeInX', { read: ElementRef }) fadeInXParagraphs!: QueryList<ElementRef>;
   
   @ViewChild('pPortuguese', { static: true }) pPortuguese: ElementRef | undefined;
   @ViewChild('pEnglish', { static: true }) pEnglish: ElementRef | undefined;
-
-  private scene!: THREE.Scene;
-  private camera!: THREE.PerspectiveCamera;
-  private renderer!: THREE.WebGLRenderer;
-  private particles!: THREE.Points;
-  private gridLines!: THREE.LineSegments;
+  
+  private _renderer!: THREE.WebGLRenderer;
+  private _camera!: THREE.PerspectiveCamera;
+  private _scene!: THREE.Scene;
+  private _particles!: THREE.Points;
+  private _gridLines!: THREE.LineSegments;
 
   public themeColor: number = 0xc7d4e8; // 0xc7d4e8 0x9100a6
   private isBrowser: boolean = false;
@@ -42,14 +43,13 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
   public isGreatingsInEnglish: boolean = false;
 
   constructor(
-      @Inject(PLATFORM_ID) private platformId: Object
+      @Inject(PLATFORM_ID) private platformId: Object,
+      private animationService :AnimationControllerService
   ) {
-      this.isBrowser = isPlatformBrowser(platformId);
+      this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   // ----------- Lifecycle -----------
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
       this.initEvents();
@@ -70,11 +70,10 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.isBrowser) return;
   
     this.isGreatingsInEnglish = !this.isGreatingsInEnglish;
-  
-    // Reutilize a lógica de aplicação diretamente
+    
     setTimeout(()=>{
       this.applyFadeInEffects();
-    }, 500)
+    }, this.animationService.animationDelayInMs)
   }
   
   // ----------- Methods -----------
@@ -151,7 +150,7 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
       }
   }
 
-  private initThreeJS(): void {
+  public initThreeJS(): void {
       this.scene = new THREE.Scene();
 
       const container = this.threeContainer?.nativeElement;
@@ -210,7 +209,7 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
       this.animate();
   }
 
-  private animate(): void {
+  public animate(): void {
       if (!this.isBrowser) return; // Não anima no lado do servidor
 
       requestAnimationFrame(() => this.animate());
@@ -245,5 +244,41 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
   
     return rect.bottom > 0 && rect.top < viewportHeight - 150;
   }
+
+  // ----------- Getters and Setters -----------
+
+  public get camera(): THREE.PerspectiveCamera {
+    return this._camera;
+  }
+  public set camera(value: THREE.PerspectiveCamera) {
+    this._camera = value;
+  }
+
+  public get renderer(): THREE.WebGLRenderer {
+    return this._renderer;
+  }
+  public set renderer(value: THREE.WebGLRenderer) {
+    this._renderer = value;
+  }
+  
+  public get gridLines(): THREE.LineSegments {
+    return this._gridLines;
+  }
+  public set gridLines(value: THREE.LineSegments) {
+    this._gridLines = value;
+  }
+  
+  public get particles(): THREE.Points {
+    return this._particles;
+  }
+  public set particles(value: THREE.Points) {
+    this._particles = value;
+  }
+  public get scene(): THREE.Scene {
+    return this._scene;
+  }
+  public set scene(value: THREE.Scene) {
+    this._scene = value;
+  }  
 
 }

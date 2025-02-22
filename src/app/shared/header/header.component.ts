@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.readyToContent = true;
-    }, 5000);
+    }, this.animateService.animationDelayInMs);
   }
 
   preventRightScrool(){

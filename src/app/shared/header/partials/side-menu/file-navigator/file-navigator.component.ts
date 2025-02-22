@@ -1,46 +1,55 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { ITitlesResponse, IObjectResponse } from '../../../../../interface/ITitlesResponse'; 
+import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FileNavigatorService } from '../../../../../services/file-navigator-service.service';
+import { IObjectResponse } from '../../../../../interface/ITitlesResponse';
 
 @Component({
   selector: 'app-file-navigator',
   standalone: true,
-  imports: [CommonModule, RouterModule],
-  styleUrl: './file-navigator.component.scss',
-  template: `
-    <ul class="ulFileNavigator">
-      <ng-container *ngFor="let item of items; let i = index">
-        <!-- Se for string (arquivo), renderiza como li com margem ajustada pela profundidade -->
-        <ng-container *ngIf="isString(item); else folderTemplate">
-          <li class="liFileNavigator" [ngStyle]="{'margin-left': depth * 20 + 'px'}">
-            <a [routerLink]="item">{{ item }}</a>
-          </li>
-        </ng-container>
-
-        <!-- Se for IObjectResponse (pasta), renderiza como details -->
-        <ng-template #folderTemplate>
-          <ng-container *ngIf="isObject(item)">
-            <details class="detailsFileNavigator" [ngStyle]="{'margin-left': depth * 20 + 'px'}">
-              <summary class="summaryFileNavigator">{{ item.tittle }}</summary>
-              <!-- Recursão para renderizar o conteúdo interno da pasta -->
-              <app-file-navigator [items]="item.response" [depth]="depth + 1"></app-file-navigator>
-            </details>
-          </ng-container>
-        </ng-template>
-      </ng-container>
-    </ul>
-  `,
+  // Adiciona forwardRef para permitir a recursão segura
+  imports: [CommonModule, RouterModule, forwardRef(() => FileNavigatorComponent)],
+  styleUrls: ['./file-navigator.component.scss'],
+  templateUrl: './file-navigator.component.html',
 })
-export class FileNavigatorComponent {
-  @Input() items: Array<IObjectResponse | string> = [];
-  @Input() depth: number = 0; // Propriedade para controle da profundidade de pastas
+export class FileNavigatorComponent implements OnInit {
+  @Input() public depth: number = 0;
+  @Input() public items: (IObjectResponse | string)[] = [];
 
-  isString(item: any): item is string {
+  constructor(private fileNavigatorService: FileNavigatorService) {}
+
+  ngOnInit(): void {
+    console.log(`\n📂 FileNavigatorComponent (depth: ${this.depth})`);
+    console.log('Itens recebidos:', JSON.stringify(this.items, null, 2));
+    // Se já tivermos itens, não chama loadItems() para evitar recursão
+    if (!this.items || this.items.length === 0) {
+      this.loadItems();
+    }
+  }
+
+  loadItems(): void {
+    this.fileNavigatorService.getItems().subscribe((data) => {
+      console.log('📥 Dados da API:', JSON.stringify(data, null, 2));
+      this.items = data;
+    });
+  }
+
+  public logClick(item: any) {
+    console.log(item);
+  }
+
+  isString(item: unknown): item is string {
     return typeof item === 'string';
   }
 
   isObject(item: any): item is IObjectResponse {
-    return typeof item === 'object' && item !== null && 'path' in item && 'tittle' in item && 'response' in item;
+    return (
+      typeof item === 'object' &&
+      item !== null &&
+      'path' in item &&
+      'title' in item &&
+      Array.isArray(item.response) &&
+      item.response.every((i: any) => typeof i === 'string' || this.isObject(i))
+    );
   }
 }

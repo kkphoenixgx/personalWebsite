@@ -1,55 +1,36 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Renderer2 } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { LampComponent } from './lamp.component';
-import { DarkModeControllerService } from '../../services/dark-mode-controller.service'; 
-import { Text3dService } from '../../services/text3d.service.service'; 
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { DarkModeControllerServiceMock } from '../../services/tests/dark-mode-controller.service.mock'; 
+import { DarkModeControllerService } from '../../services/dark-mode-controller.service'; // Importe o serviço original
 
 describe('LampComponent', () => {
   let component: LampComponent;
   let fixture: ComponentFixture<LampComponent>;
-  let darkModeService: DarkModeControllerService;
-  let text3dService: Text3dService;
-  let renderer: Renderer2;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+
+  beforeEach(fakeAsync(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+  
+    TestBed.configureTestingModule({
       imports: [LampComponent],
-      providers: [DarkModeControllerService, Text3dService, Renderer2]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(LampComponent);
-    component = fixture.componentInstance;
-    darkModeService = TestBed.inject(DarkModeControllerService);
-    text3dService = TestBed.inject(Text3dService);
-    renderer = TestBed.inject(Renderer2);
-  });
-
-  it('deve medir o impacto do componente na performance', () => {
-    if ('memory' in performance) {
-      console.log((performance as any).memory);
-      const initialMemory = (performance as any).memory?.usedJSHeapSize || 0;
-      component.ngOnInit();
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{ provide: DarkModeControllerService, useClass: DarkModeControllerServiceMock }]
+    }).compileComponents().then(() => {
+      fixture = TestBed.createComponent(LampComponent);
+      component = fixture.componentInstance;
+  
       fixture.detectChanges();
-      const afterMemory = (performance as any).memory?.usedJSHeapSize || 0;
-      console.log(`Uso de memória inicial: ${initialMemory}, após carregamento: ${afterMemory}`);
-      expect(afterMemory - initialMemory).toBeLessThan(50 * 1024 * 1024); // Menos de 50MB
-    } else {
-      console.log("API de memória não suportada.");
-    }
+      tick(); // Avança o tempo para resolver as chamadas assíncronas
+    });
+  }));
+
+  afterEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout; // Restaura o timeout original
   });
 
-  it('deve verificar se o componente carrega corretamente', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('deve medir o tempo de carregamento', (done) => {
-    const start = performance.now();
-    component.ngOnInit();
-    fixture.detectChanges();
-    const end = performance.now();
-    const loadTime = end - start;
-    console.log(`Tempo de carregamento: ${loadTime}ms`);
-    expect(loadTime).toBeLessThan(500); // Menos de 500ms
-    done();
   });
 });

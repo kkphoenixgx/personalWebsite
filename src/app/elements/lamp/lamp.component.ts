@@ -6,8 +6,7 @@ import { Text3dService } from '../../services/text3d.service.service';
 @Component({
   selector: 'app-lamp',
   standalone: true,
-  templateUrl: './lamp.component.html',
-  styleUrls: ['./lamp.component.scss']
+  templateUrl: './lamp.component.html'
 })
 export class LampComponent implements OnInit, OnDestroy {
 
@@ -103,25 +102,29 @@ export class LampComponent implements OnInit, OnDestroy {
     const createLampWithConstraint = () => {
       const svgImage = new Image();
       svgImage.src = onOffToggle ? 'assets/lamp-on.svg' : 'assets/lamp-off.svg';
-
-      svgImage.onload = () => {
-        lamp = this.createBodyFromSVGImage(svgImage, 0, 0, svgImage.width, svgImage.height);
-
-        const constraint = Constraint.create({
-          bodyA: lamp,
-          pointA: { x: 0, y: svgImage.height / 2 },
-          bodyB: string,
-          pointB: { x: 0, y: 10 },
-          length: 170,
-          stiffness: 0.1,
-          render: {
-            strokeStyle: '#2e2e2e'
-          }
-        });
-      
-        World.add(engine.world, [lamp as unknown as Matter.Body, string, constraint]);
-      };
+    
+      return new Promise<void>((resolve) => {
+        svgImage.onload = () => {
+          lamp = this.createBodyFromSVGImage(svgImage, 0, 0, svgImage.width, svgImage.height);
+    
+          const constraint = Constraint.create({
+            bodyA: lamp,
+            pointA: { x: 0, y: svgImage.height / 2 },
+            bodyB: string,
+            pointB: { x: 0, y: 10 },
+            length: 170,
+            stiffness: 0.1,
+            render: {
+              strokeStyle: '#2e2e2e'
+            }
+          });
+    
+          World.add(engine.world, [lamp as unknown as Matter.Body, string, constraint]);
+          resolve(); // Resolve a promise após o carregamento da imagem
+        };
+      });
     }
+    
 
     createLampWithConstraint();
 
