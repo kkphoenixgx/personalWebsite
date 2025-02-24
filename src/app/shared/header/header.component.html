@@ -42,32 +42,6 @@
     >settings</mat-icon>
   </div>
 
-  <div class="configMenu-container" id="configMenuContainer">
-    <ul class="configMenu"
-    [style.background-color]="toogleDarkMode ? 'rgb(112, 112, 112)' : 'rgb(189, 206, 232)'"
-    >
-      <h3>Menu</h3>
-      <li class="itemMenuConfig">
-        <p>Toogle lamp of dark mode</p>
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider" (click)="handleToogleLamp()" 
-            [ngClass]="{'slider-on': !toogleBtnDarkMode, 'slider-off': toogleBtnDarkMode}"
-          ></span>
-        </label>
-      </li>
-      <li class="itemMenuConfig">
-        <p>Toogle animations</p>
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider" (click)="handleToogleAnimations()"
-            [ngClass]="{'slider-on': toogleAnimations, 'slider-off': !toogleAnimations}"
-          ></span>
-        </label>
-      </li>
-    </ul>
-  </div>
-
-  <ng-template #lampContainer></ng-template>
+  <app-config-menu #configMenu></app-config-menu>
 
 </header>

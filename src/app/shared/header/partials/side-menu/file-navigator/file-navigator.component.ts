@@ -19,6 +19,10 @@ export class FileNavigatorComponent implements OnInit {
   constructor(private fileNavigatorService: FileNavigatorService) {}
 
   ngOnInit(): void {
+    // this.logItems();
+  }
+
+  logItems(){
     console.log(`\n📂 FileNavigatorComponent (depth: ${this.depth})`);
     console.log('Itens recebidos:', JSON.stringify(this.items, null, 2));
     // Se já tivermos itens, não chama loadItems() para evitar recursão

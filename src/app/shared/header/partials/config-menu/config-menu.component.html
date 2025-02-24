@@ -1,0 +1,41 @@
+<div class="configMenu-container" 
+  [ngClass]=" {showConfigMenu : toggleConfigMenu,  hideConfigMenu: !toggleConfigMenu}"
+>
+  <ul class="configMenu"
+  [style.background-color]=" (toggleDarkMode$ | async) ? 'rgb(112, 112, 112)' : 'rgb(189, 206, 232)'"
+  >
+    <h3>Menu</h3>
+    <li class="itemMenuConfig">
+      
+      <div class="toggleDarkModeItem"
+        *ngIf="((toggleAnimations$ | async) && lampComponentRef); else elseTemplate" 
+      >
+        <p>Destroy Lamp ☠️</p>
+        <button (click)="handleDestroyButton()" >LampOff</button>
+      </div>
+      
+      <ng-template #elseTemplate class="toggleLampItem">
+        <p>Toggle Dark Mode</p>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider" (click)="handleToggleDarkMode()" 
+            [ngClass]="{'slider-on': toggleDarkMode$ | async, 'slider-off': !(toggleDarkMode$ | async) }"
+          ></span>
+        </label>
+      </ng-template>
+    
+    </li>
+    <li class="itemMenuConfig">
+      <p>Toogle animations</p>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider" (click)="handleToggleAnimations()"
+          [ngClass]="{'slider-on': (toggleAnimations$ | async), 'slider-off': !(toggleAnimations$ | async)}"
+        ></span>
+      </label>
+    </li>
+    
+  </ul>
+</div>
+
+<ng-template #lampContainer></ng-template>

@@ -145,4 +145,21 @@
   .container-right{
     margin-left: 18%;
   }
+  .mySelfImage {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mySelfImage img {
+    top: 0px;
+  }
+  .container-photo-text {
+    width: 100%;
+    align-items: center;
+  }
+  .container-photo-text p {
+    max-width: 100%;
+  }
+  .cefet-container img{
+    width: 300px;
+  }
 } 

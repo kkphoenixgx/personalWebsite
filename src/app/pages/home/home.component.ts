@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ) {
     this.tl = gsap.timeline({ 
       repeat: -1, 
-      yoyo: true, 
+      yoyo: false, 
       delay: (this.animationService.animationDelayInMs/1000) + 2
     });
   }

@@ -1,0 +1,133 @@
+@use "../../../../styles/variables.scss" as *;
+
+.configMenu-container{
+  position: absolute;
+  top: 14vh;
+  right: -50vw;
+  transition: right 0.5s;
+  transition-timing-function: cubic-bezier(.5,.82,1,1.36);
+  z-index: 999999999999999999999999; //  Never gonna be backwards again
+}
+
+.configMenu{
+  
+  width: 40vw;
+  padding: 4%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.configMenu h3{
+  text-align: center;
+  margin-bottom: 10%;
+}
+
+.itemMenuConfig{
+  align-items: center;
+  padding: 4%;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  font-family: initial;
+}
+
+.itemMenuConfig p{
+  max-width: 50%;
+}
+
+.toggleDarkModeItem{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.toggleDarkModeItem button{
+  height: 5vh;
+  color: white;
+  padding: 1%;
+  background-color: black;
+  border: 1px $purple-default solid;
+  border-radius: 15%;
+  transition: ease-in-out 0.3s;
+}
+.toggleDarkModeItem button:hover{
+  background-color: $purple-default;
+  color: black;
+}
+
+// ----------- Helpers -----------
+
+.showConfigMenu{
+  right: 0vw;
+}
+.hideConfigMenu{
+  right: -60vw;
+}
+
+// ----------- Slider Button -----------
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Classe para slider OFF */
+.slider-off {
+  background-color: #ccc;
+}
+
+.slider-off:before {
+  transform: translateX(0);
+}
+
+/* Classe para slider ON */
+.slider-on {
+  background-color: #680068;
+}
+
+.slider-on:before {
+  transform: translateX(20px);
+}
+
+// ----------- Mobile -----------
+
+/* Smartphones (portrait) */
+@media only screen and (min-width: 320px) and (max-device-width: 767px) {
+
+  .configMenu{
+    width: 60vw;
+  }  
+
+}

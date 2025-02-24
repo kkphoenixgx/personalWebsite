@@ -213,6 +213,7 @@
     flex-direction: column;
     text-align: center;
     top: 0vh;
+    font-size: 0.6rem;
   }
   .image-container{
     margin-left: 0vw;
@@ -223,7 +224,17 @@
   .responsive-links{
     display: flex;
   }
+  .background img{
+    width: 10vw;
+    height: 10vh;
+  }
+  .hello-container .image-container img{
+    background: none;
+  }
 
+  .choice-hsitory{
+    padding: 4%;
+  }
 } 
 // /* iPads (portrait and landscape) */
 // @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {

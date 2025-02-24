@@ -18,11 +18,12 @@ import { SideMenuComponent } from './partials/side-menu/side-menu.component';
 import { AnimationControllerService } from '../../services/animation-controller.service';
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 import { SideBarMenuControllerService } from '../../services/side-bar-menu-controller.service';
+import { ConfigMenuComponent } from './partials/config-menu/config-menu.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIconModule, CommonModule, Text3dComponent, SideMenuComponent ],
+  imports: [MatIconModule, CommonModule, Text3dComponent, SideMenuComponent, ConfigMenuComponent ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -31,23 +32,21 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   public toogleSideBarMenu = false;
   public toogleSettingsAnimate = false;
   public readyToContent = false;
-  public toogleLamp = false;
   public isDarkMode = true;
   public toogleBtnDarkMode = true;
   public toogleAnimations = true;
   public toogleDarkMode = true;
-
-  @ViewChild('lampContainer', { read: ViewContainerRef }) lampContainer!: ViewContainerRef;
-
-  private lampComponentRef!: ComponentRef<any>;
+  
+  @ViewChild('configMenu') configMenu!: ConfigMenuComponent;
 
   constructor(
     private animateService: AnimationControllerService,
     private darkModeService: DarkModeControllerService,
     private sideBarService: SideBarMenuControllerService,
-    private injector: Injector,
     @Inject(PLATFORM_ID) private PLATAFORM_ID: Object,
   ) {}
+
+  // ----------- Lifecycle -----------
 
   ngOnInit(): void {
     // Observers para estado de animação e modo escuro
@@ -70,6 +69,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }, this.animateService.animationDelayInMs);
   }
 
+  // ----------- Main Methods -----------
+
   preventRightScrool(){
     if (!isPlatformBrowser(this.PLATAFORM_ID)) return;
 
@@ -84,43 +85,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     );
   }
 
-  async loadLampComponent() {
-    if (this.toogleLamp && !this.lampComponentRef) {
-      // Importa o LampComponent dinamicamente
-      const { LampComponent } = await import('../../elements/lamp/lamp.component');
-      // Cria a instância do componente
-      this.lampComponentRef = this.lampContainer.createComponent(LampComponent, {
-        injector: this.injector
-      });
-    } else if (!this.toogleLamp && this.lampComponentRef) {
-      // Remove o componente se toggle estiver desativado
-      this.lampComponentRef.destroy();
-      this.lampComponentRef = null as any;
-    }
-  }
-
-  handleToogleLamp() {
-    this.toogleLamp = !this.toogleLamp;
-    this.toogleBtnDarkMode = !this.toogleBtnDarkMode;
-    this.loadLampComponent();
-  }
-
-  handleToogleAnimations() {
-    this.animateService.setAnimations(!this.toogleAnimations);
-  }
+  // ----------- Helpers -----------
 
   handleMenuClick(): void {
-    const menu = document.querySelector('#configMenuContainer') as HTMLDivElement;
-
-    if (!this.toogleConfigMenu) {
-      menu.style.right = '0vw';
-      this.toogleConfigMenu = true;
-      this.toogleSettingsAnimate = true;
-    } else {
-      menu.style.right = '-70vw';
-      this.toogleConfigMenu = false;
-      this.toogleSettingsAnimate = false;
-    }
+    this.configMenu.toggleMenuConfig();  
   }
 
   handleSideBarMenu(): void {
