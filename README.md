@@ -6,9 +6,9 @@ O + enter
 
 ## To Do
 
+- [ ] Pointer events and css Header components
 - [ ] Fazer Mobile para os componetes já existentes
 - [ ] Module logic refactored
-- [ ] Refactoring: "Reecomponentizar"
 - [ ] Footer com os planetas
 - [ ] hire-me partial
 - [ ] portifolio partial
@@ -24,6 +24,7 @@ O + enter
 - [X] Diminuir o tempo de load dos componentes
 - [X] Alterar animation-service para definir tempo de loading para os componentes
 - [X] Testes unitários para os componentes: Certeza que os compoenentes three não estão deixando garbage
+- [X] Refactoring: "Reecomponentizar"
 
 ## Running unit tests
 
