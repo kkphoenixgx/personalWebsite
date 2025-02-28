@@ -11,7 +11,7 @@ export class DarkModeControllerService {
     this.darkModeState.next(state)
     
   }
-  getDarkModeState(){
+  getDarkModeObserbable(){
     return this.darkModeState.asObservable();
   }
 

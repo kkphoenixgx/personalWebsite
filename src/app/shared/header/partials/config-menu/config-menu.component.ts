@@ -3,7 +3,6 @@ import { AnimationControllerService } from '../../../../services/animation-contr
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, take, takeUntil } from 'rxjs';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
-import { LampComponent } from '../../../../elements/lamp/lamp.component';
 
 @Component({
   selector: 'app-config-menu',
@@ -29,8 +28,8 @@ export class ConfigMenuComponent implements OnDestroy {
     private darkModeControllerService :DarkModeControllerService,
     private injector: Injector,
   ){
-    this.toggleAnimations$ = this.animationControllerService.getAnimationState(); 
-    this.toggleDarkMode$ = this.darkModeControllerService.getDarkModeState();
+    this.toggleAnimations$ = this.animationControllerService.getAnimationObserbable(); 
+    this.toggleDarkMode$ = this.darkModeControllerService.getDarkModeObserbable();
   }
 
   // ----------- Lifecycle -----------
@@ -46,14 +45,6 @@ export class ConfigMenuComponent implements OnDestroy {
   toggleMenuConfig(){
     this.toggleConfigMenu = !this.toggleConfigMenu;
   } 
-
-  executeWithAnimationState(callBack : (state :boolean )=> void ){
-
-    this.getAnimationState().pipe( takeUntil(this.destroy$) ).subscribe(animationState=>{   
-      callBack(animationState);
-    })
-
-  }
   
   async loadLampComponent() {
     if (!this.toggleLamp && !this.lampComponentRef) {
@@ -105,18 +96,24 @@ export class ConfigMenuComponent implements OnDestroy {
   // ----------- Getters and Setters -----------
 
   private getAnimationState(): Observable<boolean> {
-    return this.animationControllerService.getAnimationState().pipe(take(1));
+    return this.animationControllerService.getAnimationObserbable().pipe(take(1));
   }
-  
   private toggleAnimationState() {
     this.getAnimationState().pipe( takeUntil(this.destroy$) )
     .subscribe(state=>{
       this.animationControllerService.setAnimations(!state);
     })
   }
+  private executeWithAnimationState(callBack :(state :boolean)=> void){
+
+    this.getAnimationState().pipe( takeUntil(this.destroy$) ).subscribe(animationState=>{   
+      callBack(animationState);
+    })
+
+  }
 
   private getDarkModeState() :Observable<boolean>{
-    return this.darkModeControllerService.getDarkModeState().pipe(take(1));
+    return this.darkModeControllerService.getDarkModeObserbable().pipe(take(1));
   }
   private toggleDarkModeState(){
     this.getDarkModeState()

@@ -1,7 +1,10 @@
 @use "../../../../styles/variables.scss" as *;
 
+// #ccc fundo
+
 .history-component{
   background-color: $gray-second;
+  position: relative;
 }
 
 .photoProfile-container{
@@ -34,21 +37,23 @@
   margin-top: 5%;
 }
 .container-photo-text p{
-  color: white;
   max-width: 40vw;
 }
 
 .three-container {
   width: 100vw;
   height: 350vh;
-  position: absolute;
+  display: block;
 }
 
 
 .content-container{
-  position: relative;
-  color: #fff;
+  position: absolute;
   z-index: 4;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .content-container p{
@@ -162,4 +167,9 @@
   .cefet-container img{
     width: 300px;
   }
+
+  .three-container {
+    height: 250vh;
+  }
+
 } 

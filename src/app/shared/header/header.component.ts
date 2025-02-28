@@ -50,10 +50,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Observers para estado de animação e modo escuro
-    this.animateService.getAnimationState().subscribe((state) => {
+    this.animateService.getAnimationObserbable().subscribe((state) => {
       this.toogleAnimations = state;
     });
-    this.darkModeService.getDarkModeState().subscribe((state) => {
+    this.darkModeService.getDarkModeObserbable().subscribe((state) => {
       this.toogleDarkMode = state;
     });
     this.sideBarService.getSideBarState().subscribe((state) => {

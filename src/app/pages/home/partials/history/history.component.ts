@@ -1,4 +1,3 @@
-
 import {
   Component,
   OnDestroy,
@@ -15,6 +14,12 @@ import { PLATFORM_ID } from '@angular/core';
 import * as THREE from 'three';
 
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
+import { Observable, Subject, take, takeUntil } from 'rxjs';
+import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
+
+interface IAfterThreeJsInitParams{
+  state :boolean
+}
 
 @Component({
   selector: 'app-history',
@@ -31,6 +36,10 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   @ViewChild('pPortuguese', { static: true }) pPortuguese: ElementRef | undefined;
   @ViewChild('pEnglish', { static: true }) pEnglish: ElementRef | undefined;
   
+  private destroy$ = new Subject<void>();
+  private _onWindowResizeRef: any;
+  private _isThreeContainerVisible: boolean = false;
+
   private _renderer!: THREE.WebGLRenderer;
   private _camera!: THREE.PerspectiveCamera;
   private _scene!: THREE.Scene;
@@ -38,34 +47,53 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   private _gridLines!: THREE.LineSegments;
 
   public themeColor: number = 0xc7d4e8; // 0xc7d4e8 0x9100a6
+  public particlesColor: number = 0xc7d4e8; // 0xc7d4e8 0x9100a6
   private isBrowser: boolean = false;
 
   public isGreatingsInEnglish: boolean = false;
 
+  public darkMode$ :Observable<boolean>
+
   constructor(
       @Inject(PLATFORM_ID) private platformId: Object,
-      private animationService :AnimationControllerService
+      private animationService: AnimationControllerService,
+      private darkModeControllerService: DarkModeControllerService
   ) {
-      this.isBrowser = isPlatformBrowser(this.platformId);
+    this.isBrowser = isPlatformBrowser(this.platformId);
+    this.darkMode$ = darkModeControllerService.getDarkModeObserbable();
   }
 
   // ----------- Lifecycle -----------
 
   ngAfterViewInit(): void {
-      this.initEvents();
+    this.initEvents();   
+
+    this.useWithDarkmodeState( (state :boolean)=>{
+      this.togggleThreeJsTheme(state);
+    } )
   }
 
   ngOnDestroy(): void {
-      if (this.isBrowser) {
-          window.removeEventListener('resize', this.onWindowResize.bind(this));
-      }
+    if (this.isBrowser) {
+        window.removeEventListener('resize', this._onWindowResizeRef);
+    }
 
-      if (this.renderer) {
-          this.renderer.dispose();
-      }
+    if (this.renderer) {
+        this.renderer.dispose();
+    }
+
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  afterThreeJsInit(){
+   
+    
+      
   }
 
   // ----------- Handlers -----------
+
   public handleChangeGreatings(): void {
     if (!this.isBrowser) return;
   
@@ -79,17 +107,19 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   // ----------- Methods -----------
   
   private initEvents(): void {
-      // ----------- Window Resize Event -----------
-      if (this.isBrowser) {
-          this.initThreeJS();
-          this.onWindowResize();
-          window.addEventListener('resize', this.onWindowResize.bind(this));
-      }
+    if (this.isBrowser) {
+        this.initThreeJS();
+        this.onWindowResize();
+        if (this.threeContainer) {
+          this._isThreeContainerVisible = this.isInView(this.threeContainer.nativeElement);
+        }
+        this._onWindowResizeRef = this.onWindowResize.bind(this);
+        window.addEventListener('resize', this._onWindowResizeRef);
+    }
 
-      // ----------- Fade in Event -----------
-      this.onScroll();
+    // ----------- Fade in Event -----------
+    this.onScroll();
   }
-  
   
   private applyFadeInEffects(): void {
     if (!this.isBrowser) return;
@@ -134,20 +164,23 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   
   @HostListener('window:scroll', ['$event'])
   private onScroll(): void {
+    if (this.threeContainer && this.isBrowser) {
+      this._isThreeContainerVisible = this.isInView(this.threeContainer.nativeElement);
+    }
     this.applyFadeInEffects();
   }
 
   private onWindowResize(): void {
-      if (this.threeContainer?.nativeElement && this.renderer && this.camera) {
-          const container = this.threeContainer.nativeElement;
-          const width = container.clientWidth;
-          const height = container.clientHeight;
-
-          this.camera.aspect = width / height;
-          this.camera.updateProjectionMatrix();
-
-          this.renderer.setSize(width, height);
-      }
+    if (this.threeContainer?.nativeElement && this.renderer && this.camera) {
+      const container = this.threeContainer.nativeElement;
+      const width = container.offsetWidth || container.clientWidth;
+      const height = container.offsetHeight || container.clientHeight;
+  
+      this.camera.aspect = width / height;
+      this.camera.updateProjectionMatrix();
+  
+      this.renderer.setSize(width, height);
+    }
   }
 
   public initThreeJS(): void {
@@ -166,8 +199,18 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
       this.renderer.setPixelRatio(window.devicePixelRatio || 1);
 
       if (container) {
+          // Configura o container para limitar o canvas
+          container.style.overflow = 'hidden';
+          container.style.position = 'relative';
+          
+          // Define o tamanho do canvas para preencher o container sem extrapolar
           this.renderer.setSize(container.clientWidth, container.clientHeight);
           container.appendChild(this.renderer.domElement);
+          this.renderer.domElement.style.position = 'absolute';
+          this.renderer.domElement.style.top = '0';
+          this.renderer.domElement.style.left = '0';
+          this.renderer.domElement.style.width = '100%';
+          this.renderer.domElement.style.height = '100%';
       }
 
       // ----------- Particles  -----------
@@ -214,38 +257,73 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
 
       requestAnimationFrame(() => this.animate());
 
-      this.particles.rotation.x += 0.002;
-      this.particles.rotation.y += 0.002;
-      this.gridLines.rotation.z += 0.001;
+      if (this._isThreeContainerVisible) {
+          this.particles.rotation.x += 0.002;
+          this.particles.rotation.y += 0.002;
+          this.gridLines.rotation.z += 0.001;
 
-      this.renderer.render(this.scene, this.camera);
+          this.renderer.render(this.scene, this.camera);
+      }
   }
 
   // ----------- Side methods -----------
 
-  public changeThemeColor(color: number): void {
-      this.themeColor = color;
+  public togggleThreeJsTheme(state :boolean){
+    console.log(state);
+    
+    this.themeColor = state ? 0x000000 : 0xffffff;
+    this.changeThemeColor(this.themeColor, state? 0xffffff : 0x9100a6)
 
-      if (this.particles.material instanceof THREE.PointsMaterial) {
-          this.particles.material.color.setHex(this.themeColor);
-      }
-      if (this.gridLines.material instanceof THREE.LineBasicMaterial) {
-          this.gridLines.material.color.setHex(this.themeColor);
-      }
   }
 
+  public changeThemeColor(backgroundColor :number, particlesColor :number): void {
+
+    if (this.particles.material instanceof THREE.PointsMaterial) {
+        this.particles.material.color.setHex(particlesColor);
+    }
+    if (this.gridLines.material instanceof THREE.LineBasicMaterial) {
+        this.gridLines.material.color.setHex(particlesColor);
+    }
+
+    // Alterar a cor do fundo da cena
+    this.scene.background = new THREE.Color(backgroundColor);
+}
+
+
   private isInView(el: HTMLElement): boolean {
-    // Verifica se está no navegador antes de acessar propriedades do DOM
     if (!this.isBrowser) return false;
-  
-    // Calcula a posição do elemento em relação ao viewport
     const rect = el.getBoundingClientRect();
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-  
-    return rect.bottom > 0 && rect.top < viewportHeight - 150;
+    
+    // Se for dispositivo móvel (ex.: largura menor que 768px)
+    if (window.innerWidth < 768) {
+      return rect.top < viewportHeight * 1.5;
+    } else {
+      return rect.top < viewportHeight;
+    }
   }
 
   // ----------- Getters and Setters -----------
+
+  public getAnimationObserbable() :Observable<boolean>{
+    return this.animationService.getAnimationObserbable().pipe(take(1));
+  }
+  public useWithAnimationState(callback :(state :boolean)=>{}){
+    this.getAnimationObserbable().pipe(takeUntil(this.destroy$))
+      .subscribe(state=>{
+        callback(state);
+      });
+  }
+
+  public getDarkMode() :Observable<boolean>{
+    return this.darkModeControllerService.getDarkModeObserbable();
+  }
+  public useWithDarkmodeState(callback :(state :boolean)=>void){
+    this.getDarkMode().pipe(takeUntil(this.destroy$))
+      .subscribe(state=>{
+        callback(state);
+      });
+  }
 
   public get camera(): THREE.PerspectiveCamera {
     return this._camera;

@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class HireMeComponent {
 
   private darkModeService = inject(DarkModeControllerService);
-  public darkMode$: Observable<Boolean> = this.darkModeService.getDarkModeState();
+  public darkMode$: Observable<Boolean> = this.darkModeService.getDarkModeObserbable();
 
 
 }

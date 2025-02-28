@@ -15,11 +15,11 @@ describe('Text3dComponent', () => {
 
   beforeEach(waitForAsync(() => {
     darkModeServiceMock = jasmine.createSpyObj('DarkModeControllerService', ['getDarkModeState']);
-    animateServiceMock = jasmine.createSpyObj('AnimationControllerService', ['getAnimationState']);
+    animateServiceMock = jasmine.createSpyObj('AnimationControllerService', ['getAnimationObserbable']);
     text3dServiceMock = jasmine.createSpyObj('Text3dService', ['createText', 'updateTextColor']);
 
     darkModeServiceMock.getDarkModeState.and.returnValue(of(true));
-    animateServiceMock.getAnimationState.and.returnValue(of(true));
+    animateServiceMock.getAnimationObserbable.and.returnValue(of(true));
 
     TestBed.configureTestingModule({
       imports: [Text3dComponent], // Importando o componente aqui

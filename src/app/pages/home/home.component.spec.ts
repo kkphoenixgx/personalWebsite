@@ -10,7 +10,7 @@ import gsap from 'gsap';
 // Stub do AnimationControllerService com delay reduzido para testes
 class AnimationControllerServiceStub {
   public animationDelayInMs = 1000; // Delay menor para os testes
-  getAnimationState() {
+  getAnimationObserbable() {
     return of(false);
   }
 }

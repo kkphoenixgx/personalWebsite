@@ -4,7 +4,9 @@
   
   <div class="three-container" #threeContainer ></div>
   
-  <div class="content-container">
+  <div class="content-container"
+    [style.color]="(darkMode$ | async) ? '#fff' : '#000' "
+  >
       
     <h3>Who I am</h3>
     

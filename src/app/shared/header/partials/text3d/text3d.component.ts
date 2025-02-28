@@ -47,12 +47,12 @@ export class Text3dComponent implements OnInit {
   ngOnInit() {
 
     // ----------- Observers -----------
-    this.darkModeService.getDarkModeState().subscribe(state => {
+    this.darkModeService.getDarkModeObserbable().subscribe(state => {
       this.isDarkMode = state;
       this.updateColors();
     });
 
-    this.animateService.getAnimationState().subscribe(state => {
+    this.animateService.getAnimationObserbable().subscribe(state => {
       this.isAnimating = state;
     });
 
@@ -61,16 +61,49 @@ export class Text3dComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
             
       window.addEventListener('resize', () => {
+        console.log("resize screen");
+        
         if (this.renderer && this.camera) {
-          const newWidth = window.innerWidth * 0.3;
-          const newHeight = window.innerHeight * 0.15;
+          let newWidth
+          let newHeight
+
+          if(this.isMobile()){
+            newWidth = window.innerWidth * 0.55;
+            newHeight = window.innerHeight * 0.15;
+          }
+          else{
+            newWidth = window.innerWidth * 0.8;
+            newHeight = window.innerHeight * 0.15;
+          }
+
+          let proportion = newWidth / newHeight
+          console.log(proportion);
+          
 
           this.renderer.setSize(newWidth, newHeight);
-          this.camera.aspect = newWidth / newHeight;
+          this.camera.aspect = proportion;
+
+          const desktopProgression = (x :number) => {
+            return Math.max(-10, Math.min(-1.3, -0.01 * innerWidth + 3));
+          }
+          
+          this.camera.position.z = proportion + (
+            this.isMobile() ? 
+              (innerWidth < 430) ? 0.3  : 
+              (innerWidth < 470) ? 0.2  : 
+              (innerWidth < 560) ? -0.5 : 
+              (innerWidth < 600) ? -0.7 :
+              (innerWidth < 700) ? -1   : -1.5
+            
+            : desktopProgression(innerWidth)
+          
+          );
+          
 
           this.camera.updateProjectionMatrix();
         }
       });
+
 
       // ----------- THREE -----------
       const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
@@ -85,7 +118,9 @@ export class Text3dComponent implements OnInit {
       this.scene.add(ambientLight);
 
       this.camera = new THREE.PerspectiveCamera(75, (window.innerWidth * 0.7) / (window.innerHeight * 0.15), 0.1, 1000);
-      this.camera.position.z = (window.innerWidth / window.innerHeight ) + (window.innerWidth < 450 ? 1 : 0 );
+      
+      this.camera.position.z = (window.innerWidth / window.innerHeight ) + (this.isMobile()? 1 : 0);
+
 
       const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
@@ -106,7 +141,14 @@ export class Text3dComponent implements OnInit {
         animate();
       }
     }
-
-   
+    
+    
+  
   }
+
+  public isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+  
+
 }

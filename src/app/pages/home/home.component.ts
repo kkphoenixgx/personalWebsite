@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         svgElements.forEach((svg: Element, index: number) => {
           this.tl.to(svg, {
-            y: 750,             // translateY(550px)
+            y: 850,             // translateY(550px)
             duration: 5,        // Duração
             ease: "linear"      // Suavização
           },
@@ -137,13 +137,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // ----------- Observers -----------
-    this.animationService.getAnimationState().subscribe(state => {
+    this.animationService.getAnimationObserbable().subscribe(state => {
       this.animate = state;
       
       if(!this.animate) this.removeAnimations();
       if(this.readyToContent && this.animate) this.generateBackground();
     });
-    this.darkModeService.getDarkModeState().subscribe(state => {
+    this.darkModeService.getDarkModeObserbable().subscribe(state => {
       this.isDarkMode = state;
     });
   }

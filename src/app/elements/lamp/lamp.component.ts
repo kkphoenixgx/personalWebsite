@@ -18,7 +18,7 @@ export class LampComponent implements OnInit, OnDestroy {
   private lamp: Matter.Body | undefined;
 
   public isDarkMode: boolean = true;
-  private rotationInterval: any; // Para controlar a rotação do texto
+  private rotationInterval: any;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -72,18 +72,21 @@ export class LampComponent implements OnInit, OnDestroy {
   // ----------- Initialization Methods -----------
 
   private initDarkModeSubscription(): void {
-    this.darkModeService.getDarkModeState().pipe(takeUntil(this.destroy$))
+    this.darkModeService.getDarkModeObserbable().pipe(takeUntil(this.destroy$))
       .subscribe(state => {
         this.isDarkMode = state;
       });
   }
-
+  
   private setupCanvas(): HTMLCanvasElement {
     const canvas = this.rendererTwo.createElement('canvas');
     const canvasContainer = document.querySelector('#canvas-container');
     this.rendererTwo.appendChild(canvasContainer, canvas);
     this.rendererTwo.setStyle(canvas, 'position', 'absolute');
     this.rendererTwo.setStyle(canvas, 'top', '0px');
+    this.rendererTwo.setStyle(canvas, 'z-index', '0');
+    this.rendererTwo.setStyle(canvas, 'pointer-events', 'click');
+
     return canvas;
   }
 
@@ -229,7 +232,7 @@ export class LampComponent implements OnInit, OnDestroy {
   }
 
   private getDarkModeStateOnce(): Observable<boolean> {
-    return this.darkModeService.getDarkModeState().pipe(take(1));
+    return this.darkModeService.getDarkModeObserbable().pipe(take(1));
   }
   
   private toggleDarkModeState(): void {
