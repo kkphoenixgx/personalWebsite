@@ -16,7 +16,7 @@ import { PortifolioComponent } from './partials/portifolio/portifolio.component'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, 
+  imports: [CommonModule, RouterModule,
     HireMeComponent, HistoryComponent, PortifolioComponent, ProfissionalHistoryComponent
   ],
   templateUrl: './home.component.html',
@@ -42,22 +42,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
     "angular", "bootstrap", "c", "csharp", "css", "docker", "electron", "express", "flutter", "git", "html", "java", "jest", "jquery", "js", "linux", "mongodb", "nest", "node", "php", "prisma", "prometheus", "react", "saas", "treejs", "ts"
   ];
   
-  public tl;
+  public tl: GSAPTimeline = gsap.timeline({});
 
   constructor(
+    @Inject(PLATFORM_ID) private PLATAFORM_ID: Object,
     private animationService: AnimationControllerService,
     private darkModeService: DarkModeControllerService,
-    @Inject(PLATFORM_ID) private PLATAFORM_ID: Object,
     private render: Renderer2
-  ) {
+  ) 
+  { this.initOnConstructor(); }
+
+  // ----------- Methods -----------
+
+  private initOnConstructor(){
+    this.startGsap();
+  }
+  public startGsap(){
     this.tl = gsap.timeline({ 
       repeat: -1, 
       yoyo: false, 
       delay: (this.animationService.animationDelayInMs/1000) + 2
     });
   }
-
-  // ----------- Methods -----------
 
   public typeWriter(txt: string, speed: number, i: number = 0): void {
     if (i < txt.length) {
