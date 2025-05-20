@@ -17,8 +17,8 @@ import { AnimationControllerService } from '../../../../services/animation-contr
 import { Observable, Subject, take, takeUntil } from 'rxjs';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 
-interface IAfterThreeJsInitParams{
-  state :boolean
+interface IAfterThreeJsInitParams {
+  state: boolean;
 }
 
 @Component({
@@ -30,14 +30,15 @@ interface IAfterThreeJsInitParams{
 })
 export class HistoryComponent implements AfterViewInit, OnDestroy {
   @ViewChild('threeContainer', { static: true }) threeContainer: ElementRef | undefined;
+  @ViewChild('contentContainer', { static: true }) contentContainer: ElementRef | undefined;
+
   @ViewChildren('pFadeInY', { read: ElementRef }) centerParagraphs!: QueryList<ElementRef>;
   @ViewChildren('pFadeInX', { read: ElementRef }) fadeInXParagraphs!: QueryList<ElementRef>;
-  
+
   @ViewChild('pPortuguese', { static: true }) pPortuguese: ElementRef | undefined;
   @ViewChild('pEnglish', { static: true }) pEnglish: ElementRef | undefined;
-  
+
   private destroy$ = new Subject<void>();
-  private _onWindowResizeRef: any;
   private _isThreeContainerVisible: boolean = false;
 
   private _renderer!: THREE.WebGLRenderer;
@@ -46,122 +47,141 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   private _particles!: THREE.Points;
   private _gridLines!: THREE.LineSegments;
 
-  public themeColor: number = 0xc7d4e8; // 0xc7d4e8 0x9100a6
-  public particlesColor: number = 0xc7d4e8; // 0xc7d4e8 0x9100a6
+  public themeColor: number = 0xc7d4e8;
+  public particlesColor: number = 0xc7d4e8;
   private isBrowser: boolean = false;
 
   public isGreatingsInEnglish: boolean = false;
-
-  public darkMode$ :Observable<boolean>
+  public darkMode$: Observable<boolean>;
 
   constructor(
-      @Inject(PLATFORM_ID) private platformId: Object,
-      private animationService: AnimationControllerService,
-      private darkModeControllerService: DarkModeControllerService
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private animationService: AnimationControllerService,
+    private darkModeControllerService: DarkModeControllerService
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
     this.darkMode$ = darkModeControllerService.getDarkModeObserbable();
   }
 
-  // ----------- Lifecycle -----------
-
   ngAfterViewInit(): void {
-    this.initEvents();   
-
-    this.useWithDarkmodeState( (state :boolean)=>{
-      this.togggleThreeJsTheme(state);
-    } )
+    this.initEvents();
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        this.initThreeJS();
+      }, 500);
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.isBrowser) {
-        window.removeEventListener('resize', this._onWindowResizeRef);
-    }
-
-    if (this.renderer) {
-        this.renderer.dispose();
-    }
-
+    if (this._renderer) this._renderer.dispose();
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  afterThreeJsInit(){
-   
-    
-      
+  afterThreeJsInit() {
+    this.useWithDarkmodeState((state: boolean) => {
+      this.togggleThreeJsTheme(state);
+    });
   }
-
-  // ----------- Handlers -----------
 
   public handleChangeGreatings(): void {
     if (!this.isBrowser) return;
-  
     this.isGreatingsInEnglish = !this.isGreatingsInEnglish;
-    
-    setTimeout(()=>{
-      this.applyFadeInEffects();
-    }, this.animationService.animationDelayInMs)
-  }
-  
-  // ----------- Methods -----------
-  
-  private initEvents(): void {
-    if (this.isBrowser) {
-        this.initThreeJS();
-        this.onWindowResize();
-        if (this.threeContainer) {
-          this._isThreeContainerVisible = this.isInView(this.threeContainer.nativeElement);
-        }
-        this._onWindowResizeRef = this.onWindowResize.bind(this);
-        window.addEventListener('resize', this._onWindowResizeRef);
-    }
 
-    // ----------- Fade in Event -----------
+    setTimeout(() => {
+      this.applyFadeInEffects();
+    }, this.animationService.animationDelayInMs);
+  }
+
+  private initEvents(): void {
+    this._isThreeContainerVisible = false;
+    this.onWindowResize();
     this.onScroll();
   }
-  
-  private applyFadeInEffects(): void {
-    if (!this.isBrowser) return;
-  
-    // ----------- Center Paragraphs -----------
-    if (!this.centerParagraphs || this.centerParagraphs.length === 0) {
-      console.warn('Nenhum parágrafo foi encontrado em `centerParagraphs`.');
-      return;
-    }
-  
-    this.centerParagraphs.forEach((pRef) => {
-      const element = pRef.nativeElement;
-  
-      if (element instanceof HTMLElement) {
-        if (this.isInView(element) && !element.classList.contains('fadeInOnScrollY')) {
-          element.classList.add('fadeInOnScrollY');
-        }
-      } else {
-        console.warn('Elemento não é um HTMLElement ou está indefinido:', element);
-      }
-    });
-  
-    // ----------- FadeInX Paragraphs -----------
-  
-    if (!this.fadeInXParagraphs || this.fadeInXParagraphs.length === 0) {
-      console.warn('Nenhum parágrafo foi encontrado em `fadeInXParagraphs`.');
-      return;
-    }
-  
-    this.fadeInXParagraphs.forEach((pRef) => {
-      const element = pRef.nativeElement;
-  
-      if (element instanceof HTMLElement) {
-        if (this.isInView(element) && !element.classList.contains('fadeInOnScrollX')) {
-          element.classList.add('fadeInOnScrollX');
-        }
-      } else {
-        console.warn('Elemento não é um HTMLElement ou está indefinido:', element);
-      }
-    });
+
+  public initThreeJS(): void {
+    const threeContainer = this.threeContainer?.nativeElement;
+    const contentContainer = this.contentContainer?.nativeElement;
+    if (!threeContainer) throw new Error('Three Container do not exists!!');
+
+    threeContainer.style.height = `${contentContainer.scrollHeight}px`;
+    threeContainer.style.overflow = 'hidden';
+
+    this._scene = new THREE.Scene();
+    const aspect = threeContainer.clientWidth / threeContainer.clientHeight;
+    this._camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+
+    this._renderer = new THREE.WebGLRenderer({ antialias: true });
+    this._renderer.setPixelRatio(window.devicePixelRatio || 1);
+    this._renderer.setSize(threeContainer.clientWidth, contentContainer.scrollHeight);
+    threeContainer.appendChild(this._renderer.domElement);
+
+    this._renderer.domElement.style.position = 'absolute';
+    this._renderer.domElement.style.top = '0';
+    this._renderer.domElement.style.left = '0';
+    this._renderer.domElement.style.width = '100%';
+    this._renderer.domElement.style.height = '100%';
+
+    this.initParticles();
+    this.animate();
+    setTimeout(() => this.afterThreeJsInit(), 500);
   }
-  
+
+  public initParticles(): void {
+    const particlesCount = 1000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particlesCount * 3);
+
+    for (let i = 0; i < particlesCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 1000;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 1000;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 1000;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const material = new THREE.PointsMaterial({ color: this.themeColor, size: 0.5 });
+    this._particles = new THREE.Points(geometry, material);
+    this._scene.add(this._particles);
+
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: this.themeColor,
+      opacity: 0.2,
+      transparent: true,
+    });
+
+    const lineGeometry = new THREE.BufferGeometry();
+    const vertices: number[] = [];
+
+    for (let i = -500; i < 500; i += 50) {
+      vertices.push(i, -500, 0, i, 500, 0);
+      vertices.push(-500, i, 0, 500, i, 0);
+    }
+
+    lineGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
+    this._gridLines = new THREE.LineSegments(lineGeometry, lineMaterial);
+    this._scene.add(this._gridLines);
+
+    this._camera.position.z = 500;
+  }
+
+  public animate(): void {
+    if (!this.isBrowser) return;
+    requestAnimationFrame(() => this.animate());
+
+    // Atualiza a visibilidade toda vez antes de renderizar
+    if (this.threeContainer?.nativeElement) {
+      this._isThreeContainerVisible = this.isInView(this.threeContainer.nativeElement);
+    }
+
+    if (this._isThreeContainerVisible) {
+      this._particles.rotation.x += 0.002;
+      this._particles.rotation.y += 0.002;
+      this._gridLines.rotation.z += 0.001;
+      this._renderer.render(this._scene, this._camera);
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   private onScroll(): void {
     if (this.threeContainer && this.isBrowser) {
@@ -170,132 +190,62 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     this.applyFadeInEffects();
   }
 
-  private onWindowResize(): void {
-    if (this.threeContainer?.nativeElement && this.renderer && this.camera) {
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(): void {
+    if (this.threeContainer?.nativeElement && this._renderer && this._camera) {
       const container = this.threeContainer.nativeElement;
+      const contentContainer = this.contentContainer?.nativeElement;
+
       const width = container.offsetWidth || container.clientWidth;
-      const height = container.offsetHeight || container.clientHeight;
-  
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-  
-      this.renderer.setSize(width, height);
+      const height = contentContainer.scrollHeight;
+
+      container.style.height = `${height}px`;
+
+      this._camera.aspect = width / height;
+      this._camera.updateProjectionMatrix();
+
+      this._renderer.setSize(width, height);
     }
   }
 
-  public initThreeJS(): void {
-      this.scene = new THREE.Scene();
-
-      const container = this.threeContainer?.nativeElement;
-
-      this.camera = new THREE.PerspectiveCamera(
-          75,
-          container ? container.clientWidth / container.clientHeight : 1,
-          0.1,
-          1000
-      );
-
-      this.renderer = new THREE.WebGLRenderer({ antialias: true });
-      this.renderer.setPixelRatio(window.devicePixelRatio || 1);
-
-      if (container) {
-          // Configura o container para limitar o canvas
-          container.style.overflow = 'hidden';
-          container.style.position = 'relative';
-          
-          // Define o tamanho do canvas para preencher o container sem extrapolar
-          this.renderer.setSize(container.clientWidth, container.clientHeight);
-          container.appendChild(this.renderer.domElement);
-          this.renderer.domElement.style.position = 'absolute';
-          this.renderer.domElement.style.top = '0';
-          this.renderer.domElement.style.left = '0';
-          this.renderer.domElement.style.width = '100%';
-          this.renderer.domElement.style.height = '100%';
-      }
-
-      // ----------- Particles  -----------
-      const particlesCount = 5000;
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particlesCount * 3);
-
-      for (let i = 0; i < particlesCount; i++) {
-          positions[i * 3] = (Math.random() - 0.5) * 1000;
-          positions[i * 3 + 1] = (Math.random() - 0.5) * 1000;
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 1000;
-      }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-      const material = new THREE.PointsMaterial({ color: this.themeColor, size: 0.5 });
-      this.particles = new THREE.Points(geometry, material);
-      this.scene.add(this.particles);
-
-      const lineMaterial = new THREE.LineBasicMaterial({
-          color: this.themeColor,
-          opacity: 0.2,
-          transparent: true,
-      });
-      const lineGeometry = new THREE.BufferGeometry();
-
-      const vertices: number[] = [];
-      for (let i = -500; i < 500; i += 50) {
-          vertices.push(i, -500, 0, i, 500, 0);
-          vertices.push(-500, i, 0, 500, i, 0);
-      }
-
-      lineGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
-      this.gridLines = new THREE.LineSegments(lineGeometry, lineMaterial);
-      this.scene.add(this.gridLines);
-
-      this.camera.position.z = 500;
-
-      this.animate();
-  }
-
-  public animate(): void {
-      if (!this.isBrowser) return; // Não anima no lado do servidor
-
-      requestAnimationFrame(() => this.animate());
-
-      if (this._isThreeContainerVisible) {
-          this.particles.rotation.x += 0.002;
-          this.particles.rotation.y += 0.002;
-          this.gridLines.rotation.z += 0.001;
-
-          this.renderer.render(this.scene, this.camera);
-      }
-  }
-
-  // ----------- Side methods -----------
-
-  public togggleThreeJsTheme(state :boolean){
-    console.log(state);
-    
+  public togggleThreeJsTheme(state: boolean): void {
     this.themeColor = state ? 0x000000 : 0xffffff;
-    this.changeThemeColor(this.themeColor, state? 0xffffff : 0x9100a6)
-
+    this.changeThemeColor(this.themeColor, state ? 0xffffff : 0x9100a6);
   }
 
-  public changeThemeColor(backgroundColor :number, particlesColor :number): void {
-
-    if (this.particles.material instanceof THREE.PointsMaterial) {
-        this.particles.material.color.setHex(particlesColor);
+  public changeThemeColor(backgroundColor: number, particlesColor: number): void {
+    if (this._particles.material instanceof THREE.PointsMaterial) {
+      this._particles.material.color.setHex(particlesColor);
     }
-    if (this.gridLines.material instanceof THREE.LineBasicMaterial) {
-        this.gridLines.material.color.setHex(particlesColor);
+    if (this._gridLines.material instanceof THREE.LineBasicMaterial) {
+      this._gridLines.material.color.setHex(particlesColor);
     }
+    this._scene.background = new THREE.Color(backgroundColor);
+  }
 
-    // Alterar a cor do fundo da cena
-    this.scene.background = new THREE.Color(backgroundColor);
-}
+  private applyFadeInEffects(): void {
+    if (!this.isBrowser) return;
 
+    this.centerParagraphs?.forEach((pRef) => {
+      const element = pRef.nativeElement;
+      if (element instanceof HTMLElement && this.isInView(element)) {
+        element.classList.add('fadeInOnScrollY');
+      }
+    });
+
+    this.fadeInXParagraphs?.forEach((pRef) => {
+      const element = pRef.nativeElement;
+      if (element instanceof HTMLElement && this.isInView(element)) {
+        element.classList.add('fadeInOnScrollX');
+      }
+    });
+  }
 
   private isInView(el: HTMLElement): boolean {
     if (!this.isBrowser) return false;
     const rect = el.getBoundingClientRect();
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-    
-    // Se for dispositivo móvel (ex.: largura menor que 768px)
+
     if (window.innerWidth < 768) {
       return rect.top < viewportHeight * 1.5;
     } else {
@@ -303,60 +253,20 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // ----------- Getters and Setters -----------
-
-  public getAnimationObserbable() :Observable<boolean>{
+  // Helpers com observable
+  public getAnimationObserbable(): Observable<boolean> {
     return this.animationService.getAnimationObserbable().pipe(take(1));
   }
-  public useWithAnimationState(callback :(state :boolean)=>{}){
-    this.getAnimationObserbable().pipe(takeUntil(this.destroy$))
-      .subscribe(state=>{
-        callback(state);
-      });
+
+  public useWithAnimationState(callback: (state: boolean) => void): void {
+    this.getAnimationObserbable().pipe(takeUntil(this.destroy$)).subscribe(callback);
   }
 
-  public getDarkMode() :Observable<boolean>{
+  public getDarkMode(): Observable<boolean> {
     return this.darkModeControllerService.getDarkModeObserbable();
   }
-  public useWithDarkmodeState(callback :(state :boolean)=>void){
-    this.getDarkMode().pipe(takeUntil(this.destroy$))
-      .subscribe(state=>{
-        callback(state);
-      });
-  }
 
-  public get camera(): THREE.PerspectiveCamera {
-    return this._camera;
+  public useWithDarkmodeState(callback: (state: boolean) => void): void {
+    this.getDarkMode().pipe(takeUntil(this.destroy$)).subscribe(callback);
   }
-  public set camera(value: THREE.PerspectiveCamera) {
-    this._camera = value;
-  }
-
-  public get renderer(): THREE.WebGLRenderer {
-    return this._renderer;
-  }
-  public set renderer(value: THREE.WebGLRenderer) {
-    this._renderer = value;
-  }
-  
-  public get gridLines(): THREE.LineSegments {
-    return this._gridLines;
-  }
-  public set gridLines(value: THREE.LineSegments) {
-    this._gridLines = value;
-  }
-  
-  public get particles(): THREE.Points {
-    return this._particles;
-  }
-  public set particles(value: THREE.Points) {
-    this._particles = value;
-  }
-  public get scene(): THREE.Scene {
-    return this._scene;
-  }
-  public set scene(value: THREE.Scene) {
-    this._scene = value;
-  }  
-
 }

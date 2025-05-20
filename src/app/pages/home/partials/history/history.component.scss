@@ -42,13 +42,15 @@
 
 .three-container {
   width: 100vw;
-  height: 350vh;
+  min-height: 350vh;
   display: block;
+  position: absolute;
 }
 
 
 .content-container{
-  position: absolute;
+  height: fit-content;
+  position: relative;
   z-index: 4;
   top: 0;
   right: 0;
@@ -97,7 +99,7 @@
 .container-right p, .container-right img{
   transform: translateX(100px);
   opacity: 0;
-  transition: 2s ease;
+  transition: 1.5s ease;
 }
 .container-right button{
   min-width: 12vw;
@@ -119,7 +121,7 @@
 .container-left p, .container-left img{
   transform: translateX(-100px);
   opacity: 0;
-  transition: 2s ease;
+  transition: 1.5s ease;
 }
 
 .imgCiep-contanier img, .cefet-container img{
