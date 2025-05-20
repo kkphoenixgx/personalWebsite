@@ -15,5 +15,5 @@ export class HireMeComponent {
   private darkModeService = inject(DarkModeControllerService);
   public darkMode$: Observable<Boolean> = this.darkModeService.getDarkModeObserbable();
 
-
+ 
 }

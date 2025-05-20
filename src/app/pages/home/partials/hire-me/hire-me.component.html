@@ -16,10 +16,42 @@
     [class.text-darkMode]=" darkMode$ | async" 
     [class.text-whiteMode]=" !(darkMode$ | async)" 
   >
-    <p> <a href="tel:+5521993344251">Cellphone: {{"+55 (21)993344251"}}</a></p>
-    <p>Email: <a href="mailto:kauaAlvesWorkplace@gmail.com">{{"kauaAlvesWorkplace@gmail.com"}}</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/kkphoenix/">{{"https://www.linkedin.com/in/kkphoenix/"}}</a></p>
-    <p>GitHub: <a href="https://github.com/kkphoenixgx">{{"https://github.com/kkphoenixgx"}}</a></p>
+    <p> Cellphone: 
+      <a href="tel:+5521993344251"
+        [class.link-darkMode]=" darkMode$ | async" 
+        [class.link-whiteMode]=" !(darkMode$ | async)" 
+      >
+        {{"+55 (21)993344251"}}
+      </a> 
+    </p>
+
+    <p>Email: 
+      <a href="mailto:kauaAlvesWorkplace@gmail.com"
+        [class.link-darkMode]=" darkMode$ | async" 
+        [class.link-whiteMode]=" !(darkMode$ | async)" 
+      >
+        {{"kauaAlvesWorkplace@gmail.com"}}
+      </a>
+    </p>
+
+    <p>LinkedIn: 
+      <a href="https://www.linkedin.com/in/kkphoenix/"
+        [class.link-darkMode]=" darkMode$ | async" 
+        [class.link-whiteMode]=" !(darkMode$ | async)" 
+      >
+        {{"https://www.linkedin.com/in/kkphoenix/"}}
+      </a>
+    </p>
+
+    <p>GitHub: 
+      <a href="https://github.com/kkphoenixgx"
+        [class.link-darkMode]=" darkMode$ | async" 
+        [class.link-whiteMode]=" !(darkMode$ | async)" 
+      >
+        {{"https://github.com/kkphoenixgx"}}
+      </a>
+    </p>
+
   </div>
 
 </div>

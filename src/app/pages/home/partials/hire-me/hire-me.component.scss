@@ -21,6 +21,11 @@
   margin-left: 2vw;
 }
 
+.container-me-info a{
+
+  text-decoration: none;
+}
+
 
 // ----------- Helpers -----------
 
@@ -38,6 +43,13 @@
 }
 .text-whiteMode{
   color: black;
+}
+
+.link-darkMode{
+  color: $purple-default;
+}
+.link-whiteMode{
+  color: $blue-default;
 }
 
 
