@@ -11,7 +11,7 @@
         *ngIf="((toggleAnimations$ | async) && lampComponentRef); else elseTemplate" 
       >
         <p>Destroy Lamp ☠️</p>
-        <button (click)="handleDestroyButton()" >LampOff</button>
+        <button (click)="handleDestroyButton()" >Destroy!</button>
       </div>
       
       <ng-template #elseTemplate class="toggleLampItem">

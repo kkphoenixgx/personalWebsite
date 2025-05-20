@@ -44,16 +44,19 @@
 }
 .toggleDarkModeItem button{
   height: 5vh;
-  color: white;
   padding: 1%;
-  background-color: black;
-  border: 1px $purple-default solid;
+  
+  color: black;
+  background-color: $purple-default;
   border-radius: 15%;
+  text-transform: uppercase;
+  
+  border: none;
   transition: ease-in-out 0.3s;
 }
 .toggleDarkModeItem button:hover{
-  background-color: $purple-default;
-  color: black;
+  background-color: black;
+  color: white;
 }
 
 // ----------- Helpers -----------
