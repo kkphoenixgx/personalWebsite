@@ -61,7 +61,6 @@ export class Text3dComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
             
       window.addEventListener('resize', () => {
-        console.log("resize screen");
         
         if (this.renderer && this.camera) {
           let newWidth
@@ -76,9 +75,7 @@ export class Text3dComponent implements OnInit {
             newHeight = window.innerHeight * 0.15;
           }
 
-          let proportion = newWidth / newHeight
-          console.log(proportion);
-          
+          let proportion = newWidth / newHeight          
 
           this.renderer.setSize(newWidth, newHeight);
           this.camera.aspect = proportion;
