@@ -28,14 +28,19 @@ import { ConfigMenuComponent } from './partials/config-menu/config-menu.componen
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
+  
   public toogleConfigMenu = false;
   public toogleSideBarMenu = false;
-  public toogleSettingsAnimate = false;
+  
   public readyToContent = false;
-  public isDarkMode = true;
-  public toogleBtnDarkMode = true;
+  
+  public toogleSettingsAnimate = false;
   public toogleAnimations = true;
+  
+  // public toogleBtnDarkMode = true;
+  
   public toogleDarkMode = true;
+  public isDarkMode = true;
   
   @ViewChild('configMenu') configMenu!: ConfigMenuComponent;
 
@@ -88,7 +93,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   // ----------- Helpers -----------
 
   handleMenuClick(): void {
-    this.configMenu.toggleMenuConfig();  
+    this.configMenu.toggleMenuConfig();
+    this.toogleSettingsAnimate = !this.toogleSettingsAnimate;
   }
 
   handleSideBarMenu(): void {

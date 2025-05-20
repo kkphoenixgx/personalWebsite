@@ -9,7 +9,11 @@
 
     <app-side-menu #sideMenu [style.left]="toogleSideBarMenu ? '0' : '-50vw' " class="sideMenu" ></app-side-menu>
 
-    <mat-icon style="margin-left: 2vw;" [ngClass]="{'darkMode': toogleDarkMode,'whiteMode': !toogleDarkMode}" 
+    <mat-icon style="margin-left: 2vw; cursor: pointer" 
+      [ngClass]="{
+        'darkMode': toogleDarkMode,
+        'whiteMode': !toogleDarkMode
+      }" 
       (click)="handleSideBarMenu()"
     >
       menu
@@ -38,7 +42,7 @@
           'darkMode': toogleDarkMode,
           'whiteMode': !toogleDarkMode
         }" 
-      style="margin-right: 2vw;" (click)="handleMenuClick()" 
+      style="margin-right: 2vw; cursor: pointer;" (click)="handleMenuClick()" 
     >settings</mat-icon>
   </div>
 
