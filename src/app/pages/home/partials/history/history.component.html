@@ -2,7 +2,7 @@
 
 <div class="history-component">
   
-  <div class="three-container" #threeContainer ></div>
+  <div class="three-container" #threeContainer [hidden]="!(animate$ | async)"></div>
   
   <div #contentContainer class="content-container"
     [style.color]="(darkMode$ | async) ? '#fff' : '#000' "

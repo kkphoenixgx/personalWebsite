@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private maxHeightBackground: number = 550;
   
   public listOfFrameworks: Array<String> = [
-    "angular", "bootstrap", "c", "csharp", "css", "docker", "electron", "express", "flutter", "git", "html", "java", "jest", "jquery", "js", "linux", "mongodb", "nest", "node", "php", "prisma", "prometheus", "react", "saas", "treejs", "ts"
+    "angular", "bootstrap", "c", "csharp", "css", "docker", "electron", "express", "flutter", "git", "html", "java", "spring", "jest", "jquery", "js", "linux", "sql", "mysql", "mongodb", "nest", "node", "php", "prisma", "prometheus", "react", "vue", "saas", "treejs", "ts"
   ];
   
   public tl: GSAPTimeline = gsap.timeline({});

@@ -1,3 +1,29 @@
-<footer>
-  <p>footer is online</p>
+<footer class="footer-container" 
+  [style.backgroundColor]="isDarkMode ? 'black' : '#9fadc4'"
+>
+
+  <ng-container *ngIf="loading; else notLoading">
+    <div class="loading-indicator">Carregando universo...</div>
+  </ng-container>
+
+  <ng-template #notLoading>
+    <ng-container *ngIf="isAnimating; else staticFooter">
+      <div #footerCanvasContainer class="footer-canvas-container"></div>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #staticFooter>
+    <div class="static-footer-content">
+      &copy; 2025 Kauã Santos. All rights reserved.
+    </div>
+  </ng-template>
+
 </footer>
+
+<div 
+  class="tooltip"
+  [style.left.px]="tooltipX"
+  [style.top.px]="tooltipY"
+  *ngIf="tooltipVisible">
+  {{ tooltipText }}
+</div>

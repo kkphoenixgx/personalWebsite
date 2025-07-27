@@ -6,18 +6,24 @@ O + enter
 
 ## To Do
 
-- [ ] Pointer events and css Header components
-- [ ] Fazer Mobile para os componetes já existentes
-- [ ] Module logic refactored
-- [ ] Footer com os planetas
+- [ ] planetas do footer na esfera
+- [ ] Testes para o footer
+
+- [ ] window sem focus tira o animate
+
 - [ ] hire-me partial
 - [ ] portifolio partial
 - [ ] profissional-history partial
+
 - [ ] Change mouse. Opção para desativar isso.
 - [ ] Backend Java com microservice em node para o Menu
 
 ## Completed
 
+- [X] Pointer events and css Header components
+- [X] abaixo de 700px -> hello container quebra
+- [?] Fazer Mobile para os componetes já existentes
+- [?] Module logic refactored
 - [X] Perfromance No app Component
 - [X] Fazer o zoom do text ser atualizado de acordo com a tela do usuário
 - [X] Definir o tamanho correto do header

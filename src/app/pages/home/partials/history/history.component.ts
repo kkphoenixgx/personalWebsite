@@ -14,12 +14,8 @@ import { PLATFORM_ID } from '@angular/core';
 import * as THREE from 'three';
 
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
-import { Observable, Subject, take, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
-
-interface IAfterThreeJsInitParams {
-  state: boolean;
-}
 
 @Component({
   selector: 'app-history',
@@ -53,6 +49,9 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
 
   public isGreatingsInEnglish: boolean = false;
   public darkMode$: Observable<boolean>;
+  public animate$: Observable<boolean>;
+
+  private animationFrameId: number | null = null;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -61,10 +60,21 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
     this.darkMode$ = darkModeControllerService.getDarkModeObserbable();
+    this.animate$ = animationService.getAnimationObserbable();
   }
 
   ngAfterViewInit(): void {
     this.initEvents();
+
+    // Observa mudanças do animationService
+    this.animate$.pipe(takeUntil(this.destroy$)).subscribe((shouldAnimate) => {
+      if (shouldAnimate) {
+        this.startAnimation();
+      } else {
+        this.stopAnimation();
+      }
+    });
+
     requestAnimationFrame(() => {
       setTimeout(() => {
         this.initThreeJS();
@@ -73,9 +83,34 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.stopAnimation();
     if (this._renderer) this._renderer.dispose();
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private startAnimation(): void {
+    if (this.animationFrameId === null) {
+      this.animateLoop();
+    }
+  }
+
+  private stopAnimation(): void {
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+  }
+
+  private animateLoop(): void {
+    this.animationFrameId = requestAnimationFrame(() => this.animateLoop());
+
+    if (this._isThreeContainerVisible) {
+      this._particles.rotation.x += 0.002;
+      this._particles.rotation.y += 0.002;
+      this._gridLines.rotation.z += 0.001;
+      this._renderer.render(this._scene, this._camera);
+    }
   }
 
   afterThreeJsInit() {
@@ -123,7 +158,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     this._renderer.domElement.style.height = '100%';
 
     this.initParticles();
-    this.animate();
     setTimeout(() => this.afterThreeJsInit(), 500);
   }
 
@@ -163,23 +197,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     this._scene.add(this._gridLines);
 
     this._camera.position.z = 500;
-  }
-
-  public animate(): void {
-    if (!this.isBrowser) return;
-    requestAnimationFrame(() => this.animate());
-
-    // Atualiza a visibilidade toda vez antes de renderizar
-    if (this.threeContainer?.nativeElement) {
-      this._isThreeContainerVisible = this.isInView(this.threeContainer.nativeElement);
-    }
-
-    if (this._isThreeContainerVisible) {
-      this._particles.rotation.x += 0.002;
-      this._particles.rotation.y += 0.002;
-      this._gridLines.rotation.z += 0.001;
-      this._renderer.render(this._scene, this._camera);
-    }
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -254,19 +271,7 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   }
 
   // Helpers com observable
-  public getAnimationObserbable(): Observable<boolean> {
-    return this.animationService.getAnimationObserbable().pipe(take(1));
-  }
-
-  public useWithAnimationState(callback: (state: boolean) => void): void {
-    this.getAnimationObserbable().pipe(takeUntil(this.destroy$)).subscribe(callback);
-  }
-
-  public getDarkMode(): Observable<boolean> {
-    return this.darkModeControllerService.getDarkModeObserbable();
-  }
-
   public useWithDarkmodeState(callback: (state: boolean) => void): void {
-    this.getDarkMode().pipe(takeUntil(this.destroy$)).subscribe(callback);
+    this.darkModeControllerService.getDarkModeObserbable().pipe(takeUntil(this.destroy$)).subscribe(callback);
   }
 }
