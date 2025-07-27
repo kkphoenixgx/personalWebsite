@@ -1,17 +1,22 @@
 @use "../../styles/variables.scss" as *;
 
-footer{
+footer {
   height: 40vh;
+  min-height: 200px;
   display: block;
   background-color: #000000;
   color: #fff;
   border-top: 2px solid $purple-default;
   position: relative;
   margin-bottom: 0.3%;
+  width: 100vw;
+  max-width: 100vw;
+  overflow: hidden;
 
   canvas {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 200px;
     display: block;
   }
   .loading-indicator {
@@ -22,11 +27,13 @@ footer{
   }
 }
 
-.static-footer-content{
+.static-footer-content {
   width: 100%;
   height: 100%;
   text-align: center;
   align-content: center;
+  font-size: 1rem;
+  padding: 10px 0;
 }
 
 .tooltip {
@@ -38,4 +45,23 @@ footer{
   font-size: 12px;
   pointer-events: none;
   z-index: 9999;
+  max-width: 80vw;
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  footer {
+    height: 25vh;
+    min-height: 120px;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+  .static-footer-content {
+    font-size: 0.8rem;
+    padding: 6px 0;
+  }
+  .tooltip {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
 }

@@ -5,111 +5,106 @@
   src: url("/assets/fonts/Rajdhani-Regular.ttf");
 }
 
-.first-container{
+.first-container {
   width: 100vw;
   height: 85vh;
   max-height: 85vh;
   overflow-y: hidden;
   overflow-x: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-// ----------- Hello -----------
-
-.background{
+.background {
   width: 100vw;
   height: 85vh;
   overflow: hidden;
 }
-.background img{
+.background img {
   width: 70px;
   height: 70px; 
   position: relative;
   will-change: transform;
 }
 
-.hello-container{
+.hello-container {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   height: 85vh;
   align-items: center;
   position: absolute;
   justify-content: space-between;
   top: 0vh;
+  gap: 2vw;
 }
-.image-container{
+.image-container {
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
   margin-left: 6vw;
+  min-width: 180px;
 }
-.image-container img{
+.image-container img {
   width: 15rem;
+  max-width: 40vw;
+  min-width: 120px;
+  height: auto;
   background-color: $gray-second;
-  padding: 1rem;
-  display: inline-block;
-  clip-path: circle();
-  margin-bottom: 0.5rem;
 }
 
-.text-effect-container{
-  width: 60vw;
+.text-effect-container {
+  flex: 1;
+  min-width: 220px;
+  max-width: 600px;
+  padding: 0 2vw;
 }
-.text-effect-container h2{
+.text-effect-container h2 {
   margin-left: 2vw;
   font-family: "Rajdhani";
   word-break: break-word;
   margin-right: 3vw;
   margin-top: 5%;
 }
-.text-effect-container h2 span::after{
+.text-effect-container h2 span::after {
   content: '';
   margin-left: 1%;
   animation: cursor 0.8s infinite;
 }
 
-.links{
+.links {
   display: flex;
-  margin-top: 2%;
+  flex-wrap: wrap;
+  gap: 1vw;
+  justify-content: flex-start;
 }
-.info-button{
-  width: 18vw;
-  height: 8vh;
-  background-color: #ddd;
-  align-items: center;
+.info-button {
   display: flex;
-  border: 3px solid black;
-  overflow-y: hidden;
-  justify-content: center;
-  border-radius: 10px;
-  background-color: #383838;
+  align-items: center;
+  gap: 0.5em;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: $gray-second;
+  font-size: 1rem;
+  transition: background 0.2s;
   text-decoration: none;
-  color: white;
-  font-family: "";
+  color: inherit;
 }
-.info-button img{
+.info-button img {
   width: 28px;
-  margin: 4%;
+  height: 28px;
 }
 
-.info-button p{
-  width: 70%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 6%;
-}
-
-.responsive-links{
+.responsive-links {
   display: none;
-  width: 100vw;
-  justify-content: center;
 }
 
-.responsive-info-button{
+.responsive-info-button {
   width: 30vw;
   height: 8vh;
   background-color: #ddd;
@@ -125,11 +120,11 @@
   font-family: "";
   margin-top: 4%;
 }
-.responsive-info-button img{
+.responsive-info-button img {
   width: 28px;
   margin: 4%;
 }
-.responsive-info-button p{
+.responsive-info-button p {
   width: 70%;
   height: 100%;
   display: flex;
@@ -148,18 +143,18 @@
 
 // ----------- Nice to meet you -----------
 
-.choice-hsitory{
+.choice-hsitory {
   display: flex;
   background-color: #000000;
   width: 100vw;
   text-align: center;
 }
-.choice-hsitory ul{
+.choice-hsitory ul {
   display: flex;
   color: white;
   width: 100vw;
 }
-.choice-hsitory li{
+.choice-hsitory li {
   padding: 2%;
   width: 30%;
   display: flex;
@@ -171,18 +166,18 @@
 
 
 // ----------- Dark mode -----------
-.backgroundHelloContainerDarkMode{
+.backgroundHelloContainerDarkMode {
   background-color: $gray-second;
   color: #ffffff;
 }
-.backgroundHelloContainerWhiteMode{
+.backgroundHelloContainerWhiteMode {
   background-color: $offwhite-default;
   color: #000000;
 }
 
 // ----------- Helpers -----------
 
-.currentTab{
+.currentTab {
   border-bottom: 3px solid $purple-default;
 }
 
@@ -190,7 +185,7 @@
 // ----------- Animations -----------
 
 @keyframes cursor {
-  50%{
+  50% {
     border-right: 4px solid #000000;
   }
 }
@@ -208,37 +203,124 @@
 /* Smartphones (portrait) */
 @media only screen and (max-width: 767px) {
   
-  .hello-container{
+  .hello-container {
     justify-content: center;
     flex-direction: column;
     text-align: center;
     top: 0vh;
     font-size: 1rem;
   }
-  .image-container{
+  .image-container {
     margin-left: 0vw;
   }
-  .links{
+  .links {
     display: none;
   }
-  .responsive-links{
+  .responsive-links {
     display: flex;
   }
-  .background img{
+  .background img {
     width: 10vw;
     height: 10vh;
   }
-  .hello-container .image-container img{
+  .hello-container .image-container img {
     background: none;
   }
 
-  .choice-hsitory{
+  .choice-hsitory {
     padding: 4%;
   }
 } 
-// /* iPads (portrait and landscape) */
-// @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-// }
-// /* Desktops and laptops */
-// @media only screen and (min-width: 1224px) {
-// }
+@media (max-width: 900px) {
+  .hello-container {
+    flex-direction: column;
+    height: auto;
+    position: static;
+    gap: 2vh;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .image-container {
+    margin-left: 0;
+    margin-bottom: 1vh;
+    min-width: 120px;
+  }
+  .image-container img {
+    width: 10rem;
+    max-width: 60vw;
+    min-width: 80px;
+  }
+  .text-effect-container {
+    max-width: 90vw;
+    padding: 0 1vw;
+  }
+  .links {
+    gap: 2vw;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .first-container {
+    height: auto;
+    min-height: 320px;
+    padding-bottom: 10vh;
+  }
+  .hello-container {
+    flex-direction: column;
+    height: auto;
+    gap: 1vh;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .image-container {
+    margin-left: 0;
+    margin-bottom: 1vh;
+    min-width: 80px;
+  }
+  .image-container img {
+    width: 7rem;
+    max-width: 80vw;
+    min-width: 60px;
+  }
+  .text-effect-container {
+    max-width: 98vw;
+    padding: 0 1vw;
+    font-size: 0.95rem;
+  }
+  .links {
+    flex-direction: column;
+    gap: 1vh;
+    align-items: flex-start;
+  }
+  .info-button {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+  .info-button img {
+    width: 22px;
+    height: 22px;
+  }
+  .responsive-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-top: 2vh;
+  }
+  .responsive-info-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: $gray-second;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .responsive-info-button img {
+    width: 22px;
+    height: 22px;
+  }
+}
