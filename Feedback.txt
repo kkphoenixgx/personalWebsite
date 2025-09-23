@@ -1,0 +1,17 @@
+Espaçamento dos lados na home
+continua as linguagens sem a animação no toggle animations
+baixar currículo 
+diminuir height do footer
+mouse hover mudar a cor para parecer do fundo
+mouse out da div → fecha a tolltip
+Divs do Portifolio grid texto alinhadas
+responsividade do footer
+
+
+As coisas não estão conversando
+muito texto → Talvez planetas, dinâmico, lúdico
+Lampada é um problema
+Ícones eternamente caindo → aleatorio ou chuva
+cor um pouco diferente nos cards
+cor de fundo mudando incomoda nos cards
+paleta de cores estranha

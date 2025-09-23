@@ -1,1 +1,69 @@
-<p>portifolio works!</p>
+<div class="portfolio-section"
+  [ngClass]="{ 'darkMode': darkMode$ | async, 'whiteMode': !(darkMode$ | async) }"
+>
+  <h2 class="portfolio-title">Featured Projects</h2>
+  <p class="portfolio-description">Check out my main projects, built with modern technologies and a focus on user experience.</p>
+  <div class="carousel" *ngIf="carouselProjects.length">
+    <div class="carousel-slide" *ngFor="let project of carouselProjects">
+      <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
+      <div class="carousel-content">
+        <h3 class="project-title">{{ project.title }}</h3>
+        <p class="highlight">{{ project.highlightText }}</p>
+        <p>{{ project.description }}</p>
+        <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="portfolio-title" style="margin-top:2.5rem">Secondary Projects</h2>
+  <p class="portfolio-description">Support, study, and experimental projects using different stacks and architectures.</p>
+  <div class="portfolio-layout">
+    <div class="left-column">
+      <div class="portfolio-card" *ngFor="let project of sideLeftProjects">
+        <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
+        <div>
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="highlight">{{ project.highlightText }}</p>
+          <p>{{ project.description }}</p>
+          <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
+        </div>
+      </div>
+    </div>
+    <div class="center-column">
+      <div class="portfolio-card" *ngFor="let project of cardProjects">
+        <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
+        <div>
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="highlight">{{ project.highlightText }}</p>
+          <p>{{ project.description }}</p>
+          <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
+        </div>
+      </div>
+    </div>
+    <div class="right-column">
+      <div class="portfolio-card" *ngFor="let project of sideRightProjects">
+        <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
+        <div>
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="highlight">{{ project.highlightText }}</p>
+          <p>{{ project.description }}</p>
+          <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="portfolio-title" style="margin-top:2.5rem">Side Project</h2>
+  <p class="portfolio-description">Personal initiatives, learning experiences, and creative experiments.</p>
+  <div class="side-projects">
+    <div class="portfolio-card" *ngFor="let project of endProjects">
+      <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
+      <div>
+        <h3 class="project-title">{{ project.title }}</h3>
+        <p class="highlight">{{ project.highlightText }}</p>
+        <p>{{ project.description }}</p>
+        <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
+      </div>
+    </div>
+  </div>
+</div>

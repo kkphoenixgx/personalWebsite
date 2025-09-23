@@ -65,29 +65,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.toogleSideBarMenu = state;
     });
 
-    this.preventRightScrool();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.readyToContent = true;
     }, this.animateService.animationDelayInMs);
-  }
-
-  // ----------- Main Methods -----------
-
-  preventRightScrool(){
-    if (!isPlatformBrowser(this.PLATAFORM_ID)) return;
-
-    document.addEventListener(
-      'touchmove',
-      function (event) {
-        if (event.touches.length > 1 || Math.abs(event.touches[0].clientX) > 0) {
-          event.preventDefault();
-        }
-      },
-      { passive: false }
-    );
   }
 
   // ----------- Helpers -----------

@@ -105,7 +105,7 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   private animateLoop(): void {
     this.animationFrameId = requestAnimationFrame(() => this.animateLoop());
 
-    if (this._isThreeContainerVisible) {
+    if (this._isThreeContainerVisible && this._particles) {
       this._particles.rotation.x += 0.002;
       this._particles.rotation.y += 0.002;
       this._gridLines.rotation.z += 0.001;

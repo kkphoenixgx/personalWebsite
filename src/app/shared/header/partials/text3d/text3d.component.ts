@@ -1,7 +1,5 @@
-import { Component, OnInit, Inject, PLATFORM_ID  } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { isPlatformBrowser } from '@angular/common';
-
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -18,35 +16,111 @@ import { Text3dService } from '../../../../services/text3d.service.service';
 })
 export class Text3dComponent implements OnInit {
 
-  public isDarkMode: boolean = true;
-  public isAnimating: boolean = true;
-  private renderer: THREE.WebGLRenderer | undefined;
-  private scene: THREE.Scene | undefined;
-  private camera: THREE.PerspectiveCamera | undefined;
+  public isDarkMode = true;
+  public isAnimating = true;
+
+  private renderer?: THREE.WebGLRenderer;
+  private scene?: THREE.Scene;
+  private camera?: THREE.PerspectiveCamera;
 
   constructor(
     public darkModeService: DarkModeControllerService,
     public animateService: AnimationControllerService,
     private text3dService: Text3dService,
-    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  updateColors() {
-    if (this.scene) {
-      const newBackgroundColor = this.isDarkMode ? 0x000000 : 0xffffff;
-      const newTextColor = this.isDarkMode ? 0xffffff : 0x000000;
+  // ----------- LifeCycle -----------
 
-      
-      if(this.scene.background) this.scene.background = new THREE.Color(newBackgroundColor);
-      else console.error("background undefined")
+  ngOnInit(): void {
 
-      this.text3dService.updateTextColor(newTextColor);
+    this.subscribeToServices();
+    this.initThreejs();
+    window.addEventListener('resize', () => this.resizeText());
+  
+  }
+
+  // ----------- Main methods -----------
+
+  private initThreejs(): void {
+    this.createThreeJs();
+    this.createBackground();
+    this.createText();
+    this.animate();
+  }
+
+  private createThreeJs(): void {
+    const canvas = document.querySelector("#canvas") as HTMLCanvasElement | null;
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.scene = new THREE.Scene();
+
+    const aspectRatio = (window.innerWidth * 0.7) / (window.innerHeight * 0.15);
+    this.camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
+    this.camera.position.z = (window.innerWidth / window.innerHeight) + (this.isMobile() ? 1 : 0);
+
+    new OrbitControls(this.camera, this.renderer.domElement);
+
+    if (this.isAnimating && canvas) {
+      this.renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.15);
+      canvas.appendChild(this.renderer.domElement);
     }
   }
 
-  ngOnInit() {
+  private createBackground(): void {
+    if (!this.scene) return;
+    this.scene.background = new THREE.Color(this.isDarkMode ? 0x000000 : 0xffffff);
 
-    // ----------- Observers -----------
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    this.scene.add(ambientLight);
+  }
+
+  private createText(): void {
+    if (!this.scene) return;
+    const color = this.isDarkMode ? 0xffffff : 0x000000;
+    this.text3dService.createText(this.scene, 'KKPHOENIX', color);
+    this.resizeText();
+  }
+
+  public resizeText(): void { 
+    if (!this.renderer || !this.camera) return;
+    const isMobile = this.isMobile(); 
+    
+    const newWidth = isMobile ? window.innerWidth * 0.55 : window.innerWidth * 0.8; 
+    const newHeight = window.innerHeight * 0.15; 
+   
+    const proportion = newWidth / newHeight; 
+    
+    this.renderer.setSize(newWidth, newHeight); 
+    this.camera.aspect = proportion; 
+
+    this.updateCameraZ(); 
+    this.camera.updateProjectionMatrix(); 
+  }
+
+  public updateCameraZ(): void { 
+    if (!this.camera) return; 
+
+    const isMobile = this.isMobile(); 
+    
+    const width = window.innerWidth; 
+    const zOffset = isMobile ? 
+      this.getMobileZOffset(width) : this.getDesktopZOffset(width); 
+    
+    const proportion = this.renderer?.domElement.width! / this.renderer?.domElement.height!; 
+    
+    this.camera.position.z = proportion + zOffset; 
+  }
+
+  private animate(): void {
+    requestAnimationFrame(() => this.animate());
+
+    if (this.isAnimating && this.renderer && this.scene && this.camera) {
+      this.renderer.render(this.scene, this.camera);
+    }
+  }
+
+  // ----------- Darkmode and Animation controll -----------
+
+  private subscribeToServices(): void {
     this.darkModeService.getDarkModeObserbable().subscribe(state => {
       this.isDarkMode = state;
       this.updateColors();
@@ -55,97 +129,34 @@ export class Text3dComponent implements OnInit {
     this.animateService.getAnimationObserbable().subscribe(state => {
       this.isAnimating = state;
     });
-
-    // text 3d component
-
-    if (isPlatformBrowser(this.platformId)) {
-            
-      window.addEventListener('resize', () => {
-        
-        if (this.renderer && this.camera) {
-          let newWidth
-          let newHeight
-
-          if(this.isMobile()){
-            newWidth = window.innerWidth * 0.55;
-            newHeight = window.innerHeight * 0.15;
-          }
-          else{
-            newWidth = window.innerWidth * 0.8;
-            newHeight = window.innerHeight * 0.15;
-          }
-
-          let proportion = newWidth / newHeight          
-
-          this.renderer.setSize(newWidth, newHeight);
-          this.camera.aspect = proportion;
-
-          const desktopProgression = (x :number) => {
-            return Math.max(-10, Math.min(-1.3, -0.01 * innerWidth + 3));
-          }
-          
-          this.camera.position.z = proportion + (
-            this.isMobile() ? 
-              (innerWidth < 430) ? 0.3  : 
-              (innerWidth < 470) ? 0.2  : 
-              (innerWidth < 560) ? -0.5 : 
-              (innerWidth < 600) ? -0.7 :
-              (innerWidth < 700) ? -1   : -1.5
-            
-            : desktopProgression(innerWidth)
-          
-          );
-          
-
-          this.camera.updateProjectionMatrix();
-        }
-      });
-
-
-      // ----------- THREE -----------
-      const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
-
-      this.renderer = new THREE.WebGLRenderer({ antialias: true });
-      this.scene = new THREE.Scene();
-
-      // ----------- Background -----------
-      this.scene.background = new THREE.Color(this.isDarkMode ? 0x000000 : 0xffffff);
-
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-      this.scene.add(ambientLight);
-
-      this.camera = new THREE.PerspectiveCamera(75, (window.innerWidth * 0.7) / (window.innerHeight * 0.15), 0.1, 1000);
-      
-      this.camera.position.z = (window.innerWidth / window.innerHeight ) + (this.isMobile()? 1 : 0);
-
-
-      const controls = new OrbitControls(this.camera, this.renderer.domElement);
-
-      if (this.isAnimating && canvas) {
-        this.renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.15);
-        canvas?.appendChild(this.renderer.domElement);
-      }
-
-      // ----------- Text -----------
-      this.text3dService.createText(this.scene, 'KKPHOENIX', this.isDarkMode ? 0xffffff : 0x000000);
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-        this.renderer?.render(this.scene!, this.camera!);
-      };
-
-      if (this.isAnimating) {
-        animate();
-      }
-    }
-    
-    
-  
   }
 
-  public isMobile() {
+  private updateColors(): void {
+    if (!this.scene) return;
+
+    const bgColor = this.isDarkMode ? 0x000000 : 0xffffff;
+    const textColor = this.isDarkMode ? 0xffffff : 0x000000;
+
+    this.scene.background = new THREE.Color(bgColor);
+    this.text3dService.updateTextColor(textColor);
+  }
+
+  // ----------- Side Methods -----------
+
+  private isMobile(): boolean {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
+  private getMobileZOffset(width: number): number { 
+    if (width < 450) return 1; 
+    if (width < 560) return -0.5; 
+    if (width < 600) return -0.7; 
+    if (width < 700) return -1; 
+    return -1.5; 
+  }
+  private getDesktopZOffset(width: number): number { 
+    return Math.max(-10, Math.min(-1.3, -0.01 * width + 3)); 
+  }
+
   
 
 }

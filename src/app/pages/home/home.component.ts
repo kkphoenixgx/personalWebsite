@@ -85,28 +85,58 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   public animateBackground(): void {
-    if (isPlatformBrowser(this.PLATAFORM_ID)) {
-      
     if (!this.animate) this.tl.clear();
     else {
-
-      const svgElements: NodeListOf<Element> = document.querySelectorAll(".background img");
+      const svgElements: NodeListOf<HTMLElement> = document.querySelectorAll(".background img");
+      this.tl.clear();
 
       setTimeout(() => {
-        svgElements.forEach((svg: Element, index: number) => {
-          this.tl.to(svg, {
-            y: 850,             // translateY(550px)
-            duration: 5,        // Duração
-            ease: "linear"      // Suavização
-          },
-            index * 0.8);      // Delay
-        });
-        
-      }, 80);
+        svgElements.forEach((svg: HTMLElement, index: number) => {
+          svg.style.pointerEvents = 'none'; // evita capturar eventos de touch
+          gsap.set(svg, { pointerEvents: 'none' });
 
-    }
+          const effect = Math.floor(Math.random() * 3); // 0, 1 ou 2
+          const fixedDuration = 4;
+
+          switch (effect) {
+
+            case 0: // queda
+              this.tl.to(svg, {
+                y: this.maxHeightBackground,
+                rotation: gsap.utils.random(-180, 180),
+                duration: fixedDuration,
+                ease: "power1.in"
+              }, index * 0.5);
+              break;
+
+            case 1: // pulo
+              this.tl.to(svg, {
+                y: -200,
+                scale: 1.3,
+                rotation: gsap.utils.random(-90, 90),
+                duration: fixedDuration,
+                ease: "bounce.out"
+              }, index * 0.5);
+              break;
+
+            case 2: // queda rodando
+              this.tl.to(svg, {
+                y: this.maxHeightBackground,
+                rotation: 720,
+                scale: 0.6,
+                duration: fixedDuration,
+                ease: "circ.in"
+              }, index * 0.5);
+              break;
+
+            default:
+              break;
+          }
+        });
+      }, 80);
     }
   }
+
 
   public generateBackground(): void {
     
@@ -116,7 +146,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       this.listOfFrameworks.forEach(language => {
         let image = this.render.createElement("img");
-        this.render.setAttribute(image, 'src', `assets/svg/${language}.svg`); 
+        this.render.setAttribute(image, 'src', `/assets/svg/${language}.svg`); 
       
         if (this.helloBackgroundDiv.nativeElement)
           this.render.appendChild(this.helloBackgroundDiv.nativeElement, image);  
@@ -124,7 +154,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
         
       this.animateBackground();
-    }, this.animationService.animationDelayInMs)
+    }, 0)
 
   }
 
@@ -157,7 +187,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.lastTab = this.firstTab.nativeElement;
     let fullText: string = 
-      "Wellcome!! My name is Kauã Alves Santos, I am a fullstack web developer, please checkout my portfolio and enjoy my site.";
+      "Wellcome!! My name is Kauã Alves Santos, I am a fullstack web developer. Please checkout my portfolio and enjoy my site.";
   
     setTimeout(() => {
       this.readyToContent = true;

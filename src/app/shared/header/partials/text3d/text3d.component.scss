@@ -1,6 +1,18 @@
-.canvas{
+.text3d-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; // garante ícones nas extremidades
+  align-items: center;
+  width: 100%;
+}
+
+.canvas {
+  flex: 0 0 auto; // não cresce nem encolhe
+  max-width: 60%; // largura máxima do canvas
+  height: 15vh;
+}
+
+.icon-left, .icon-right {
+  flex: 0 0 auto; // sempre visíveis
 }
 
 

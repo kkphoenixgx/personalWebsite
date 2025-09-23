@@ -11,30 +11,34 @@
   <div class="hello-container">
 
     <div class="image-container">
-      <img src="/assets/logoCompleta.png" alt="logo-Kauã-Alves-Santos">
+      <div class="image-backgound">
+        <img src="/assets/logoCompleta.png" alt="logo-Kauã-Alves-Santos">
+      </div>
       <p>Kauã Alves Santos</p>
       <p>kkphoenix</p>
     </div>
     <div class="text-effect-container">
-        <h2 *ngIf="animate">{{text}}<span></span></h2>
-      <ng-template [ngIf]="!animate">
-        <h2>Wellcome!! My name is Kauã Alves Santos, I am a fullstack web developer, please checkout my portifolio and enjoy my site.</h2>
-      </ng-template>
+      <!-- animated text -->
+      <h2 *ngIf="animate">{{text}}<span></span></h2>
+        <ng-template [ngIf]="!animate">
+          <h2>Wellcome!! My name is Kauã Alves Santos, I am a fullstack web developer, please checkout my portifolio and enjoy my site.</h2>
+        </ng-template>
 
+      
       <div class="links">
 
         <a class="info-button" href="https://www.linkedin.com/in/kkphoenix/">
-          <img src="assets/LinkedIn.png" alt="">
+          <img src="/assets/LinkedIn.png" alt="">
           <p>LinkedIn</p>
         </a>
 
         <a class="info-button" href="https://github.com/kkphoenixgx">
-          <img src="assets/githubIcon.png" alt="linkedIn icon">
+          <img src="/assets/githubIcon.png" alt="linkedIn icon">
           <p>GitHub</p>
         </a>
 
-        <a class="info-button" href="assets/Curriculo-English.pdf" download="Curriculo-English.pdf">
-          <img src="assets/pdfIcon.png" alt="pdf icon">
+        <a class="info-button" href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf">
+          <img src="/assets/pdfIcon.png" alt="pdf icon">
           <p>Baixar Curriculo</p>
         </a>
 
@@ -42,7 +46,7 @@
 
     </div>
 
-    <div class="responsive-links">
+    <!-- <div class="responsive-links">
 
       <a class="responsive-info-button" href="https://www.linkedin.com/in/kkphoenix/">
         <img src="assets/githubIcon.png" alt="">
@@ -59,7 +63,7 @@
         <p>Baixar Curriculo</p>
       </a>
 
-    </div>
+    </div> -->
 
   </div>
 

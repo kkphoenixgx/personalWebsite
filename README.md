@@ -1,25 +1,24 @@
 # PersonalWebsite
 
-## Simple Notes
-
-O + enter
-
 ## To Do
 
-- [ ] planetas do footer na esfera
-- [ ] Testes para o footer
-
-- [ ] window sem focus tira o animate
-
-- [ ] hire-me partial
-- [ ] portifolio partial
+- [ ] Responsividade do footer
+- [ ] Responsividade do Hire Me
+- [ ] Responsividade do Portifólio ( & Margin no portifólio)
 - [ ] profissional-history partial
+- [ ] Backend Java e uma aplicação de converter em node para o Menu
 
+- [ ] Testes para o footer
+- [ ] window sem focus tira o animate
 - [ ] Change mouse. Opção para desativar isso.
-- [ ] Backend Java com microservice em node para o Menu
+- [ ] Github API para listar os repositórios em algum lugar
+- [ ] Refatorar scss
 
 ## Completed
 
+- [X] hire-me partial
+- [X] portifolio partial
+- [X] planetas do footer na esfera
 - [X] Pointer events and css Header components
 - [X] abaixo de 700px -> hello container quebra
 - [?] Fazer Mobile para os componetes já existentes
@@ -31,6 +30,12 @@ O + enter
 - [X] Alterar animation-service para definir tempo de loading para os componentes
 - [X] Testes unitários para os componentes: Certeza que os compoenentes three não estão deixando garbage
 - [X] Refactoring: "Reecomponentizar"
+- [X] Ajustar os ícones do hello component
+- [X] History resize with background
+- [X] Mobile do header
+- [X] Mobile do Home
+- [X] Mobile do History
+
 
 ## Running unit tests
 
@@ -51,3 +56,8 @@ ng e2e
 ## Current Architeture
 
 ![architeture](./current_architecture.png)
+
+
+## Simple Notes
+
+O + enter

@@ -84,7 +84,7 @@ export class LampComponent implements OnInit, OnDestroy {
     this.rendererTwo.appendChild(canvasContainer, canvas);
     this.rendererTwo.setStyle(canvas, 'position', 'absolute');
     this.rendererTwo.setStyle(canvas, 'top', '0px');
-    this.rendererTwo.setStyle(canvas, 'z-index', '0');
+    this.rendererTwo.setStyle(canvas, 'z-index', '10');
     this.rendererTwo.setStyle(canvas, 'pointer-events', 'click');
 
     return canvas;
