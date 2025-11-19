@@ -2,20 +2,24 @@
 
 ## To Do
 
-- [ ] Responsividade do footer
-- [ ] Responsividade do Hire Me
-- [ ] Responsividade do Portifólio ( & Margin no portifólio)
 - [ ] profissional-history partial
+- [ ] Full screen o texto buga
 - [ ] Backend Java e uma aplicação de converter em node para o Menu
+- [ ] Ajeita o menu
 
 - [ ] Testes para o footer
 - [ ] window sem focus tira o animate
 - [ ] Change mouse. Opção para desativar isso.
+- [ ] Profissional history vai ser um livro
 - [ ] Github API para listar os repositórios em algum lugar
 - [ ] Refatorar scss
+- [?] Quando acontece um resize aumentando a tela acima de 890px e abaixo de 1260 - o canvas não ocupa 100% do history
 
 ## Completed
 
+- [X] Responsividade do Portifólio ( & Margin no portifólio)
+- [X] Responsividade do Hire Me
+- [X] Responsividade do footer
 - [X] hire-me partial
 - [X] portifolio partial
 - [X] planetas do footer na esfera
@@ -57,7 +61,9 @@ ng e2e
 
 ![architeture](./current_architecture.png)
 
-
 ## Simple Notes
 
 O + enter
+
+ng serve --host 0.0.0.0 --port 4200
+

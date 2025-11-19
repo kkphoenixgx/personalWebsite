@@ -15,6 +15,6 @@ import { FooterComponent } from './shared/footer/footer.component';
   `,
     imports: [RouterOutlet, HeaderComponent, MatIconModule, FooterComponent]
 })
-export class AppComponent {
+export class AppComponent{
   title = 'personal-website';
 }

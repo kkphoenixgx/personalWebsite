@@ -58,7 +58,7 @@
   <div class="side-projects">
     <div class="portfolio-card" *ngFor="let project of endProjects">
       <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
-      <div>
+      <div class="card-content">
         <h3 class="project-title">{{ project.title }}</h3>
         <p class="highlight">{{ project.highlightText }}</p>
         <p>{{ project.description }}</p>

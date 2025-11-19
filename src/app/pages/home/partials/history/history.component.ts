@@ -207,7 +207,7 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     this.applyFadeInEffects();
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', ['$event']) 
   onWindowResize(): void {
     if (this.threeContainer?.nativeElement && this._renderer && this._camera) {
       const container = this.threeContainer.nativeElement;

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ProfissionalHistoryComponent } from './profissional-history.component';
+import { ProfissionalHistoryComponent } from './professional-history.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProfissionalHistoryComponent', () => {

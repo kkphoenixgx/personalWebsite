@@ -1,59 +1,58 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, forwardRef, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FileNavigatorService } from '../../../../../services/file-navigator-service.service';
-import { IObjectResponse } from '../../../../../interface/ITitlesResponse';
+import { Observable } from 'rxjs';
+
+import { IPage } from '../../../../../interface/ITitlesResponse';
+import { DarkModeControllerService } from '../../../../../services/dark-mode-controller.service';
 
 @Component({
   selector: 'app-file-navigator',
   standalone: true,
-  // Adiciona forwardRef para permitir a recursão segura
   imports: [CommonModule, RouterModule, forwardRef(() => FileNavigatorComponent)],
   styleUrls: ['./file-navigator.component.scss'],
   templateUrl: './file-navigator.component.html',
 })
 export class FileNavigatorComponent implements OnInit {
   @Input() public depth: number = 0;
-  @Input() public items: (IObjectResponse | string)[] = [];
+  @Input() public items: IPage[] = [];
 
-  constructor(private fileNavigatorService: FileNavigatorService) {}
+  private darkModeService = inject(DarkModeControllerService);
+  public darkMode$: Observable<boolean> = this.darkModeService.getDarkModeObserbable();
 
   ngOnInit(): void {
-    // this.logItems();
+    this.items = this.sortFoldersFirst(this.items);
   }
 
-  logItems(){
+  private sortFoldersFirst(items: IPage[]): IPage[] {
+    return items
+      .slice()
+      .sort((a, b) => {
+        const aIsFolder = this.isFolder(a);
+        const bIsFolder = this.isFolder(b);
+        if (aIsFolder && !bIsFolder) return -1;
+        if (!aIsFolder && bIsFolder) return 1;
+        return 0;
+      })
+      .map(item => {
+        if (item.items) item.items = this.sortFoldersFirst(item.items);
+        return item;
+      });
+  }
+
+  //? ----------- Helpers -----------
+
+  isFolder(item: IPage): boolean {
+    return Array.isArray(item.items) && item.items.length > 0;
+  }
+
+  //! ----------- Debug -----------
+  logItems() {
     console.log(`\n📂 FileNavigatorComponent (depth: ${this.depth})`);
     console.log('Itens recebidos:', JSON.stringify(this.items, null, 2));
-    // Se já tivermos itens, não chama loadItems() para evitar recursão
-    if (!this.items || this.items.length === 0) {
-      this.loadItems();
-    }
-  }
-
-  loadItems(): void {
-    this.fileNavigatorService.getItems().subscribe((data) => {
-      console.log('📥 Dados da API:', JSON.stringify(data, null, 2));
-      this.items = data;
-    });
   }
 
   public logClick(item: any) {
     console.log(item);
-  }
-
-  isString(item: unknown): item is string {
-    return typeof item === 'string';
-  }
-
-  isObject(item: any): item is IObjectResponse {
-    return (
-      typeof item === 'object' &&
-      item !== null &&
-      'path' in item &&
-      'title' in item &&
-      Array.isArray(item.response) &&
-      item.response.every((i: any) => typeof i === 'string' || this.isObject(i))
-    );
   }
 }

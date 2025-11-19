@@ -1,8 +1,8 @@
-export interface ITitlesResponse {
-  response : Array< IObjectResponse | string>
+export interface IPagesResponse {
+  response : Array< IPage >
 }
-export interface IObjectResponse {
+export interface IPage {
   title : string,
   path : string,
-  response : Array< IObjectResponse | string>
+  items : Array< IPage >
 }

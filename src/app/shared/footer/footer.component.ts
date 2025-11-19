@@ -14,6 +14,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
+import { ViewportHelper } from '../../utils/Viewport';
 
 @Component({
   selector: 'app-footer',
@@ -34,6 +35,14 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
   private controls!: OrbitControls;
   
   private resizeTimeout?: any;
+
+  private onResizeZPosition = 11;
+  private onResizeYPos = -3;
+  
+  private mobileZPosition = 20;
+  private mobileYPosition = -5;
+  
+  private defaultZPosition = 13;
   
   private reactPlanet! : ReactPlanet;
   
@@ -110,26 +119,27 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   //? ----------- Host Listeners -----------
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', ['$event']) 
   onResize(): void {
     clearTimeout(this.resizeTimeout);
-    
+
     this.resizeTimeout = setTimeout(() => {
       if (!this.camera || !this.renderer) return;
       const container = this.canvasContainerRef?.nativeElement;
       if (!container) return;
 
       this.camera.aspect = container.clientWidth / container.clientHeight;
+
+      this.handleCameraPosition(container);
+
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(container.clientWidth, container.clientHeight);
       this.composer.setSize(container.clientWidth, container.clientHeight);
       (this.outlinePass as any).resolution.set(container.clientWidth, container.clientHeight);
-    
     }, 150);
-
   }
 
-  @HostListener('mousemove', ['$event'])
+  @HostListener('mousemove', ['$event']) 
   onMouseMove(event: MouseEvent): void {
     if (!this.renderer || !this.camera) return;
 
@@ -140,7 +150,7 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.checkPlanetIntersection(event);
   }
 
-  @HostListener('click', ['$event'])
+  @HostListener('click', ['$event']) 
   onClick(event: MouseEvent): void {
     if (!this.camera || !this.renderer) return;
 
@@ -245,6 +255,7 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
     canvas.style.height = '40vh';
     canvas.style.display = 'block';
     container.appendChild(canvas);
+
     return canvas;
   }
 
@@ -271,8 +282,10 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
       0.1,
       1000
     );
-    this.camera.position.z = 13;
+
     this.camera.position.x = -5;
+    this.handleCameraPosition(container);
+    
   }
 
   private addLight(): void {
@@ -299,6 +312,24 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.outlinePass.hiddenEdgeColor.set('#000000');
 
     this.composer.addPass(this.outlinePass);
+  }
+
+  private handleCameraPosition( container: HTMLDivElement ){
+    //? When canvas is smaller, the planets are not centralized
+    if (container.clientWidth < 600) this.camera.position.y = this.onResizeYPos;
+    else this.camera.position.y = 0;
+    
+    //? in mobile, canvas is rectangular
+    if (ViewportHelper.isMobile()){
+      this.camera.position.z = this.mobileZPosition;
+      this.camera.position.y = this.mobileYPosition;
+    }
+  
+    //? When canvas is bigger, is good to close up camera
+    else if (container.clientWidth > 1000) 
+      this.camera.position.z = this.onResizeZPosition;
+    
+    else this.camera.position.z = this.defaultZPosition;
   }
 
   //! DEBUG

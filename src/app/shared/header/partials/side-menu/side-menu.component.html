@@ -3,5 +3,5 @@
 >
   <div class="x-icon" (click)="handleSideBarMenu()"></div>
 
-  <app-file-navigator [items]="studyArray.response"></app-file-navigator>
+  <app-file-navigator *ngIf="pagesResponse && pagesResponse.length > 0" [items]="pagesResponse"></app-file-navigator>
 </nav>

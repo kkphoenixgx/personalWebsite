@@ -1,26 +1,51 @@
-// .ulFileNavigator{
-//   padding: 5%;
-// }
-.liFileNavigator, .detailsFileNavigator{
-  margin-top: 3%;
+@use "../../../../../styles/variables.scss" as *;
+
+.ulFileNavigator {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.liFileNavigator{
-  list-style: none;
-  color: #fff;
-  margin-top: 2%;
+/* Aplica recuo e linha lateral apenas para ULs filhos diretos de detalhes */
+.detailsFileNavigator > .ulFileNavigator {
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  padding-left: 1rem;  // espaço para arquivos dentro da pasta
+  margin-left: 0.5rem; // distância do summary
 }
-.liFileNavigator a{
+
+/* Itens da lista (arquivos e pastas) */
+.liFileNavigator {
+  margin-top: 0.5rem;
+  color: #fff;
+  list-style: none;
+  position: relative;
+}
+
+/* Links de arquivos */
+.liFileNavigator a {
   text-decoration: none;
   color: white;
 }
 
-.detailsFileNavigator{
-  color: #fff;
+/* Pastas */
+.detailsFileNavigator {
+  margin-top: 0.3rem;
+  cursor: pointer;
 }
 
-.summaryFileNavigator{
-  border-bottom: 1px solid red;
-  padding: 3%;
-  background-color: #242323;
+/* Último arquivo da pasta recebe margem inferior */
+.detailsFileNavigator > .ulFileNavigator > .liFileNavigator:last-child {
+  margin-bottom: 1rem; // ajuste o valor conforme preferir
+}
+
+/* Resumo da pasta */
+.summaryFileNavigator {
+  border-bottom: 1px solid $purple-default;
+  padding: 0.5rem 1rem;
+  background-color: $gray-second;
+  display: block;
+}
+
+.liFileNavigator.last {
+  margin-bottom: 1.4rem;
 }

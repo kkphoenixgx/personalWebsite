@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { ITitlesResponse } from '../../../../interface/ITitlesResponse'; 
+import { IPage } from '../../../../interface/ITitlesResponse'; 
 
 import { SideBarMenuControllerService } from '../../../../services/side-bar-menu-controller.service';
 import { FileNavigatorComponent } from './file-navigator/file-navigator.component';
+import { FileNavigatorService } from '../../../../services/file-navigator-service.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -14,50 +15,14 @@ import { FileNavigatorComponent } from './file-navigator/file-navigator.componen
   templateUrl: './side-menu.component.html'
 }) 
 export class SideMenuComponent implements OnInit{
-  public studyArray: ITitlesResponse = {
-    response: [
-      {
-        title: 'Pasta 1',
-        path: '/pasta1',
-        response: [
-          {
-            title: 'Subpasta 1.1',
-            path: '/pasta1/subpasta1',
-            response: [
-              'Arquivo 1.1.1',
-              'Arquivo 1.1.2',
-              {
-                title: 'Subpasta 1.1.1',
-                path: '/pasta1/subpasta1/subpasta1.1',
-                response: [
-                  'Arquivo 1.1.1.1',
-                  'Arquivo 1.1.1.2',
-                ]
-              }
-            ]
-          },
-          'Arquivo 1.2'
-        ]
-      },
-      {
-        title: 'Pasta 2',
-        path: '/pasta2',
-        response: [
-          'Arquivo 2.1',
-          {
-            title: 'Subpasta 2.1',
-            path: '/pasta2/subpasta2.1',
-            response: ['Arquivo 2.1.1', 'Arquivo 2.1.2']
-          }
-        ]
-      },
-      'Arquivo 3'
-    ]
-  };
 
+  public pagesResponse: IPage[] = [];
   public toogleSideBar :boolean = false;
 
-  constructor(private sideBar :SideBarMenuControllerService){}
+  constructor(
+    private sideBar :SideBarMenuControllerService,
+    private fileNavigatorService :FileNavigatorService
+  ){}
 
   public handleSideBarMenu(){
     this.sideBar.setSideBar(!this.sideBar)
@@ -70,7 +35,11 @@ export class SideMenuComponent implements OnInit{
       this.toogleSideBar = state;
     });
 
-  }
+    this.fileNavigatorService.getItems().subscribe(items=>{
+      console.log(items);
+      if (items && items.length > 0) this.pagesResponse = items;
+    });
 
+  }
 
 }

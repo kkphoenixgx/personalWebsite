@@ -1,55 +1,70 @@
 @use "../../../../styles/variables.scss" as *;
 
-.container-hire-me{
+
+.container-hire-me {
   width: 100vw;
   height: 90vh;
   align-items: center;
   display: flex;
   justify-content: center;
 
+  .container-me-logo {
+    img {
+      width: 200px;
+    }
+    h3 {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+
+  .container-me-info {
+    margin-left: 2vw;
+    a {
+      text-decoration: none;
+    }
+  }
 }
 
-.container-me-logo img{
-  width: 200px;
-}
-.container-me-logo h3{
-  font-size: 1rem;
-  text-align: center;
-}
+//? ----------- Helpers -----------
 
-.container-me-info{
-  margin-left: 2vw;
-}
+// ----------- Darkmode -----------
 
-.container-me-info a{
-
-  text-decoration: none;
-}
-
-
-// ----------- Helpers -----------
-
-.darkMode{
+.darkMode {
   background-color: $gray-second;
   color: white;
 }
-.whiteMode{
+.text-darkMode {
+  color: white;
+}
+.link-darkMode {
+  color: $purple-default;
+}
+
+// ----------- White mode -----------
+
+.whiteMode {
   background-color: $offwhite-default;
   color: black;
 }
-
-.text-darkMode{
-  color: white;
-}
-.text-whiteMode{
+.text-whiteMode {
   color: black;
 }
-
-.link-darkMode{
-  color: $purple-default;
-}
-.link-whiteMode{
+.link-whiteMode {
   color: $blue-default;
 }
 
 
+// ----------- Responsividade -----------
+
+/* Smartphones (portrait) */
+@media only screen and (max-width: 600px) {
+  .container-hire-me {
+    flex-direction: column;
+
+    .container-me-logo {
+      margin-bottom: 3%;
+    }
+
+  }
+}

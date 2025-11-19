@@ -10,14 +10,14 @@ import { DarkModeControllerService } from '../../services/dark-mode-controller.s
 import gsap from "gsap"
 import { HireMeComponent } from './partials/hire-me/hire-me.component';
 import { HistoryComponent } from './partials/history/history.component';
-import { ProfissionalHistoryComponent } from './partials/profissional-history/profissional-history.component';
+import { ProfessionalHistoryComponent } from './partials/professional-history/professional-history.component';
 import { PortifolioComponent } from './partials/portifolio/portifolio.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, RouterModule,
-    HireMeComponent, HistoryComponent, PortifolioComponent, ProfissionalHistoryComponent
+    HireMeComponent, HistoryComponent, PortifolioComponent, ProfessionalHistoryComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']

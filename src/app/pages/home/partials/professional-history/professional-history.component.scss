@@ -1,0 +1,106 @@
+@use "../../../../styles/variables.scss" as *;
+
+@font-face {
+  font-family: "FleurDeLeah";
+  src: url("/assets/fonts/FleurDeLeah-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.professional-history{
+  display: flex;
+  min-height: 90vh;
+  width: 100vw;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 3%;
+  
+  h1 {
+    width: 100%;
+    position: absolute;
+    top: 4%;
+    border-bottom: 3px solid $purple-default;
+    text-align: center;
+
+  }
+
+  p{
+    margin-top: 5%;
+    text-align: center;
+  }
+
+  .book {
+    position: relative;
+    display: inline-block;
+    margin-top: 5%;
+
+    width: min(60%, 570px);
+    min-width: 366px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .book-left, .book-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      perspective: 1000px; // define a "profundidade"
+    }
+
+    .book-left { 
+      left: 0; 
+      
+      img {
+        width: 50%;
+        transform: skewY(-3deg);
+        transform-origin: left center;
+        margin-left: 27%;
+        margin-bottom: 30%;
+      }
+    
+    }
+
+    .book-right { 
+      font-family: "FleurDeLeah", sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      right: 0; 
+      padding: 15%;
+      text-align: center;
+      color: #000;
+
+      transform: skewY(-18deg);
+      transform-origin: right center;
+      margin-right: 5%;
+      margin-bottom: 24%;
+
+      /* Smartphones (portrait) */
+      @media only screen and (max-width: 750px) {
+        padding: 0 9% 0 7%;
+      }
+    }
+  }
+
+
+}
+
+// ----------- Helpers -----------
+
+.darkMode{
+  background-color: $gray-second;
+  color: #ffffff;
+}
+.whiteMode{
+  background-color: $offwhite-default;
+  color: #000;
+}
