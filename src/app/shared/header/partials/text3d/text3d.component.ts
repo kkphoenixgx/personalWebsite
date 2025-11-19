@@ -52,15 +52,12 @@ export class Text3dComponent implements OnInit {
     const canvas = document.querySelector("#canvas") as HTMLCanvasElement | null;
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.scene = new THREE.Scene();
-
-    const aspectRatio = (window.innerWidth * 0.7) / (window.innerHeight * 0.15);
-    this.camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
-    this.camera.position.z = (window.innerWidth / window.innerHeight) + (this.isMobile() ? 1 : 0);
+    
+    this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 
     new OrbitControls(this.camera, this.renderer.domElement);
 
     if (this.isAnimating && canvas) {
-      this.renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.15);
       canvas.appendChild(this.renderer.domElement);
     }
   }
@@ -80,34 +77,30 @@ export class Text3dComponent implements OnInit {
     this.resizeText();
   }
 
-  public resizeText(): void { 
+  public resizeText(): void {
     if (!this.renderer || !this.camera) return;
-    const isMobile = this.isMobile(); 
-    
-    const newWidth = isMobile ? window.innerWidth * 0.55 : window.innerWidth * 0.8; 
-    const newHeight = window.innerHeight * 0.15; 
-   
-    const proportion = newWidth / newHeight; 
-    
-    this.renderer.setSize(newWidth, newHeight); 
-    this.camera.aspect = proportion; 
 
-    this.updateCameraZ(); 
-    this.camera.updateProjectionMatrix(); 
+    const isMobile = this.isMobile();
+    const newWidth = window.innerWidth * (isMobile ? 0.6 : 0.5);
+    const newHeight = window.innerHeight * 0.12;
+
+    this.renderer.setSize(newWidth, newHeight);
+    this.camera.aspect = newWidth / newHeight;
+
+    this.updateCameraZ();
+    this.camera.updateProjectionMatrix();
   }
 
-  public updateCameraZ(): void { 
-    if (!this.camera) return; 
+  public updateCameraZ(): void {
+    if (!this.camera || !this.renderer) return;
 
-    const isMobile = this.isMobile(); 
+    const width = window.innerWidth;
     
-    const width = window.innerWidth; 
-    const zOffset = isMobile ? 
-      this.getMobileZOffset(width) : this.getDesktopZOffset(width); 
-    
-    const proportion = this.renderer?.domElement.width! / this.renderer?.domElement.height!; 
-    
-    this.camera.position.z = proportion + zOffset; 
+    let zPosition = 1.5; //? Valor padrão para telas menores (mobile)
+    if (width > 1200) zPosition = 1.3; //? Telas grandes
+    else if (width > 768) zPosition = 1.3; //? Telas médias (desktop/tablet)
+
+    this.camera.position.z = zPosition;
   }
 
   private animate(): void {
@@ -146,17 +139,5 @@ export class Text3dComponent implements OnInit {
   private isMobile(): boolean {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
-  private getMobileZOffset(width: number): number { 
-    if (width < 450) return 1; 
-    if (width < 560) return -0.5; 
-    if (width < 600) return -0.7; 
-    if (width < 700) return -1; 
-    return -1.5; 
-  }
-  private getDesktopZOffset(width: number): number { 
-    return Math.max(-10, Math.min(-1.3, -0.01 * width + 3)); 
-  }
-
-  
 
 }

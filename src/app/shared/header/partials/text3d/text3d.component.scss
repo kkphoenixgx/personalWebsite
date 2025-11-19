@@ -1,20 +1,16 @@
 .text3d-container {
   display: flex;
-  justify-content: space-between; // garante ícones nas extremidades
-  align-items: center;
-  width: 100%;
+  justify-content: center;
+  align-items: center; 
+  flex-grow: 1; // Permite que o contêiner ocupe o espaço disponível no header
+  height: 100%; // Ocupa a altura do pai (header)
 }
 
 .canvas {
-  flex: 0 0 auto; // não cresce nem encolhe
-  max-width: 60%; // largura máxima do canvas
-  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.icon-left, .icon-right {
-  flex: 0 0 auto; // sempre visíveis
-}
-
 
 // ----------- Helpers -----------
 
