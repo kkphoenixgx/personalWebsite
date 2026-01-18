@@ -1,12 +1,12 @@
 <ul class="ulFileNavigator">
-  <ng-container *ngFor="let item of items; let last = last">
+  <ng-container *ngFor="let item of items; let last = last; trackBy: trackByFn">
 
     <!-- PASTA -->
     <ng-container *ngIf="isFolder(item); else fileTemplate">
       <li class="liFileNavigator" 
           [class.last]="last"
           [ngClass]="{ 'darkMode': darkMode$ | async, 'whiteMode': !(darkMode$ | async) }">
-        <details class="detailsFileNavigator">
+        <details class="detailsFileNavigator" [open]="depth === 0">
           <summary class="summaryFileNavigator">{{ item.title }}</summary>
 
           <ul class="ulFileNavigator">
@@ -21,7 +21,7 @@
       <li class="liFileNavigator" 
           [class.last]="last"
           [ngClass]="{ 'darkMode': darkMode$ | async, 'whiteMode': !(darkMode$ | async) }">
-        <a [routerLink]="[item.path]" (click)="logClick(item)">{{ item.title }}</a>
+        <a [href]="item.path" (click)="logClick(item)">{{ item.title }}</a>
       </li>
     </ng-template>
 

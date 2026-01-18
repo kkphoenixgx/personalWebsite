@@ -1,0 +1,49 @@
+<div class="first-container"
+  [ngClass]="{
+    'backgroundHelloContainerDarkMode': isDarkMode,
+    'backgroundHelloContainerWhiteMode': !isDarkMode
+  }"
+>
+  <div *ngIf="readyToContent && animate" #helloBackground class="background">
+    <img #bgImg *ngFor="let lang of listOfFrameworks" [src]="'/assets/svg/' + lang + '.svg'" alt="" loading="lazy">
+  </div>
+
+  <div class="hello-container">
+
+    <div class="image-container">
+      <div class="image-backgound">
+        <img src="/assets/logoCompleta.png" alt="logo-Kauã-Alves-Santos" fetchpriority="high">
+      </div>
+      <p>Kauã Alves Santos</p>
+      <p>kkphoenix</p>
+    </div>
+    <div class="text-effect-container">
+      <!-- animated text -->
+      <h2 *ngIf="animate">{{text}}<span></span></h2>
+        <ng-template [ngIf]="!animate">
+          <h2>Welcome!! My name is Kauã Alves Santos, I am a fullstack web developer, please checkout my portfolio and enjoy my site.</h2>
+        </ng-template>
+
+      
+      <div class="links">
+
+        <a class="info-button" style="font-size: 1.2rem;" href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf">
+          <img src="/assets/pdfIcon.png" alt="pdf icon">
+          <p>Download Resume</p>
+        </a>
+
+        <a class="info-button" href="https://www.linkedin.com/in/kkphoenix/">
+          <img src="/assets/LinkedIn.png" alt="">
+          <p>LinkedIn</p>
+        </a>
+
+        <a class="info-button" href="https://github.com/kkphoenixgx">
+          <img src="/assets/githubIcon.png" alt="linkedIn icon">
+          <p>GitHub</p>
+        </a>
+
+
+      </div>
+    </div>
+  </div>
+</div>

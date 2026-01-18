@@ -7,7 +7,6 @@ import {
   Inject,
   ViewChildren,
   QueryList,
-  HostListener,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
@@ -25,6 +24,7 @@ import { DarkModeControllerService } from '../../../../services/dark-mode-contro
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('mainContainer', { static: true }) mainContainer: ElementRef | undefined;
   @ViewChild('threeContainer', { static: true }) threeContainer: ElementRef | undefined;
   @ViewChild('contentContainer', { static: true }) contentContainer: ElementRef | undefined;
 
@@ -35,6 +35,8 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   @ViewChild('pEnglish', { static: true }) pEnglish: ElementRef | undefined;
 
   private destroy$ = new Subject<void>();
+  private resizeObserver: ResizeObserver | undefined;
+  private intersectionObserver: IntersectionObserver | undefined;
   private _isThreeContainerVisible: boolean = false;
 
   private _renderer!: THREE.WebGLRenderer;
@@ -64,7 +66,7 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.initEvents();
+    this.initIntersectionObserver();
 
     // Observa mudanças do animationService
     this.animate$.pipe(takeUntil(this.destroy$)).subscribe((shouldAnimate) => {
@@ -80,11 +82,20 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
         this.initThreeJS();
       }, 500);
     });
+
+    if (this.isBrowser && this.contentContainer?.nativeElement) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.updateCanvasSize();
+      });
+      this.resizeObserver.observe(this.contentContainer.nativeElement);
+    }
   }
 
   ngOnDestroy(): void {
     this.stopAnimation();
     if (this._renderer) this._renderer.dispose();
+    if (this.resizeObserver) this.resizeObserver.disconnect();
+    if (this.intersectionObserver) this.intersectionObserver.disconnect();
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -122,16 +133,43 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   public handleChangeGreatings(): void {
     if (!this.isBrowser) return;
     this.isGreatingsInEnglish = !this.isGreatingsInEnglish;
-
-    setTimeout(() => {
-      this.applyFadeInEffects();
-    }, this.animationService.animationDelayInMs);
   }
 
-  private initEvents(): void {
-    this._isThreeContainerVisible = false;
-    this.onWindowResize();
-    this.onScroll();
+  private initIntersectionObserver(): void {
+    if (!this.isBrowser) return;
+
+    const options = { threshold: 0.1 };
+
+    this.intersectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
+
+        // Controle de visibilidade do ThreeJS (Performance)
+        if (target === this.threeContainer?.nativeElement) {
+          this._isThreeContainerVisible = entry.isIntersecting;
+          return;
+        }
+
+        // Animação de fade-in dos parágrafos
+        if (entry.isIntersecting) {
+          const isCenter = this.centerParagraphs?.some((p) => p.nativeElement === target);
+          target.classList.add(isCenter ? 'fadeInOnScrollY' : 'fadeInOnScrollX');
+          this.intersectionObserver?.unobserve(target); // Para de observar após animar (mais leve)
+        }
+      });
+    }, options);
+
+    if (this.threeContainer) this.intersectionObserver.observe(this.threeContainer.nativeElement);
+    this.observeParagraphs();
+
+    // Re-observa quando a lista de elementos mudar (ex: troca de idioma)
+    this.centerParagraphs.changes.pipe(takeUntil(this.destroy$)).subscribe(() => this.observeParagraphs());
+    this.fadeInXParagraphs.changes.pipe(takeUntil(this.destroy$)).subscribe(() => this.observeParagraphs());
+  }
+
+  private observeParagraphs(): void {
+    this.centerParagraphs?.forEach((p) => this.intersectionObserver?.observe(p.nativeElement));
+    this.fadeInXParagraphs?.forEach((p) => this.intersectionObserver?.observe(p.nativeElement));
   }
 
   public initThreeJS(): void {
@@ -139,7 +177,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     const contentContainer = this.contentContainer?.nativeElement;
     if (!threeContainer) throw new Error('Three Container do not exists!!');
 
-    threeContainer.style.height = `${contentContainer.scrollHeight}px`;
     threeContainer.style.overflow = 'hidden';
 
     this._scene = new THREE.Scene();
@@ -199,24 +236,17 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     this._camera.position.z = 500;
   }
 
-  @HostListener('window:scroll', ['$event'])
-  private onScroll(): void {
-    if (this.threeContainer && this.isBrowser) {
-      this._isThreeContainerVisible = this.isInView(this.threeContainer.nativeElement);
-    }
-    this.applyFadeInEffects();
-  }
-
-  @HostListener('window:resize', ['$event']) 
-  onWindowResize(): void {
-    if (this.threeContainer?.nativeElement && this._renderer && this._camera) {
-      const container = this.threeContainer.nativeElement;
-      const contentContainer = this.contentContainer?.nativeElement;
-
-      const width = container.offsetWidth || container.clientWidth;
+  private updateCanvasSize(): void {
+    if (this.mainContainer?.nativeElement && this.contentContainer?.nativeElement) {
+      const contentContainer = this.contentContainer.nativeElement;
       const height = contentContainer.scrollHeight;
 
-      container.style.height = `${height}px`;
+      // Define a altura do container principal para acomodar todo o texto
+      this.mainContainer.nativeElement.style.height = `${height}px`;
+
+      if (!this.threeContainer?.nativeElement || !this._renderer || !this._camera) return;
+      const container = this.threeContainer.nativeElement;
+      const width = container.offsetWidth || container.clientWidth;
 
       this._camera.aspect = width / height;
       this._camera.updateProjectionMatrix();
@@ -238,36 +268,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
       this._gridLines.material.color.setHex(particlesColor);
     }
     this._scene.background = new THREE.Color(backgroundColor);
-  }
-
-  private applyFadeInEffects(): void {
-    if (!this.isBrowser) return;
-
-    this.centerParagraphs?.forEach((pRef) => {
-      const element = pRef.nativeElement;
-      if (element instanceof HTMLElement && this.isInView(element)) {
-        element.classList.add('fadeInOnScrollY');
-      }
-    });
-
-    this.fadeInXParagraphs?.forEach((pRef) => {
-      const element = pRef.nativeElement;
-      if (element instanceof HTMLElement && this.isInView(element)) {
-        element.classList.add('fadeInOnScrollX');
-      }
-    });
-  }
-
-  private isInView(el: HTMLElement): boolean {
-    if (!this.isBrowser) return false;
-    const rect = el.getBoundingClientRect();
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-    if (window.innerWidth < 768) {
-      return rect.top < viewportHeight * 1.5;
-    } else {
-      return rect.top < viewportHeight;
-    }
   }
 
   // Helpers com observable

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, forwardRef, inject } from '@angular/core';
+import { Component, Input, forwardRef, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -12,38 +12,23 @@ import { DarkModeControllerService } from '../../../../../services/dark-mode-con
   imports: [CommonModule, RouterModule, forwardRef(() => FileNavigatorComponent)],
   styleUrls: ['./file-navigator.component.scss'],
   templateUrl: './file-navigator.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileNavigatorComponent implements OnInit {
+export class FileNavigatorComponent {
   @Input() public depth: number = 0;
   @Input() public items: IPage[] = [];
 
   private darkModeService = inject(DarkModeControllerService);
   public darkMode$: Observable<boolean> = this.darkModeService.getDarkModeObserbable();
 
-  ngOnInit(): void {
-    this.items = this.sortFoldersFirst(this.items);
-  }
-
-  private sortFoldersFirst(items: IPage[]): IPage[] {
-    return items
-      .slice()
-      .sort((a, b) => {
-        const aIsFolder = this.isFolder(a);
-        const bIsFolder = this.isFolder(b);
-        if (aIsFolder && !bIsFolder) return -1;
-        if (!aIsFolder && bIsFolder) return 1;
-        return 0;
-      })
-      .map(item => {
-        if (item.items) item.items = this.sortFoldersFirst(item.items);
-        return item;
-      });
-  }
-
   //? ----------- Helpers -----------
 
   isFolder(item: IPage): boolean {
     return Array.isArray(item.items) && item.items.length > 0;
+  }
+
+  trackByFn(index: number, item: IPage): string {
+    return item.path || String(index);
   }
 
   //! ----------- Debug -----------

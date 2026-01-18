@@ -2,21 +2,29 @@
 
 ## To Do
 
-- [ ] profissional-history partial
-- [ ] Full screen o texto buga
-- [ ] Backend Java e uma aplicação de converter em node para o Menu
-- [ ] Ajeita o menu
 
+- [ ] Refatorar scss
+- [ ] Melhorar a UI para deixar mais impressionante
+- [ ] Sessão dos artigos
 - [ ] Testes para o footer
 - [ ] window sem focus tira o animate
 - [ ] Change mouse. Opção para desativar isso.
+- [~] profissional-history partial
 - [ ] Profissional history vai ser um livro
 - [ ] Github API para listar os repositórios em algum lugar
-- [ ] Refatorar scss
+
+- [ ] Sugestão: O botão de "Toggle Animations" que vi no seu código (<app-config-menu>) precisa funcionar perfeitamente. Se detectar FPS baixo, sugira desligar a física automaticamente ou mostre um aviso.
 - [?] Quando acontece um resize aumentando a tela acima de 890px e abaixo de 1260 - o canvas não ocupa 100% do history
 
 ## Completed
 
+- [X] Links da hero não tão mudando na mudança para o dark mode
+- [X] A hero não tá funcionando do jeito que precisa
+- [X] O history ainda buga ( Se eu dou resize na página, o canvas as vezes buga e não fica do tamanho correto )
+- [X] Tira o TCC project por enquanto
+- [X] Ajeita o menu
+- [X] Backend Java
+- [X] Full screen o texto buga
 - [X] Responsividade do Portifólio ( & Margin no portifólio)
 - [X] Responsividade do Hire Me
 - [X] Responsividade do footer

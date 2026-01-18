@@ -70,10 +70,10 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private reactPlanetPosition : [number, number, number] = [-17, 0, 0];
   private planetList :IPlanet[] = [
-    { id: 0, position: [ -9, 0, 0 ], imagePath: "assets/planeta-poemSite.png", label: "Poem Maker", site: "https://server-poem-site-utqk.vercel.app/" },
-    { id: 1, position: [ -4.5, 0, 0 ], imagePath: "assets/planeta-TCC.png", label: "TCC project", site: "_blank"},
-    { id: 2, position: [ 0.5, 0, 0 ], imagePath: "assets/planeta-github.png", label: "GitHub", site:"https://github.com/kkphoenixgx" },
-    { id: 3, position: [ 6, 0, 0 ], imagePath: "assets/planeta-linkedIn.png", label: "linkedIn", site: "https://www.linkedin.com/in/kkphoenix/" },
+    { id: 0, position: [ -8, 0, 0 ], imagePath: "assets/planeta-poemSite.png", label: "Poem Maker", site: "https://server-poem-site-utqk.vercel.app/" },
+    // { id: 1, position: [ -4.5, 0, 0 ], imagePath: "assets/planeta-TCC.png", label: "TCC project", site: "_blank"},
+    { id: 2, position: [ -2, 0, 0 ], imagePath: "assets/planeta-github.png", label: "GitHub", site:"https://github.com/kkphoenixgx" },
+    { id: 3, position: [ 5, 0, 0 ], imagePath: "assets/planeta-linkedIn.png", label: "linkedIn", site: "https://www.linkedin.com/in/kkphoenix/" },
   ]
 
   constructor(
@@ -119,7 +119,7 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   //? ----------- Host Listeners -----------
 
-  @HostListener('window:resize', ['$event']) 
+  @HostListener('window:resize', []) 
   onResize(): void {
     clearTimeout(this.resizeTimeout);
 

@@ -43,20 +43,23 @@
   align-items: center;
 }
 .toggleDarkModeItem button{
-  height: 5vh;
-  padding: 1%;
+  padding: 0.5rem 1rem;
   
-  color: black;
+  color: white;
   background-color: $purple-default;
-  border-radius: 15%;
+  border-radius: 8px;
   text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
   
   border: none;
   transition: ease-in-out 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .toggleDarkModeItem button:hover{
   background-color: black;
   color: white;
+  transform: translateY(-2px);
 }
 
 // ----------- Helpers -----------

@@ -6,11 +6,22 @@ $x-line-thickness: 5px;
 .menu-container{
   width: 30vw;
   height: 100vh;
-  position: relative;
-  z-index: 5;
-  background-color: $gray-default;
+  position: fixed;
+  z-index: 100;
   transition: ease-in-out 0.5s;
   top: 0;
+  overflow-y: auto; /* Permite scroll se o conteúdo estourar a altura */
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3); /* Sombra para destacar o menu */
+
+  &.darkMode {
+    background-color: $gray-default;
+    .extra-links li a { color: white; }
+  }
+
+  &.whiteMode {
+    background-color: #f5f5f5;
+    .extra-links li a { color: black; }
+  }
 }
 
 .x-icon {
@@ -41,11 +52,39 @@ $x-line-thickness: 5px;
   }
 }
 
+/* Espaçamento para o navegador de arquivos ficar mais clean */
+app-file-navigator {
+  display: block;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+.extra-links {
+  list-style: none;
+  padding: 2rem 2rem 3rem 2rem;
+  margin: 0;
+  border-top: 2px solid $gray-third;
+  text-align: center;
+
+  li {
+    margin-bottom: 1rem;
+
+    a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: ease-in-out 0.3s;
+
+      &:hover {
+        color: $purple-default;
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
 
 // ----------- Responsive -----------
 
 /* Smartphones (portrait) */
-@media only screen and (min-width: 320px) and (max-device-width: 767px) {
+@media only screen and (max-width: 767px) {
   $x-size-small: 30px; // Tamanho do X para telas menores
 
   .x-icon {
@@ -54,7 +93,7 @@ $x-line-thickness: 5px;
   }
 
   .menu-container{
-    width: 40vw;
+    width: 80vw; /* Aumenta largura no mobile para caber melhor o conteúdo */
   }
 } 
 

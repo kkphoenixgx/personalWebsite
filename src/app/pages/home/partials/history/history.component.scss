@@ -4,8 +4,7 @@
 .history-component {
   background-color: $gray-second;
   position: relative;
-  width: 100vw;
-  min-height: 331vh;
+  width: 100%;
   overflow: hidden;
 
   .three-container {
@@ -13,21 +12,17 @@
     inset: 0;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100%;
-    min-height: 331vh;
     z-index: 1;
     pointer-events: none;
-
-    @media only screen and (max-device-width: 767px) {
-      height: 250vh;
-    }
   }
 
   .content-container {
     position: absolute;
     z-index: 2;
     top: 0;
+    width: 100%; /* Garante que o texto ocupe a largura correta para calcular a altura */
 
     p {
       margin: 0 6% 2.3%;
@@ -166,10 +161,12 @@
   .imgCiep-contanier img,
   .cefet-container img {
     width: 400px;
+    max-width: 100%; /* Garante que a imagem não estoure a tela no mobile */
     margin: 0 6% 2vw;
 
     @media only screen and (max-device-width: 767px) {
       width: 300px;
+      max-width: 90%; /* Margem de segurança extra no mobile */
     }
   }
 

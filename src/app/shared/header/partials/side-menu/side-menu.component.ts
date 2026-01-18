@@ -6,6 +6,7 @@ import { IPage } from '../../../../interface/ITitlesResponse';
 import { SideBarMenuControllerService } from '../../../../services/side-bar-menu-controller.service';
 import { FileNavigatorComponent } from './file-navigator/file-navigator.component';
 import { FileNavigatorService } from '../../../../services/file-navigator-service.service';
+import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -18,14 +19,16 @@ export class SideMenuComponent implements OnInit{
 
   public pagesResponse: IPage[] = [];
   public toogleSideBar :boolean = false;
+  public isDarkMode: boolean = true;
 
   constructor(
     private sideBar :SideBarMenuControllerService,
-    private fileNavigatorService :FileNavigatorService
+    private fileNavigatorService :FileNavigatorService,
+    private darkModeService: DarkModeControllerService
   ){}
 
   public handleSideBarMenu(){
-    this.sideBar.setSideBar(!this.sideBar)
+    this.sideBar.setSideBar(!this.toogleSideBar);
   }
 
 
@@ -35,9 +38,18 @@ export class SideMenuComponent implements OnInit{
       this.toogleSideBar = state;
     });
 
-    this.fileNavigatorService.getItems().subscribe(items=>{
-      console.log(items);
-      if (items && items.length > 0) this.pagesResponse = items;
+    this.darkModeService.getDarkModeObserbable().subscribe(state => {
+      this.isDarkMode = state;
+    });
+
+    this.fileNavigatorService.getItems().then(items => {
+      if (items && items.length > 0) {
+        this.pagesResponse = [{
+          title: '🧠 Second brain notes',
+          path: '',
+          items: items
+        }];
+      }
     });
 
   }

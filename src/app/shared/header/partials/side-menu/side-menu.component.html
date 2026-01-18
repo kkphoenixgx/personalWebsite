@@ -1,7 +1,17 @@
 <nav class="menu-container" 
-  [style.left]="toogleSideBar ? '0' : '-50vw' "
+  [style.left]="toogleSideBar ? '0' : '-100vw' "
+  [ngClass]="{ 'darkMode': isDarkMode, 'whiteMode': !isDarkMode }"
 >
   <div class="x-icon" (click)="handleSideBarMenu()"></div>
 
   <app-file-navigator *ngIf="pagesResponse && pagesResponse.length > 0" [items]="pagesResponse"></app-file-navigator>
+
+  <ul class="extra-links">
+    <li><a href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf">Download Resume</a></li>
+    <li><a href="https://www.linkedin.com/in/kkphoenix/" target="_blank">LinkedIn</a></li>
+    <li><a href="https://github.com/kkphoenixgx" target="_blank">Github</a></li>
+    <li><a href="mailto:kauaalvesWorkplace@gmail.com">Email</a></li>
+    <li><a href="https://server-poem-site-utqk.vercel.app/" target="_blank">Poems site</a></li>
+    <li><a href="https://kkphoenixgx.github.io/react-exercises-site/" target="_blank">React exercises</a></li>
+  </ul>
 </nav>

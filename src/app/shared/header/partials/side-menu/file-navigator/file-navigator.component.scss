@@ -8,7 +8,6 @@
 
 /* Aplica recuo e linha lateral apenas para ULs filhos diretos de detalhes */
 .detailsFileNavigator > .ulFileNavigator {
-  border-left: 2px solid rgba(255, 255, 255, 0.2);
   padding-left: 1rem;  // espaço para arquivos dentro da pasta
   margin-left: 0.5rem; // distância do summary
 }
@@ -16,15 +15,35 @@
 /* Itens da lista (arquivos e pastas) */
 .liFileNavigator {
   margin-top: 0.5rem;
-  color: #fff;
   list-style: none;
   position: relative;
+
+  &.darkMode {
+    color: #fff;
+    a { color: white; }
+    .detailsFileNavigator > .ulFileNavigator {
+      border-left: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    .summaryFileNavigator {
+      background-color: $gray-second;
+    }
+  }
+
+  &.whiteMode {
+    color: black;
+    a { color: black; }
+    .detailsFileNavigator > .ulFileNavigator {
+      border-left: 2px solid rgba(0, 0, 0, 0.2);
+    }
+    .summaryFileNavigator {
+      background-color: #e0e0e0;
+    }
+  }
 }
 
 /* Links de arquivos */
 .liFileNavigator a {
   text-decoration: none;
-  color: white;
 }
 
 /* Pastas */
@@ -42,7 +61,6 @@
 .summaryFileNavigator {
   border-bottom: 1px solid $purple-default;
   padding: 0.5rem 1rem;
-  background-color: $gray-second;
   display: block;
 }
 
