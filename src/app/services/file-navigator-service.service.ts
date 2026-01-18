@@ -8,8 +8,8 @@ import { IPage } from '../interface/ITitlesResponse';
 })
 export class FileNavigatorService {
 
-  // private readonly API_URL = 'https://api-personalwebsite.kkphoenix.com.br/api/pages/';
-  private readonly API_URL = 'http://localhost:8081/api/pages/'; // TODO: Verifique a porta do seu servidor local
+  private readonly API_URL = 'https://api-personalwebsite.kkphoenix.com.br/api/pages/';
+  // private readonly API_URL = 'http://localhost:8081/api/pages/'; // TODO: Verifique a porta do seu servidor local
   private itemsCache: Promise<IPage[]> | null = null;
 
   constructor(private http: HttpClient) { }
