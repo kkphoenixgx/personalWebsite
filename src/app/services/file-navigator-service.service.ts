@@ -8,8 +8,9 @@ import { IPage } from '../interface/ITitlesResponse';
 })
 export class FileNavigatorService {
 
-  private readonly API_URL = 'https://api-personalwebsite.kkphoenix.com.br/api/pages/';
-  // private readonly API_URL = 'http://localhost:8081/api/pages/'; // TODO: Verifique a porta do seu servidor local
+  private readonly BACKEND = 'https://api-personalwebsite.kkphoenix.com.br';
+  private readonly API_URL = this.BACKEND + '/api/pages/';
+
   private itemsCache: Promise<IPage[]> | null = null;
 
   constructor(private http: HttpClient) { }
@@ -37,7 +38,7 @@ export class FileNavigatorService {
       const isFolder = Array.isArray(item.items) && item.items.length > 0;
       return {
         title: item.title,
-        path: isFolder ? item.path : `http://localhost:8081${item.path}`,
+        path: isFolder ? item.path : `${this.BACKEND}${item.path}`,
         items: item.items ? this.transformToPage(item.items) : []
       } as any;
     });
