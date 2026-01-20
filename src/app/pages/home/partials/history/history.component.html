@@ -1,6 +1,8 @@
 <!-- ../../../../../ -->
 
-<div class="history-component" #mainContainer>
+<div class="history-component" #mainContainer
+  [ngClass]="{ 'darkMode': (darkMode$ | async), 'whiteMode': !(darkMode$ | async) }"
+>
   
   <div class="three-container" #threeContainer [hidden]="!(animate$ | async)"></div>
   

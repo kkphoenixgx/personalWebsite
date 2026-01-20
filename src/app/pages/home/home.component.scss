@@ -7,6 +7,11 @@
   background-color: #000000;
   width: 100%;
   text-align: center;
+  transition: background-color 0.5s ease;
+
+  &.whiteMode {
+    background-color: $deep-slate;
+  }
 }
 .choice-hsitory ul {
   display: flex;
@@ -21,6 +26,9 @@
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 // ----------- Helpers -----------

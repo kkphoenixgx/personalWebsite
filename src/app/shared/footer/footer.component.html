@@ -1,5 +1,5 @@
 <footer class="footer-container" 
-  [style.backgroundColor]="isDarkMode ? 'black' : '#9fadc4'"
+  [ngClass]="{ 'darkMode': isDarkMode, 'whiteMode': !isDarkMode }"
 >
 
   <ng-container *ngIf="loading; else notLoading">

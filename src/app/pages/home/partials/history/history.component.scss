@@ -60,6 +60,7 @@
         border: 2px solid transparent;
         top: 20px;
         z-index: 3;
+        transition: background-color 0.5s ease;
 
         @media only screen and (max-device-width: 767px) {
           top: 0;
@@ -188,5 +189,11 @@
   .fadeInOnScrollX {
     transform: translateX(0) !important;
     opacity: 1 !important;
+  }
+
+  &.whiteMode {
+    .photoProfile-container .mySelfImage img {
+      background-color: $deep-slate;
+    }
   }
 }

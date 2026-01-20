@@ -1,6 +1,8 @@
 <app-hero></app-hero>
 
-<nav class="choice-hsitory">
+<nav class="choice-hsitory"
+  [ngClass]="{ 'whiteMode': !(darkModeService.getDarkModeObserbable() | async) }"
+>
   <ul>
     <li #firstTab class="currentTab" (click)="handleHistoryLiClick($event)" data-tab ="History">History</li>
     <li (click)="handleHistoryLiClick($event)" data-tab ="Professional History" >Professional History</li>

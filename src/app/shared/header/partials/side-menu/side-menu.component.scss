@@ -34,6 +34,8 @@ $x-line-thickness: 5px;
   height: $x-size;
   margin: 0 auto;
   margin-top: 5%;
+  user-select: none;
+  -webkit-user-select: none;
 
   &::before,
   &::after {

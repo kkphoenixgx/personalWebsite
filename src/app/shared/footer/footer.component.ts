@@ -68,12 +68,12 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
   tooltipVisible: boolean = false;
   tooltipText: string = ''; tooltipX = 0; tooltipY = 0;
 
-  private reactPlanetPosition : [number, number, number] = [-17, 0, 0];
+  private reactPlanetPosition : [number, number, number] = [-9, 0, 0];
   private planetList :IPlanet[] = [
-    { id: 0, position: [ -8, 0, 0 ], imagePath: "assets/planeta-poemSite.png", label: "Poem Maker", site: "https://server-poem-site-utqk.vercel.app/" },
+    { id: 0, position: [ -3, 0, 0 ], imagePath: "assets/planeta-poemSite.png", label: "Poem Maker", site: "https://server-poem-site-utqk.vercel.app/" },
     // { id: 1, position: [ -4.5, 0, 0 ], imagePath: "assets/planeta-TCC.png", label: "TCC project", site: "_blank"},
-    { id: 2, position: [ -2, 0, 0 ], imagePath: "assets/planeta-github.png", label: "GitHub", site:"https://github.com/kkphoenixgx" },
-    { id: 3, position: [ 5, 0, 0 ], imagePath: "assets/planeta-linkedIn.png", label: "linkedIn", site: "https://www.linkedin.com/in/kkphoenix/" },
+    { id: 2, position: [ 3, 0, 0 ], imagePath: "assets/planeta-github.png", label: "GitHub", site:"https://github.com/kkphoenixgx" },
+    { id: 3, position: [ 9, 0, 0 ], imagePath: "assets/planeta-linkedIn.png", label: "linkedIn", site: "https://www.linkedin.com/in/kkphoenix/" },
   ]
 
   constructor(
@@ -283,7 +283,7 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
       1000
     );
 
-    this.camera.position.x = -5;
+    this.camera.position.x = 0;
     this.handleCameraPosition(container);
     
   }

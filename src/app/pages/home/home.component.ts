@@ -9,6 +9,7 @@ import { ProfessionalHistoryComponent } from './partials/professional-history/pr
 import { PortifolioComponent } from './partials/portifolio/portifolio.component';
 // Importando HeroComponent explicitamente para uso no template
 import { HeroComponent } from './partials/hero/hero.component';
+import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public lastTab! :HTMLElement;
   public currentTab :string | undefined = "History";
 
-  constructor() { }
+  constructor(
+    public darkModeService: DarkModeControllerService
+  ) { }
 
   public handleHistoryLiClick(event: Event): void {
     const target = event.target as HTMLElement;

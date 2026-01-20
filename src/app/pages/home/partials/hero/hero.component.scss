@@ -67,7 +67,7 @@
 
       .image-backgound{
         
-        background-color: $black-background;
+        transition: background-color 0.5s ease;
         display: flex;
         align-items: center;
         border-radius: 100%;
@@ -150,6 +150,19 @@
     background-color: $gray-third;
     color: #ffffff;
   }
+
+  .image-backgound {
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(5px);
+  }
+
+  @media only screen and (max-width: 767px) {
+    .hello-container .text-effect-container {
+      background-color: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+    }
+  }
 }
 .backgroundHelloContainerWhiteMode {
   background-color: $offwhite-default;
@@ -159,6 +172,21 @@
     background-color: #dcdcdc;
     color: #000000;
     border: 1px solid #b0b0b0;
+  }
+
+  .image-backgound {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  @media only screen and (max-width: 767px) {
+    .hello-container .text-effect-container {
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
   }
 }
 
@@ -186,7 +214,6 @@
   
     .text-effect-container{
       flex: none !important;
-      background-color: $black-background;
       margin: 3%;
       padding: 3% !important;
 

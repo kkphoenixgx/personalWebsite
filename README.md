@@ -2,8 +2,6 @@
 
 ## To Do
 
-- [ ] Lamp não está funcionando no mobile
-
 - [ ] Refatorar scss
 - [ ] Melhorar a UI para deixar mais impressionante
 - [ ] Sessão dos artigos
@@ -19,6 +17,7 @@
 
 ## Completed
 
+- [X] Lamp não está funcionando no mobile
 - [X] Menu fallbacks
 - [X] File explorer clicka e fica tudo azul
 - [X] Links da hero não tão mudando na mudança para o dark mode
