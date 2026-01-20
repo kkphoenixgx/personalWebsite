@@ -143,12 +143,12 @@ export class LampComponent implements OnInit, OnDestroy {
   }
 
   private setupMouseEvents(engine: Matter.Engine, render: Matter.Render): void {
-    render.canvas.addEventListener("click", (event: MouseEvent) => {
-      const rect = render.canvas.getBoundingClientRect();
-      const mousePosition = {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-      };
+    let touchStartTime = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    const handleInput = (x: number, y: number) => {
+      const mousePosition = { x, y };
       const bodiesUnderMouse = Query.point(engine.world.bodies, mousePosition);
       bodiesUnderMouse.forEach((body) => {
         this.executeWithDarkModeState((state: boolean) => {
@@ -165,6 +165,34 @@ export class LampComponent implements OnInit, OnDestroy {
           }
         });
       });
+    };
+
+    render.canvas.addEventListener("click", (event: MouseEvent) => {
+      const rect = render.canvas.getBoundingClientRect();
+      handleInput(event.clientX - rect.left, event.clientY - rect.top);
+    });
+    
+    render.canvas.addEventListener("touchstart", (event: TouchEvent) => {
+      const touch = event.touches[0];
+      touchStartTime = Date.now();
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    });
+
+    render.canvas.addEventListener("touchend", (event: TouchEvent) => {
+      const touch = event.changedTouches[0];
+      const touchEndTime = Date.now();
+      const touchEndX = touch.clientX;
+      const touchEndY = touch.clientY;
+
+      const duration = touchEndTime - touchStartTime;
+      const distance = Math.sqrt(Math.pow(touchEndX - touchStartX, 2) + Math.pow(touchEndY - touchStartY, 2));
+
+      // Considera como click se foi rápido (<300ms) e não moveu muito (<10px)
+      if (duration < 300 && distance < 10) {
+        const rect = render.canvas.getBoundingClientRect();
+        handleInput(touchEndX - rect.left, touchEndY - rect.top);
+      }
     });
   }
 

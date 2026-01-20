@@ -8,8 +8,9 @@ import { IPage } from '../interface/ITitlesResponse';
 })
 export class FileNavigatorService {
 
-  private readonly BACKEND = 'https://api-personalwebsite.kkphoenix.com.br';
-  private readonly API_URL = this.BACKEND + '/api/pages/';
+  // private readonly BACKEND = 'https://api-personalwebsite.kkphoenix.com.br';
+  private readonly BACKEND = 'http://192.168.0.30:8081';
+  private readonly API_URL = this.BACKEND + '/api/pages/'; 
 
   private itemsCache: Promise<IPage[]> | null = null;
 
@@ -24,7 +25,7 @@ export class FileNavigatorService {
           return this.transformToPage(data);
         } catch (error) {
           console.error('Erro na requisição:', error);
-          return [];
+          throw error;
         }
       })();
     }

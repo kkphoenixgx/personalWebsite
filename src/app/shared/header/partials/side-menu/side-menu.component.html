@@ -4,7 +4,17 @@
 >
   <div class="x-icon" (click)="handleSideBarMenu()"></div>
 
-  <app-file-navigator *ngIf="pagesResponse && pagesResponse.length > 0" [items]="pagesResponse"></app-file-navigator>
+  <div *ngIf="isLoading" class="status-container loading">
+    <div class="spinner"></div>
+    <p>Carregando...</p>
+  </div>
+
+  <div *ngIf="hasError" class="status-container error">
+    <div class="error-icon">!</div>
+    <p>Connection Error</p>
+  </div>
+
+  <app-file-navigator *ngIf="!isLoading && !hasError && pagesResponse && pagesResponse.length > 0" [items]="pagesResponse"></app-file-navigator>
 
   <ul class="extra-links">
     <li><a href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf">Download Resume</a></li>

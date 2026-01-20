@@ -2,6 +2,7 @@
 
 ## To Do
 
+- [ ] Lamp não está funcionando no mobile
 
 - [ ] Refatorar scss
 - [ ] Melhorar a UI para deixar mais impressionante
@@ -18,6 +19,8 @@
 
 ## Completed
 
+- [X] Menu fallbacks
+- [X] File explorer clicka e fica tudo azul
 - [X] Links da hero não tão mudando na mudança para o dark mode
 - [X] A hero não tá funcionando do jeito que precisa
 - [X] O history ainda buga ( Se eu dou resize na página, o canvas as vezes buga e não fica do tamanho correto )

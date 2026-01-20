@@ -20,6 +20,8 @@ export class SideMenuComponent implements OnInit{
   public pagesResponse: IPage[] = [];
   public toogleSideBar :boolean = false;
   public isDarkMode: boolean = true;
+  public isLoading: boolean = true;
+  public hasError: boolean = false;
 
   constructor(
     private sideBar :SideBarMenuControllerService,
@@ -50,6 +52,10 @@ export class SideMenuComponent implements OnInit{
           items: items
         }];
       }
+      this.isLoading = false;
+    }).catch(() => {
+      this.hasError = true;
+      this.isLoading = false;
     });
 
   }
