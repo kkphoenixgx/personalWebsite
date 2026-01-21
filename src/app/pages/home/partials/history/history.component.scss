@@ -192,6 +192,7 @@
   }
 
   &.whiteMode {
+    background-color: #fff;
     .photoProfile-container .mySelfImage img {
       background-color: $deep-slate;
     }

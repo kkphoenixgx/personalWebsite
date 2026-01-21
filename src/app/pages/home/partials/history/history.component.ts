@@ -101,6 +101,9 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   }
 
   private startAnimation(): void {
+    if (!this._renderer && this.isBrowser) {
+      this.initThreeJS();
+    }
     if (this.animationFrameId === null) {
       this.animateLoop();
     }
@@ -111,12 +114,13 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
     }
+    this.disposeThreeJS();
   }
 
   private animateLoop(): void {
     this.animationFrameId = requestAnimationFrame(() => this.animateLoop());
 
-    if (this._isThreeContainerVisible && this._particles) {
+    if (this._isThreeContainerVisible && this._particles && this._renderer) {
       this._particles.rotation.x += 0.002;
       this._particles.rotation.y += 0.002;
       this._gridLines.rotation.z += 0.001;
@@ -133,6 +137,40 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   public handleChangeGreatings(): void {
     if (!this.isBrowser) return;
     this.isGreatingsInEnglish = !this.isGreatingsInEnglish;
+  }
+
+  private disposeThreeJS(): void {
+    if (this._renderer) {
+      this._renderer.dispose();
+      const threeContainer = this.threeContainer?.nativeElement;
+      if (threeContainer && this._renderer.domElement && threeContainer.contains(this._renderer.domElement)) {
+        threeContainer.removeChild(this._renderer.domElement);
+      }
+    }
+
+    if (this._scene) {
+      this._scene.clear();
+    }
+
+    if (this._particles) {
+      if (this._particles.geometry) this._particles.geometry.dispose();
+      if (this._particles.material instanceof THREE.Material) {
+        this._particles.material.dispose();
+      }
+    }
+
+    if (this._gridLines) {
+      if (this._gridLines.geometry) this._gridLines.geometry.dispose();
+      if (this._gridLines.material instanceof THREE.Material) {
+        this._gridLines.material.dispose();
+      }
+    }
+
+    this._renderer = undefined as any;
+    this._scene = undefined as any;
+    this._camera = undefined as any;
+    this._particles = undefined as any;
+    this._gridLines = undefined as any;
   }
 
   private initIntersectionObserver(): void {
@@ -173,29 +211,47 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   }
 
   public initThreeJS(): void {
-    const threeContainer = this.threeContainer?.nativeElement;
-    const contentContainer = this.contentContainer?.nativeElement;
-    if (!threeContainer) throw new Error('Three Container do not exists!!');
+    try {
+      const threeContainer = this.threeContainer?.nativeElement;
+      const contentContainer = this.contentContainer?.nativeElement;
+      
+      if (!threeContainer) {
+        setTimeout(() => this.initThreeJS(), 500);
+        return;
+      }
 
-    threeContainer.style.overflow = 'hidden';
+      this.disposeThreeJS();
 
-    this._scene = new THREE.Scene();
-    const aspect = threeContainer.clientWidth / threeContainer.clientHeight;
-    this._camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
+      threeContainer.style.overflow = 'hidden';
 
-    this._renderer = new THREE.WebGLRenderer({ antialias: true });
-    this._renderer.setPixelRatio(window.devicePixelRatio || 1);
-    this._renderer.setSize(threeContainer.clientWidth, contentContainer.scrollHeight);
-    threeContainer.appendChild(this._renderer.domElement);
+      this._scene = new THREE.Scene();
+      
+      let width = threeContainer.clientWidth || window.innerWidth;
+      let height = contentContainer?.scrollHeight || threeContainer.clientHeight || window.innerHeight;
+      
+      if (width === 0) width = 1;
+      if (height === 0) height = 1;
 
-    this._renderer.domElement.style.position = 'absolute';
-    this._renderer.domElement.style.top = '0';
-    this._renderer.domElement.style.left = '0';
-    this._renderer.domElement.style.width = '100%';
-    this._renderer.domElement.style.height = '100%';
+      const aspect = width / height;
+      this._camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
 
-    this.initParticles();
-    setTimeout(() => this.afterThreeJsInit(), 500);
+      this._renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      this._renderer.setPixelRatio(window.devicePixelRatio || 1);
+      this._renderer.setSize(width, height);
+      threeContainer.appendChild(this._renderer.domElement);
+
+      this._renderer.domElement.style.position = 'absolute';
+      this._renderer.domElement.style.top = '0';
+      this._renderer.domElement.style.left = '0';
+      this._renderer.domElement.style.width = '100%';
+      this._renderer.domElement.style.height = '100%';
+
+      this.initParticles();
+      setTimeout(() => this.afterThreeJsInit(), 500);
+    } catch (error) {
+      console.error('Error initializing ThreeJS, retrying...', error);
+      setTimeout(() => this.initThreeJS(), 1000);
+    }
   }
 
   public initParticles(): void {
@@ -248,10 +304,12 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
       const container = this.threeContainer.nativeElement;
       const width = container.offsetWidth || container.clientWidth;
 
-      this._camera.aspect = width / height;
-      this._camera.updateProjectionMatrix();
+      if (width > 0 && height > 0) {
+        this._camera.aspect = width / height;
+        this._camera.updateProjectionMatrix();
 
-      this._renderer.setSize(width, height);
+        this._renderer.setSize(width, height);
+      }
     }
   }
 
@@ -261,6 +319,8 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   }
 
   public changeThemeColor(backgroundColor: number, particlesColor: number): void {
+    if (!this._particles || !this._gridLines || !this._scene) return;
+
     if (this._particles.material instanceof THREE.PointsMaterial) {
       this._particles.material.color.setHex(particlesColor);
     }

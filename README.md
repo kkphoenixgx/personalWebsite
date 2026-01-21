@@ -1,6 +1,7 @@
 # PersonalWebsite
 
-## To Do
+## ISSUES
+
 
 - [ ] Refatorar scss
 - [ ] Melhorar a UI para deixar mais impressionante
@@ -15,8 +16,10 @@
 - [ ] Sugestão: O botão de "Toggle Animations" que vi no seu código (<app-config-menu>) precisa funcionar perfeitamente. Se detectar FPS baixo, sugira desligar a física automaticamente ou mostre um aviso.
 - [?] Quando acontece um resize aumentando a tela acima de 890px e abaixo de 1260 - o canvas não ocupa 100% do history
 
-## Completed
+### Completed
 
+- [X] Se eu ligo a animação pelo menos 3 vezes (6 clicks no toogle animation) o container do tree.js no history buga e dá erro na criação do container com tema escuro e continua com o fumdo claro, tornando impossível ler o texto
+- [X] A color não tá mudando quando desliga a animação 
 - [X] Lamp não está funcionando no mobile
 - [X] Menu fallbacks
 - [X] File explorer clicka e fica tudo azul
