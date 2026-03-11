@@ -44,19 +44,21 @@ export class SideMenuComponent implements OnInit{
       this.isDarkMode = state;
     });
 
-    this.fileNavigatorService.getItems().then(items => {
-      if (items && items.length > 0) {
-        this.pagesResponse = [{
-          title: '🧠 Second brain notes',
-          path: '',
-          items: items
-        }];
-      }
-      this.isLoading = false;
-    }).catch(() => {
-      this.hasError = true;
-      this.isLoading = false;
-    });
+    this.fileNavigatorService.getItems()
+      .then(items => {
+        if (items && items.length > 0) {
+          this.pagesResponse = [{
+            title: '🧠 Second brain notes',
+            path: '',
+            items: items
+          }];
+        }
+        this.isLoading = false;
+      })
+      .catch(() => {
+        this.hasError = true;
+        this.isLoading = false;
+      });
 
   }
 

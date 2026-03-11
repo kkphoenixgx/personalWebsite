@@ -8,8 +8,9 @@ import { IPage } from '../interface/ITitlesResponse';
 })
 export class FileNavigatorService {
 
-  private readonly BACKEND = 'https://api-personalwebsite.kkphoenix.com.br';
-  private readonly API_URL = this.BACKEND + '/api/pages/'; 
+  // private readonly BACKEND = 'https://api-personalwebsite.kkphoenix.com.br';
+  private readonly BACKEND = 'http://localhost:8081/';
+  private readonly API_URL = this.BACKEND + '/api/pages/';
 
   private itemsCache: Promise<IPage[]> | null = null;
 
@@ -34,14 +35,17 @@ export class FileNavigatorService {
   private transformToPage(items: any[]): IPage[] {
     const mappedItems = (items || [])
       .filter(item => item.title !== '404')
+      .filter(item => !item.title.includes("sync conflict"))
+      .filter(item => !item.title.includes(".excalidraw"))
       .map(item => {
-      const isFolder = Array.isArray(item.items) && item.items.length > 0;
-      return {
-        title: item.title,
-        path: isFolder ? item.path : `${this.BACKEND}${item.path}`,
-        items: item.items ? this.transformToPage(item.items) : []
-      } as any;
-    });
+        const isFolder = Array.isArray(item.items) && item.items.length > 0;
+      
+        return {
+          title: item.title,
+          path: isFolder ? item.path : `${this.BACKEND}${item.path}`,
+          items: item.items ? this.transformToPage(item.items) : []
+        } as any;
+      });
 
     return mappedItems.sort((a, b) => {
       const priority = ['Programming', 'Programing', 'Study', 'Stody', 'RPG'];

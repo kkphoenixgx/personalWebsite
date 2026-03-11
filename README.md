@@ -2,7 +2,9 @@
 
 ## ISSUES
 
-
+- [ ] listando sync conflicts e .excalidraw no quartz
+- [ ] Tá dando erro 404 para pegar as imagens
+- [ ] Tem que fazer aquele negócio das provas
 - [ ] Refatorar scss
 - [ ] Melhorar a UI para deixar mais impressionante
 - [ ] Sessão dos artigos
@@ -14,10 +16,16 @@
 - [ ] Github API para listar os repositórios em algum lugar
 
 - [ ] Sugestão: O botão de "Toggle Animations" que vi no seu código (<app-config-menu>) precisa funcionar perfeitamente. Se detectar FPS baixo, sugira desligar a física automaticamente ou mostre um aviso.
-- [?] Quando acontece um resize aumentando a tela acima de 890px e abaixo de 1260 - o canvas não ocupa 100% do history
+
+### Sub projetos
+
+- [ ] - excalidraw no site
+  - Google desenhos exporta para pdf com resulição vetorial de zoom de 1000x
 
 ### Completed
 
+- [X] listando sync conflicts e .excalidraw
+- [X] Quando acontece um resize aumentando a tela acima de 890px e abaixo de 1260 - o canvas não ocupa 100% do history
 - [X] Se eu ligo a animação pelo menos 3 vezes (6 clicks no toogle animation) o container do tree.js no history buga e dá erro na criação do container com tema escuro e continua com o fumdo claro, tornando impossível ler o texto
 - [X] A color não tá mudando quando desliga a animação 
 - [X] Lamp não está funcionando no mobile
