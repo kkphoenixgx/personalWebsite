@@ -1,10 +1,12 @@
+/// <reference types="jasmine" />
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { LampComponent } from './lamp.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DarkModeControllerServiceMock } from '../../services/tests/dark-mode-controller.service.mock'; 
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service'; // Importe o serviço original
+import { Runner, World, Engine, Render } from 'matter-js';
 
-describe('LampComponent', () => {
+describe('LampComponent (Performance & Metrics)', () => {
   let component: LampComponent;
   let fixture: ComponentFixture<LampComponent>;
 
@@ -32,5 +34,31 @@ describe('LampComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('[Métrica] should clean up Matter.js engine and memory on destroy to prevent memory leaks', () => {
+    const runnerStopSpy = spyOn(Runner, 'stop').and.callThrough();
+    const worldClearSpy = spyOn(World, 'clear').and.callThrough();
+    const engineClearSpy = spyOn(Engine, 'clear').and.callThrough();
+    const renderStopSpy = spyOn(Render, 'stop').and.callThrough();
+
+    component.ngOnDestroy();
+
+    expect(runnerStopSpy).toHaveBeenCalled();
+    expect(worldClearSpy).toHaveBeenCalled();
+    expect(engineClearSpy).toHaveBeenCalled();
+    expect(renderStopSpy).toHaveBeenCalled();
+
+    expect((component as any).render).toBeUndefined();
+  });
+
+  it('[Métrica] should complete destroy$ subject on ngOnDestroy to prevent RxJS memory leaks', () => {
+    const destroyNextSpy = spyOn((component as any).destroy$, 'next').and.callThrough();
+    const destroyCompleteSpy = spyOn((component as any).destroy$, 'complete').and.callThrough();
+
+    component.ngOnDestroy();
+
+    expect(destroyNextSpy).toHaveBeenCalled();
+    expect(destroyCompleteSpy).toHaveBeenCalled();
   });
 });

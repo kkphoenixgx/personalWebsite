@@ -150,6 +150,12 @@ export class FooterComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.checkPlanetIntersection(event);
   }
 
+  @HostListener('mouseleave') 
+  onMouseLeave(): void {
+    this.resetPlanetHighlight();
+    this.tooltipVisible = false;
+  }
+
   @HostListener('click', ['$event']) 
   onClick(event: MouseEvent): void {
     if (!this.camera || !this.renderer) return;

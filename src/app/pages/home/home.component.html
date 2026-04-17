@@ -1,6 +1,7 @@
 <app-hero></app-hero>
 
 <nav class="choice-hsitory"
+  aria-label="Page sections"
   [ngClass]="{ 'whiteMode': !(darkModeService.getDarkModeObserbable() | async) }"
 >
   <ul>

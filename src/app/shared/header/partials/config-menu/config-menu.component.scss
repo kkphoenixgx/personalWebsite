@@ -24,15 +24,15 @@
 }
 
 .itemMenuConfig{
+  width: 100%;
   align-items: center;
   padding: 4%;
   display: flex;
   justify-content: space-between;
-  list-style: none;
   font-family: initial;
 }
 
-.itemMenuConfig p{
+.itemMenuConfig label{
   max-width: 50%;
 }
 
@@ -120,7 +120,7 @@
 
 /* Classe para slider ON */
 .slider-on {
-  background-color: #680068;
+  background-color: $purple-default;
 }
 
 .slider-on:before {

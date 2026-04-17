@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, PLATFORM_ID, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, QueryList, ViewChildren, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
@@ -27,9 +27,9 @@ export class HeroComponent implements OnInit, AfterViewInit {
   ];
   
   public tl: GSAPTimeline = gsap.timeline({});
+  private platformId = inject(PLATFORM_ID);
 
   constructor(
-    @Inject(PLATFORM_ID) private PLATAFORM_ID: Object,
     private animationService: AnimationControllerService,
     private darkModeService: DarkModeControllerService,
     private cdr: ChangeDetectorRef
@@ -43,8 +43,6 @@ export class HeroComponent implements OnInit, AfterViewInit {
 
   public startGsap(){
     this.tl = gsap.timeline({ 
-      repeat: -1, 
-      yoyo: false, 
       delay: (this.animationService.animationDelayInMs/1000) + 2
     });
   }
@@ -59,64 +57,43 @@ export class HeroComponent implements OnInit, AfterViewInit {
   }
 
   public removeAnimations(): void {
-    if (!this.animate && this.bgImages) {
-      this.bgImages.forEach(imgRef => {
-        const img = imgRef.nativeElement;
-        img.classList.remove("applyAnimation");
-        img.classList.add("removeAnimation");
-      });
-    }
+    this.tl.clear();
   }
 
   public animateBackground(): void {
-    if (!this.animate || !this.bgImages) this.tl.clear();
-    else {
-      this.tl.clear();
-
-      const fallDistance = window.innerHeight + 100;
-
-      setTimeout(() => {
-        this.bgImages.forEach((imgRef, index) => {
-          const svg = imgRef.nativeElement;
-          svg.style.pointerEvents = 'none'; 
-          gsap.set(svg, { pointerEvents: 'none' });
-
-          const effect = Math.floor(Math.random() * 3); 
-          const fixedDuration = 4;
-
-          switch (effect) {
-            case 0: 
-              this.tl.to(svg, {
-                y: fallDistance,
-                rotation: gsap.utils.random(-180, 180),
-                duration: fixedDuration,
-                ease: "power1.in"
-              }, index * 0.5);
-              break;
-            case 1: 
-              this.tl.to(svg, {
-                y: -200,
-                scale: 1.3,
-                rotation: gsap.utils.random(-90, 90),
-                duration: fixedDuration,
-                ease: "bounce.out"
-              }, index * 0.5);
-              break;
-            case 2: 
-              this.tl.to(svg, {
-                y: fallDistance,
-                rotation: 720,
-                scale: 0.6,
-                duration: fixedDuration,
-                ease: "circ.in"
-              }, index * 0.5);
-              break;
-            default:
-              break;
-          }
-        });
-      }, 80);
+    if (!this.animate || !this.bgImages) {
+      this.removeAnimations();
+      return;
     }
+
+    this.tl.clear();
+    const fallDistance = window.innerHeight + 100;
+
+    setTimeout(() => {
+      this.bgImages.forEach((imgRef) => {
+        const svg = imgRef.nativeElement;
+        gsap.set(svg, { pointerEvents: 'none' });
+
+        this.tl.fromTo(svg, 
+          {
+            y: -150,
+            x: () => gsap.utils.random(0, window.innerWidth),
+            opacity: () => gsap.utils.random(0.1, 0.5),
+            scale: () => gsap.utils.random(0.4, 0.9),
+            rotation: () => gsap.utils.random(-90, 90)
+          },
+          {
+            y: fallDistance,
+            rotation: () => gsap.utils.random(-360, 360),
+            duration: () => gsap.utils.random(10, 20), // Queda suave
+            ease: "none",
+            repeat: -1,
+            delay: () => gsap.utils.random(0, 10)
+          },
+          0 // Garante que todos os tweens sejam adicionados ao tempo 0 da timeline
+        );
+      });
+    }, 80);
   }
 
   public generateBackground(): void {

@@ -14,6 +14,11 @@
     <p>Connection Error</p>
   </div>
 
+  <ul class="link-to-pages">
+    <li> <a [routerLink]="['']" >Home</a></li>
+    <li> <a [routerLink]="['articles']" >Articles</a></li>
+  </ul>
+ 
   <app-file-navigator *ngIf="!isLoading && !hasError && pagesResponse && pagesResponse.length > 0" [items]="pagesResponse"></app-file-navigator>
 
   <ul class="extra-links">

@@ -1,1 +1,37 @@
-<p>articles works!</p>
+<div class="articles-container stanford-theme">
+
+  <!-- Viewer Mode: Exibe o PDF diretamente via iframe -->
+  <div class="article-viewer" *ngIf="selectedArticle">
+    <button class="back-button" (click)="selectedArticle = null">&larr; Back to Publications</button>
+    <div class="pdf-container">
+      <iframe [src]="selectedArticle.safeUrl" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <!-- Grid Mode: Exibe os cartões -->
+  <div class="grid-mode" *ngIf="!selectedArticle">
+    <div class="stanford-header">
+      <h1 class="stanford-title">Articles & Publications</h1>
+      <p class="stanford-subtitle">My academic research and technical papers.</p>
+      
+      <div class="search-container">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Search a keyword inside documents..." class="stanford-search-input" />
+      </div>
+    </div>
+
+    <div class="articles-grid">
+      <a class="article-card" *ngFor="let article of filteredArticles" href="#" (click)="openArticle(article, $event)">
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-date">{{ article.date }}</span>
+            <span class="extraction-status" *ngIf="article.isExtracting">Indexing text...</span>
+          </div>
+          <h3>{{ article.title }}</h3>
+          <p class="article-description">{{ article.description }}</p>
+          
+          <span class="read-more">Read Publication &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,8 @@
 @use "../../styles/variables.scss" as *;
 
 footer {
-  height: 40vh;
-  min-height: 200px;
+  height: 30vh;
+  min-height: 150px;
   display: block;
   color: #fff;
   border-top: 2px solid $purple-default;
@@ -24,7 +24,7 @@ footer {
   canvas {
     width: 100% !important;
     height: 100% !important;
-    min-height: 200px;
+    min-height: 150px;
     display: block;
   }
   .loading-indicator {

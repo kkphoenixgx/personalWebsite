@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 // home.component.spec.ts
 import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { HomeComponent } from './home.component';

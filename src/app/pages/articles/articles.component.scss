@@ -1,0 +1,192 @@
+// Stanford Theme Variables
+$stanford-red: #8C1515;
+$stanford-dark-red: #820000;
+$paper-white: #fdfcf8;
+$text-dark: #2e2d29;
+
+:host {
+  display: block;
+  width: 100vw;
+  min-height: 85vh;
+}
+
+.articles-container {
+  min-height: 85vh;
+  padding: 15vh 10vw 10vh 10vw;
+  font-family: "Merriweather", "Georgia", serif;
+  background-color: transparent; // Deixa o body modificado pelo JS aparecer
+  color: $text-dark;
+
+  .article-viewer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    animation: fadeIn 0.4s ease-out;
+
+    .back-button {
+      background: none;
+      border: none;
+      color: $stanford-red;
+      font-size: 1.1rem;
+      font-weight: bold;
+      font-family: sans-serif;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      align-self: flex-start;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $stanford-dark-red;
+        text-decoration: underline;
+      }
+    }
+
+    .pdf-container {
+      flex-grow: 1;
+      border: 2px solid rgba($stanford-red, 0.2);
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      background-color: white;
+
+      iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .grid-mode {
+    animation: fadeIn 0.4s ease-out;
+
+    .stanford-header {
+      text-align: center;
+      margin-bottom: 5rem;
+      border-bottom: 2px solid rgba($stanford-red, 0.2);
+      padding-bottom: 2rem;
+
+      .stanford-title {
+        font-size: 3.5rem;
+        color: $stanford-red;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+      }
+
+      .stanford-subtitle {
+        font-size: 1.2rem;
+        color: lighten($text-dark, 20%);
+        font-style: italic;
+      }
+
+      .search-container {
+        margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+
+        .stanford-search-input {
+          width: 100%;
+          max-width: 500px;
+          padding: 1rem 1.5rem;
+          font-size: 1rem;
+          font-family: inherit;
+          border: 1px solid rgba($stanford-red, 0.3);
+          border-radius: 25px;
+          outline: none;
+          transition: all 0.3s ease;
+
+          &:focus {
+            border-color: $stanford-red;
+            box-shadow: 0 4px 12px rgba($stanford-red, 0.15);
+          }
+        }
+      }
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 3rem;
+
+      .article-card {
+        text-decoration: none;
+        color: inherit;
+        background-color: #ffffff;
+        border-top: 4px solid $stanford-red;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 12px 24px rgba(140, 21, 21, 0.15);
+
+          .read-more {
+            color: $stanford-red;
+            text-decoration: underline;
+          }
+        }
+
+        .article-content {
+          padding: 2.5rem 2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+
+          .article-meta {
+            margin-bottom: 1rem;
+            
+            .article-date {
+              font-size: 0.85rem;
+              font-family: sans-serif;
+              color: $stanford-red;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              font-weight: bold;
+            }
+            
+            .extraction-status {
+              font-size: 0.75rem;
+              color: #a0a0a0;
+              font-family: sans-serif;
+              font-style: italic;
+              float: right;
+            }
+          }
+
+          h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            color: $text-dark;
+          }
+
+          .article-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: lighten($text-dark, 15%);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+          }
+
+          .read-more {
+            font-size: 0.9rem;
+            font-family: sans-serif;
+            font-weight: bold;
+            color: lighten($stanford-red, 10%);
+            transition: color 0.2s ease;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

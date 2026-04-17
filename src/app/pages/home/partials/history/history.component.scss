@@ -130,10 +130,11 @@
       min-width: 12vw;
       height: 5vh;
       margin-right: 6%;
-      background-color: rgba(144, 144, 144, 0.64);
+      background-color: $purple-default;
       border-radius: 6%;
-      border: none;
-      color: #ede3e3;
+      border: 2px solid transparent;
+      color: #ffffff;
+      font-weight: bold;
     }
 
     @media only screen and (max-device-width: 767px) {

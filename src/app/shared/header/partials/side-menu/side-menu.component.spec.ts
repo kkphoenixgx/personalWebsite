@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SideMenuComponent } from './side-menu.component';
 import { provideRouter } from '@angular/router';

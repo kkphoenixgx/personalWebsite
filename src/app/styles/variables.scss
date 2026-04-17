@@ -1,12 +1,18 @@
-$gray-default: #262626;
-$gray-second: #111;
-$gray-third: #2e2c2c;
+$gray-default: var(--gray-default, #262626);
+$gray-second: var(--gray-second, #111111);
+$gray-third: var(--gray-third, #2e2c2c);
 
-$offwhite-default: #c7d4e8;
+$offwhite-origin: #c7d4e8;
+$offwhite-default: var(--offwhite-default, #{$offwhite-origin});
 
-$purple-default: #9100a6;
+$purple-origin: #9100a6;
+$purple-default: var(--purple-default, #{$purple-origin});
+$purple-light: #d47fe0; // Variação clara para passar no WCAG AA em fundos escuros
 
-$blue-default: #9fadc4;
+// Variável para texto branco padrão (usado no menu)
+$text-light: var(--text-light, #f5f5f5);
+
+$blue-default: #2c3e50; // Cor escurecida para passar no WCAG AA em fundos claros
 
 $black-background: #0a0a0adb;
 $black-background-moreBlack: #0a0a0aec;

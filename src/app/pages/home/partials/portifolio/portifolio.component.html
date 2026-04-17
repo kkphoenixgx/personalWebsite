@@ -21,10 +21,10 @@
     <div class="left-column">
       <div class="portfolio-card" *ngFor="let project of sideLeftProjects">
         <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
-        <div>
+        <div class="card-content">
           <h3 class="project-title">{{ project.title }}</h3>
           <p class="highlight">{{ project.highlightText }}</p>
-          <p>{{ project.description }}</p>
+          <p class="description">{{ project.description }}</p>
           <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
         </div>
       </div>
@@ -32,10 +32,10 @@
     <div class="center-column">
       <div class="portfolio-card" *ngFor="let project of cardProjects">
         <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
-        <div>
+        <div class="card-content">
           <h3 class="project-title">{{ project.title }}</h3>
           <p class="highlight">{{ project.highlightText }}</p>
-          <p>{{ project.description }}</p>
+          <p class="description">{{ project.description }}</p>
           <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
         </div>
       </div>
@@ -43,10 +43,10 @@
     <div class="right-column">
       <div class="portfolio-card" *ngFor="let project of sideRightProjects">
         <img [src]="project.image" [alt]="project.title" class="portfolio-img" *ngIf="project.image" />
-        <div>
+        <div class="card-content">
           <h3 class="project-title">{{ project.title }}</h3>
           <p class="highlight">{{ project.highlightText }}</p>
-          <p>{{ project.description }}</p>
+          <p class="description">{{ project.description }}</p>
           <a class="portfolio-link" [href]="project.url" target="_blank">Visit</a>
         </div>
       </div>

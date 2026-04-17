@@ -7,11 +7,12 @@ import { SideBarMenuControllerService } from '../../../../services/side-bar-menu
 import { FileNavigatorComponent } from './file-navigator/file-navigator.component';
 import { FileNavigatorService } from '../../../../services/file-navigator-service.service';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-side-menu',
   standalone: true,
-  imports: [CommonModule, FileNavigatorComponent],
+  imports: [CommonModule, FileNavigatorComponent, RouterLink],
   styleUrl: './side-menu.component.scss',
   templateUrl: './side-menu.component.html'
 }) 
