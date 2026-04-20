@@ -3,9 +3,11 @@
 ## ISSUES
 
 - [ ] Sessão dos artigos
+  - [ ] Criar testes para o pdfExtraction, testes para the-eye e testes para o article.
 - [ ] Testes
   - [ ] Verificar cobertura atual de testes
   - [ ] Criar testes de métricas para esse software
+  - [ ] Criar Teste de validação para verificar se vai funcionar em produção.
 - [ ] Precisamos de um lugar que lista melhor todas as provas antigas do cefet, substituir o banco de provas atual do cefet, uma nova page para o banco de provas do cefet, pode ser o cefet-exams 
 - [ ] Refatorar scss
   - [ ] Escrever scss melhor, precisa ser scss mesmo, não css disfraçado, usar as melhores práticas

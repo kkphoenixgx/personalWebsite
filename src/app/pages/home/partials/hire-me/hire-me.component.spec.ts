@@ -3,6 +3,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HireMeComponent } from './hire-me.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
+import { of } from 'rxjs';
 
 describe('HireMeComponent', () => {
   let component: HireMeComponent;
@@ -11,7 +14,10 @@ describe('HireMeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [HireMeComponent],
-      schemas: [NO_ERRORS_SCHEMA] // Add NO_ERRORS_SCHEMA to ignore unknown elements and attributes
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: DarkModeControllerService, useValue: { getDarkModeObserbable: () => of(true) } }
+      ]
     })
     .compileComponents()
     .then(() => {
@@ -23,5 +29,14 @@ describe('HireMeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('deve renderizar as informações de contato corretas', () => {
+    const links = fixture.debugElement.queryAll(By.css('.container-me-info a'));
+    expect(links.length).toBe(4);
+    expect(links[0].nativeElement.getAttribute('href')).toContain('tel:+5521993344251');
+    expect(links[1].nativeElement.getAttribute('href')).toContain('mailto:kauaAlvesWorkplace@gmail.com');
+    expect(links[2].nativeElement.getAttribute('href')).toContain('linkedin.com');
+    expect(links[3].nativeElement.getAttribute('href')).toContain('github.com');
   });
 });

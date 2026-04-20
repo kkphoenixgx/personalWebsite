@@ -1,39 +1,48 @@
 <div class="configMenu-container" 
-  [ngClass]=" {showConfigMenu : toggleConfigMenu,  hideConfigMenu: !toggleConfigMenu}"
+  [ngClass]="{
+    'showConfigMenu': toggleConfigMenu,
+    'hideConfigMenu': !toggleConfigMenu,
+    'darkMode': toggleDarkMode$ | async,
+    'whiteMode': !(toggleDarkMode$ | async)
+  }"
 >
   <div class="configMenu"
   [style.background-color]=" (toggleDarkMode$ | async) ? '#262626' : '#f5f5f5'"
   [style.color]=" (toggleDarkMode$ | async) ? '#ffffff' : '#000000'"
-  role="dialog" aria-label="Configuration Menu"
+  role="region" aria-label="Settings Menu"
   >
-    <h3>Menu</h3>
+    <h2>Menu</h2>
     <div class="itemMenuConfig">
       
       <div class="toggleDarkModeItem"
         *ngIf="((toggleAnimations$ | async) && lampComponentRef); else elseTemplate" 
       >
-        <label for="destroy-lamp-btn">Destroy Lamp</label>
-        <button (click)="handleDestroyButton()" >Destroy!</button>
+        <span>Destroy Lamp</span>
+        <button (click)="handleDestroyButton()" aria-label="Destroy Lamp Physics">Destroy</button>
       </div>
       
       <ng-template #elseTemplate class="toggleLampItem">
-        <label for="dark-mode-toggle">Toggle Dark Mode</label>
-        <label class="switch">
-          <input type="checkbox" id="dark-mode-toggle" [checked]="toggleDarkMode$ | async" aria-label="Toggle Dark Mode">
-          <span class="slider" (click)="handleToggleDarkMode()" 
-            [ngClass]="{'slider-on': toggleDarkMode$ | async, 'slider-off': !(toggleDarkMode$ | async) }"
-          ></span>
-        </label>
+        <div class="toggle-container">
+          <label class="label-text" for="dark-mode-toggle">Toggle Dark Mode</label>
+          <div class="switch">
+            <input type="checkbox" id="dark-mode-toggle" [checked]="toggleDarkMode$ | async" (change)="handleToggleDarkMode()" class="sr-only">
+            <span class="slider" 
+              [ngClass]="{'slider-on': toggleDarkMode$ | async, 'slider-off': !(toggleDarkMode$ | async) }"
+            ></span>
+          </div>
+        </div>
       </ng-template>
     </div>
     <div class="itemMenuConfig">
-      <label for="animations-toggle">Toggle animations</label>
-      <label class="switch">
-        <input type="checkbox" id="animations-toggle" [checked]="toggleAnimations$ | async" aria-label="Toggle Animations">
-        <span class="slider" (click)="handleToggleAnimations()"
-          [ngClass]="{'slider-on': (toggleAnimations$ | async), 'slider-off': !(toggleAnimations$ | async)}"
-        ></span>
-      </label>
+      <div class="toggle-container">
+        <label class="label-text" for="animations-toggle">Toggle animations</label>
+        <div class="switch">
+          <input type="checkbox" id="animations-toggle" [checked]="toggleAnimations$ | async" (change)="handleToggleAnimations()" class="sr-only">
+          <span class="slider"
+            [ngClass]="{'slider-on': (toggleAnimations$ | async), 'slider-off': !(toggleAnimations$ | async)}"
+          ></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@
 
 }
 
-.configMenu h3{
+.configMenu h2{
   text-align: center;
   margin-bottom: 10%;
 }
@@ -32,8 +32,16 @@
   font-family: initial;
 }
 
-.itemMenuConfig label{
-  max-width: 50%;
+.toggle-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  
+  .label-text {
+    max-width: 60%;
+  }
 }
 
 .toggleDarkModeItem{
@@ -54,7 +62,7 @@
   
   border: none;
   transition: ease-in-out 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px $shadow-light;
 }
 .toggleDarkModeItem button:hover{
   background-color: black;
@@ -66,9 +74,11 @@
 
 .showConfigMenu{
   right: 0vw;
+  visibility: visible;
 }
 .hideConfigMenu{
   right: -60vw;
+  visibility: hidden;
 }
 
 // ----------- Slider Button -----------
@@ -79,10 +89,15 @@
   height: 20px;
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .slider {
@@ -92,7 +107,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: $gray-accessible;
   transition: 0.4s;
   border-radius: 20px;
 }
@@ -111,7 +126,7 @@
 
 /* Classe para slider OFF */
 .slider-off {
-  background-color: #ccc;
+  background-color: $gray-accessible;
 }
 
 .slider-off:before {
@@ -121,6 +136,10 @@
 /* Classe para slider ON */
 .slider-on {
   background-color: $purple-default;
+}
+
+.darkMode .slider-on {
+  background-color: $purple-light;
 }
 
 .slider-on:before {

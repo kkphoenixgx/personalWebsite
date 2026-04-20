@@ -10,6 +10,8 @@
   height: 85vh;
   max-height: 85vh;
   position: relative;
+  background-color: $gray-second;
+  color: #ffffff;
   
   overflow-x: hidden;
   touch-action: pan-y;
@@ -59,6 +61,9 @@
     .image-container{
 
       display: flex;
+      p {
+        color: #ffffff;
+      }
       flex-direction: column;
       justify-content: flex-start;
       text-align: center;
@@ -117,7 +122,8 @@
         .info-button {
           display: flex;
           font-size: 1rem;
-          color: inherit;
+          color: #ffffff;
+          p { color: #ffffff; }
           
           align-items: center;
           gap: 0.5em;
@@ -141,14 +147,27 @@
   }
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 // ----------- Dark mode -----------
 .backgroundHelloContainerDarkMode {
   background-color: $gray-second;
   color: #ffffff;
+  p { color: #ffffff; }
 
   .info-button {
     background-color: $gray-third;
     color: #ffffff;
+    p { color: #ffffff; }
   }
 
   .image-backgound {
@@ -167,11 +186,13 @@
 .backgroundHelloContainerWhiteMode {
   background-color: $offwhite-default;
   color: #000000;
+  p { color: #000000; }
 
   .info-button {
     background-color: #dcdcdc;
     color: #000000;
     border: 1px solid #b0b0b0;
+    p { color: #000000; }
   }
 
   .image-backgound {

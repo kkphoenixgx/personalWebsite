@@ -16,4 +16,19 @@ describe('AnimationControllerService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('deve emitir true por padrão (Animações ativadas)', (done) => {
+    service.getAnimationObserbable().subscribe(state => {
+      expect(state).toBeTrue();
+      done();
+    });
+  });
+
+  it('deve emitir false quando setAnimations(false) for chamado', (done) => {
+    service.setAnimations(false);
+    service.getAnimationObserbable().subscribe(state => {
+      expect(state).toBeFalse();
+      done();
+    });
+  });
 });

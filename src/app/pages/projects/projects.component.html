@@ -1,0 +1,35 @@
+<div class="projects-container" [ngClass]="{'darkMode': isDarkMode$ | async, 'whiteMode': !(isDarkMode$ | async)}" role="main">
+  
+  <div class="header-section">
+    <h1>Engineering & Architecture Showcase</h1>
+    <p>Deep dives into the systems I've designed, the problems I solved, and the technical decisions behind them.</p>
+  </div>
+
+  <div class="projects-list">
+    <div class="project-card" *ngFor="let project of projects">
+      
+      <div class="card-header">
+        <h2>{{ project.title }}</h2>
+      </div>
+      
+      <div class="card-body">
+        <div class="section">
+          <h3>The Problem & Context</h3>
+          <p>{{ project.context }}</p>
+        </div>
+        <div class="section">
+          <h3>Architecture & Solution</h3>
+          <p>{{ project.architecture }}</p>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span class="tech-badge" *ngFor="let tech of project.techStack">{{ tech }}</span>
+      </div>
+
+      <div class="card-actions" *ngIf="project.internalRoute">
+        <a [routerLink]="project.internalRoute" class="read-more-btn" [attr.aria-label]="'Read Full Case Study about ' + project.title">Read Full Case Study</a>
+      </div>
+    </div>
+  </div>
+</div>

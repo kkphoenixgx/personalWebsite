@@ -9,32 +9,33 @@
 
     <app-side-menu #sideMenu [style.left]="toogleSideBarMenu ? '0' : '-50vw' " class="sideMenu" ></app-side-menu>
 
-    <mat-icon style="margin-left: 2vw; cursor: pointer; user-select: none; -webkit-user-select: none;" 
+    <button class="icon-btn menu-btn"
       [ngClass]="{
         'darkMode': toogleDarkMode,
         'whiteMode': !toogleDarkMode
       }" 
+      aria-label="Toggle Sidebar menu"
       (click)="handleSideBarMenu()"
     >
-      menu
-    </mat-icon>
+      <mat-icon aria-hidden="true" focusable="false" tabindex="-1">menu</mat-icon>
+    </button>
     
     <ng-template [ngIf]="!toogleAnimations">
-      <h1 class="h1-container"
+      <div class="h1-container"
         [ngClass]="{
           'darkMode': toogleDarkMode,
           'whiteMode': !toogleDarkMode
         }"
       >
         KKPHOENIX
-      </h1>
+      </div>
     </ng-template>
 
     <ng-template [ngIf]="toogleAnimations && readyToContent">      
       <app-text3d></app-text3d>
     </ng-template>
 
-    <mat-icon
+    <button class="icon-btn settings-btn"
       [ngClass]="
         { 
           'rotate-animation': ( toogleAnimations && toogleSettingsAnimate),
@@ -42,8 +43,11 @@
           'darkMode': toogleDarkMode,
           'whiteMode': !toogleDarkMode
         }" 
-      style="margin-right: 2vw; cursor: pointer; user-select: none; -webkit-user-select: none;" (click)="handleMenuClick()" 
-    >settings</mat-icon>
+      aria-label="Open Settings Menu"
+      (click)="handleMenuClick()"
+    >
+      <mat-icon aria-hidden="true" focusable="false" tabindex="-1">settings</mat-icon>
+    </button>
   </div>
 
   <app-config-menu #configMenu></app-config-menu>

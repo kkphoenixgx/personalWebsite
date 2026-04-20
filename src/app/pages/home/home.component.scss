@@ -13,12 +13,19 @@
     background-color: $deep-slate;
   }
 }
-.choice-hsitory ul {
+.choice-hsitory .tab-list {
   display: flex;
   color: white;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
-.choice-hsitory li {
+.choice-hsitory .tab-item {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1rem;
   padding: 2%;
   width: 30%;
   display: flex;

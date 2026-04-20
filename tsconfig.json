@@ -13,8 +13,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,
+    "module": "ES2022",
+    "lib": ["es2022", "dom"],
     "target": "ES2022",
-    "module": "ES2022"
+    "rootDir": "."
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -22,5 +24,10 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "files": []
+  "exclude": [
+    "**/*.cy.ts"
+  ],
+  "include": [
+    "**/*.ts"
+  ]
 }

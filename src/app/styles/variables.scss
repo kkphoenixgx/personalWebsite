@@ -18,3 +18,20 @@ $black-background: #0a0a0adb;
 $black-background-moreBlack: #0a0a0aec;
 
 $deep-slate: #1e2a38; // Fundo do footer para o tema claro (Dark Slate Blue)
+
+// --- Status & Utility Colors ---
+$status-error: #ff4444;
+$gray-light: #cccccc;
+$gray-accessible: #767676; // Cinza escurecido para contraste > 3:1 em UI
+$gray-medium: #333333;
+
+// --- Stanford Theme Colors ---
+$stanford-red: #8c1515;
+$stanford-dark-red: #820000;
+$paper-white: #fdfcf8;
+$text-dark: #2e2d29;
+
+// --- Shadows & Borders ---
+$shadow-medium: rgba(0, 0, 0, 0.3);
+$shadow-light: rgba(0, 0, 0, 0.2);
+$border-light: rgba(128, 128, 128, 0.2);

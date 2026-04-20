@@ -1,26 +1,21 @@
-// Stanford Theme Variables
-$stanford-red: #8C1515;
-$stanford-dark-red: #820000;
-$paper-white: #fdfcf8;
-$text-dark: #2e2d29;
+@use "../../styles/variables.scss" as *;
 
 :host {
   display: block;
   width: 100vw;
   min-height: 85vh;
 }
-
 .articles-container {
   min-height: 85vh;
   padding: 15vh 10vw 10vh 10vw;
   font-family: "Merriweather", "Georgia", serif;
-  background-color: transparent; // Deixa o body modificado pelo JS aparecer
+  background-color: transparent; 
   color: $text-dark;
 
-  .article-viewer {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  // READER MODE (HTML GERADO DO PDF)
+  .article-reader {
+    max-width: 850px;
+    margin: 0 auto;
     animation: fadeIn 0.4s ease-out;
 
     .back-button {
@@ -31,8 +26,8 @@ $text-dark: #2e2d29;
       font-weight: bold;
       font-family: sans-serif;
       cursor: pointer;
-      margin-bottom: 1rem;
-      align-self: flex-start;
+      margin-bottom: 3rem;
+      padding: 0;
       transition: color 0.2s ease;
 
       &:hover {
@@ -41,22 +36,93 @@ $text-dark: #2e2d29;
       }
     }
 
-    .pdf-container {
-      flex-grow: 1;
-      border: 2px solid rgba($stanford-red, 0.2);
-      border-radius: 4px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      background-color: white;
+    .reader-header {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid rgba($stanford-red, 0.2);
+      padding-bottom: 2rem;
 
-      iframe {
+      .reader-date {
+        font-family: sans-serif;
+        font-weight: bold;
+        color: $stanford-red;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
         display: block;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        line-height: 1.2;
+        color: $text-dark;
+      }
+    }
+
+    .loading-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-style: italic;
+      color: $gray-medium;
+      margin-top: 5rem;
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba($stanford-red, 0.15);
+        border-top-color: $stanford-red;
+        border-radius: 50%;
+        animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .error-content {
+      text-align: center;
+      margin-top: 5rem;
+      padding: 3rem;
+      background-color: rgba($stanford-red, 0.03);
+      border: 1px dashed rgba($stanford-red, 0.2);
+      border-radius: 8px;
+
+      .error-message {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: $stanford-dark-red;
+        margin-bottom: 1rem;
+      }
+
+      .error-details {
+        font-family: sans-serif;
+        font-size: 1rem;
+        color: $gray-medium;
+        line-height: 1.6;
+      }
+    }
+
+    .reader-content {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: $gray-medium;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem; // Espaço entre as páginas
+
+      .pdf-page {
         width: 100%;
-        height: 100%;
+        max-width: 850px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        background-color: white;
       }
     }
   }
 
+  // GRID MODE (STANFORD)
   .grid-mode {
     animation: fadeIn 0.4s ease-out;
 
@@ -76,31 +142,8 @@ $text-dark: #2e2d29;
 
       .stanford-subtitle {
         font-size: 1.2rem;
-        color: lighten($text-dark, 20%);
+        color: $gray-medium;
         font-style: italic;
-      }
-
-      .search-container {
-        margin-top: 2.5rem;
-        display: flex;
-        justify-content: center;
-
-        .stanford-search-input {
-          width: 100%;
-          max-width: 500px;
-          padding: 1rem 1.5rem;
-          font-size: 1rem;
-          font-family: inherit;
-          border: 1px solid rgba($stanford-red, 0.3);
-          border-radius: 25px;
-          outline: none;
-          transition: all 0.3s ease;
-
-          &:focus {
-            border-color: $stanford-red;
-            box-shadow: 0 4px 12px rgba($stanford-red, 0.15);
-          }
-        }
       }
     }
 
@@ -112,7 +155,7 @@ $text-dark: #2e2d29;
       .article-card {
         text-decoration: none;
         color: inherit;
-        background-color: #ffffff;
+        background-color: white;
         border-top: 4px solid $stanford-red;
         border-radius: 4px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -148,14 +191,6 @@ $text-dark: #2e2d29;
               letter-spacing: 1px;
               font-weight: bold;
             }
-            
-            .extraction-status {
-              font-size: 0.75rem;
-              color: #a0a0a0;
-              font-family: sans-serif;
-              font-style: italic;
-              float: right;
-            }
           }
 
           h3 {
@@ -168,7 +203,7 @@ $text-dark: #2e2d29;
           .article-description {
             font-size: 1rem;
             line-height: 1.6;
-            color: lighten($text-dark, 15%);
+            color: $gray-medium;
             margin-bottom: 2rem;
             flex-grow: 1;
           }
@@ -177,7 +212,7 @@ $text-dark: #2e2d29;
             font-size: 0.9rem;
             font-family: sans-serif;
             font-weight: bold;
-            color: lighten($stanford-red, 10%);
+            color: $stanford-red;
             transition: color 0.2s ease;
           }
         }
@@ -189,4 +224,8 @@ $text-dark: #2e2d29;
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

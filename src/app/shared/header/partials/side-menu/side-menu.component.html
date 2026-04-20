@@ -1,8 +1,9 @@
 <nav class="menu-container" 
   [style.left]="toogleSideBar ? '0' : '-100vw' "
+  [style.visibility]="toogleSideBar ? 'visible' : 'hidden'"
   [ngClass]="{ 'darkMode': isDarkMode, 'whiteMode': !isDarkMode }"
 >
-  <div class="x-icon" (click)="handleSideBarMenu()"></div>
+  <div class="x-icon" role="button" tabindex="0" aria-label="Close Sidebar Menu" (click)="handleSideBarMenu()" (keydown.enter)="handleSideBarMenu()"></div>
 
   <div *ngIf="isLoading" class="status-container loading">
     <div class="spinner"></div>
@@ -17,6 +18,7 @@
   <ul class="link-to-pages">
     <li> <a [routerLink]="['']" >Home</a></li>
     <li> <a [routerLink]="['articles']" >Articles</a></li>
+    <li> <a [routerLink]="['projects']" >Projects</a></li>
   </ul>
  
   <app-file-navigator *ngIf="!isLoading && !hasError && pagesResponse && pagesResponse.length > 0" [items]="pagesResponse"></app-file-navigator>

@@ -1,15 +1,16 @@
+<main>
 <app-hero></app-hero>
 
 <nav class="choice-hsitory"
   aria-label="Page sections"
   [ngClass]="{ 'whiteMode': !(darkModeService.getDarkModeObserbable() | async) }"
 >
-  <ul>
-    <li #firstTab class="currentTab" (click)="handleHistoryLiClick($event)" data-tab ="History">History</li>
-    <li (click)="handleHistoryLiClick($event)" data-tab ="Professional History" >Professional History</li>
-    <li (click)="handleHistoryLiClick($event)" data-tab ="Portifolio" >Portfolio</li>
-    <li (click)="handleHistoryLiClick($event)" data-tab ="Hire Me" >Hire Me</li>
-  </ul>
+  <div class="tab-list" role="tablist" aria-label="Navigation Tabs">
+    <button #firstTab class="currentTab tab-item" role="tab" [attr.tabindex]="currentTab === 'History' ? 0 : -1" [attr.aria-selected]="currentTab === 'History' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="History">History</button>
+    <button class="tab-item" role="tab" [attr.tabindex]="currentTab === 'Professional History' ? 0 : -1" [attr.aria-selected]="currentTab === 'Professional History' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="Professional History" >Professional History</button>
+    <button class="tab-item" role="tab" [attr.tabindex]="currentTab === 'Portifolio' ? 0 : -1" [attr.aria-selected]="currentTab === 'Portifolio' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="Portifolio" >Portfolio</button>
+    <button class="tab-item" role="tab" [attr.tabindex]="currentTab === 'Hire Me' ? 0 : -1" [attr.aria-selected]="currentTab === 'Hire Me' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="Hire Me" >Hire Me</button>
+  </div>
 </nav>
 
 <app-history *ngIf="currentTab == 'History'" ></app-history>
@@ -17,3 +18,4 @@
 <app-portifolio *ngIf="currentTab == 'Portifolio'"></app-portifolio>
 <app-hire-me *ngIf="currentTab == 'Hire Me'" ></app-hire-me>
 <div class="ops" *ngIf="currentTab == undefined" > Ops, something went wrong </div>
+</main>
