@@ -1,0 +1,102 @@
+<div class="hello-container" [ngClass]="{ 'light-mode': !isDarkMode, 'no-animations': !isAnimated }">
+  
+  <!-- 3D Canvas Background -->
+  <div class="canvas-container" #canvasContainer></div>
+
+  <!-- Scrollable Content Journey -->
+  <div class="scroll-content">
+    
+    <!-- Section 1: Hero -->
+    <section class="step step-hero">
+      <div class="content-block">
+        <h2 class="pre-title">KAUÃ ALVES SANTOS</h2>
+        <h1 class="main-title">
+          Solid Software Architecture.<br>
+          <span class="gradient-text">Immersive Web Interfaces.</span>
+        </h1>
+        <p class="desc">
+          Full Stack Developer focused on transforming complex systemic problems into scalable, high-performance solutions. From AWS infrastructure orchestration to reactive 3D graphics rendering in the browser.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: Core Value -->
+    <section class="step step-value">
+      <div class="content-block right">
+        <h2 class="section-title">Engineering Beyond Code</h2>
+        <p class="desc">
+          I don't just write scripts; I design architectures. My foundation is built upon <strong>Clean Architecture, SOLID, and DDD</strong>.
+        </p>
+        <p class="desc">
+          I build robust backends in <strong>Java (Spring)</strong> and <strong>Node.js</strong> with a strictly decoupled design, ensuring high cohesion, testability, and maintainability for any business rule.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Diferenciais -->
+    <section class="step step-features">
+      <div class="content-block full">
+        <h2 class="section-title center">The Technical Edge</h2>
+        <div class="grid-features">
+          <div class="feature-card"><h3>Complex Front-End</h3><p>Mastery of robust SPAs with <strong>Angular</strong>. State management with <strong>RxJS</strong> and 3D integration using <strong>Three.js</strong> and <strong>Matter.js</strong> for high-performance interfaces and memory control.</p></div>
+          <div class="feature-card"><h3>Artificial Intelligence</h3><p>Researcher at the CHON Group. Hands-on experience designing <strong>Multi-Agent Systems (MAS)</strong> and <strong>BDI</strong> logic for autonomous drones.</p></div>
+          <div class="feature-card"><h3>LLM Integration</h3><p>Development of Java APIs that translate natural language in real-time to control robotic systems using local LLMs (Ollama).</p></div>
+          <div class="feature-card"><h3>End-to-End</h3><p>Systemic view of the lifecycle. Implementation of pipelines (CI/CD), data persistence (PostgreSQL), and infrastructure deployment on <strong>AWS</strong> with Docker.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Freelance Pitch -->
+    <section class="step step-freelance">
+      <div class="freelance-layout">
+        <div class="content-block clear freelance-text">
+          <h2 class="section-title">Freelance & Consulting</h2>
+          <p class="desc">
+            Turning bold ideas into high-performance digital products. I am available for freelance projects, offering end-to-end development from immersive UI design to robust backend architecture.
+          </p>
+          <p class="desc">
+            Whether you need a modern <strong>Single Page Application</strong>, a custom <strong>3D web experience</strong>, or a scalable system built from scratch, I bring startup agility combined with enterprise-grade quality.
+          </p>
+          <div class="cta-actions freelance-cta">
+            <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn primary">Contact Me</a>
+          </div>
+        </div>
+
+        <div class="showcase-column">
+          <!-- Primeiro item: Alinhado à direita -->
+          <div class="content-block clear showcase-item align-right">
+            <img src="/assets/senco.png" alt="Senco Locações Preview" class="showcase-img">
+            <div class="project-highlight">
+              <h3 class="highlight-cyan">Senco Locações</h3>
+              <p class="desc">A complete digital transformation. Custom management dashboard and landing page.</p>
+            </div>
+          </div>
+          
+          <!-- Segundo item: Alinhado à esquerda -->
+          <div class="content-block clear showcase-item align-left">
+            <img src="/assets/foodzero.png" alt="FoodZero Preview" class="showcase-img">
+            <div class="project-highlight">
+              <h3 class="highlight-purple">Restaurant FoodZero</h3>
+              <p class="desc">An immersive, high-end 3D web experience for a premium restaurant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: CTA -->
+    <section class="step step-cta">
+      <div class="content-block center">
+        <h2 class="main-title">Ready to Scale Your Engineering?</h2>
+        <p class="desc center">
+          Explore my complete portfolio or access the repository of my solutions. Well-architected systems start here.
+        </p>
+        <div class="cta-actions">
+          <a [routerLink]="['/projects']" class="btn primary">View Projects (Architecture)</a>
+          <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn secondary">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>

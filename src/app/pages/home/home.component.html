@@ -6,13 +6,15 @@
   [ngClass]="{ 'whiteMode': !(darkModeService.getDarkModeObserbable() | async) }"
 >
   <div class="tab-list" role="tablist" aria-label="Navigation Tabs">
-    <button #firstTab class="currentTab tab-item" role="tab" [attr.tabindex]="currentTab === 'History' ? 0 : -1" [attr.aria-selected]="currentTab === 'History' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="History">History</button>
+    <button #firstTab class="currentTab tab-item" role="tab" [attr.tabindex]="currentTab === 'Hello' ? 0 : -1" [attr.aria-selected]="currentTab === 'Hello' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="Hello">Hello</button>
+    <button class="tab-item" role="tab" [attr.tabindex]="currentTab === 'History' ? 0 : -1" [attr.aria-selected]="currentTab === 'History' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="History">History</button>
     <button class="tab-item" role="tab" [attr.tabindex]="currentTab === 'Professional History' ? 0 : -1" [attr.aria-selected]="currentTab === 'Professional History' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="Professional History" >Professional History</button>
     <button class="tab-item" role="tab" [attr.tabindex]="currentTab === 'Portifolio' ? 0 : -1" [attr.aria-selected]="currentTab === 'Portifolio' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="Portifolio" >Portfolio</button>
     <button class="tab-item" role="tab" [attr.tabindex]="currentTab === 'Hire Me' ? 0 : -1" [attr.aria-selected]="currentTab === 'Hire Me' ? 'true' : 'false'" (click)="handleHistoryLiClick($event)" (keydown.enter)="handleHistoryLiClick($event)" data-tab ="Hire Me" >Hire Me</button>
   </div>
 </nav>
 
+<app-hello *ngIf="currentTab == 'Hello'" ></app-hello>
 <app-history *ngIf="currentTab == 'History'" ></app-history>
 <app-professional-history *ngIf="currentTab == 'Professional History'" ></app-professional-history>
 <app-portifolio *ngIf="currentTab == 'Portifolio'"></app-portifolio>

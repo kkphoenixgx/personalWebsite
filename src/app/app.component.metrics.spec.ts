@@ -194,6 +194,19 @@ describe('Global Software Metrics (A11y, Performance, Responsiveness & Architect
     fixture.detectChanges();
     await new Promise(resolve => setTimeout(resolve, 500));
 
+    // Navega para a Home (HelloComponent) e outros projetos para forçar o Angular a injetar seus estilos na DOM
+    await router.navigate(['/']);
+    fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    await router.navigate(['/projects/personal-website']);
+    fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    await router.navigate(['/projects/rpg-roguelite-bullethell']);
+    fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     console.log(`\n[Métrica] [Design System] --- RELATÓRIO DE PALETA DE CORES (STYLE LINT) ---`);
     
     // Paleta oficial listada no variables.scss (e variações estruturais genéricas)
@@ -211,6 +224,9 @@ describe('Global Software Metrics (A11y, Performance, Responsiveness & Architect
       '#00ffcc', '#050505', '#eef5f4', '#c0c0c0', '#e0f2f1', '#00695c', '#00897b', '#00d6c1', '#00ffe5', '#d1d1d1', // BIG Agent
       'rgba(0,255,204,0.1)', 'rgba(0,255,204,0.2)', 'rgba(0,255,204,0.4)', 'rgba(0,255,204,0.5)', 'rgba(0,255,204,0.8)',
       '#ff0033', 'rgba(255,0,51,0.15)', 'rgba(255,0,51,0.9)', 'rgba(255,0,51,0.6)', 'rgba(255,0,51,0.5)',
+
+      // Indie Game Theme
+      'rgba(0,255,204,0.05)', '#ffcc00', 'rgba(255,204,0,0.2)', '#ff003c', '#666', '#111', '#a0a0a0', '#222', 'rgba(255,0,51,0.2)', '#0a0a0a', '#888',
 
       'rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)', 'rgba(255,255,255,0.08)', 'rgba(255,255,255,0.03)',
       'rgba(0,0,0,0.8)', 'rgba(0,0,0,0.4)', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.2)', 'rgba(0,0,0,0.15)', 'rgba(0,0,0,0.08)', 'rgba(0,0,0,0.06)', 'rgba(0,0,0,0.05)', 'rgba(0,0,0,0.04)',

@@ -5,14 +5,14 @@
   }"
 >
   <div *ngIf="readyToContent && animate" #helloBackground class="background">
-    <img #bgImg *ngFor="let lang of listOfFrameworks" [src]="'/assets/svg/' + lang + '.svg'" alt="" loading="lazy">
+    <img #bgImg *ngFor="let lang of listOfFrameworks" [ngSrc]="'/assets/svg/' + lang + '.svg'" width="70" height="70" alt="" loading="lazy">
   </div>
 
   <div class="hello-container">
 
     <div class="image-container">
       <div class="image-backgound">
-        <img src="/assets/logoCompleta.png" alt="logo-Kauã-Alves-Santos" fetchpriority="high">
+        <img ngSrc="/assets/logoCompleta.png" alt="logo-Kauã-Alves-Santos" width="176" height="176" priority>
       </div>
       <p>Kauã Alves Santos</p>
       <p>kkphoenix</p>
@@ -31,17 +31,17 @@
       <div class="links">
 
         <a class="info-button" style="font-size: 1.2rem;" href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf">
-          <img src="/assets/pdfIcon.png" alt="">
+          <img ngSrc="/assets/pdfIcon.png" width="28" height="28" alt="">
           <p>Download Resume</p>
         </a>
 
         <a class="info-button" href="https://www.linkedin.com/in/kkphoenix/">
-          <img src="/assets/LinkedIn.png" alt="">
+          <img ngSrc="/assets/LinkedIn.png" width="28" height="28" alt="">
           <p>LinkedIn</p>
         </a>
 
         <a class="info-button" href="https://github.com/kkphoenixgx">
-          <img src="/assets/githubIcon.png" alt="">
+          <img ngSrc="/assets/githubIcon.png" width="28" height="28" alt="">
           <p>GitHub</p>
         </a>
 

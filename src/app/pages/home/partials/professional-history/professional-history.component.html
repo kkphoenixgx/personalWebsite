@@ -1,21 +1,79 @@
 <div class="professional-history"
   [ngClass] = "{ 'darkMode': darkMode$ | async, 'whiteMode': !(darkMode$ | async) }"
 >
-  <h1>Professional history</h1>
+  <header class="section-header">
+    <span class="subtitle">// CAREER LOGS</span>
+    <h1 class="section-title">Professional <span class="highlight">History</span></h1>
+  </header>
 
-  <div class="book">
-    <img src="/assets/book.png" alt="book">
-    
-    <div class="book-left">
-      <img src="/assets/logoCompleta.png" alt="kkphoenix logo">
-    </div>
-
-    <div class="book-right">
+  <div class="scene">
+    <div class="book" [class.is-open]="activePage > 0">
       
-      <p>Let me show you my skills and write this history with your comany</p>
+      <!-- CAPA (Página 0) -->
+      <div class="page" [class.flipped]="activePage > 0" 
+           [style.z-index]="activePage > 0 ? 0 : 100" 
+           (click)="setPage(activePage > 0 ? 0 : 1)">
+        
+        <div class="front cover">
+          <div class="cover-content">
+            <img src="/assets/logoCompleta.png" alt="kkphoenix logo" class="logo">
+            <h2>Engineering<br>Journey</h2>
+          </div>
+        </div>
+        
+        <div class="back paper">
+          <div class="page-content center-content">
+            <span class="page-number left">i</span>
+            <h2>Prologue</h2>
+            <p class="handwritten">I'm looking for the perfect team to write the next chapter.</p>
+            <p class="click-hint">(Click to flip the pages)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PÁGINAS DINÂMICAS DE TRABALHOS (1 a N) -->
+      <div class="page" *ngFor="let job of jobs; let i = index"
+           [class.flipped]="activePage > (i + 1)"
+           [style.z-index]="activePage > (i + 1) ? (i + 1) : 100 - (i + 1)"
+           (click)="setPage(activePage > (i + 1) ? (i + 1) : (i + 2))">
+        
+        <div class="front paper">
+          <div class="page-content">
+            <span class="page-number">{{ (i * 2) + 1 }}</span>
+            <div class="job-header">
+              <h3>{{ job.company }}</h3>
+              <span class="period">{{ job.period }}</span>
+            </div>
+            <h4 class="role">{{ job.role }}</h4>
+            <p>{{ job.description }}</p>
+            <ul class="achievements">
+              <li *ngFor="let ach of job.achievements">{{ ach }}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="back paper">
+          <div class="page-content center-content">
+            <span class="page-number left">{{ (i * 2) + 2 }}</span>
+            <p class="notes-hint">// Let's build the future together.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTRA CAPA (Página N + 1) -->
+      <div class="page" [class.flipped]="activePage > jobs.length + 1" 
+           [style.z-index]="activePage > jobs.length + 1 ? jobs.length + 1 : 100 - (jobs.length + 1)"
+           (click)="setPage(activePage > jobs.length + 1 ? jobs.length + 1 : jobs.length + 2)">
+        <div class="front paper">
+           <div class="page-content center-content">
+              <span class="page-number">{{ (jobs.length * 2) + 1 }}</span>
+              <h2>Let's Talk!</h2>
+              <p class="hire-hint">Contact me to make this page a reality.</p>
+           </div>
+        </div>
+        <div class="back cover-back"></div>
+      </div>
+
     </div>
   </div>
-
-  <p>When I get my job, it will be listed here and it will be a 3D book! Check it out later to see those changes</p>
-
 </div>

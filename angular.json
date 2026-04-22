@@ -65,6 +65,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "allowedHosts": ["barely-uncorrelated-denita.ngrok-free.dev"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "personal-website:build:production"

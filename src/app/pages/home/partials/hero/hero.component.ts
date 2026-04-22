@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, PLATFORM_ID, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, QueryList, ViewChildren, inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
@@ -8,14 +8,14 @@ import gsap from "gsap";
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroComponent implements OnInit, AfterViewInit {
   public text: string = "";
-  public animate: boolean = true;
+  public animate: boolean = false; // Inicia false para evitar a piscada do DOM antes do serviço responder
   public isDarkMode: boolean = true;
   public readyToContent: boolean = false;
   

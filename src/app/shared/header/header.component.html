@@ -21,14 +21,14 @@
     </button>
     
     <ng-template [ngIf]="!toogleAnimations">
-      <div class="h1-container"
+      <h1 class="h1-container"
         [ngClass]="{
           'darkMode': toogleDarkMode,
           'whiteMode': !toogleDarkMode
         }"
       >
         KKPHOENIX
-      </div>
+      </h1>
     </ng-template>
 
     <ng-template [ngIf]="toogleAnimations && readyToContent">      

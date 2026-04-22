@@ -4,7 +4,7 @@ import { LampComponent } from './lamp.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DarkModeControllerServiceMock } from '../../services/tests/dark-mode-controller.service.mock'; 
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service'; // Importe o serviço original
-import { Runner, World, Engine, Render } from 'matter-js';
+import { Runner, World, Engine, Render, Mouse } from 'matter-js';
 
 describe('LampComponent (Performance & Metrics)', () => {
   let component: LampComponent;
@@ -41,6 +41,7 @@ describe('LampComponent (Performance & Metrics)', () => {
     const worldClearSpy = spyOn(World, 'clear').and.callThrough();
     const engineClearSpy = spyOn(Engine, 'clear').and.callThrough();
     const renderStopSpy = spyOn(Render, 'stop').and.callThrough();
+    const mouseClearSpy = spyOn(Mouse, 'clearSourceEvents').and.callThrough();
 
     component.ngOnDestroy();
 
@@ -48,6 +49,7 @@ describe('LampComponent (Performance & Metrics)', () => {
     expect(worldClearSpy).toHaveBeenCalled();
     expect(engineClearSpy).toHaveBeenCalled();
     expect(renderStopSpy).toHaveBeenCalled();
+    expect(mouseClearSpy).toHaveBeenCalled(); // Atesta que o Matter.Mouse limpou o cache global
 
     expect((component as any).render).toBeUndefined();
   });

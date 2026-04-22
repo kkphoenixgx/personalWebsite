@@ -1,4 +1,4 @@
-import { Component, ComponentRef, Injector, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, Injector, OnDestroy, OnInit, ViewChild, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, take, takeUntil } from 'rxjs';
@@ -11,7 +11,7 @@ import { DarkModeControllerService } from '../../../../services/dark-mode-contro
   styleUrl: './config-menu.component.scss'
 })
 export class ConfigMenuComponent implements OnDestroy {
-  @ViewChild('lampContainer', { read: ViewContainerRef }) lampContainer!: ViewContainerRef;
+  @ViewChild('lampContainer', { read: ViewContainerRef, static: true }) lampContainer!: ViewContainerRef;
 
   private destroy$ = new Subject<void>();
 
@@ -27,6 +27,7 @@ export class ConfigMenuComponent implements OnDestroy {
     private animationControllerService :AnimationControllerService, 
     private darkModeControllerService :DarkModeControllerService,
     private injector: Injector,
+    private cdr: ChangeDetectorRef
   ){
     this.toggleAnimations$ = this.animationControllerService.getAnimationObserbable(); 
     this.toggleDarkMode$ = this.darkModeControllerService.getDarkModeObserbable();
@@ -53,11 +54,13 @@ export class ConfigMenuComponent implements OnDestroy {
       this.lampComponentRef = this.lampContainer.createComponent(LampComponent, {
         injector: this.injector
       });
+      this.cdr.detectChanges(); // Garante que a UI do menu reaja imediatamente e mostre o botão
     }
   }
   destroyLampComponent(){
     this.lampComponentRef.destroy();
     this.lampComponentRef = null as any;
+    this.cdr.detectChanges(); // Atualiza a UI para remover o botão imediatamente
   }
 
   // ----------- Helpers -----------

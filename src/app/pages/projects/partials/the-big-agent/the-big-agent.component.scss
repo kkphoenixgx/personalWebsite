@@ -61,7 +61,7 @@ $border: rgba(0, 255, 204, 0.2);
 .hero-header {
   margin-bottom: 5rem;
   .context-tag { font-weight: 300; letter-spacing: 4px; opacity: 0.9; }
-  h1 { font-size: clamp(3rem, 10vw, 6rem); line-height: 0.9; margin: 1rem 0; font-weight: 700; }
+  h1 { font-size: clamp(3rem, 10vw, 6rem); line-height: 0.9; margin: 1rem 0; font-weight: 700; word-break: break-word; }
   .tagline { font-size: 1.5rem; max-width: 600px; opacity: 0.9; }
 
   .article-link-container {
@@ -87,7 +87,7 @@ $border: rgba(0, 255, 204, 0.2);
 
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
   gap: 2.5rem;
 }
 
@@ -199,4 +199,9 @@ $border: rgba(0, 255, 204, 0.2);
 @media (max-width: 600px) {
   .content-grid { grid-template-columns: 1fr; }
   .agent-split { grid-template-columns: 1fr; }
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
 }

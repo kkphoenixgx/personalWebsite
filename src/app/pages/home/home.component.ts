@@ -9,6 +9,7 @@ import { ProfessionalHistoryComponent } from './partials/professional-history/pr
 import { PortifolioComponent } from './partials/portifolio/portifolio.component';
 // Importando HeroComponent explicitamente para uso no template
 import { HeroComponent } from './partials/hero/hero.component';
+import { HelloComponent } from './partials/hello/hello.component';
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 
 @Component({
@@ -16,7 +17,7 @@ import { DarkModeControllerService } from '../../services/dark-mode-controller.s
   standalone: true,
   imports: [CommonModule, RouterModule,
     HireMeComponent, HistoryComponent, PortifolioComponent, ProfessionalHistoryComponent,
-    HeroComponent
+    HeroComponent, HelloComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('firstTab') firstTab!: ElementRef;
 
   public lastTab! :HTMLElement;
-  public currentTab :string | undefined = "History";
+  public currentTab :string | undefined = "Hello";
 
   constructor(
     public darkModeService: DarkModeControllerService

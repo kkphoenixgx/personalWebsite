@@ -24,27 +24,27 @@
       <ng-template #elseTemplate class="toggleLampItem">
         <div class="toggle-container">
           <label class="label-text" for="dark-mode-toggle">Toggle Dark Mode</label>
-          <div class="switch">
+          <label class="switch" for="dark-mode-toggle">
             <input type="checkbox" id="dark-mode-toggle" [checked]="toggleDarkMode$ | async" (change)="handleToggleDarkMode()" class="sr-only">
             <span class="slider" 
               [ngClass]="{'slider-on': toggleDarkMode$ | async, 'slider-off': !(toggleDarkMode$ | async) }"
             ></span>
-          </div>
+          </label>
         </div>
       </ng-template>
     </div>
     <div class="itemMenuConfig">
       <div class="toggle-container">
         <label class="label-text" for="animations-toggle">Toggle animations</label>
-        <div class="switch">
+        <label class="switch" for="animations-toggle">
           <input type="checkbox" id="animations-toggle" [checked]="toggleAnimations$ | async" (change)="handleToggleAnimations()" class="sr-only">
           <span class="slider"
             [ngClass]="{'slider-on': (toggleAnimations$ | async), 'slider-off': !(toggleAnimations$ | async)}"
           ></span>
-        </div>
+        </label>
       </div>
     </div>
   </div>
 </div>
 
-<ng-template #lampContainer></ng-template>
+<ng-container #lampContainer></ng-container>

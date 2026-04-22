@@ -1,35 +1,50 @@
-<div class="projects-container" [ngClass]="{'darkMode': isDarkMode$ | async, 'whiteMode': !(isDarkMode$ | async)}" role="main">
+<div class="projects-matrix" [ngClass]="{'darkMode': isDarkMode$ | async, 'whiteMode': !(isDarkMode$ | async)}" role="main">
   
-  <div class="header-section">
-    <h1>Engineering & Architecture Showcase</h1>
-    <p>Deep dives into the systems I've designed, the problems I solved, and the technical decisions behind them.</p>
-  </div>
+  <header class="matrix-header">
+    <div class="hud-line"></div>
+    <h1 class="glitch-title">SYSTEM_ARCHITECTURE</h1>
+    <p class="subtitle">// DEEP DIVES INTO ENGINEERED ECOSYSTEMS</p>
+  </header>
 
-  <div class="projects-list">
-    <div class="project-card" *ngFor="let project of projects">
+  <div class="module-list">
+    <article class="sys-module" *ngFor="let project of projects; let i = index">
       
-      <div class="card-header">
-        <h2>{{ project.title }}</h2>
+      <div class="module-index">
+        <span class="num">0{{ i + 1 }}</span>
+        <div class="vertical-line"></div>
       </div>
       
-      <div class="card-body">
-        <div class="section">
-          <h3>The Problem & Context</h3>
-          <p>{{ project.context }}</p>
+      <div class="module-content">
+        <h2 class="module-title">{{ project.title }}</h2>
+        
+        <div class="module-grid">
+          <div class="data-panel context-panel">
+            <span class="panel-label">/** THE_PROBLEM */</span>
+            <p>{{ project.context }}</p>
+          </div>
+          
+          <div class="data-panel arch-panel">
+            <span class="panel-label">/** SOLUTION_TOPOLOGY */</span>
+            <p>{{ project.architecture }}</p>
+          </div>
         </div>
-        <div class="section">
-          <h3>Architecture & Solution</h3>
-          <p>{{ project.architecture }}</p>
+
+        <div class="module-footer">
+          <div class="tech-array">
+            <span class="array-bracket">LOADED_MODULES: [</span>
+            <span class="tech-node" *ngFor="let tech of project.techStack; let last = last">
+              "{{ tech }}"<span class="comma" *ngIf="!last">, </span>
+            </span>
+            <span class="array-bracket">]</span>
+          </div>
+          
+          <div class="action-terminal" *ngIf="project.internalRoute">
+            <a [routerLink]="project.internalRoute" class="btn-access" [attr.aria-label]="'Initialize Case Study: ' + project.title">
+              <span class="blink">></span> INITIALIZE_STUDY
+            </a>
+          </div>
         </div>
       </div>
-
-      <div class="card-footer">
-        <span class="tech-badge" *ngFor="let tech of project.techStack">{{ tech }}</span>
-      </div>
-
-      <div class="card-actions" *ngIf="project.internalRoute">
-        <a [routerLink]="project.internalRoute" class="read-more-btn" [attr.aria-label]="'Read Full Case Study about ' + project.title">Read Full Case Study</a>
-      </div>
-    </div>
+    </article>
   </div>
 </div>

@@ -35,6 +35,7 @@
       width: 70px;
       height: 70px; 
       margin: 0;
+      opacity: 0; // Impede que eles pisquem visíveis antes do GSAP assumir o controle!
       will-change: transform;
 
       pointer-events: none;
