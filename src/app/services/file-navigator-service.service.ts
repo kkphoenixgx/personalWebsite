@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { IPage } from '../interface/ITitlesResponse';
@@ -13,14 +13,13 @@ export class FileNavigatorService {
   private readonly API_URL = this.BACKEND + '/api/pages/';
 
   private itemsCache: Promise<IPage[]> | null = null;
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   getItems(): Promise<IPage[]> {
     if (!this.itemsCache) {
       this.itemsCache = (async () => {
         try {
-          const data = await lastValueFrom(this.http.get<any[]>(this.API_URL));
+          const data = await lastValueFrom(this.http.get<IPage[]>(this.API_URL));
           console.log('Dados recebidos da API:', data);
           return this.transformToPage(data);
         } catch (error) {
@@ -32,8 +31,8 @@ export class FileNavigatorService {
     return this.itemsCache;
   }
 
-  private transformToPage(items: any[]): IPage[] {
-    const mappedItems = (items || [])
+  private transformToPage(items: IPage[]): IPage[] {
+    const mappedItems: IPage[] = (items || [])
       .filter(item => item.title !== '404')
       .filter(item => !item.title.includes("sync conflict"))
       .filter(item => !item.title.includes(".excalidraw"))
@@ -44,7 +43,7 @@ export class FileNavigatorService {
           title: item.title,
           path: isFolder ? item.path : `${this.BACKEND}${item.path}`,
           items: item.items ? this.transformToPage(item.items) : []
-        } as any;
+        } as IPage;
       });
 
     return mappedItems.sort((a, b) => {

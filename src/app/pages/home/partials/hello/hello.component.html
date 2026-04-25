@@ -25,7 +25,7 @@
       <div class="content-block right">
         <h2 class="section-title">Engineering Beyond Code</h2>
         <p class="desc">
-          I don't just write scripts; I design architectures. My foundation is built upon <strong>Clean Architecture, SOLID, and DDD</strong>.
+          I don't just write scripts; I design architectures. My foundation is built upon <strong>Clean Architecture, Design Patterns, and DDD</strong>.
         </p>
         <p class="desc">
           I build robust backends in <strong>Java (Spring)</strong> and <strong>Node.js</strong> with a strictly decoupled design, ensuring high cohesion, testability, and maintainability for any business rule.
@@ -42,6 +42,24 @@
           <div class="feature-card"><h3>Artificial Intelligence</h3><p>Researcher at the CHON Group. Hands-on experience designing <strong>Multi-Agent Systems (MAS)</strong> and <strong>BDI</strong> logic for autonomous drones.</p></div>
           <div class="feature-card"><h3>LLM Integration</h3><p>Development of Java APIs that translate natural language in real-time to control robotic systems using local LLMs (Ollama).</p></div>
           <div class="feature-card"><h3>End-to-End</h3><p>Systemic view of the lifecycle. Implementation of pipelines (CI/CD), data persistence (PostgreSQL), and infrastructure deployment on <strong>AWS</strong> with Docker.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3.5: Telemetry & Observability -->
+    <section class="step step-telemetry">
+      <div class="content-block">
+        <h2 class="section-title">Observability & Telemetry</h2>
+        <p class="desc">
+          High-performance 3D applications require strict resource management. I implement real-time monitoring to track <strong>WebGL FPS</strong>, GPU memory allocations, and network latency.
+        </p>
+        <p class="desc">
+          Explore the live health dashboard to see how this architecture behaves under the hood, ensuring zero memory leaks and smooth frame rates.
+        </p>
+        <div class="cta-actions" style="justify-content: flex-start; margin-top: 2rem;">
+          <a [routerLink]="['/health']" class="btn secondary">
+            <span class="material-icons" style="vertical-align: sub; margin-right: 6px; font-size: 1.3rem;">monitor_heart</span>View System Health
+          </a>
         </div>
       </div>
     </section>
@@ -65,19 +83,19 @@
         <div class="showcase-column">
           <!-- Primeiro item: Alinhado à direita -->
           <div class="content-block clear showcase-item align-right">
-            <img src="/assets/senco.png" alt="Senco Locações Preview" class="showcase-img">
+            <img src="/assets/senco-locacoes-image.webp" alt="Senco Locações Preview" class="showcase-img" (click)="openImage('/assets/senco-locacoes-image.webp')">
             <div class="project-highlight">
               <h3 class="highlight-cyan">Senco Locações</h3>
-              <p class="desc">A complete digital transformation. Custom management dashboard and landing page.</p>
+              <p class="desc">A complete digital transformation. Custom management dashboard and landing page dockerized, check it out!.</p>
             </div>
           </div>
           
           <!-- Segundo item: Alinhado à esquerda -->
           <div class="content-block clear showcase-item align-left">
-            <img src="/assets/foodzero.png" alt="FoodZero Preview" class="showcase-img">
+            <img src="/assets/restaurant-food-zero.webp" alt="FoodZero Preview" class="showcase-img" (click)="openImage('/assets/restaurant-food-zero.webp')">
             <div class="project-highlight">
               <h3 class="highlight-purple">Restaurant FoodZero</h3>
-              <p class="desc">An immersive, high-end 3D web experience for a premium restaurant.</p>
+              <p class="desc">An immersive web experience for a premium restaurant dockerized, check it out!</p>
             </div>
           </div>
         </div>
@@ -98,5 +116,13 @@
       </div>
     </section>
 
+  </div>
+
+  <!-- Image Modal Viewer -->
+  <div class="image-modal" [class.active]="selectedImage" (click)="closeImage()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img *ngIf="selectedImage" [src]="selectedImage" alt="Expanded Image">
+      <button class="close-btn" (click)="closeImage()"><span class="material-icons">close</span></button>
+    </div>
   </div>
 </div>

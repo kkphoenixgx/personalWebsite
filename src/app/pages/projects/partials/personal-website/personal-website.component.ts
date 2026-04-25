@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -12,8 +12,9 @@ import { RouterModule } from '@angular/router';
 export class PersonalWebsiteComponent implements AfterViewInit, OnDestroy {
 
   private observer: IntersectionObserver | null = null;
+  private el = inject(ElementRef);
 
-  constructor(private el: ElementRef) {}
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.setupScrollAnimations();

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker-js/master/packages/core/schema/stryker-schema.json",
+  "packageManager": "npm",
+  "reporters": ["html", "clear-text", "progress", "json"],
+  "testRunner": "karma",
+  "cleanTempDir": true,
+  "coverageAnalysis": "perTest",
+  "ignorePatterns": [".angular", "dist", "logs", "coverage", ".stryker-tmp"],
+  "karma": {
+    "projectType": "angular-cli",
+    "configFile": "karma.conf.js",
+    "config": {
+      "browsers": ["ChromeHeadlessCI"],
+      "reporters": ["progress"]
+    }
+  },
+  "mutate": [
+    "src/app/**/*.ts",
+    "!src/app/**/*.spec.ts"
+  ],
+  "timeoutMS": 60000
+}

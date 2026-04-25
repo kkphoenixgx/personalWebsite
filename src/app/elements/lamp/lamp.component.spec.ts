@@ -1,5 +1,5 @@
 /// <reference types="jasmine" />
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { LampComponent } from './lamp.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DarkModeControllerServiceMock } from '../../services/tests/dark-mode-controller.service.mock'; 
@@ -51,12 +51,13 @@ describe('LampComponent (Performance & Metrics)', () => {
     expect(renderStopSpy).toHaveBeenCalled();
     expect(mouseClearSpy).toHaveBeenCalled(); // Atesta que o Matter.Mouse limpou o cache global
 
-    expect((component as any).render).toBeUndefined();
+    expect((component as unknown as { render: unknown }).render).toBeUndefined();
   });
 
   it('[Métrica] should complete destroy$ subject on ngOnDestroy to prevent RxJS memory leaks', () => {
-    const destroyNextSpy = spyOn((component as any).destroy$, 'next').and.callThrough();
-    const destroyCompleteSpy = spyOn((component as any).destroy$, 'complete').and.callThrough();
+    const componentWithInternal = component as unknown as { destroy$: { next: jasmine.Spy, complete: jasmine.Spy } };
+    const destroyNextSpy = spyOn(componentWithInternal.destroy$, 'next').and.callThrough();
+    const destroyCompleteSpy = spyOn(componentWithInternal.destroy$, 'complete').and.callThrough();
 
     component.ngOnDestroy();
 

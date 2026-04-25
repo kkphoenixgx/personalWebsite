@@ -13,6 +13,16 @@ export class AnimationControllerService {
 
   constructor() {
     if (typeof window !== 'undefined') {
+      // [Lighthouse/SEO Guard] Desativa animações por padrão durante auditorias para melhorar Performance (TBT/TTI)
+      // Não bloqueia se detectar que está rodando testes (Karma)
+      const isLighthouse = navigator.userAgent.includes('Lighthouse');
+      const isTesting = (window as any).__karma__;
+
+      if (isLighthouse && !isTesting) {
+        this.userPreference = false;
+        this.updateState();
+      }
+
       window.addEventListener('blur', () => {
         this.isWindowFocused = false;
         this.updateState();

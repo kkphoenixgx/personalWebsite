@@ -9,6 +9,8 @@ import { FileNavigatorService } from './services/file-navigator-service.service'
 import { ViewportHelper } from './utils/Viewport';
 import axe from 'axe-core';
 
+/* eslint-disable max-lines-per-function */
+
 describe('Global Software Metrics (A11y, Performance, Responsiveness & Architecture)', () => {
   let fixture: ComponentFixture<AppComponent>;
   let router: Router;
@@ -16,17 +18,6 @@ describe('Global Software Metrics (A11y, Performance, Responsiveness & Architect
   beforeAll(() => {
     // Aumenta o limite global de tempo do Jasmine para evitar Timeouts em navegações assíncronas (5000ms -> 30000ms)
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-    
-    console.log(`\n\n`);
-    console.log(`====================================================================================================`);
-    console.log(`=================================== 🚀 NOVA EXECUÇÃO DE MÉTRICAS 🚀 ================================`);
-    console.log(`====================================================================================================\n`);
-  });
-
-  afterAll(() => {
-    console.log(`\n====================================================================================================`);
-    console.log(`=================================== 🏁 FIM DA EXECUÇÃO DE MÉTRICAS 🏁 ==============================`);
-    console.log(`====================================================================================================\n\n`);
   });
 
   beforeEach(async () => {
@@ -83,12 +74,20 @@ describe('Global Software Metrics (A11y, Performance, Responsiveness & Architect
   });
 
   it('[Métrica] [Acessibilidade] should scan components and generate a detailed debt report', async () => {
+    // O axe-core precisa que o elemento esteja FISICAMENTE no DOM do navegador para conseguir calcular contraste de cores e visibilidade.
+    document.body.appendChild(fixture.nativeElement);
+
     fixture.detectChanges();
     router.initialNavigation();
     await fixture.whenStable();
+    // Aguarda o GSAP e o Three.js terminarem de montar a tela inicial para o axe-core poder ver tudo
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     console.log(`\n[Métrica] [Acessibilidade] --- RELATÓRIO DE ACESSIBILIDADE WCAG ---`);
     const results = await axe.run(fixture.nativeElement);
+    
+    // Remove do DOM para não vazar pro próximo teste
+    document.body.removeChild(fixture.nativeElement);
     
     if (results.violations.length > 0) {
       console.log(`[Métrica] [Acessibilidade] 🔴 DÉBITO TÉCNICO: Encontradas ${results.violations.length} violações.`);
@@ -161,6 +160,156 @@ describe('Global Software Metrics (A11y, Performance, Responsiveness & Architect
     console.log(`[Métrica] [Arquitetura] Status Pós-Ação do LampComponent: 🟢 Carregado dinamicamente (Correto)`);
   });
 
+  it('[Métrica] [Arquitetura] should identify components missing Dark Mode and Animation controls', async () => {
+    // Filtro Transparente Sem Viés: Só silencia o aviso inofensivo de proporção de imagem do Angular e o PDF ausente.
+    // Erros reais (ex: Crash de lógica, NullPointerException) VÃO aparecer no console e reprovar sua arquitetura.
+    const originalWarn = console.warn;
+    spyOn(console, 'warn').and.callFake((...args) => {
+      if (args.join(' ').includes('NG02952')) return;
+      originalWarn.apply(console, args);
+    });
+    const originalError = console.error;
+    spyOn(console, 'error').and.callFake((...args) => {
+      if (args.join(' ').includes('PDF loading failed') || args.join(' ').includes('mock.pdf')) return;
+      originalError.apply(console, args);
+    });
+
+    // Navegamos por rotas distintas para forçar o Angular a injetar o máximo de componentes na DOM do Karma
+    await router.navigate(['/projects/the-big-agent']);
+    fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    await router.navigate(['/']);
+    fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    // Extrai todos os nós HTML e filtra apenas os que são componentes Angular vivos (tags app-*)
+    const allElements = fixture.debugElement.queryAll(By.css('*'));
+    const componentElements = allElements.filter(el => el.name && el.name.startsWith('app-') && el.componentInstance);
+
+    const uniqueComponents = new Map<string, unknown>();
+    componentElements.forEach(el => uniqueComponents.set(el.name, el.componentInstance));
+
+    const missingDarkMode: string[] = [];
+    const missingAnimation: string[] = [];
+
+    // Ignora os wrappers raiz de roteamento que são apenas "cascas" vazias
+    const whitelist = ['app-root', 'app-home', 'app-projects', 'app-articles'];
+
+    uniqueComponents.forEach((instance, name) => {
+      if (whitelist.includes(name)) return;
+
+      // Lemos o código-fonte da classe do componente instanciado e suas propriedades em memória
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const compAny = instance as any;
+      const classSource = compAny.constructor.toString().toLowerCase();
+      const instanceKeys = Object.keys(compAny).join(',').toLowerCase();
+      const signature = classSource + instanceKeys;
+
+      const hasDarkMode = signature.includes('darkmode') || signature.includes('dark_mode');
+      const hasAnimation = signature.includes('animation') || signature.includes('animated') || signature.includes('gsap') || signature.includes('matter');
+
+      if (!hasDarkMode) missingDarkMode.push(name);
+      if (!hasAnimation) missingAnimation.push(name);
+    });
+
+    console.log(`\n[Métrica] [Arquitetura] --- RELATÓRIO DE INTEGRIDADE DE UI/UX (DARK MODE & ANIMAÇÕES) ---`);
+
+    if (missingDarkMode.length > 0) {
+      missingDarkMode.forEach(comp => console.log(`[Métrica] [Arquitetura] ❌ ${comp}`));
+    }
+
+    if (missingAnimation.length > 0) {
+      console.log(`[Métrica] [Arquitetura] 🟡 WARN: Componentes sem controle de Animação: [ ${missingAnimation.join(', ')} ]`);
+    }
+    
+    if (missingDarkMode.length === 0 && missingAnimation.length === 0) {
+      console.log(`[Métrica] [Arquitetura] 🟢 EXCELENTE! Todos os componentes analisados possuem controle de Dark Mode e Animações.`);
+    }
+
+    // Garante que o Jasmine não dispare o aviso de "spec has no expectations" (Não trava o build)
+    expect(true).toBe(true);
+  });
+
+  it('[Métrica] [Arquitetura] should verify if 3D/Heavy components implement Lighthouse/SEO guards (Delayed Load)', async () => {
+    const originalWarn = console.warn;
+    spyOn(console, 'warn').and.callFake((...args) => {
+      if (args.join(' ').includes('NG02952')) return;
+      originalWarn.apply(console, args);
+    });
+    const originalError = console.error;
+    spyOn(console, 'error').and.callFake((...args) => {
+      if (args.join(' ').includes('PDF loading failed') || args.join(' ').includes('mock.pdf')) return;
+      originalError.apply(console, args);
+    });
+
+    // Força o roteamento para montar os painéis e extrair o código deles
+    await router.navigate(['/projects/the-big-agent']);
+    fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    await router.navigate(['/']);
+    fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    const allElements = fixture.debugElement.queryAll(By.css('*'));
+    const componentElements = allElements.filter(el => el.name && el.name.startsWith('app-') && el.componentInstance);
+
+    const uniqueComponents = new Map<string, unknown>();
+    componentElements.forEach(el => uniqueComponents.set(el.name, el.componentInstance));
+
+    const passingComponents: string[] = [];
+    const failingComponents: string[] = [];
+    const lightComponents: string[] = [];
+
+    uniqueComponents.forEach((instance, name) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const compAny = instance as any;
+      let classSource = compAny.constructor.toString().toLowerCase();
+
+      // Busca funções e métodos anexados ao protótipo (ex: ngOnInit, ngAfterViewInit)
+      const proto = Object.getPrototypeOf(compAny);
+      if (proto) {
+        Object.getOwnPropertyNames(proto).forEach(method => {
+          try {
+            if (typeof proto[method] === 'function') classSource += proto[method].toString().toLowerCase();
+          } 
+          catch (e) { console.error(e) }
+        });
+      }
+
+      // Busca em propriedades de instância (Arrow Functions locais)
+      Object.keys(compAny).forEach(key => {
+        try {
+          if (typeof compAny[key] === 'function') classSource += compAny[key].toString().toLowerCase();
+        } 
+        catch (e) { console.error(e) }
+      });
+
+      // Detecta se o componente invoca instâncias pesadas de Game Engine ou bibliotecas de Animação (GSAP)
+      const isHeavy = classSource.includes('webgl') || classSource.includes('three') || classSource.includes('matter') || classSource.includes('gsap');
+
+      if (isHeavy) {
+        // Verifica se existe a trava de Lighthouse, setTimeout ou um Observer atrasando a engine
+        const hasGuard = classSource.includes('lighthouse') || classSource.includes('settimeout') || classSource.includes('requestanimationframe');
+        
+        if (hasGuard) passingComponents.push(name);
+        else failingComponents.push(name);
+      } else {
+        // Se não possui engines pesadas, é um componente "Leve" e isento
+        lightComponents.push(name);
+      }
+    });
+
+    console.log(`\n[Métrica] [Arquitetura] --- RELATÓRIO DE LIGHTHOUSE GUARDS (ATRASO EM 3D) ---`);
+    console.log(`[Métrica] [Arquitetura] 🔍 Foram escaneados dinamicamente ${uniqueComponents.size} componentes ativos na página.`);
+    if (passingComponents.length > 0) console.log(`[Métrica] [Arquitetura] 🟢 Otimizados (Seguros para SEO): [ ${passingComponents.join(', ')} ]`);
+    if (failingComponents.length > 0) console.log(`[Métrica] [Arquitetura] 🔴 DÉBITO DE PERFORMANCE (3D Instantâneo Bloqueando TBT): [ ${failingComponents.join(', ')} ]`);
+    if (lightComponents.length > 0) console.log(`[Métrica] [Arquitetura] ⚪ Componentes Leves (Isentos): [ ${lightComponents.join(', ')} ]`);
+
+    expect(true).toBe(true); // Apenas relata no log, não bloqueia a esteira CI
+  });
+
   it('[Métrica] [SEO] should verify essential meta tags and title for search engines', async () => {
     // Navegamos para uma página da SPA para validar se os serviços de SEO (Title e Meta) estão atuando
     await router.navigate(['/projects']);
@@ -183,6 +332,17 @@ describe('Global Software Metrics (A11y, Performance, Responsiveness & Architect
   });
 
   it('[Métrica] [Design System] should warn about hardcoded colors not in variables.scss', async () => {
+    const originalWarn = console.warn;
+    spyOn(console, 'warn').and.callFake((...args) => {
+      if (args.join(' ').includes('NG02952')) return;
+      originalWarn.apply(console, args);
+    });
+    const originalError = console.error;
+    spyOn(console, 'error').and.callFake((...args) => {
+      if (args.join(' ').includes('PDF loading failed') || args.join(' ').includes('mock.pdf')) return;
+      originalError.apply(console, args);
+    });
+
     // Navegamos pelas rotas principais para garantir que os componentes injetaram seus estilos na DOM
     await router.navigate(['/projects/the-big-agent']);
     fixture.detectChanges();

@@ -4,7 +4,9 @@
   [ngClass]="{ 'darkMode': (darkMode$ | async), 'whiteMode': !(darkMode$ | async) }"
 >
   
-  <div class="three-container" #threeContainer [hidden]="!(animate$ | async)"></div>
+  <div class="three-container" #threeContainer [hidden]="!(animate$ | async)">
+    <canvas #historyCanvas style="width: 100%; height: 100%; display: block;"></canvas>
+  </div>
   
   <div #contentContainer class="content-container"
     [style.color]="(darkMode$ | async) ? '#fff' : '#000' "

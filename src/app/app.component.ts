@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 //import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -19,7 +19,8 @@ import { Title, Meta } from '@angular/platform-browser';
 export class AppComponent implements OnInit {
   title = 'personal-website';
 
-  constructor(private titleService: Title, private metaService: Meta) {}
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
 
   ngOnInit(): void {
     this.titleService.setTitle('Kkphoenix - Fullstack Developer');
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
       { name: 'description', content: 'Portfolio of Kauã Alves Santos, a fullstack web developer specializing in Angular, Node.js, and 3D web experiences.' },
       { property: 'og:title', content: 'Kkphoenix - Fullstack Developer' },
       { property: 'og:description', content: 'Portfolio of Kauã Alves Santos, a fullstack web developer specializing in Angular, Node.js, and 3D web experiences.' },
-      { property: 'og:image', content: 'https://kkphoenix.com.br/assets/logoCompleta.png' },
+      { property: 'og:image', content: 'https://kkphoenix.com.br/assets/logoCompleta.webp' },
       { property: 'og:url', content: 'https://kkphoenix.com.br' },
       { name: 'author', content: 'Kauã Alves Santos' }
     ]);

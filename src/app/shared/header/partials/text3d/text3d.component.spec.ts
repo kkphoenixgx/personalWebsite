@@ -50,6 +50,7 @@ describe('Text3dComponent', () => {
   });
 
   it('should update colors based on dark mode state', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (component as any).updateColors();
     expect(text3dServiceMock.updateTextColor).toHaveBeenCalledWith(0xffffff);
   });

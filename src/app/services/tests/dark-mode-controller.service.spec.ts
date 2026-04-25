@@ -30,4 +30,14 @@ describe('DarkModeControllerService', () => {
       done();
     });
   });
+
+  it('deve alternar o estado corretamente múltiplas vezes', (done) => {
+    service.setDarkMode(false);
+    service.setDarkMode(true);
+    service.setDarkMode(false);
+    service.getDarkModeObserbable().subscribe(state => {
+      expect(state).toBeFalse();
+      done();
+    });
+  });
 });

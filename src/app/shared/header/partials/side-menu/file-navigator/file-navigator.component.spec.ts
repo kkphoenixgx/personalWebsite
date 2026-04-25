@@ -2,7 +2,6 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FileNavigatorComponent } from './file-navigator.component'; 
 import { FileNavigatorService } from '../../../../../services/file-navigator-service.service'; 
-import { of } from 'rxjs';
 import { provideRouter } from '@angular/router';
 import { IPage } from '../../../../../interface/ITitlesResponse';
 

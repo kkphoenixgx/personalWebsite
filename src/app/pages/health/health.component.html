@@ -1,0 +1,88 @@
+<div class="health-dashboard">
+  <div class="glow-ambient"></div>
+
+  <header class="dashboard-header">
+    <div class="live-indicator">
+      <span class="pulse"></span> LIVE TELEMETRY
+    </div>
+    <h1 class="gradient-text">System Health</h1>
+    <p class="subtitle">Real-time tracking of Quality Assurance metrics and WebGL performance</p>
+  </header>
+
+  <h2 class="section-heading"><span class="material-icons">verified_user</span> Quality & Performance Metrics</h2>
+  
+  <div class="metrics-grid">
+    <div class="metric-card coverage">
+      <h3>Statements / Lines</h3>
+      <div class="circular-chart">
+        <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="linesOffset"></circle></svg>
+        <div class="inner-value"><span class="number">{{ covLines }}</span><span class="unit">%</span></div>
+      </div>
+      <div class="status-badge up-blue">Excellent</div>
+    </div>
+
+    <div class="metric-card coverage">
+      <h3>Functions & Methods</h3>
+      <div class="circular-chart">
+        <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="functionsOffset"></circle></svg>
+        <div class="inner-value"><span class="number">{{ covFunctions }}</span><span class="unit">%</span></div>
+      </div>
+      <div class="status-badge up-blue">Flawless</div>
+    </div>
+
+    <div class="metric-card coverage">
+      <h3>Logical Branches</h3>
+      <div class="circular-chart">
+        <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="branchesOffset"></circle></svg>
+        <div class="inner-value"><span class="number">{{ covBranches }}</span><span class="unit">%</span></div>
+      </div>
+      <div class="status-badge up-blue">Highly Tested</div>
+    </div>
+
+    <div class="metric-card">
+      <h3>WebGL Engine</h3>
+      <div class="circular-chart">
+        <svg>
+          <circle class="bg" cx="60" cy="60" r="40"></circle>
+          <circle class="progress" cx="60" cy="60" r="40" [style.stroke-dashoffset]="fpsOffset" [attr.stroke]="fps >= 30 ? '#00ffcc' : (fps > 0 ? '#ffcc00' : '#888')"></circle>
+        </svg>
+        <div class="inner-value"><span class="number">{{ fps }}</span><span class="unit">FPS</span></div>
+      </div>
+      <div class="status-badge" [ngClass]="{'up': fps >= 30, 'warning': fps > 0 && fps < 30, 'checking': fps === 0}">{{ fps >= 30 ? 'Fluid' : 'Degraded' }}</div>
+    </div>
+  </div>
+
+  <h2 class="section-heading mt-5"><span class="material-icons">architecture</span> Quality Assurance Strategy</h2>
+  <div class="strategy-grid">
+    
+    <div class="strategy-card">
+      <h3>Chaos Engineering & Mutation Testing</h3>
+      <p>Traditional coverage lies. I use <strong>Stryker Mutator</strong> to inject artificial bugs (mutants) into the source code during CI to ensure the tests actually detect failures, proving the resilience of the business rules.</p>
+      <div class="badge-list"><span class="badge">Stryker</span> <span class="badge">Mutation Score</span></div>
+    </div>
+
+    <div class="strategy-card">
+      <h3>Hardware & Game Loop Emulation</h3>
+      <p>WebGL and Physics engines (Three.js/Matter.js) bypass the standard DOM. I use <strong>Playwright</strong> to emulate real mouse hardware events and Raycasters, ensuring the 3D pipeline works outside local environments.</p>
+      <div class="badge-list"><span class="badge">Playwright</span> <span class="badge">E2E</span> <span class="badge">WebGL Raycasting</span></div>
+    </div>
+
+    <div class="strategy-card">
+      <h3>Memory Guards & DOM Isolation</h3>
+      <p>Single Page Applications degrade if GPU buffers aren't cleared. Custom <strong>Karma/Jasmine</strong> pipelines track <code>performance.memory</code> to catch VRAM Memory Leaks on component <code>ngOnDestroy</code> hooks automatically.</p>
+      <div class="badge-list"><span class="badge">Karma</span> <span class="badge">Jasmine</span> <span class="badge">Garbage Collection</span></div>
+    </div>
+
+    <div class="strategy-card">
+      <h3>Hexagonal Architecture Enforcer</h3>
+      <p>Clean Architecture is easily broken by bad imports. I utilize <strong>Dependency-Cruiser</strong> and <strong>ESLint</strong> to strictly forbid UI elements from leaking into Services, blocking circular injections at build time.</p>
+      <div class="badge-list"><span class="badge">Dependency Cruiser</span> <span class="badge">ESLint</span> <span class="badge">AST Parsing</span></div>
+    </div>
+
+    <div class="strategy-card full-width">
+      <h3>Automated Penetration Testing (DAST)</h3>
+      <p>The CI/CD pipeline executes automated security audits testing the Angular <code>DomSanitizer</code> against Cross-Site Scripting (XSS) payloads and checking the backend AWS server for sensitive infrastructure headers leakage.</p>
+      <div class="badge-list"><span class="badge">OWASP Baselines</span> <span class="badge">npm audit</span> <span class="badge">Payload Injection</span></div>
+    </div>
+  </div>
+</div>

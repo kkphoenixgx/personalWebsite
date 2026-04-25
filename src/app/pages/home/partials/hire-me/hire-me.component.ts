@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service'; 
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
 export class HireMeComponent {
 
   private darkModeService = inject(DarkModeControllerService);
-  public darkMode$: Observable<Boolean> = this.darkModeService.getDarkModeObserbable();
+  public darkMode$: Observable<boolean> = this.darkModeService.getDarkModeObserbable();
 
- 
 }

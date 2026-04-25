@@ -2,24 +2,13 @@
 
 ## ISSUES
 
-- [ ] Sessão dos artigos
-  - [ ] Criar testes para o pdfExtraction, testes para the-eye e testes para o article.
-- [ ] Testes
-  - [ ] Verificar cobertura atual de testes
-  - [ ] Criar testes de métricas para esse software
-  - [ ] Criar Teste de validação para verificar se vai funcionar em produção.
 - [ ] Precisamos de um lugar que lista melhor todas as provas antigas do cefet, substituir o banco de provas atual do cefet, uma nova page para o banco de provas do cefet, pode ser o cefet-exams 
 - [ ] Refatorar scss
   - [ ] Escrever scss melhor, precisa ser scss mesmo, não css disfraçado, usar as melhores práticas
 - [ ] Produzir fotos para a aba portifólio.
 - [ ] Preciso de alguma claude para rodar meus projetos principais com banco de dados e servidor de graça.
-- [ ] Melhorar a UI para deixar mais impressionante
-- [ ] window sem focus tira o animate
-- [~] profissional-history partial
-- [ ] Profissional history vai ser um livro
 - [ ] Github API para listar os repositórios em algum lugar
 - [ ] Change mouse, no site o mouse do cliente vai ser diferente. Opção para desativar isso.
-- [ ] listando sync conflicts e .excalidraw **no quartz**
 - [ ] Sugestão: O botão de "Toggle Animations" que vi no seu código (<app-config-menu>) precisa funcionar perfeitamente. Se detectar FPS baixo, sugira desligar a física automaticamente ou mostre um aviso.
 
 ### Sub projetos
@@ -33,6 +22,17 @@
 
 ### Completed
 
+- [ ] Testes
+  - [X] Verificar cobertura atual de testes
+  - [X] Criar testes de métricas para esse software
+  - [X] Criar Teste de validação para verificar se vai funcionar em produção.
+- [X] Melhorar a UI para deixar mais impressionante
+- [X] window sem focus tira o animate
+- [X] profissional-history partial
+- [X] Profissional history vai ser um livro
+- [X] listando sync conflicts e .excalidraw **no quartz**
+- [X] Sessão dos artigos
+  - [X] Criar testes para o pdfExtraction, testes para the-eye e testes para o article.
 - [X] listando sync conflicts e .excalidraw
 - [X] Quando acontece um resize aumentando a tela acima de 890px e abaixo de 1260 - o canvas não ocupa 100% do history
 - [X] Se eu ligo a animação pelo menos 3 vezes (6 clicks no toogle animation) o container do tree.js no history buga e dá erro na criação do container com tema escuro e continua com o fumdo claro, tornando impossível ler o texto

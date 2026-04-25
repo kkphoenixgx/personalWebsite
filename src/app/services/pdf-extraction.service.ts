@@ -1,26 +1,48 @@
 import { Injectable } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
 
+// --- Interfaces para os Polyfills ---
+interface PromiseWithResolvers<T> {
+  promise: Promise<T>;
+  resolve: (value: T | PromiseLike<T>) => void;
+  reject: (reason?: unknown) => void;
+}
+
+declare global {
+  interface PromiseConstructor {
+    withResolvers<T>(): PromiseWithResolvers<T>;
+    try<T>(callback: () => T | PromiseLike<T>): Promise<T>;
+  }
+  interface Map<K, V> {
+    getOrInsertComputed(key: K, callback: (key: K) => V): V;
+  }
+}
+
 // --- Polyfills para contornar o conflito entre o PDF.js 5+ e o zone.js do Angular ---
-if (typeof (Promise as any).withResolvers === 'undefined') {
-  (Promise as any).withResolvers = function () {
-    let resolve, reject;
-    const promise = new Promise((res, rej) => {
+if (typeof Promise.withResolvers === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (Promise as any).withResolvers = function <T>() {
+    let resolve: (value: T | PromiseLike<T>) => void;
+    let reject: (reason?: unknown) => void;
+    const promise = new Promise<T>((res, rej) => {
       resolve = res;
       reject = rej;
     });
-    return { promise, resolve, reject };
+    return { promise, resolve: resolve!, reject: reject! };
   };
 }
-if (typeof (Promise as any).try === 'undefined') {
-  (Promise as any).try = function (callback: any) {
-    return new Promise((resolve, reject) => {
+if (typeof Promise.try === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (Promise as any).try = function <T>(callback: () => T | PromiseLike<T>) {
+    return new Promise<T>((resolve, reject) => {
       try { resolve(callback()); } catch (error) { reject(error); }
     });
   };
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 if (typeof (Map.prototype as any).getOrInsertComputed === 'undefined') {
-  (Map.prototype as any).getOrInsertComputed = function (key: any, callback: any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (Map.prototype as any).getOrInsertComputed = function <K, V>(this: Map<K, V>, key: K, callback: (key: K) => V) {
     if (this.has(key)) {
       return this.get(key);
     }
@@ -60,7 +82,12 @@ export class PdfExtractionService {
       for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
         const page = await pdf.getPage(pageNum);
         const textContent = await page.getTextContent();
-        const pageText = textContent.items.map((item: any) => item.str).join(' ');
+        const pageText = textContent.items
+          .map((item: unknown) => {
+            const textItem = item as { str?: string };
+            return textItem.str || '';
+          })
+          .join(' ');
         fullText += pageText + ' ';
       }
       return fullText.toLowerCase(); // Retornamos minúsculo para facilitar o "includes" na barra de pesquisa

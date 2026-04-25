@@ -8,6 +8,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-firefox-launcher'),
+      require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma'),
@@ -18,20 +19,13 @@ module.exports = function (config) {
           
           const latestLogPath = path.join(logDir, 'latest.log');
           const metricsLogPath = path.join(logDir, 'metrics.log');
+          const activeFlag = path.join(logDir, '.metrics_active');
 
-          // Limpa o arquivo latest.log toda vez que uma nova bateria de testes começar
-          this.onRunStart = function() {
-            const dateStr = new Date().toLocaleString();
-            const header = `\n====================================================================================================\n[SISTEMA] Execução iniciada em: ${dateStr}\n====================================================================================================\n`;
-            fs.writeFileSync(latestLogPath, header);
-            fs.appendFileSync(metricsLogPath, header);
-          };
+          let sessionCleared = false;
 
           this.onBrowserLog = function(browser, log, type) {
-            // Intercepta qualquer console log que venha dos testes de métrica
             if (typeof log === 'string' && (log.includes('[Métrica]') || log.includes('===='))) {
-              // Limpa formatação bruta e insere no arquivo
-              let cleanLog = log.replace(/^'|'$/g, '').replace(/\\n/g, '\n');
+              let cleanLog = log.replace(/^'|'$/g, '').replace(/\\n/g, '\n').trim();
               
               if (!cleanLog.includes('====')) {
                 const timeStr = new Date().toLocaleTimeString();
@@ -39,7 +33,15 @@ module.exports = function (config) {
               }
               
               fs.appendFileSync(metricsLogPath, cleanLog + '\n');
-              fs.appendFileSync(latestLogPath, cleanLog + '\n');
+
+              const isInPipeline = fs.existsSync(activeFlag);
+
+              if (!isInPipeline && !sessionCleared) {
+                fs.writeFileSync(latestLogPath, `[TESTE UNITÁRIO AVULSO] ${new Date().toLocaleString()}\n${cleanLog}\n`);
+                sessionCleared = true;
+              } else {
+                fs.appendFileSync(latestLogPath, cleanLog + '\n');
+              }
             }
           };
         }]
@@ -48,16 +50,30 @@ module.exports = function (config) {
     client: {
       jasmine: { }
     },
+    coverageReporter: {
+      dir: require('path').join(__dirname, './coverage/personal-website'),
+      subdir: '.',
+      reporters: [
+        { type: 'html' },
+        { type: 'json-summary' }
+      ]
+    },
     jasmineHtmlReporter: {
       suppressAll: true 
     },
-    // Adicionamos nosso extrator de logs à lista de executores
-    reporters: ['kjhtml', 'metrics-logger'],
+    // Adicionamos 'coverage' para engatilhar o relatório estruturado
+    reporters: ['progress', 'kjhtml', 'metrics-logger', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Firefox'],
+    browsers: ['Chrome'],
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-dev-shm-usage', '--enable-unsafe-swiftshader']
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });

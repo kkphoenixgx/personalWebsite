@@ -42,9 +42,11 @@ describe('HomeComponent', () => {
   beforeEach(fakeAsync(() => {
     // Stub do gsap.timeline para evitar a execução real de animações (timeline infinito)
     // Agora inclui o método clear, que é chamado no componente
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     spyOn(gsap, 'timeline').and.returnValue({
       clear: () => {},
       to: () => {}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
 
     TestBed.configureTestingModule({

@@ -31,33 +31,33 @@ export class PortifolioComponent {
       highlightText: 'Revolutionizing agent-based simulations with embedded AI.'
     },
     {
-      title: 'Restaurant Food Zero (Vue Frontend)',
-      description: 'A modern restaurant website with blog, posts, and reservation system. Built with Vue.js for a smooth user experience.',
-      url: 'https://github.com/kkphoenixgx/RestaurantFoodZeroFrontEnd',
+      title: 'Restaurant Food Zero',
+      description: 'Dockerized easy to run modern restaurant website with blog, posts, and reservation system, built with Vue.js for a smooth user experience and Node.js with Swagger for fast, scalable and documented restaurant management.',
+      url: 'https://github.com/kkphoenixgx/Restaurant-FoodZero',
       type: 'carousel',
-      highlightText: 'Elevating restaurant web presence with Vue.'
+      highlightText: 'Robust system for modern a restaurant.'
     },
     {
-      title: 'Restaurant Food Zero (Node Backend)',
-      description: 'The backend powering Food Zero, built with Node.js for fast and scalable restaurant management.',
-      url: 'https://github.com/kkphoenixgx/backendRestaurantFoodZero',
+      title: 'Senco locações',
+      description: 'Dockerized easy to run modern Angular SPA website with correct authentication, login, connection to email, administrator dashboard, routes, backend, tests, docs and a lot more!',
+      url: 'https://github.com/kkphoenixgx/senco-locacoes-website',
       type: 'carousel',
-      highlightText: 'Robust backend for modern restaurant solutions.'
+      highlightText: 'Robust system for a real company.'
     },
     {
-      title: 'Poem Site (React Frontend)',
-      description: 'A web app to create, edit, and perfect poems for mobile screens, making sharing on social media easier than ever.',
+      title: 'Poem Site',
+      description: 'A SPA React web app to create, edit, perfect poems for mobile screens using Google Firebase database, making sharing on social media easier than ever.',
       url: 'https://github.com/kkphoenixgx/Poem-site',
       type: 'carousel',
       highlightText: 'Poetry meets technology for social sharing.'
     },
-    {
-      title: 'Poem Site (Node Server)',
-      description: 'The Node.js server powering Poem Site, enabling seamless poem management and sharing.',
-      url: 'https://github.com/kkphoenixgx/server-poem-site',
-      type: 'carousel',
-      highlightText: 'Backend for creative expression.'
-    },
+    // {
+    //   title: 'Poem Site (Node Server)',
+    //   description: 'The Node.js server powering Poem Site, enabling seamless poem management and sharing.',
+    //   url: 'https://github.com/kkphoenixgx/server-poem-site',
+    //   type: 'carousel',
+    //   highlightText: 'Backend for creative expression.'
+    // },
     {
       title: 'RandomQuiz Spring API',
       description: 'A robust Spring Boot server for creating and saving random quizzes. Features Swagger documentation and MySQL integration for seamless quiz management.',

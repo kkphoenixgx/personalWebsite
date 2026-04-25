@@ -6,6 +6,10 @@
 /out-tsc
 /bazel-out
 logs/
+test-results/
+.stryker-tmp/
+playwright-report/
+reports/
 
 # Node
 /node_modules

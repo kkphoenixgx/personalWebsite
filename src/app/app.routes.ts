@@ -5,6 +5,7 @@ import { ProjectsComponent } from './pages/projects/projects.component';
 import { TheBigAgentComponent } from './pages/projects/partials/the-big-agent/the-big-agent.component';
 import { PersonalWebsiteComponent } from './pages/projects/partials/personal-website/personal-website.component';
 import { RpgRogueliteBullethellComponent } from './pages/projects/partials/rpg-roguelite-bullethell/rpg-roguelite-bullethell.component';
+import { HealthComponent } from './pages/health/health.component';
 
 export const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: 'full' },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: "personal-website", component: PersonalWebsiteComponent },
     { path: "rpg-roguelite-bullethell", component: RpgRogueliteBullethellComponent }
   ]},
+  { path: "health", component: HealthComponent },
   { path: '**', component: HomeComponent }
 ];

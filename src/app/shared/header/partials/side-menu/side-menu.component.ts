@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { IPage } from '../../../../interface/ITitlesResponse'; 
 
@@ -7,6 +7,7 @@ import { SideBarMenuControllerService } from '../../../../services/side-bar-menu
 import { FileNavigatorComponent } from './file-navigator/file-navigator.component';
 import { FileNavigatorService } from '../../../../services/file-navigator-service.service';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
+import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { RouterLink } from "@angular/router";
 
 @Component({
@@ -21,14 +22,14 @@ export class SideMenuComponent implements OnInit{
   public pagesResponse: IPage[] = [];
   public toogleSideBar :boolean = false;
   public isDarkMode: boolean = true;
+  public isAnimating: boolean = true;
   public isLoading: boolean = true;
   public hasError: boolean = false;
 
-  constructor(
-    private sideBar :SideBarMenuControllerService,
-    private fileNavigatorService :FileNavigatorService,
-    private darkModeService: DarkModeControllerService
-  ){}
+  private sideBar = inject(SideBarMenuControllerService);
+  private fileNavigatorService = inject(FileNavigatorService);
+  private darkModeService = inject(DarkModeControllerService);
+  private animateService = inject(AnimationControllerService);
 
   public handleSideBarMenu(){
     this.sideBar.setSideBar(!this.toogleSideBar);
@@ -43,6 +44,10 @@ export class SideMenuComponent implements OnInit{
 
     this.darkModeService.getDarkModeObserbable().subscribe(state => {
       this.isDarkMode = state;
+    });
+
+    this.animateService.getAnimationObserbable().subscribe(state => {
+      this.isAnimating = state;
     });
 
     this.fileNavigatorService.getItems()

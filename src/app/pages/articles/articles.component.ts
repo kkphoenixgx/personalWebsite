@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { PdfExtractionService } from '../../services/pdf-extraction.service';
 import { gsap } from 'gsap';
@@ -38,9 +38,9 @@ export class ArticlesComponent implements OnInit, OnDestroy { // Removido AfterV
 
   public articles: IArticle[] = []; // Começa vazio e é preenchido dinamicamente
 
-  constructor( // Removido AfterViewInit
-    private pdfExtractionService: PdfExtractionService
-  ) { }
+  private pdfExtractionService = inject(PdfExtractionService);
+
+  constructor() { }
 
   async ngOnInit() {
     this.document.body.style.backgroundColor = '#fdfcf8'; // Off-white de Stanford

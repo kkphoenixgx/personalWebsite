@@ -1,0 +1,87 @@
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+interface ICoverageData {
+  total: {
+    lines: { pct: number };
+    functions: { pct: number };
+    branches: { pct: number };
+  };
+}
+
+@Component({
+  selector: 'app-health',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './health.component.html',
+  styleUrl: './health.component.scss'
+})
+export class HealthComponent implements OnInit, OnDestroy {
+  fps = 0;
+  
+  covLines = 0;
+  covFunctions = 0;
+  covBranches = 0;
+
+  private animationFrameId: number = 0;
+  private frames = 0;
+  private prevTime = performance.now();
+
+  private http = inject(HttpClient);
+
+  constructor() {}
+
+  ngOnInit() {
+    this.startFpsMonitor();
+    this.fetchCoverage();
+  }
+
+  ngOnDestroy() {
+    cancelAnimationFrame(this.animationFrameId);
+  }
+
+  private fetchCoverage() {
+    this.http.get<ICoverageData>('/assets/coverage.json').subscribe({
+      next: (data) => {
+        if (data && data.total) {
+          this.covLines = data.total.lines.pct || 0;
+          this.covFunctions = data.total.functions.pct || 0;
+          this.covBranches = data.total.branches.pct || 0;
+        }
+      },
+      error: () => console.warn('Coverage data not found. Run tests with coverage to generate.')
+    });
+  }
+
+  private startFpsMonitor() {
+    const loop = () => {
+      this.frames++;
+      const time = performance.now();
+      if (time >= this.prevTime + 1000) {
+        this.fps = Math.round((this.frames * 1000) / (time - this.prevTime));
+        this.frames = 0;
+        this.prevTime = time;
+      }
+      this.animationFrameId = requestAnimationFrame(loop);
+    };
+    loop();
+  }
+
+  // --- Helpers SVG Circular Progress (Perímetro de um círculo de raio 40px é ~251.2px) ---
+  get fpsOffset(): number {
+    const pct = Math.min(this.fps / 60, 1);
+    return 251.2 - (251.2 * pct);
+  }
+
+  // --- Helpers SVG Test Coverage ---
+  get linesOffset(): number {
+    return 251.2 - (251.2 * (this.covLines / 100));
+  }
+  get functionsOffset(): number {
+    return 251.2 - (251.2 * (this.covFunctions / 100));
+  }
+  get branchesOffset(): number {
+    return 251.2 - (251.2 * (this.covBranches / 100));
+  }
+}

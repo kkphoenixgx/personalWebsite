@@ -8,7 +8,7 @@
   overflow: hidden;
 
   .three-container {
-    position: relative;
+    position: absolute; /* O Canvas fica solto no fundo */
     inset: 0;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@
   }
 
   .content-container {
-    position: absolute;
+    position: relative; /* O texto volta a ditar a altura da página */
     z-index: 2;
     top: 0;
     width: 100%; /* Garante que o texto ocupe a largura correta para calcular a altura */

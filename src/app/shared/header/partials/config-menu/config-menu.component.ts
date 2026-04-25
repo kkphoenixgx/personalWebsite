@@ -1,4 +1,4 @@
-import { Component, ComponentRef, Injector, OnDestroy, OnInit, ViewChild, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
+import { Component, ComponentRef, Injector, OnDestroy, ViewChild, ViewContainerRef, ChangeDetectorRef, inject } from '@angular/core';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, take, takeUntil } from 'rxjs';
@@ -6,6 +6,7 @@ import { DarkModeControllerService } from '../../../../services/dark-mode-contro
 
 @Component({
   selector: 'app-config-menu',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './config-menu.component.html',
   styleUrl: './config-menu.component.scss'
@@ -17,21 +18,17 @@ export class ConfigMenuComponent implements OnDestroy {
 
   public toggleConfigMenu :boolean = false;
 
-  public toggleDarkMode$ :Observable<boolean>
-  public toggleAnimations$ :Observable<boolean>
+  private animationControllerService = inject(AnimationControllerService);
+  private darkModeControllerService = inject(DarkModeControllerService);
+  private injector = inject(Injector);
+  private cdr = inject(ChangeDetectorRef);
+
+  public toggleDarkMode$: Observable<boolean> = this.darkModeControllerService.getDarkModeObserbable();
+  public toggleAnimations$: Observable<boolean> = this.animationControllerService.getAnimationObserbable();
   
   public toggleLamp = false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public lampComponentRef!: ComponentRef<any>;
-
-  constructor( 
-    private animationControllerService :AnimationControllerService, 
-    private darkModeControllerService :DarkModeControllerService,
-    private injector: Injector,
-    private cdr: ChangeDetectorRef
-  ){
-    this.toggleAnimations$ = this.animationControllerService.getAnimationObserbable(); 
-    this.toggleDarkMode$ = this.darkModeControllerService.getDarkModeObserbable();
-  }
 
   // ----------- Lifecycle -----------
 
@@ -58,9 +55,12 @@ export class ConfigMenuComponent implements OnDestroy {
     }
   }
   destroyLampComponent(){
-    this.lampComponentRef.destroy();
-    this.lampComponentRef = null as any;
-    this.cdr.detectChanges(); // Atualiza a UI para remover o botão imediatamente
+    if (this.lampComponentRef) {
+      this.lampComponentRef.destroy();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.lampComponentRef = null as any;
+      this.cdr.detectChanges(); // Atualiza a UI para remover o botão imediatamente
+    }
   }
 
   // ----------- Helpers -----------

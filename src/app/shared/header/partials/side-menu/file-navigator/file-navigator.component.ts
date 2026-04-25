@@ -37,7 +37,7 @@ export class FileNavigatorComponent {
     console.log('Itens recebidos:', JSON.stringify(this.items, null, 2));
   }
 
-  public logClick(item: any) {
+  public logClick(item: IPage) {
     console.log(item);
   }
 }
