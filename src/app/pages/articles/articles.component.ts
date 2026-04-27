@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router'; // Importar RouterModule, Router, ActivatedRoute e ParamMap
 import { Subject, takeUntil } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 export interface IArticle {
   title: string;
@@ -17,7 +18,7 @@ export interface IArticle {
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [CommonModule, RouterModule], // Adicionado RouterModule
+  imports: [CommonModule, RouterModule, TranslateModule], // Adicionado RouterModule
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss',
 })
@@ -39,6 +40,7 @@ export class ArticlesComponent implements OnInit, OnDestroy { // Removido AfterV
   public articles: IArticle[] = []; // Começa vazio e é preenchido dinamicamente
 
   private pdfExtractionService = inject(PdfExtractionService);
+  private translate = inject(TranslateService);
 
   constructor() { }
 
@@ -46,18 +48,18 @@ export class ArticlesComponent implements OnInit, OnDestroy { // Removido AfterV
     this.document.body.style.backgroundColor = '#fdfcf8'; // Off-white de Stanford
     this.document.body.style.transition = 'background-color 0.5s ease';
     
-    this.titleService.setTitle('Research & Publications | K. Phoenix');
-    this.metaService.updateTag({ name: 'description', content: 'Academic research and technical papers.' });
+    this.translate.get('ARTICLES.TITLE').subscribe(title => {
+      this.titleService.setTitle(`${title} | K. Phoenix`);
+    });
+    this.translate.get('ARTICLES.SUBTITLE').subscribe(desc => {
+      this.metaService.updateTag({ name: 'description', content: desc });
+    });
 
     // Busca os dados da lista de artigos no arquivo JSON estático
     try {
       const response = await fetch('assets/articles/articles.json');
       if (response.ok) {
         this.articles = await response.json();
-        this.articles.forEach(article => {
-          // Cria um slug a partir do título para a URL
-          article.slug = this.createSlug(article.title);
-        });
         this.cdr.detectChanges(); // Garante que a tela atualize a grade de cartões
       } else {
         console.error('Falha ao carregar a lista de artigos do JSON.');
@@ -120,8 +122,12 @@ export class ArticlesComponent implements OnInit, OnDestroy { // Removido AfterV
     this.cdr.detectChanges(); // Força a tela a mostrar o spinner imediatamente
     
     // Atualiza o SEO dinamicamente para a publicação específica!
-    this.titleService.setTitle(`${article.title} | Publication`);
-    this.metaService.updateTag({ name: 'description', content: article.description });
+    this.translate.get(article.title).subscribe(translatedTitle => {
+      this.titleService.setTitle(`${translatedTitle} | Publication`);
+    });
+    this.translate.get(article.description).subscribe(translatedDesc => {
+      this.metaService.updateTag({ name: 'description', content: translatedDesc });
+    });
     
     try {
       // Lê o PDF e renderiza as páginas perfeitamente

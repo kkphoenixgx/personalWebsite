@@ -82,8 +82,9 @@ export class HelloSceneManager {
     hexLattice.position.x = hexLattice.userData['baseX'] + Math.sin(elapsedTime * 1.1) * 0.5;
     hexLattice.position.y = hexLattice.userData['baseY'] + Math.cos(elapsedTime * 1.3) * 0.6;
     hexLattice.position.z = hexLattice.userData['baseZ'] + Math.cos(elapsedTime * 1.2) * 0.5;
-    hexLattice.rotation.z = elapsedTime * 0.3;
-    hexLattice.rotation.x = 0.5 + Math.sin(elapsedTime * 1.2) * 0.3;
+    hexLattice.rotation.y = elapsedTime * 0.4;
+    hexLattice.rotation.x = 0.8 + Math.sin(elapsedTime * 1.2) * 0.2;
+    hexLattice.rotation.z = Math.cos(elapsedTime * 0.8) * 0.15;
 
     cleanArchSymbol.position.x = cleanArchSymbol.userData['baseX'] + Math.sin(elapsedTime * 1.4) * 0.6;
     cleanArchSymbol.position.y = cleanArchSymbol.userData['baseY'] + Math.cos(elapsedTime * 1.5) * 0.8;
@@ -131,17 +132,17 @@ export class HelloSceneManager {
 
   public onScroll(scrollP: number) {
     if (!this.models) return;
-    const { cyberCat, cleanArchSymbol, dbSymbol, hexLattice, obsidianGraph, aiNode, gitTree, bgParticles, bgNebulas } = this.models;
+    const { cyberCat, cleanArchSymbol, dbSymbol, hexLattice: hexagonalSymbol, obsidianGraph, aiNode, gitTree, bgParticles, bgNebulas } = this.models;
 
     const catZ = scrollP < 0 ? 15 + (scrollP * 120) : 15 - (scrollP * 50);
 
     gsap.to(cyberCat.userData, { baseX: 8 - (scrollP * 20), baseY: -1 + (scrollP * 10), baseZ: catZ, duration: 1, ease: 'power2.out' });
     gsap.to(cyberCat.rotation, { y: -0.5 + (scrollP * 3), duration: 1, ease: 'power2.out' });
 
-    gsap.to(cleanArchSymbol.userData, { baseX: -12 + (scrollP * 24), baseY: 8 - (scrollP * 30), baseZ: -10 + (scrollP * 105), duration: 1, ease: 'power2.out' });
-    gsap.to(dbSymbol.userData, { baseX: -30 + (scrollP * 21), baseY: -10 + (scrollP * 15), baseZ: -50 + (scrollP * 83), duration: 1, ease: 'power2.out' });
-    gsap.to(hexLattice.userData, { baseX: 80 - (scrollP * 30), baseY: -20 + (scrollP * 20), baseZ: -120 + (scrollP * 80), duration: 1, ease: 'power2.out' });
-    gsap.to(obsidianGraph.userData, { baseX: 34 - (scrollP * 40), baseY: -20 + (scrollP * 35), baseZ: -90 + (scrollP * 160), duration: 1, ease: 'power2.out' });
+    gsap.to(cleanArchSymbol.userData, { baseX: -12 + (scrollP * 24), baseY: 5 - (scrollP * 30), baseZ: -5 + (scrollP * 105), duration: 1, ease: 'power2.out' });
+    gsap.to(dbSymbol.userData, { baseX: -16 + (scrollP * 21), baseY: -12 + (scrollP * 15), baseZ: -50 + (scrollP * 83), duration: 1, ease: 'power2.out' });
+    gsap.to(hexagonalSymbol.userData, { baseX: -55 + (scrollP * 90), baseY: -60 + (scrollP * 120), baseZ: -100 + (scrollP * 220), duration: 1, ease: 'power2.out' });
+    gsap.to(obsidianGraph.userData, { baseX: 50 - (scrollP * 60), baseY: -40 + (scrollP * 60), baseZ: -90 + (scrollP * 150), duration: 1, ease: 'power2.out' });
     gsap.to(aiNode.userData, { baseX: -30 + (scrollP * 20), baseY: -18 + (scrollP * 18), baseZ: -55 + (scrollP * 70), duration: 1, ease: 'power2.out' });
     gsap.to(gitTree.userData, { baseX: 34 - (scrollP * 20), baseY: -22 + (scrollP * 22), baseZ: -60 + (scrollP * 70), duration: 1, ease: 'power2.out' });
     
@@ -188,10 +189,10 @@ export class HelloSceneManager {
       this.showFloatingText(obsidianGraph, "Second Brain\nKnowledge Graph", "#d47fe0");
     } else if (object === dbSymbol) {
       this.animateScaleDistort(dbSymbol, 1.3, 0.6);
-      this.showFloatingText(dbSymbol, "Relational DB\nPostgreSQL & Redis", "#38bdf8");
+      this.showFloatingText(dbSymbol, "Relational DB\nMySQL", "#38bdf8");
     } else if (object === hexLattice) {
       this.animateScaleUniform(hexLattice, 1.4);
-      this.showFloatingText(hexLattice, "Hex Lattice\nMicroservices", "#9100a6");
+      this.showFloatingText(hexLattice, "Hexagonal Architecture\nPorts & Adapters", "#d47fe0");
     }
   }
 
@@ -293,7 +294,20 @@ export class HelloSceneManager {
                 }
             });
         }
+            
+            if (obj) {
+                gsap.killTweensOf(obj);
+                gsap.killTweensOf(obj.position);
+                gsap.killTweensOf(obj.rotation);
+                gsap.killTweensOf(obj.scale);
+                gsap.killTweensOf(obj.userData);
+            }
     });
-    gsap.killTweensOf("*");
+    
+    if (this.models?.bgNebulas?.material) gsap.killTweensOf(this.models.bgNebulas.material);
+    if (this.container) {
+        const labels = this.container.querySelectorAll('div');
+        if (labels) gsap.killTweensOf(labels);
+    }
   }
 }

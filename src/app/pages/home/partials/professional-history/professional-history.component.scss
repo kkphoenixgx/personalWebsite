@@ -230,24 +230,34 @@
     padding: 0;
     .scene { height: 65vh; perspective: 3000px;}
     .book {
-      width: 90vw;
-      height: 65vh;
+      width: 85vw; // Largura maior para o livro fechado
+      height: 60vh;
+      transform: translateX(0); // Sem escala quando fechado
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      
       &.is-open {
-        transform: translateX(25%) scale(0.5); 
+        // Reduz a escala apenas quando aberto para as duas páginas caberem na tela
+        transform: translateX(20%) scale(0.6); 
       }
     }
     .paper .page-content {
-      padding: 1.5rem;
-      .job-header { flex-direction: column; gap: 0.5rem; }
-      .job-header h3 { font-size: 1.2rem; }
-      p { font-size: 0.9rem; }
-      .achievements li { font-size: 0.85rem; }
+      padding: 1.2rem;
+      .job-header { flex-direction: column; gap: 0.3rem; }
+      .job-header h3 { font-size: 1.1rem; }
+      .job-header .period { font-size: 0.75rem; }
+      .role { font-size: 0.9rem; margin-bottom: 0.8rem; }
+      p { font-size: 0.85rem; line-height: 1.4; margin-bottom: 1rem; }
+      .achievements li { font-size: 0.8rem; margin-bottom: 0.4rem; }
     }
   }
 }
 
 @media (max-width: 500px) {
-  .professional-history .book.is-open {
-     transform: translateX(20%) scale(0.4); 
+  .professional-history .book {
+     width: 90vw;
+     &.is-open {
+        // Escala ainda menor para telas muito estreitas
+        transform: translateX(20%) scale(0.45); 
+     }
   }
 }

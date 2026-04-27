@@ -4,6 +4,7 @@ import { ProjectsComponent } from './projects.component';
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ProjectsComponent', () => {
   let component: ProjectsComponent;
@@ -14,7 +15,7 @@ describe('ProjectsComponent', () => {
     darkModeSpy.getDarkModeObserbable.and.returnValue(of(true));
 
     await TestBed.configureTestingModule({
-      imports: [ProjectsComponent],
+      imports: [ProjectsComponent, TranslateModule.forRoot()],
       providers: [
         { provide: DarkModeControllerService, useValue: darkModeSpy },
         provideRouter([])

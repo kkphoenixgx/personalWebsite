@@ -5,21 +5,19 @@
     <nav class="top-nav">
       <a routerLink="/projects" class="back-btn">
         <span class="arrow">&larr;</span> 
-        <span class="text">BACK TO PROJECTS</span>
+        <span class="text">{{ 'PROJECT_PERSONAL.NAV_BACK' | translate }}</span>
       </a>
     </nav>
     <div class="blueprint-grid"></div>
     
     <div class="hero-content reveal-up">
       <div class="code-comment">/** &#64;Architecture Showcase */</div>
-      <h1 class="elegant-title">Engineering a<br><span class="text-gradient">Digital Mind.</span></h1>
-      <p class="hero-description">
-        Mais do que uma página estática. Um ecossistema Full-Stack vivo, projetado para espelhar meu "Segundo Cérebro" em tempo real através de Integração Contínua (CI).
-      </p>
+      <h1 class="elegant-title" [innerHTML]="'PROJECT_PERSONAL.HERO_TITLE' | translate"></h1>
+      <p class="hero-description" [innerHTML]="'PROJECT_PERSONAL.HERO_DESC' | translate"></p>
       
       <div class="action-row">
-        <a href="https://github.com/vitoroliveiracg/personal-website" target="_blank" class="btn-architect">
-          <span class="icon">{{ '{ }' }}</span> Inspecionar Código-Fonte
+        <a href="https://github.com/kkphoenixgx/personal-website" target="_blank" class="btn-architect">
+          <span class="icon">{{ '{ }' }}</span> {{ 'PROJECT_PERSONAL.INSPECT_CODE' | translate }}
         </a>
       </div>
     </div>
@@ -42,12 +40,8 @@
       </div>
       <div class="window-body split-layout">
         <div class="text-panel">
-          <h3 class="panel-title">Git-as-a-Database & Hexagonal Design</h3>
-          <p>
-            A atualização de conteúdo não ocorre via painéis engessados. Minhas notas de estudo são forjadas no <strong>Obsidian</strong> e versionadas no GitHub. 
-            Um núcleo <strong>Java Spring Boot</strong> em Arquitetura Hexagonal rodando em instâncias AWS EC2 captura as mudanças, realiza o parsing da sintaxe Markdown e entrega uma árvore topológica de grafos via REST. 
-            A publicação é orgânica e orientada a dados.
-          </p>
+          <h3 class="panel-title">{{ 'PROJECT_PERSONAL.ARCH_TITLE_1' | translate }}</h3>
+          <p [innerHTML]="'PROJECT_PERSONAL.ARCH_DESC_1' | translate"></p>
         </div>
         <!-- Diagrama Visual Elegante -->
         <div class="diagram-panel">
@@ -66,13 +60,9 @@
         <div class="window-title">frontend-renderer.ts</div>
       </div>
       <div class="window-body">
-        <h3 class="panel-title">WebGL, Física Dinâmica e Zero-GC</h3>
-        <p>
-          A interface dissolve a barreira entre UI e simulação. Utilizamos <strong>Three.js</strong> para renderizar Sistemas Solares com <em>Raycasting</em> nativo, e injetamos <strong>Matter.js</strong> para gerar uma lâmpada física sujeita à gravidade no DOM.
-        </p>
-        <p>
-          Para proteger a GPU, laços de renderização são geridos cirurgicamente por <code>IntersectionObservers</code> e componentes pesados nascem por <strong>Lazy Loading</strong> via <code>ViewContainerRef</code>, descarregando a memória (Zero Garbage Collection Thrashing) quando invisíveis.
-        </p>
+        <h3 class="panel-title">{{ 'PROJECT_PERSONAL.ARCH_TITLE_2' | translate }}</h3>
+        <p [innerHTML]="'PROJECT_PERSONAL.ARCH_DESC_2' | translate"></p>
+        <p [innerHTML]="'PROJECT_PERSONAL.ARCH_DESC_3' | translate"></p>
       </div>
     </div>
   </section>
@@ -80,26 +70,26 @@
   <!-- O LABORATÓRIO: A Metáfora do Terminal -->
   <section class="telemetry-section">
     <div class="content-wrapper observe-me">
-      <h2 class="elegant-title small">The Metrics Belt</h2>
-      <p class="section-desc">Arquiteturas bonitas são frágeis sem observabilidade. O Frontend é blindado por suítes contínuas de <strong>Karma/Jasmine</strong> rodando asserções profundas na DOM e na Memória.</p>
+      <h2 class="elegant-title small">{{ 'PROJECT_PERSONAL.METRICS_TITLE' | translate }}</h2>
+      <p class="section-desc" [innerHTML]="'PROJECT_PERSONAL.METRICS_DESC' | translate"></p>
       
       <div class="terminal-window">
         <div class="term-header">
           <span class="term-title">kkphoenix&#64;arch ~ $ ng test --metrics</span>
         </div>
         <div class="term-body">
-          <div class="term-line"><span class="prompt">></span> Executing Global Software Metrics Suite...</div>
-          <div class="term-line success">✓ [Velocidade] Render Base da SPA: 112ms (ÓTIMO)</div>
-          <div class="term-line success">✓ [Arquitetura] Payload Budget: Lazy Load confirmado.</div>
-          <div class="term-line success">✓ [Zero-GC] Three.js Memory Leak Check: 0 leaks.</div>
+          <div class="term-line"><span class="prompt">></span> {{ 'PROJECT_PERSONAL.TERMINAL_START' | translate }}</div>
+          <div class="term-line success">{{ 'PROJECT_PERSONAL.TERMINAL_VELOCITY' | translate }}</div>
+          <div class="term-line success">{{ 'PROJECT_PERSONAL.TERMINAL_ARCH' | translate }}</div>
+          <div class="term-line success">{{ 'PROJECT_PERSONAL.TERMINAL_ZERO_GC' | translate }}</div>
           <div class="term-line highlight">
-            <span class="prompt">></span> axe-core engine scanning DOM...
+            <span class="prompt">></span> {{ 'PROJECT_PERSONAL.TERMINAL_SCAN' | translate }}
           </div>
-          <div class="term-line success">✓ [Acessibilidade] WCAG AA Compliance: 100% Aprovado.</div>
+          <div class="term-line success">{{ 'PROJECT_PERSONAL.TERMINAL_ACCESSIBILITY' | translate }}</div>
           <br>
-          <div class="term-line"><span class="prompt">Test Suites:</span> <span class="text-green">14 passed</span>, 14 total</div>
-          <div class="term-line"><span class="prompt">Snapshots:</span>   0 total</div>
-          <div class="term-line"><span class="prompt">Time:</span>        2.45s</div>
+          <div class="term-line"><span class="prompt">{{ 'PROJECT_PERSONAL.TERMINAL_FOOTER_1' | translate }}</span></div>
+          <div class="term-line"><span class="prompt">{{ 'PROJECT_PERSONAL.TERMINAL_FOOTER_2' | translate }}</span></div>
+          <div class="term-line"><span class="prompt">{{ 'PROJECT_PERSONAL.TERMINAL_FOOTER_3' | translate }}</span></div>
           <div class="term-line blinking-cursor">_</div>
         </div>
       </div>
@@ -107,9 +97,9 @@
   </section>
 
   <section class="footer-cta observe-me">
-    <p class="code-comment">// Ready to build the future?</p>
-    <a href="mailto:contato@exemplo.com" class="btn-architect solid">
-      Initialize Contact
+    <p class="code-comment">{{ 'PROJECT_PERSONAL.FOOTER_COMMENT' | translate }}</p>
+    <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn-architect solid">
+      {{ 'PROJECT_PERSONAL.INITIALIZE_CONTACT' | translate }}
     </a>
   </section>
 

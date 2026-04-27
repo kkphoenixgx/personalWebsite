@@ -6,6 +6,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HireMeComponent', () => {
   let component: HireMeComponent;
@@ -13,7 +14,7 @@ describe('HireMeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HireMeComponent],
+      imports: [HireMeComponent, TranslateModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: DarkModeControllerService, useValue: { getDarkModeObserbable: () => of(true) } }
@@ -35,7 +36,7 @@ describe('HireMeComponent', () => {
     const links = fixture.debugElement.queryAll(By.css('.container-me-info a'));
     expect(links.length).toBe(4);
     expect(links[0].nativeElement.getAttribute('href')).toContain('tel:+5521993344251');
-    expect(links[1].nativeElement.getAttribute('href')).toContain('mailto:kauaAlvesWorkplace@gmail.com');
+    expect(links[1].nativeElement.getAttribute('href')).toContain('mailto:kauaalvesWorkplace@gmail.com');
     expect(links[2].nativeElement.getAttribute('href')).toContain('linkedin.com');
     expect(links[3].nativeElement.getAttribute('href')).toContain('github.com');
   });

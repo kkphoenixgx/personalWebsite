@@ -4,6 +4,7 @@ import { PortifolioComponent } from './portifolio.component';
 import { By } from '@angular/platform-browser';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PortifolioComponent', () => {
   let component: PortifolioComponent;
@@ -11,7 +12,7 @@ describe('PortifolioComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [PortifolioComponent],
+      imports: [PortifolioComponent, TranslateModule.forRoot()],
       providers: [
         { provide: DarkModeControllerService, useValue: { getDarkModeObserbable: () => of(true) } }
       ]

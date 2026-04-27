@@ -3,44 +3,44 @@
 
   <header class="dashboard-header">
     <div class="live-indicator">
-      <span class="pulse"></span> LIVE TELEMETRY
+      <span class="pulse"></span> {{ 'HEALTH.LIVE_TELEMETRY' | translate }}
     </div>
-    <h1 class="gradient-text">System Health</h1>
-    <p class="subtitle">Real-time tracking of Quality Assurance metrics and WebGL performance</p>
+    <h1 class="gradient-text">{{ 'HEALTH.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'HEALTH.SUBTITLE' | translate }}</p>
   </header>
 
-  <h2 class="section-heading"><span class="material-icons">verified_user</span> Quality & Performance Metrics</h2>
+  <h2 class="section-heading"><span class="material-icons">verified_user</span> {{ 'HEALTH.QA_METRICS' | translate }}</h2>
   
   <div class="metrics-grid">
     <div class="metric-card coverage">
-      <h3>Statements / Lines</h3>
+      <h3>{{ 'HEALTH.STATEMENTS_LINES' | translate }}</h3>
       <div class="circular-chart">
         <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="linesOffset"></circle></svg>
         <div class="inner-value"><span class="number">{{ covLines }}</span><span class="unit">%</span></div>
       </div>
-      <div class="status-badge up-blue">Excellent</div>
+      <div class="status-badge up-blue">{{ 'HEALTH.EXCELLENT' | translate }}</div>
     </div>
 
     <div class="metric-card coverage">
-      <h3>Functions & Methods</h3>
+      <h3>{{ 'HEALTH.FUNCTIONS_METHODS' | translate }}</h3>
       <div class="circular-chart">
         <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="functionsOffset"></circle></svg>
         <div class="inner-value"><span class="number">{{ covFunctions }}</span><span class="unit">%</span></div>
       </div>
-      <div class="status-badge up-blue">Flawless</div>
+      <div class="status-badge up-blue">{{ 'HEALTH.FLAWLESS' | translate }}</div>
     </div>
 
     <div class="metric-card coverage">
-      <h3>Logical Branches</h3>
+      <h3>{{ 'HEALTH.LOGICAL_BRANCHES' | translate }}</h3>
       <div class="circular-chart">
         <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="branchesOffset"></circle></svg>
         <div class="inner-value"><span class="number">{{ covBranches }}</span><span class="unit">%</span></div>
       </div>
-      <div class="status-badge up-blue">Highly Tested</div>
+      <div class="status-badge up-blue">{{ 'HEALTH.HIGHLY_TESTED' | translate }}</div>
     </div>
 
     <div class="metric-card">
-      <h3>WebGL Engine</h3>
+      <h3>{{ 'HEALTH.WEBGL_ENGINE' | translate }}</h3>
       <div class="circular-chart">
         <svg>
           <circle class="bg" cx="60" cy="60" r="40"></circle>
@@ -48,40 +48,40 @@
         </svg>
         <div class="inner-value"><span class="number">{{ fps }}</span><span class="unit">FPS</span></div>
       </div>
-      <div class="status-badge" [ngClass]="{'up': fps >= 30, 'warning': fps > 0 && fps < 30, 'checking': fps === 0}">{{ fps >= 30 ? 'Fluid' : 'Degraded' }}</div>
+      <div class="status-badge" [ngClass]="{'up': fps >= 30, 'warning': fps > 0 && fps < 30, 'checking': fps === 0}">{{ fps >= 30 ? ('HEALTH.FLUID' | translate) : (fps === 0 ? ('HEALTH.CHECKING' | translate) : ('HEALTH.DEGRADED' | translate)) }}</div>
     </div>
   </div>
 
-  <h2 class="section-heading mt-5"><span class="material-icons">architecture</span> Quality Assurance Strategy</h2>
+  <h2 class="section-heading mt-5"><span class="material-icons">architecture</span> {{ 'HEALTH.QA_STRATEGY' | translate }}</h2>
   <div class="strategy-grid">
     
     <div class="strategy-card">
-      <h3>Chaos Engineering & Mutation Testing</h3>
-      <p>Traditional coverage lies. I use <strong>Stryker Mutator</strong> to inject artificial bugs (mutants) into the source code during CI to ensure the tests actually detect failures, proving the resilience of the business rules.</p>
+      <h3>{{ 'HEALTH.CHAOS_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.CHAOS_DESC' | translate }}</p>
       <div class="badge-list"><span class="badge">Stryker</span> <span class="badge">Mutation Score</span></div>
     </div>
 
     <div class="strategy-card">
-      <h3>Hardware & Game Loop Emulation</h3>
-      <p>WebGL and Physics engines (Three.js/Matter.js) bypass the standard DOM. I use <strong>Playwright</strong> to emulate real mouse hardware events and Raycasters, ensuring the 3D pipeline works outside local environments.</p>
+      <h3>{{ 'HEALTH.HARDWARE_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.HARDWARE_DESC' | translate }}</p>
       <div class="badge-list"><span class="badge">Playwright</span> <span class="badge">E2E</span> <span class="badge">WebGL Raycasting</span></div>
     </div>
 
     <div class="strategy-card">
-      <h3>Memory Guards & DOM Isolation</h3>
-      <p>Single Page Applications degrade if GPU buffers aren't cleared. Custom <strong>Karma/Jasmine</strong> pipelines track <code>performance.memory</code> to catch VRAM Memory Leaks on component <code>ngOnDestroy</code> hooks automatically.</p>
+      <h3>{{ 'HEALTH.MEMORY_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.MEMORY_DESC' | translate }}</p>
       <div class="badge-list"><span class="badge">Karma</span> <span class="badge">Jasmine</span> <span class="badge">Garbage Collection</span></div>
     </div>
 
     <div class="strategy-card">
-      <h3>Hexagonal Architecture Enforcer</h3>
-      <p>Clean Architecture is easily broken by bad imports. I utilize <strong>Dependency-Cruiser</strong> and <strong>ESLint</strong> to strictly forbid UI elements from leaking into Services, blocking circular injections at build time.</p>
+      <h3>{{ 'HEALTH.HEXAGONAL_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.HEXAGONAL_DESC' | translate }}</p>
       <div class="badge-list"><span class="badge">Dependency Cruiser</span> <span class="badge">ESLint</span> <span class="badge">AST Parsing</span></div>
     </div>
 
     <div class="strategy-card full-width">
-      <h3>Automated Penetration Testing (DAST)</h3>
-      <p>The CI/CD pipeline executes automated security audits testing the Angular <code>DomSanitizer</code> against Cross-Site Scripting (XSS) payloads and checking the backend AWS server for sensitive infrastructure headers leakage.</p>
+      <h3>{{ 'HEALTH.SECURITY_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.SECURITY_DESC' | translate }}</p>
       <div class="badge-list"><span class="badge">OWASP Baselines</span> <span class="badge">npm audit</span> <span class="badge">Payload Injection</span></div>
     </div>
   </div>

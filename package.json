@@ -34,6 +34,8 @@
     "@angular/router": "^19.2.21",
     "@angular/ssr": "^19.1.7",
     "@fontsource/roboto": "^5.1.1",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
     "gsap": "^3.12.7",
     "material-icons": "^1.13.14",
     "matter-js": "^0.20.0",

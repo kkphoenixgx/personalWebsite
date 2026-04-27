@@ -20,10 +20,10 @@ export class FileNavigatorService {
       this.itemsCache = (async () => {
         try {
           const data = await lastValueFrom(this.http.get<IPage[]>(this.API_URL));
-          console.log('Dados recebidos da API:', data);
+          console.log('Data received from API:', data);
           return this.transformToPage(data);
         } catch (error) {
-          console.error('Erro na requisição:', error);
+          console.error('Request error:', error);
           throw error;
         }
       })();

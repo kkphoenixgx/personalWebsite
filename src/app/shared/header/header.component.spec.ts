@@ -5,6 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { FileNavigatorService } from '../../services/file-navigator-service.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -15,7 +16,7 @@ describe('HeaderComponent', () => {
     fileNavigatorServiceMock.getItems.and.returnValue(Promise.resolve([]));
 
     TestBed.configureTestingModule({
-      imports: [HeaderComponent], // Standalone component
+      imports: [HeaderComponent, TranslateModule.forRoot()], // Standalone component
       providers: [
         {
           provide: ActivatedRoute,

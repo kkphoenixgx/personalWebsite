@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { PdfExtractionService } from '../../services/pdf-extraction.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ArticlesComponent & PDF Extraction', () => {
   let component: ArticlesComponent;
@@ -15,7 +16,7 @@ describe('ArticlesComponent & PDF Extraction', () => {
     mockPdfExtractionService.renderPdfToImages.and.returnValue(Promise.resolve([]));
 
     await TestBed.configureTestingModule({
-      imports: [ArticlesComponent],
+      imports: [ArticlesComponent, TranslateModule.forRoot()],
       providers: [
         provideRouter([]), // Resolve o erro fatal "router.events is undefined"
         provideHttpClient(),

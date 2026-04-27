@@ -9,11 +9,12 @@ import { FileNavigatorService } from '../../../../services/file-navigator-servic
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { RouterLink } from "@angular/router";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-side-menu',
   standalone: true,
-  imports: [CommonModule, FileNavigatorComponent, RouterLink],
+  imports: [CommonModule, FileNavigatorComponent, RouterLink, TranslateModule],
   styleUrl: './side-menu.component.scss',
   templateUrl: './side-menu.component.html'
 }) 

@@ -2,6 +2,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ProfessionalHistoryComponent } from './professional-history.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ProfessionalHistoryComponent', () => {
   let component: ProfessionalHistoryComponent;
@@ -9,7 +10,7 @@ describe('ProfessionalHistoryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ProfessionalHistoryComponent], // Use imports instead of declarations for standalone components
+      imports: [ProfessionalHistoryComponent, TranslateModule.forRoot()], // Use imports instead of declarations for standalone components
       schemas: [NO_ERRORS_SCHEMA] // Add NO_ERRORS_SCHEMA to ignore unknown elements and attributes
     })
     .compileComponents()

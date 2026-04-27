@@ -1,57 +1,74 @@
 @use "../../styles/variables.scss" as *;
 
-// ----------- Nice to meet you -----------
-
 .choice-hsitory {
-  display: flex;
+  display: block; // Mudado de flex para block para o container pai não prender o scroll
   background-color: #000000;
   width: 100%;
-  text-align: center;
   transition: background-color 0.5s ease;
 
   &.whiteMode {
     background-color: $deep-slate;
   }
 }
+
 .choice-hsitory .tab-list {
   display: flex;
   color: white;
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; 
+  scrollbar-width: none; 
+  justify-content: center; // Centraliza no desktop
+
+  &::-webkit-scrollbar {
+    display: none; 
+  }
 }
+
 .choice-hsitory .tab-item {
   background: transparent;
   border: none;
   color: inherit;
   font-family: inherit;
-  font-size: 1rem;
-  padding: 2%;
-  width: 30%;
+  font-size: 1.1rem; // Aumentado levemente
+  padding: 1.5rem 2rem; // Aumentado o height via padding
+  flex: 0 0 auto; 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
+  white-space: nowrap; 
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
 }
 
 // ----------- Helpers -----------
 
 .currentTab {
-  border-bottom: 3px solid $purple-default;
+  border-bottom-color: $purple-default !important;
+  font-weight: bold;
+  background: rgba($purple-default, 0.15);
 }
 
+@media only screen and (max-width: 800px) {
+  .choice-hsitory .tab-list {
+    justify-content: flex-start; // Mantém scroll no mobile
+  }
+  .choice-hsitory .tab-item {
+    font-size: 0.95rem;
+    padding: 1.2rem 1.2rem;
+  }
+}
 
 // ----------- Animations -----------
 
 @keyframes moveY {
-  from {
-    transform: translateY(0);
-  }
-  to {
-      transform: translateY(550px);
-  }
+  from { transform: translateY(0); }
+  to { transform: translateY(550px); }
 }

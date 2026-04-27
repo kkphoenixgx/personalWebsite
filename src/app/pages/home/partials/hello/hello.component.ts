@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, PLATFORM_ID, inject, NgZone, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { Subject, takeUntil } from 'rxjs';
@@ -12,7 +13,7 @@ import { HelloSceneManager } from './3D/hello-scene.manager';
 @Component({
   selector: 'app-hello',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './hello.component.html',
   styleUrl: './hello.component.scss'
 })
@@ -111,6 +112,7 @@ export class HelloComponent implements OnInit, AfterViewInit, OnDestroy {
       this.initScrollObservers();
       
       // Atraso otimizado para a CPU pintar o HTML antes de ligar a GPU (Three.js)
+      const delay = isTesting ? 0 : 800;
       setTimeout(() => {
         this.sceneManager = new HelloSceneManager(this.canvasContainer.nativeElement);
         this.sceneManager.init(this.isDarkMode);
@@ -119,7 +121,7 @@ export class HelloComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         setTimeout(() => this.onWindowScroll(), 50);
         this.updateAnimationState();
-      }, 800);
+      }, delay);
     }
   }
 
@@ -159,12 +161,12 @@ export class HelloComponent implements OnInit, AfterViewInit, OnDestroy {
         if (entry.isIntersecting) {
           if (this.isAnimated) {
             // Anima a caixa principal
-            gsap.to(entry.target, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out' });
+            gsap.to(entry.target, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' });
             
             // Efeito "Wave / Decode" (Cascata com desfoque) nos textos filhos
             gsap.fromTo(entry.target.children, 
               { y: 20, opacity: 0, filter: 'blur(10px)' }, 
-              { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, stagger: 0.15, ease: 'power2.out', delay: 0.2, clearProps: 'filter' }
+              { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.4, stagger: 0.08, ease: 'power2.out', delay: 0.1, clearProps: 'filter' }
             );
           }
           observer.unobserve(entry.target);

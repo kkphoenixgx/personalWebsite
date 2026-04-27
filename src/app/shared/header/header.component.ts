@@ -16,11 +16,12 @@ import { AnimationControllerService } from '../../services/animation-controller.
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 import { SideBarMenuControllerService } from '../../services/side-bar-menu-controller.service';
 import { ConfigMenuComponent } from './partials/config-menu/config-menu.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIconModule, CommonModule, Text3dComponent, SideMenuComponent, ConfigMenuComponent ],
+  imports: [MatIconModule, CommonModule, Text3dComponent, SideMenuComponent, ConfigMenuComponent, TranslateModule ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

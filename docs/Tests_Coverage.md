@@ -101,7 +101,17 @@ Todos os serviços da aplicação, como operam via Injeção de Dependência (`p
 
 ---
 
-## 5. Avaliação e Próximos Passos (Next Steps)
+## 5. Visualização em Tempo Real (`HealthComponent`)
+
+A aplicação conta com um dashboard de "Saúde" (`/health`) que integra os resultados dos testes e métricas de performance diretamente na UI:
+
+- **Métricas de Cobertura**: O componente realiza o fetch do arquivo `coverage.json` gerado pelo pipeline de testes e renderiza gráficos circulares (SVG) com as porcentagens de Statements, Functions e Branches.
+- **Transparência de Qualidade**: Esta funcionalidade permite que qualquer pessoa (ou cliente) valide a integridade do código sem precisar acessar o terminal.
+- **Monitoramento de FPS**: Além dos testes estáticos, monitora a performance runtime para garantir que as engines 3D não degradem a experiência.
+
+---
+
+## 6. Avaliação e Próximos Passos (Next Steps)
 
 A estrutura base dos testes garante que alterações de roteamento ou injeção de dependência na aplicação não causem quebras catastróficas desapercebidas (Crash de inicialização). 
 

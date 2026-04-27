@@ -1,0 +1,446 @@
+{
+  "META": {
+    "TITLE": "Kkphoenix - Fullstack Developer",
+    "DESCRIPTION": "Portfolio of Kauã Alves Santos, a fullstack web developer specializing in Angular, Node.js, and 3D web experiences."
+  },
+  "COMMON": {
+    "LOADING": "Loading...",
+    "LOADING_UNIVERSE": "Loading universe...",
+    "CONNECTION_ERROR": "Connection Error",
+    "ALL_RIGHTS_RESERVED": "All rights reserved.",
+    "PAGE": "Page"
+  },
+  "HEADER": {
+    "TOGGLE_SIDEBAR": "Toggle Sidebar menu",
+    "OPEN_SETTINGS": "Open Settings Menu"
+  },
+  "SIDE_MENU": {
+    "HOME": "Home",
+    "ARTICLES": "Articles",
+    "PROJECTS": "Projects",
+    "DOWNLOAD_RESUME": "Download Resume",
+    "EMAIL": "Email",
+    "POEMS_SITE": "Poems site",
+    "REACT_EXERCISES": "React exercises",
+    "CLOSE": "Close Sidebar Menu"
+  },
+  "ARTICLES": {
+    "BACK_TO_PUBLICATIONS": "Back to Publications",
+    "PARSING_PDF": "Parsing PDF to HTML structure...",
+    "FAILED_LOAD": "Failed to load article",
+    "TITLE": "Articles & Publications",
+    "SUBTITLE": "My academic research and technical papers.",
+    "READ_MORE": "Read Article",
+    "BIG_AGENT_TITLE": "The BIG Agent: The Utilization of Embedded Multi-Agent Systems in Unmanned Aerial Vehicles for Autonomous Operations",
+    "BIG_AGENT_DESC": "Inspired by the high crime rates in Brazil and the use of drones in strategic sectors, this work presents an integration of multi-agent systems (MAS) embedded within unmanned aerial vehicles (UAVs) for autonomous and distributed route operations."
+  },
+  "PROJECTS_PAGE": {
+    "TITLE": "SYSTEM_ARCHITECTURE",
+    "SUBTITLE": "// DEEP DIVES INTO ENGINEERED ECOSYSTEMS",
+    "THE_PROBLEM": "THE_PROBLEM",
+    "SOLUTION_TOPOLOGY": "SOLUTION_TOPOLOGY",
+    "LOADED_MODULES": "LOADED_MODULES",
+    "INITIALIZE_STUDY": "INITIALIZE_STUDY",
+    "P1_TITLE": "Personal Website with 3D",
+    "P1_CONTEXT": "A highly interactive portfolio aiming to merge standard web practices with cutting-edge 3D graphics and physics, creating a memorable experience without sacrificing accessibility or performance.",
+    "P1_ARCH": "Built as an Angular 19 SPA. It integrates Three.js for WebGL rendering (including post-processing with EffectComposer) and Matter.js for 2D physics. Heavy use of RxJS for state management (like global Dark Mode and Animation limits) and memory cleanup to prevent GPU leaks during route transitions.",
+    "P2_TITLE": "The Big Agent (Embedded MAS)",
+    "P2_CONTEXT": "A multi-agent system inspired by George Orwell's 1984. The goal was to simulate an environment where agents possess embedded artificial intelligence capable of complex navigation, decision-making, and communication without a central orchestrator.",
+    "P2_ARCH": "Developed with a heavily decoupled architecture. The cognitive backend was built in Python/Java to handle BDI (Belief-Desire-Intention) agent logic, while the physical simulation layer runs on Unity/Three.js. They communicate asynchronously, respecting the strict sensor-actuator loop constraints.",
+    "P3_TITLE": "A Marionete (RPG Roguelite Bullet-Hell)",
+    "P3_CONTEXT": "An indie game currently in active development. You play as Geppetto's ragdoll, surviving a barrage of projectiles, attending the Magic Academy, and navigating between the 3D real world and the ragdoll's dreams. It features a rich Multiclass system and NPCs controlled by generative Artificial Intelligence.",
+    "P3_ARCH": "100% Custom Engine built from scratch in pure TypeScript. To support thousands of simultaneous elements at 60 FPS, it utilizes an extreme Zero-Garbage Collection (Zero-GC) architecture and offloads spatial collision mathematics (SAT) to parallel Web Workers."
+  },
+  "HOME": {
+    "TABS": {
+      "HELLO": "Hello",
+      "HISTORY": "History",
+      "PROFESSIONAL": "Professional History",
+      "PORTFOLIO": "Portfolio",
+      "HIRE_ME": "Hire Me"
+    },
+    "ERROR": "Ops, something went wrong"
+  },
+  "HISTORY": {
+    "WHO_I_AM": "Who I am",
+    "PHOTO_DESC_1": "I am a full-stack developer with a deep passion for coding and system architecture.",
+    "PHOTO_DESC_2": "I love creating 3D content and crafting beautiful details that make customers happy through engaging interactions!",
+    "PHOTO_DESC_3": "A proud Brazilian developer!!! 🇧🇷",
+    "ASTRONOMY_DESC": "<strong>Passion for Astronomy and Journey to Software Development</strong>: During my school years, I was deeply passionate about astronomy. I was captivated by the beauty of nebulas, the scientific discoveries, and the relentless pursuit of understanding the universe. However, my journey took an unexpected turn when I discovered coding as a hobby and began learning programming independently.",
+    "COVID_DESC": "With the onset of the COVID-19 pandemic, my country implemented strict lockdowns, which disrupted my access to proper education in physics and other disciplines. This period of isolation gave me time to reflect on my future. Leveraging my self-taught skills, I delved deeper into software development and began envisioning a career in software architecture. I committed myself to rigorous study, day and night, to pave my path toward higher education.",
+    "PASSION_DESC": "<strong>Discovering My True Passion</strong>: Through this journey, I found my true calling. Coding combines pure logic with intellectual creativity — two elements I deeply value. It offers a perfect blend of problem-solving, innovative thinking, and the opportunity to deliver impactful solutions to clients. Moreover, I developed a passion for business-driven technology, where creativity meets practicality to achieve meaningful outcomes.",
+    "ACADEMIC_CAREER": "Academic Career",
+    "CIEP_DESC": "In high school, I learned a lot of things and developed a deep passion for entrepreneurship and business. I dived deeply into JavaScript, created numerous projects, and learned various programming languages and concepts while studying for ENEM, CCAA, and school.",
+    "GREETING_PROF": "I would like to express my heartfelt gratitude and dedicate a special note to Professor Ricardo, Professor Caroline Brito, Professor Canedo, Professor Cicília, Professor Marcelo, Director Maristela, and all the teachers who contributed to my journey so far. To each of you, I wish nothing but the best. A big hug to all of you.",
+    "CEFET_DESC": "<strong>In college</strong>, I am currently pursuing a degree in Information Systems at one of the best federal institutions in Brazil. Why Information Systems? I believe I can deliver more results by understanding a company's business logic and developing practical solutions, rather than focusing purely on hardware and deep theoretical mathematics like in Computer Science. I strongly prefer a practical, hands-on approach, although I still deeply love logic and math.",
+    "TCC_DESC": "For my final thesis (TCC), I am working on a project that will facilitate the development of embedded AI systems by creating a 3D simulated environment for agents equipped with artificial intelligence."
+  },
+  "PROFESSIONAL_HISTORY": {
+    "SUBTITLE": "// CAREER LOGS",
+    "TITLE": "Professional <span class=\"highlight\">History</span>",
+    "COVER_TITLE": "Engineering<br>Journey",
+    "PROLOGUE_TITLE": "Prologue",
+    "PROLOGUE_DESC": "I'm looking for the perfect team to write the next chapter.",
+    "CLICK_HINT": "(Click to flip the pages)",
+    "NOTES_HINT": "// Let's build the future together.",
+    "TALK_TITLE": "Let's Talk!",
+    "HIRE_HINT": "Contact me to make this page a reality.",
+    "JOB_MOCK_COMPANY": "Your Company",
+    "JOB_MOCK_ROLE": "Full-Stack / Frontend Engineer",
+    "JOB_MOCK_PERIOD": "2026 - Future",
+    "JOB_MOCK_DESC": "I am ready to architect and develop scalable digital solutions for your business, bridging the gap between immersive UI and solid software engineering.",
+    "JOB_MOCK_ACH_1": "Develop interactive 3D web experiences",
+    "JOB_MOCK_ACH_2": "Architect robust Angular ecosystems",
+    "JOB_MOCK_ACH_3": "Optimize performance and eliminate technical debt"
+  },
+  "HIRE_ME": {
+    "CELLPHONE": "Cellphone:",
+    "EMAIL": "Email:",
+    "LINKEDIN": "LinkedIn:",
+    "GITHUB": "GitHub:"
+  },
+  "HEALTH": {
+    "LIVE_TELEMETRY": "LIVE TELEMETRY",
+    "TITLE": "System Health",
+    "SUBTITLE": "Real-time tracking of Quality Assurance metrics and WebGL performance",
+    "QA_METRICS": "Quality & Performance Metrics",
+    "STATEMENTS_LINES": "Statements / Lines",
+    "FUNCTIONS_METHODS": "Functions & Methods",
+    "LOGICAL_BRANCHES": "Logical Branches",
+    "WEBGL_ENGINE": "WebGL Engine",
+    "EXCELLENT": "Excellent",
+    "FLAWLESS": "Flawless",
+    "HIGHLY_TESTED": "Highly Tested",
+    "FLUID": "Fluid",
+    "DEGRADED": "Degraded",
+    "CHECKING": "Checking...",
+    "QA_STRATEGY": "Quality Assurance Strategy",
+    "CHAOS_TITLE": "Chaos Engineering & Mutation Testing",
+    "CHAOS_DESC": "Traditional coverage lies. I use Stryker Mutator to inject artificial bugs (mutants) into the source code during CI to ensure the tests actually detect failures, proving the resilience of the business rules.",
+    "HARDWARE_TITLE": "Hardware & Game Loop Emulation",
+    "HARDWARE_DESC": "WebGL and Physics engines (Three.js/Matter.js) bypass the standard DOM. I use Playwright to emulate real mouse hardware events and Raycasters, ensuring the 3D pipeline works outside local environments.",
+    "MEMORY_TITLE": "Memory Guards & DOM Isolation",
+    "MEMORY_DESC": "Single Page Applications degrade if GPU buffers aren't cleared. Custom Karma/Jasmine pipelines track performance.memory to catch VRAM Memory Leaks on component ngOnDestroy hooks automatically.",
+    "HEXAGONAL_TITLE": "Hexagonal Architecture Enforcer",
+    "HEXAGONAL_DESC": "Clean Architecture is easily broken by bad imports. I utilize Dependency-Cruiser and ESLint to strictly forbid UI elements from leaking into Services, blocking circular injections at build time.",
+    "SECURITY_TITLE": "Automated Penetration Testing (DAST)",
+    "SECURITY_DESC": "The CI/CD pipeline executes automated security audits testing the Angular DomSanitizer against Cross-Site Scripting (XSS) payloads and checking the backend AWS server for sensitive infrastructure headers leakage."
+  },
+  "CONFIG": {
+    "TITLE": "Settings",
+    "DESTROY_LAMP": "Destroy Lamp Physics",
+    "DESTROY_BTN": "Destroy",
+    "DARK_MODE": "Dark Mode",
+    "ANIMATIONS": "Animations",
+    "LANGUAGE": "Language"
+  },
+  "HELLO": {
+    "HERO": {
+      "PRE_TITLE": "KAUÃ ALVES SANTOS",
+      "TITLE_P1": "Solid Software Architecture.",
+      "TITLE_P2": "Immersive Web Interfaces.",
+      "DESC": "Full Stack Developer focused on transforming complex systemic problems into scalable, high-performance solutions. From AWS infrastructure orchestration to reactive 3D graphics rendering in the browser."
+    },
+    "VALUE": {
+      "TITLE": "Engineering Beyond Code",
+      "DESC_1": "I don't just write scripts; I design architectures. My foundation is built upon <strong>Clean Architecture, Design Patterns, and DDD</strong>.",
+      "DESC_2": "I build robust backends in <strong>Java (Spring)</strong> and <strong>Node.js</strong> with a strictly decoupled design, ensuring high cohesion, testability, and maintainability for any business rule."
+    },
+    "FEATURES": {
+      "TITLE": "The Technical Edge",
+      "CARD_1": {
+        "TITLE": "Complex Front-End",
+        "DESC": "Mastery of robust SPAs with <strong>Angular</strong>. State management with <strong>RxJS</strong> and 3D integration using <strong>Three.js</strong> and <strong>Matter.js</strong> for high-performance interfaces and memory control."
+      },
+      "CARD_2": {
+        "TITLE": "Artificial Intelligence",
+        "DESC": "Researcher at the CHON Group. Hands-on experience designing <strong>Multi-Agent Systems (MAS)</strong> and <strong>BDI</strong> logic for autonomous drones."
+      },
+      "CARD_3": {
+        "TITLE": "LLM Integration",
+        "DESC": "Development of Java APIs that translate natural language in real-time to control robotic systems using local LLMs (Ollama)."
+      },
+      "CARD_4": {
+        "TITLE": "End-to-End",
+        "DESC": "Systemic view of the lifecycle. Implementation of pipelines (CI/CD), data persistence (PostgreSQL), and infrastructure deployment on <strong>AWS</strong> with Docker."
+      }
+    },
+    "GAME": {
+      "PRE_TITLE": "FEATURED PROJECT",
+      "TITLE": "Zero-GC Game Engine",
+      "DESC_1": "To demonstrate my ability to solve complex, low-level engineering problems, I built a <strong>high-performance Roguelite RPG</strong> from scratch using pure TypeScript. No Unity, no Unreal.",
+      "DESC_2": "It features a custom <strong>Zero-Garbage Collection</strong> architecture, multi-threaded collision detection via Web Workers, a Lexical Spell Parser, and a dynamic NPC ecosystem powered by local LLMs (Ollama).",
+      "CTA": "Inspect Architecture"
+    },
+    "TELEMETRY": {
+      "TITLE": "Observability & Telemetry",
+      "DESC_1": "High-performance 3D applications require strict resource management. I implement real-time monitoring to track <strong>WebGL FPS</strong>, GPU memory allocations, and network latency.",
+      "DESC_2": "Explore the live health dashboard to see how this architecture behaves under the hood, ensuring zero memory leaks and smooth frame rates.",
+      "CTA": "View System Health"
+    },
+    "FREELANCE": {
+      "TITLE": "Freelance & Consulting",
+      "DESC_1": "Turning bold ideas into high-performance digital products. I am available for freelance projects, offering end-to-end development from immersive UI design to robust backend architecture.",
+      "DESC_2": "Whether you need a modern <strong>Single Page Application</strong>, a custom <strong>3D web experience</strong>, or a scalable system built from scratch, I bring startup agility combined with enterprise-grade quality.",
+      "CTA": "Contact Me",
+      "SHOWCASE_1": {
+        "TITLE": "Senco Locações",
+        "DESC": "A complete digital transformation. Custom management dashboard and landing page dockerized, check it out!"
+      },
+      "SHOWCASE_2": {
+        "TITLE": "Restaurant FoodZero",
+        "DESC": "An immersive web experience for a premium restaurant dockerized, check it out!"
+      }
+    },
+    "CTA": {
+      "TITLE": "Ready to Scale Your Engineering?",
+      "DESC": "Explore my complete portfolio or access the repository of my solutions. Well-architected systems start here.",
+      "BTN_1": "View Projects (Architecture)",
+      "BTN_2": "Get in Touch"
+    }
+  },
+  "PORTFOLIO": {
+    "SECTION_1": {
+      "TITLE": "Featured Projects",
+      "DESC": "Check out my main projects, built with modern technologies and a focus on user experience."
+    },
+    "SECTION_2": {
+      "TITLE": "Secondary Projects",
+      "DESC": "Support, study, and experimental projects using different stacks and architectures."
+    },
+    "SECTION_3": {
+      "TITLE": "Side Project",
+      "DESC": "Personal initiatives, learning experiences, and creative experiments."
+    },
+    "VISIT_BTN": "Visit",
+    "PROJECTS": {
+      "BIG_AGENT": {
+        "TITLE": "The Big Agent (Embedded MAS)",
+        "DESC": "A multi-agent system inspired by George Orwell's 1984. One agent simulates a secretary sending paths to drones, while another agent is a drone navigating those paths. Cutting-edge AI embedded simulation.",
+        "HIGHLIGHT": "Revolutionizing agent-based simulations with embedded AI."
+      },
+      "FOOD_ZERO": {
+        "TITLE": "Restaurant Food Zero",
+        "DESC": "Dockerized easy to run modern restaurant website with blog, posts, and reservation system, built with Vue.js for a smooth user experience and Node.js with Swagger for fast, scalable and documented restaurant management.",
+        "HIGHLIGHT": "Robust system for modern a restaurant."
+      },
+      "SENCO": {
+        "TITLE": "Senco Locações",
+        "DESC": "Dockerized easy to run modern Angular SPA website with correct authentication, login, connection to email, administrator dashboard, routes, backend, tests, docs and a lot more!",
+        "HIGHLIGHT": "Robust system for a real company."
+      },
+      "POEM": {
+        "TITLE": "Poem Site",
+        "DESC": "A SPA React web app to create, edit, perfect poems for mobile screens using Google Firebase database, making sharing on social media easier than ever.",
+        "HIGHLIGHT": "Poetry meets technology for social sharing."
+      },
+      "RANDOM_QUIZ_SPRING": {
+        "TITLE": "RandomQuiz Spring API",
+        "DESC": "A robust Spring Boot server for creating and saving random quizzes. Features Swagger documentation and MySQL integration for seamless quiz management.",
+        "HIGHLIGHT": "Empowering quiz creation with enterprise-grade backend."
+      },
+      "RANDOM_QUIZ_JAVA": {
+        "TITLE": "RandomQuiz Java EE",
+        "DESC": "Java Enterprise Edition version of RandomQuiz, fully dockerized, with JUnit tests and MySQL database. Built from scratch for maximum control and reliability.",
+        "HIGHLIGHT": "Enterprise-level quiz management with modern DevOps."
+      },
+      "DROPBOX": {
+        "TITLE": "DropBox Clone",
+        "DESC": "A full-featured DropBox clone, demonstrating cloud storage concepts and file management.",
+        "HIGHLIGHT": "Cloud storage, reimagined for learning."
+      },
+      "TASK_APP": {
+        "TITLE": "Task Manager Angular",
+        "DESC": "A task management app built with Angular for productivity and organization.",
+        "HIGHLIGHT": "Boost your productivity."
+      },
+      "CLI_ARCH": {
+        "TITLE": "Custom Project Architecture CLI",
+        "DESC": "A Node.js CLI to create customizable project architectures.",
+        "HIGHLIGHT": "Structure your projects your way."
+      },
+      "NODE_CRUD": {
+        "TITLE": "Node RESTful CRUD Server",
+        "DESC": "A RESTful CRUD server built with Node.js, demonstrating API fundamentals.",
+        "HIGHLIGHT": "Learn RESTful APIs by example."
+      },
+      "DARK_THEME": {
+        "TITLE": "Dark Theme Angular",
+        "DESC": "Angular app with dark theme, login system, and guards. A showcase of modern UI/UX and security.",
+        "HIGHLIGHT": "Beautiful, secure, and user-friendly."
+      },
+      "MARKDOWN_INDEX": {
+        "TITLE": "Markdown Index Creator",
+        "DESC": "A Node.js CLI tool to create indexes of files in markdown format.",
+        "HIGHLIGHT": "Automate your documentation."
+      },
+      "SNAKE": {
+        "TITLE": "Snake Game",
+        "DESC": "A classic snake game built in JavaScript. Simple, fun, and nostalgic.",
+        "HIGHLIGHT": "Retro gaming for web."
+      },
+      "POKEDEX": {
+        "TITLE": "Pokedex Angular",
+        "DESC": "A Pokédex built with Angular, featuring Pokémon data and search capabilities.",
+        "HIGHLIGHT": "Pokémon exploration with Angular."
+      },
+      "CALCULATOR": {
+        "TITLE": "Simple Calculator JS",
+        "DESC": "A simple calculator built in JavaScript for quick calculations.",
+        "HIGHLIGHT": "Quick and easy calculations."
+      }
+    }
+  },
+  "RPG": {
+    "NAV": {
+      "BACK": "BACK TO PROJECTS"
+    },
+    "HERO": {
+      "TITLE": "CODE. CAST. SURVIVE.",
+      "TAGLINE": "A Bullet-Hell Roguelite RPG where your keyboard forges reality.",
+      "BADGE_1": "PURE TYPESCRIPT",
+      "BADGE_2": "WEB-WORKERS",
+      "BADGE_3": "ZERO-GC",
+      "BADGE_4": "LLM",
+      "INSPECT_BTN": "[ INSPECT_CODE ]",
+      "SCROLL": "SCROLL FOR LORE"
+    },
+    "LORE": {
+      "LABEL": "// LORE_",
+      "TITLE": "A world of chaos.<br>A soul made of <span class=\"highlight-cyan\">cloth</span>.",
+      "BODY": "You are not the hero of the prophecy. You are a living abomination sculpted by Geppetto, a portal between the dream world and reality. Awake and unbound, you enter the forgotten corridors of the <strong>Magic Academy</strong>, the palaces of the castle of light, and many other unique places through dreams. In an ecosystem where spells are forged with your very soul, where every class is unique, you will need to master alchemy, negotiate with insane creatures, and survive a true barrage of projectiles (Bullet-Hell)."
+    },
+    "FEATURE_1": {
+      "LABEL": "// CLASS SYSTEM",
+      "TITLE": "Forge your <span class=\"highlight-cyan\">Destiny</span>",
+      "DESC": "Do not limit yourself to a single path. Our expansive <strong>Multiclass</strong> system allows you to steal, absorb, and combine skills from different bloodlines lost throughout the vast dream world. Be a brutal battlemage, a necromancer, a pyromaniac fire madman, or a never-before-seen anomaly. The skill tree is your blank slate."
+    },
+    "FEATURE_2": {
+      "LABEL": "// PROCEDURAL MAGIC",
+      "TITLE": "Syntax is <span class=\"highlight-purple\">Your Weapon</span>",
+      "DESC": "Forget automated attack buttons. Each <strong>class is unique</strong>! Compile chaotic spells and abilities dynamically while dodging bullets. Magic demands focus, rhythm, and the perfect syntax. Combat demands skill and wisdom. Shooting requires sanity and a lot of aim."
+    },
+    "FEATURE_3": {
+      "LABEL": "// COMBAT SYSTEM",
+      "TITLE": "Systemic <span class=\"highlight-crimson\">Alchemy</span>",
+      "DESC": "It's not just subtracting HP. It's thermodynamics. Fire damage evaporates Water. Wet enemies (<em>WetStatus</em>) conduct Electricity and take amplified damage from Dark magic. Holy damage purges the undead. Every entity inherits and overrides a complex ecosystem of <em>On-Hit</em> vulnerabilities."
+    },
+    "FEATURE_4": {
+      "LABEL": "// ARTIFICIAL INTELLIGENCE",
+      "TITLE": "The world <span class=\"highlight-cyan\">Breathes</span>",
+      "DESC": "The academy corridors house beings like the iconic <strong>Director Molor</strong>. Here, static dialogue trees are dead. Our NPCs have <em>beliefs, desires, and intentions</em> processed dynamically by a Local Generative AI (Ollama). Chat with them freely, and watch as the AI manipulates the physical game world generating interactive scripts. Ask, say, interact, command, and obey simulated brains."
+    },
+    "FEATURE_5": {
+      "LABEL": "// PURE ENGINE",
+      "TITLE": "Engine Built <span class=\"highlight-purple\">From Scratch</span>",
+      "DESC": "We don't use Unity or Unreal. This experience was forged 100% in code. We built our own TypeScript Engine based on <strong>Zero-Garbage Collection</strong> (so you never feel a stutter) and delegated collision box calculations to <strong>Web Workers</strong> in parallel. A software engineering monstrosity designed to handle a locked 60 FPS."
+    },
+    "FEATURE_6": {
+      "LABEL": "// HEXAGONAL ARCHITECTURE",
+      "TITLE": "The Visuals are Just an <span class=\"highlight-purple\">Adapter</span>",
+      "DESC_1": "The biggest trap in software development is coupling the visual interface to the business rules. To prove my mastery of <strong>Systems Design and DDD</strong>, the <em>Core</em> of this RPG was built in strict <strong>Hexagonal Architecture (Ports & Adapters)</strong>.",
+      "DESC_2": "Collision physics, inventory algorithms, and AI logic exist in a purely TypeScript mathematical vacuum. The WebGL graphics engine you see on the screen? It's literally an output <em>Adapter</em>. If I want to run this game in a command-line terminal or migrate the UI to React tomorrow, the system's brain remains completely untouched."
+    },
+    "FORGE": {
+      "TITLE": "THE CODE IS OPEN.",
+      "DESC": "This game is a constant technical evolution. We take engineering seriously: Vitest test suites simulate extreme <em>Headless</em> stress on every commit, and cryptographic signatures block any physical flaws before they reach you.<br><br>The entire architecture, the Mage Parser, and the AI's BDI simulations have open doors.",
+      "LINK": "> [ ACCESS_COMMIT_PIPELINE ]"
+    },
+    "ROADMAP": {
+      "HEADER": "/// EXPANSION LOG_",
+      "ITEM_1": " Integrated Zero-GC Pipeline",
+      "ITEM_2": " QuadTree & SAT Physics WebWorker",
+      "ITEM_3": " Lexical Spell Parser (FIFO)",
+      "ITEM_4": " Post-Processing WebGL Shaders",
+      "ITEM_5": " World collision",
+      "ITEM_6": " P2P WebRTC Multiplayer"
+    }
+  },
+  "PROJECT_PERSONAL": {
+    "NAV_BACK": "BACK TO PROJECTS",
+    "HERO_TITLE": "Engineering a<br><span class=\"text-gradient\">Digital Mind.</span>",
+    "HERO_DESC": "More than a static page. A living Full-Stack ecosystem, designed to mirror my 'Second Brain' in real-time through Continuous Integration (CI).",
+    "INSPECT_CODE": "Inspect Source Code",
+    "ARCH_TITLE_1": "Git-as-a-Database & Hexagonal Design",
+    "ARCH_DESC_1": "Content updates don't happen via rigid panels. My study notes are forged in <strong>Obsidian</strong> and versioned on GitHub. A <strong>Java Spring Boot</strong> core in Hexagonal Architecture running on AWS EC2 instances captures changes, parses Markdown syntax, and delivers a topological graph tree via REST. Publication is organic and data-driven.",
+    "ARCH_TITLE_2": "WebGL, Dynamic Physics, and Zero-GC",
+    "ARCH_DESC_2": "The interface dissolves the barrier between UI and simulation. We use <strong>Three.js</strong> to render Solar Systems with native <em>Raycasting</em>, and inject <strong>Matter.js</strong> to generate a physical lamp subject to gravity in the DOM.",
+    "ARCH_DESC_3": "To protect the GPU, rendering loops are surgically managed by <code>IntersectionObservers</code> and heavy components are born via <strong>Lazy Loading</strong> through <code>ViewContainerRef</code>, offloading memory (Zero Garbage Collection Thrashing) when invisible.",
+    "METRICS_TITLE": "The Metrics Belt",
+    "METRICS_DESC": "Beautiful architectures are fragile without observability. The Frontend is shielded by continuous <strong>Karma/Jasmine</strong> suites running deep assertions on the DOM and Memory.",
+    "TERMINAL_START": "Executing Global Software Metrics Suite...",
+    "TERMINAL_VELOCITY": "✓ [Velocity] SPA Base Render: 112ms (OPTIMAL)",
+    "TERMINAL_ARCH": "✓ [Architecture] Payload Budget: Lazy Load confirmed.",
+    "TERMINAL_ZERO_GC": "✓ [Zero-GC] Three.js Memory Leak Check: 0 leaks.",
+    "TERMINAL_SCAN": "axe-core engine scanning DOM...",
+    "TERMINAL_ACCESSIBILITY": "✓ [Accessibility] WCAG AA Compliance: 100% Passed.",
+    "TERMINAL_FOOTER_1": "Test Suites: 14 passed, 14 total",
+    "TERMINAL_FOOTER_2": "Snapshots: 0 total",
+    "TERMINAL_FOOTER_3": "Time: 2.45s",
+    "FOOTER_COMMENT": "// Ready to build the future?",
+    "INITIALIZE_CONTACT": "Initialize Contact"
+  },
+  "PROJECT_BIG_AGENT": {
+    "NAV_BACK": "BACK TO PROJECTS",
+    "SYSTEM_ONLINE": "SYSTEM ONLINE: THE BIG AGENT V1.0",
+    "TAGLINE": "Utilization of Embedded Multi-Agent Systems in UAVs for Autonomous Operations.",
+    "META_DESC": "Case study: Utilization of Embedded Multi-Agent Systems in UAVs for Autonomous Operations.",
+    "CONTEXT_TAG": "WESAAC 2025 // RESEARCH PROJECT",
+    "READ_PUBLICATION": "Read the full publication",
+    "SECTION_1_LABEL": "01 // CONTEXT",
+    "SECTION_1_TITLE": "The Public Safety Challenge",
+    "SECTION_1_DESC": "High crime rates in Brazil demand constant surveillance. However, traditional centralized systems fail due to <strong>data overload</strong>, low scalability, and exorbitant maintenance costs.",
+    "STAT_THEFTS": "Thefts",
+    "STAT_VEHICLE_THEFTS": "Vehicle Thefts",
+    "STAT_NOTE": "*SSP-RJ 2025 data cited in the study",
+    "SECTION_2_LABEL": "02 // ARCHITECTURE",
+    "SECTION_2_TITLE": "Decentralization via MAS",
+    "SECTION_2_DESC": "The solution proposes a distributed system where drones are not just tools, but <strong>autonomous agents</strong> capable of perceiving the environment and acting collaboratively.",
+    "AGENT_DRONE_TITLE": "Drone Agent (Eye)",
+    "AGENT_DRONE_DESC": "Controls the hardware, motors, and GPS directly via the <strong>ARGO</strong> architecture.",
+    "AGENT_SECRETARY_TITLE": "Security Secretary",
+    "AGENT_SECRETARY_DESC": "Acts as the decision master, defining strategic routes and communicating via <strong>ContextNet</strong>.",
+    "SECTION_3_LABEL": "03 // SPECIFICATIONS",
+    "SECTION_3_TITLE": "How We Solved It",
+    "ALGORITHM_TITLE": "Proportional-Derivative (PD) Stabilization",
+    "ALGORITHM_DESC": "We ensure stable flight through a continuous feedback loop processing roll, pitch, and yaw rates in real-time.",
+    "SECTION_4_LABEL": "04 // CONTROL LOGIC",
+    "SECTION_4_TITLE": "FSM: State Machine",
+    "FSM_NOTE": "The system automatically switches to <strong>HOVERING</strong> between actions to compensate for communication latency between agents.",
+    "SPEC_1_LABEL": "Agent Architecture",
+    "SPEC_1_VALUE": "BDI (Belief-Desire-Intention)",
+    "SPEC_2_LABEL": "MAS Language",
+    "SPEC_2_VALUE": "Jason / AgentSpeak(L)",
+    "SPEC_3_LABEL": "Emulated Hardware",
+    "SPEC_3_VALUE": "DJI Mavic 2 Pro",
+    "SPEC_4_LABEL": "IoT Communication",
+    "SPEC_4_VALUE": "ContextNet / ChonNet",
+    "SPEC_5_LABEL": "Middleware",
+    "SPEC_5_VALUE": "ARGO & Javino",
+    "SPEC_6_LABEL": "Simulator",
+    "SPEC_6_VALUE": "Webots 2023b",
+    "STATE_LANDED": "LANDED",
+    "STATE_UP": "UP",
+    "STATE_DOWN": "DOWN",
+    "STATE_MOVE_RIGHT": "MOVE RIGHT",
+    "STATE_MOVE_LEFT": "MOVE LEFT",
+    "STATE_MOVE_FORWARD": "MOVE FORWARD",
+    "STATE_MOVE_BACKWARD": "MOVE BACKWARD",
+    "STATE_HOVERING": "HOVERING",
+    "STATE_LANDING": "LANDING",
+    "DEEP_DIVE_TITLE": "Logical Structure and Scalability of The BIG Agent",
+    "DEEP_DIVE_P1": "<em>The BIG Agent</em> proposes an architecture focused on decomposing the control of Unmanned Aerial Vehicles (UAVs). The system fragments the problem into two fundamental Multi-Agent Systems (MAS): one responsible for the physical interface and direct actuation of the flight hardware, and a central node that processes route planning and tactical orchestration. The validation, executed in the Webots simulator using a DJI Mavic 2 Pro model, proves the viability of mapping logical commands to physical security operations.",
+    "DEEP_DIVE_P2": "The main pillar of the project is the strict decoupling of layers. Physical perception and motor control are isolated from external network communication, which operates over the ContextNet middleware. By removing the low-level hardware syntax from the responsibilities of the BDI tactical layer, the system achieves the modularity necessary to ensure that updates or occasional failures do not corrupt the control architecture.",
+    "DEEP_DIVE_P3": "The modeling resolves the structural incompatibility between the discrete reasoning of the agents and the continuous physics of the environment. To handle the latency inherent in sending data, aerodynamic stability is managed by an internal Proportional-Derivative (PD) algorithm that forces the UAV to return to a stationary flight state (<em>hovering</em>) between the execution of each movement packet. This mechanics prioritizes the precision of the premise over fluidity, ensuring predictability.",
+    "DEEP_DIVE_P4": "Finally, the expansion capacity is intrinsic to the network topology. The communication architecture uses <em>illocutions</em> based on unique UUIDs, defining a rigorous standard for identifying and exchanging messages. This taxonomy builds the foundation necessary for the solution to move from unitary control and support scaling to swarms of UAVs, connecting the solid logic of MAS to practical execution at Edge AI frontiers.",
+    "VALIDATION_NOTE": "Validated in <strong>Webots</strong> simulation with realistic physics (ODE)."
+  },
+  "OLD_HERO": {
+    "NAME": "Kauã Alves Santos",
+    "NICKNAME": "kkphoenix",
+    "GREETING": "Welcome!! My name is Kauã Alves Santos, I am a fullstack web developer. Please checkout my portfolio and enjoy my site.",
+    "DOWNLOAD_RESUME": "Download Resume",
+    "LINKEDIN": "LinkedIn",
+    "GITHUB": "GitHub"
+  }
+}

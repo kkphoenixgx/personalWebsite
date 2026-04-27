@@ -2,8 +2,8 @@
   [ngClass] = "{ 'darkMode': darkMode$ | async, 'whiteMode': !(darkMode$ | async) }"
 >
   <header class="section-header">
-    <span class="subtitle">// CAREER LOGS</span>
-    <h1 class="section-title">Professional <span class="highlight">History</span></h1>
+    <span class="subtitle">{{ 'PROFESSIONAL_HISTORY.SUBTITLE' | translate }}</span>
+    <h1 class="section-title" [innerHTML]="'PROFESSIONAL_HISTORY.TITLE' | translate"></h1>
   </header>
 
   <div class="scene">
@@ -17,16 +17,16 @@
         <div class="front cover">
           <div class="cover-content">
             <img src="/assets/logoCompleta.webp" alt="kkphoenix logo" class="logo">
-            <h2>Engineering<br>Journey</h2>
+            <h2 [innerHTML]="'PROFESSIONAL_HISTORY.COVER_TITLE' | translate"></h2>
           </div>
         </div>
         
         <div class="back paper">
           <div class="page-content center-content">
             <span class="page-number left">i</span>
-            <h2>Prologue</h2>
-            <p class="handwritten">I'm looking for the perfect team to write the next chapter.</p>
-            <p class="click-hint">(Click to flip the pages)</p>
+            <h2>{{ 'PROFESSIONAL_HISTORY.PROLOGUE_TITLE' | translate }}</h2>
+            <p class="handwritten">{{ 'PROFESSIONAL_HISTORY.PROLOGUE_DESC' | translate }}</p>
+            <p class="click-hint">{{ 'PROFESSIONAL_HISTORY.CLICK_HINT' | translate }}</p>
           </div>
         </div>
       </div>
@@ -41,13 +41,13 @@
           <div class="page-content">
             <span class="page-number">{{ (i * 2) + 1 }}</span>
             <div class="job-header">
-              <h3>{{ job.company }}</h3>
-              <span class="period">{{ job.period }}</span>
+              <h3>{{ job.company | translate }}</h3>
+              <span class="period">{{ job.period | translate }}</span>
             </div>
-            <h4 class="role">{{ job.role }}</h4>
-            <p>{{ job.description }}</p>
+            <h4 class="role">{{ job.role | translate }}</h4>
+            <p>{{ job.description | translate }}</p>
             <ul class="achievements">
-              <li *ngFor="let ach of job.achievements">{{ ach }}</li>
+              <li *ngFor="let ach of job.achievements">{{ ach | translate }}</li>
             </ul>
           </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="back paper">
           <div class="page-content center-content">
             <span class="page-number left">{{ (i * 2) + 2 }}</span>
-            <p class="notes-hint">// Let's build the future together.</p>
+            <p class="notes-hint">{{ 'PROFESSIONAL_HISTORY.NOTES_HINT' | translate }}</p>
           </div>
         </div>
       </div>
@@ -67,8 +67,8 @@
         <div class="front paper">
            <div class="page-content center-content">
               <span class="page-number">{{ (jobs.length * 2) + 1 }}</span>
-              <h2>Let's Talk!</h2>
-              <p class="hire-hint">Contact me to make this page a reality.</p>
+              <h2>{{ 'PROFESSIONAL_HISTORY.TALK_TITLE' | translate }}</h2>
+              <p class="hire-hint">{{ 'PROFESSIONAL_HISTORY.HIRE_HINT' | translate }}</p>
            </div>
         </div>
         <div class="back cover-back"></div>

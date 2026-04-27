@@ -3,21 +3,21 @@
   <nav class="top-nav">
     <a routerLink="/projects" class="back-btn">
       <span class="arrow">&larr;</span> 
-      <span class="text">BACK TO PROJECTS</span>
+      <span class="text">{{ 'PROJECT_BIG_AGENT.NAV_BACK' | translate }}</span>
     </a>
     <div class="status-indicator">
-      <span class="dot"></span> SYSTEM ONLINE: THE BIG AGENT V1.0
+      <span class="dot"></span> {{ 'PROJECT_BIG_AGENT.SYSTEM_ONLINE' | translate }}
       <app-the-eye></app-the-eye>
     </div>
   </nav>
 
   <div class="hero-header">
     <div class="header-content">
-      <div class="context-tag">WESAAC 2025 // RESEARCH PROJECT</div>
+      <div class="context-tag">{{ 'PROJECT_BIG_AGENT.CONTEXT_TAG' | translate }}</div>
       <h1>THE BIG <span class="highlight">AGENT</span></h1>
-      <p class="tagline">Utilization of Embedded Multi-Agent Systems in UAVs for Autonomous Operations.<app-the-eye></app-the-eye></p>
+      <p class="tagline">{{ 'PROJECT_BIG_AGENT.TAGLINE' | translate }}<app-the-eye></app-the-eye></p>
       <div class="article-link-container">
-        <a routerLink="/articles/the-big-agent-the-utilization-of-embedded-multi-agent-systems-in-unmanned-aerial-vehicles-for-autonomous-operations" class="discreet-link">Read the full publication &rarr;</a>
+        <a routerLink="/articles/the-big-agent-the-utilization-of-embedded-multi-agent-systems-in-unmanned-aerial-vehicles-for-autonomous-operations" class="discreet-link">{{ 'PROJECT_BIG_AGENT.READ_PUBLICATION' | translate }} &rarr;</a>
       </div>
     </div>
   </div>
@@ -25,84 +25,66 @@
   <div class="content-grid">
     
     <section class="section-card problem scroll-anim">
-      <div class="section-label">01 // CONTEXT</div>
-      <h2>The Public Safety Challenge <app-the-eye></app-the-eye></h2>
-      <p>
-        High crime rates in Brazil demand constant surveillance[cite: 7]. 
-        However, traditional centralized systems fail due to <strong>data overload</strong>, 
-        low scalability, and exorbitant maintenance costs[cite: 18, 19, 20].
-      </p>
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_1_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_1_TITLE' | translate }} <app-the-eye></app-the-eye></h2>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.SECTION_1_DESC' | translate"></p>
       <div class="stat-box">
-        <div class="stat"><span>58k+</span> Thefts</div>
-        <div class="stat"><span>30k+</span> Vehicle Thefts</div>
-        <small>*SSP-RJ 2025 data cited in the study [cite: 13]</small>
+        <div class="stat"><span>58k+</span> {{ 'PROJECT_BIG_AGENT.STAT_THEFTS' | translate }}</div>
+        <div class="stat"><span>30k+</span> {{ 'PROJECT_BIG_AGENT.STAT_VEHICLE_THEFTS' | translate }}</div>
+        <small>{{ 'PROJECT_BIG_AGENT.STAT_NOTE' | translate }}</small>
       </div>
     </section>
 
     <section class="section-card solution scroll-anim">
-      <div class="section-label">02 // ARCHITECTURE</div>
-      <h2>Decentralization via MAS</h2>
-      <p>
-        The solution proposes a distributed system where drones are not just tools, but 
-        <strong>autonomous agents</strong> capable of perceiving the environment and acting collaboratively[cite: 22, 23].
-      </p>
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_2_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_2_TITLE' | translate }}</h2>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.SECTION_2_DESC' | translate"></p>
       
       <div class="agent-split">
         <div class="agent-item">
           <div class="icon" role="img" aria-label="Eye">👁️</div>
-          <h3>Drone Agent (Eye)</h3>
-          <p>Controls the hardware, motors, and GPS directly via the <strong>ARGO</strong> architecture[cite: 59, 111].</p>
+          <h3>{{ 'PROJECT_BIG_AGENT.AGENT_DRONE_TITLE' | translate }}</h3>
+          <p [innerHTML]="'PROJECT_BIG_AGENT.AGENT_DRONE_DESC' | translate"></p>
         </div>
         <div class="agent-item">
           <div class="icon" role="img" aria-label="Brain">🧠</div>
-          <h3>Security Secretary</h3>
-          <p>Acts as the decision master, defining strategic routes and communicating via <strong>ContextNet</strong>[cite: 59, 134]. <app-the-eye></app-the-eye></p>
+          <h3>{{ 'PROJECT_BIG_AGENT.AGENT_SECRETARY_TITLE' | translate }}</h3>
+          <p [innerHTML]="'PROJECT_BIG_AGENT.AGENT_SECRETARY_DESC' | translate"></p>
         </div>
       </div>
     </section>
 
     <section class="section-card technical scroll-anim">
-      <div class="section-label">03 // SPECIFICATIONS</div>
-      <h2>How We Solved It</h2>
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_3_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_3_TITLE' | translate }}</h2>
       <ul class="spec-grid">
         <li *ngFor="let spec of techSpecs">
-          <span class="label">{{ spec.label }}:</span>
-          <span class="value">{{ spec.value }}</span>
+          <span class="label">{{ spec.label | translate }}:</span>
+          <span class="value">{{ spec.value | translate }}</span>
         </li>
       </ul>
       <div class="algorithm-info">
-        <h3>Proportional-Derivative (PD) Stabilization</h3>
-        <p>We ensure stable flight through a continuous feedback loop processing roll, pitch, and yaw rates in real-time[cite: 94, 95]. <app-the-eye></app-the-eye></p>
+        <h3>{{ 'PROJECT_BIG_AGENT.ALGORITHM_TITLE' | translate }}</h3>
+        <p [innerHTML]="'PROJECT_BIG_AGENT.ALGORITHM_DESC' | translate"></p>
       </div>
     </section>
 
     <section class="section-card states scroll-anim">
-      <div class="section-label">04 // CONTROL LOGIC</div>
-      <h2>FSM: State Machine</h2>
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_4_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_4_TITLE' | translate }}</h2>
       <div class="state-container">
-        <span *ngFor="let state of systemStates" class="state-tag">{{ state }}</span><app-the-eye></app-the-eye>
+        <span *ngFor="let state of systemStates" class="state-tag">{{ state | translate }}</span><app-the-eye></app-the-eye>
       </div>
-      <p class="note">
-        The system automatically switches to <strong>HOVERING</strong> between actions to compensate for communication 
-        latency between agents[cite: 108].
-      </p>
+      <p class="note" [innerHTML]="'PROJECT_BIG_AGENT.FSM_NOTE' | translate"></p>
     </section>
 
     <!-- Deep Dive: Exaltação do Artigo -->
     <article class="deep-dive-text scroll-anim">
-      <h2>Logical Structure and Scalability of The BIG Agent</h2>
-      <p>
-        [cite_start]<em>The BIG Agent</em> proposes an architecture focused on decomposing the control of Unmanned Aerial Vehicles (UAVs)[cite: 2]. [cite_start]The system fragments the problem into two fundamental Multi-Agent Systems (MAS): one responsible for the physical interface and direct actuation of the flight hardware [cite: 8][cite_start], and a central node that processes route planning and tactical orchestration[cite: 9, 59]. [cite_start]The validation, executed in the Webots simulator using a DJI Mavic 2 Pro model [cite: 46, 52][cite_start], proves the viability of mapping logical commands to physical security operations[cite: 33].
-      </p>
-      <p>
-        The main pillar of the project is the strict decoupling of layers. [cite_start]Physical perception and motor control are isolated from external network communication, which operates over the ContextNet middleware[cite: 110, 115, 134]. By removing the low-level hardware syntax from the responsibilities of the BDI tactical layer, the system achieves the modularity necessary to ensure that updates or occasional failures do not corrupt the control architecture.
-      </p>
-      <p>
-        The modeling resolves the structural incompatibility between the discrete reasoning of the agents and the continuous physics of the environment. [cite_start]To handle the latency inherent in sending data, aerodynamic stability is managed by an internal Proportional-Derivative (PD) algorithm that forces the UAV to return to a stationary flight state (<em>hovering</em>) between the execution of each movement packet[cite: 95, 108]. This mechanics prioritizes the precision of the premise over fluidity, ensuring predictability.
-      </p>
-      <p>
-        Finally, the expansion capacity is intrinsic to the network topology. [cite_start]The communication architecture uses <em>illocutions</em> based on unique UUIDs, defining a rigorous standard for identifying and exchanging messages[cite: 136, 137]. [cite_start]This taxonomy builds the foundation necessary for the solution to move from unitary control and support scaling to swarms of UAVs[cite: 60], connecting the solid logic of MAS to practical execution at Edge AI frontiers.
-      </p>
+      <h2>{{ 'PROJECT_BIG_AGENT.DEEP_DIVE_TITLE' | translate }}</h2>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P1' | translate"></p>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P2' | translate"></p>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P3' | translate"></p>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P4' | translate"></p>
     </article>
 
   </div>
@@ -110,7 +92,7 @@
   <div class="project-footer">
     <div class="footer-line"></div>
     <div class="footer-content">
-      <p>Validated in <strong>Webots</strong> simulation with realistic physics (ODE)[cite: 49].</p>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.VALIDATION_NOTE' | translate"></p>
       <div class="authors">
         SANTOS, K. | COSTA, D. | LAZARIN, N. | FREITAS, B. | PANTOJA, C. [cite: 4]
         <app-the-eye></app-the-eye>

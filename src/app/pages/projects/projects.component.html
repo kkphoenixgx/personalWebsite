@@ -2,8 +2,8 @@
   
   <header class="matrix-header">
     <div class="hud-line"></div>
-    <h1 class="glitch-title">SYSTEM_ARCHITECTURE</h1>
-    <p class="subtitle">// DEEP DIVES INTO ENGINEERED ECOSYSTEMS</p>
+    <h1 class="glitch-title">{{ 'PROJECTS_PAGE.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'PROJECTS_PAGE.SUBTITLE' | translate }}</p>
   </header>
 
   <div class="module-list">
@@ -15,23 +15,23 @@
       </div>
       
       <div class="module-content">
-        <h2 class="module-title">{{ project.title }}</h2>
+        <h2 class="module-title">{{ project.title | translate }}</h2>
         
         <div class="module-grid">
           <div class="data-panel context-panel">
-            <span class="panel-label">/** THE_PROBLEM */</span>
-            <p>{{ project.context }}</p>
+            <span class="panel-label">/** {{ 'PROJECTS_PAGE.THE_PROBLEM' | translate }} */</span>
+            <p>{{ project.context | translate }}</p>
           </div>
           
           <div class="data-panel arch-panel">
-            <span class="panel-label">/** SOLUTION_TOPOLOGY */</span>
-            <p>{{ project.architecture }}</p>
+            <span class="panel-label">/** {{ 'PROJECTS_PAGE.SOLUTION_TOPOLOGY' | translate }} */</span>
+            <p>{{ project.architecture | translate }}</p>
           </div>
         </div>
 
         <div class="module-footer">
           <div class="tech-array">
-            <span class="array-bracket">LOADED_MODULES: [</span>
+            <span class="array-bracket">{{ 'PROJECTS_PAGE.LOADED_MODULES' | translate }}: [</span>
             <span class="tech-node" *ngFor="let tech of project.techStack; let last = last">
               "{{ tech }}"<span class="comma" *ngIf="!last">, </span>
             </span>
@@ -39,8 +39,8 @@
           </div>
           
           <div class="action-terminal" *ngIf="project.internalRoute">
-            <a [routerLink]="project.internalRoute" class="btn-access" [attr.aria-label]="'Initialize Case Study: ' + project.title">
-              <span class="blink">></span> INITIALIZE_STUDY
+            <a [routerLink]="project.internalRoute" class="btn-access" [attr.aria-label]="('PROJECTS_PAGE.INITIALIZE_STUDY' | translate) + ': ' + (project.title | translate)">
+              <span class="blink">></span> {{ 'PROJECTS_PAGE.INITIALIZE_STUDY' | translate }}
             </a>
           </div>
         </div>

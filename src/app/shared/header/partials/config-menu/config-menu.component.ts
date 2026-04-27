@@ -1,17 +1,19 @@
-import { Component, ComponentRef, Injector, OnDestroy, ViewChild, ViewContainerRef, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, ComponentRef, Injector, OnInit, OnDestroy, ViewChild, ViewContainerRef, ChangeDetectorRef, inject, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Observable, Subject, take, takeUntil } from 'rxjs';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-config-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './config-menu.component.html',
-  styleUrl: './config-menu.component.scss'
+  styleUrl: './config-menu.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConfigMenuComponent implements OnDestroy {
+export class ConfigMenuComponent implements OnInit, OnDestroy {
   @ViewChild('lampContainer', { read: ViewContainerRef, static: true }) lampContainer!: ViewContainerRef;
 
   private destroy$ = new Subject<void>();
@@ -22,6 +24,8 @@ export class ConfigMenuComponent implements OnDestroy {
   private darkModeControllerService = inject(DarkModeControllerService);
   private injector = inject(Injector);
   private cdr = inject(ChangeDetectorRef);
+  private translateService = inject(TranslateService);
+  private platformId = inject(PLATFORM_ID);
 
   public toggleDarkMode$: Observable<boolean> = this.darkModeControllerService.getDarkModeObserbable();
   public toggleAnimations$: Observable<boolean> = this.animationControllerService.getAnimationObserbable();
@@ -29,8 +33,22 @@ export class ConfigMenuComponent implements OnDestroy {
   public toggleLamp = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public lampComponentRef!: ComponentRef<any>;
+  public currentLang: string = 'en';
 
   // ----------- Lifecycle -----------
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.currentLang = localStorage.getItem('lang') || this.translateService.currentLang || 'en';
+    } else {
+      this.currentLang = this.translateService.currentLang || 'en';
+    }
+
+    this.translateService.onLangChange.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      this.currentLang = event.lang;
+      this.cdr.markForCheck(); // Avisa ao OnPush que a UI precisa atualizar
+    });
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -42,6 +60,7 @@ export class ConfigMenuComponent implements OnDestroy {
 
   toggleMenuConfig(){
     this.toggleConfigMenu = !this.toggleConfigMenu;
+    this.cdr.detectChanges(); // Força a atualização síncrona para não falhar ao abrir/fechar
   } 
   
   async loadLampComponent() {
@@ -75,6 +94,17 @@ export class ConfigMenuComponent implements OnDestroy {
 
     this.executeWithAnimationState(destroyLampWhenAnimationOff)
     
+  }
+  
+  public toggleLanguage(): void {
+    const newLang = this.currentLang === 'en' ? 'pt' : 'en';
+    this.currentLang = newLang; // Atualiza a UI do botão imediatamente (remove lag visual)
+    this.translateService.use(newLang);
+    
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('lang', newLang); // Salva na memória do usuário
+    }
+    this.cdr.detectChanges(); // Força a placa de vídeo a repintar o estado "active" do span
   }
 
   handleToggleDarkMode() {

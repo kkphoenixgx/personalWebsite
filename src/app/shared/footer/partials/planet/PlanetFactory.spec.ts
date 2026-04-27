@@ -6,6 +6,9 @@ import IPlanet from '../../../../interface/IPlanet';
 describe('PlanetFactory (Architectural & Domain Guard)', () => {
   
   it('should create Three.js Meshes based on provided planet data headlessly', () => {
+    // Mock do TextureLoader para evitar 404s de imagens nos testes
+    spyOn(THREE.TextureLoader.prototype, 'load').and.returnValue(new THREE.Texture());
+
     const mockScene = new THREE.Scene();
     const spyAdd = spyOn(mockScene, 'add').and.callThrough();
 

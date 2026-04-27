@@ -73,6 +73,32 @@
   }
 }
 
+.title-container{
+  display: flex;
+
+  .indie-sprite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    
+    .pixel-art {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+    .sprite-anim {
+      background-repeat: no-repeat;
+      background-size: 200% 100%;
+      display: inline-block;
+    }
+    .player-sprite {
+      background-image: url('/assets/player-idle.png');
+      width: 100px; height: 100px;
+      animation: sprite-play 0.8s steps(2) infinite, floatSprite 4s ease-in-out infinite;
+    }
+  }
+}
+
 .pre-title { font-size: 1rem; letter-spacing: 4px; color: $purple-light; text-transform: uppercase; margin-bottom: 1.5rem; }
 
 .main-title {
@@ -345,4 +371,30 @@
       }
     }
   }
+}
+
+/* --- Indie Game Card specific UI --- */
+.step-game {
+  .indie-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-direction: row;
+
+    @media (max-width: 800px) {
+      flex-direction: column-reverse;
+      text-align: center;
+      .cta-actions { justify-content: center !important; }
+    }
+  }
+}
+
+@keyframes sprite-play {
+  from { background-position: 0 0; }
+  to { background-position: 200% 0; }
+}
+
+@keyframes floatSprite {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }

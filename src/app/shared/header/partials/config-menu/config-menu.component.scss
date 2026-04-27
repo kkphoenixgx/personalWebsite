@@ -1,35 +1,61 @@
 @use "../../../../styles/variables.scss" as *;
 
 .configMenu-container{
-  position: absolute;
+  position: fixed;
   top: 14vh;
-  right: -50vw;
-  transition: right 0.5s;
-  transition-timing-function: cubic-bezier(.5,.82,1,1.36);
-  z-index: 999999999999999999999999; //  Never gonna be backwards again
+  right: 0;
+  transform: translateX(120%); // Desloca usando a Placa de Vídeo (GPU)
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  z-index: 2147483647; // Nível máximo para não ficar atrás do canvas da lâmpada
+  opacity: 0;
+  will-change: transform, opacity; // GPU Hint para evitar Layout Thrashing
+
+  &.darkMode .configMenu {
+    background-color: rgba(30, 30, 30, 0.85);
+    color: #ffffff;
+  }
+  &.whiteMode .configMenu {
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #000000;
+  }
 }
 
 .configMenu{
-  
-  width: 40vw;
-  padding: 4%;
+  width: 360px; // Aumentado ligeiramente para Desktop
+  max-width: 90vw;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  backface-visibility: hidden; // Cria uma camada de composição que estabiliza o Blur na Placa de Vídeo
 }
 
 .configMenu h2{
   text-align: center;
-  margin-bottom: 10%;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
 }
 
 .itemMenuConfig{
   width: 100%;
   align-items: center;
-  padding: 4%;
+  padding: 0.8rem 1.2rem;
   display: flex;
   justify-content: space-between;
-  font-family: initial;
+  border-radius: 12px;
+  background: rgba(128, 128, 128, 0.05);
+  border: 1px solid rgba(128, 128, 128, 0.05);
+  margin-bottom: 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .toggle-container {
@@ -40,7 +66,8 @@
   cursor: pointer;
   
   .label-text {
-    max-width: 60%;
+    font-weight: 500;
+    font-size: 1rem;
   }
 }
 
@@ -73,12 +100,14 @@
 // ----------- Helpers -----------
 
 .showConfigMenu{
-  right: 0vw;
+  transform: translateX(-2vw); // Flutuando com um pequeno distanciamento da borda
   visibility: visible;
+  opacity: 1;
 }
 .hideConfigMenu{
-  right: -60vw;
+  transform: translateX(120%);
   visibility: hidden;
+  opacity: 0;
 }
 
 // ----------- Slider Button -----------
@@ -146,13 +175,42 @@
   transform: translateX(20px);
 }
 
+// ----------- Language Toggle Button -----------
+.lang-toggle-btn {
+  display: flex;
+  background: rgba(128, 128, 128, 0.2);
+  border-radius: 20px;
+  padding: 4px;
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  span {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: inherit;
+    z-index: 1;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+
+    &.active {
+      background: $purple-default;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
 // ----------- Mobile -----------
 
 /* Smartphones (portrait) */
 @media only screen and (min-width: 320px) and (max-device-width: 767px) {
-
-  .configMenu{
-    width: 60vw;
-  }  
-
+  .configMenu-container {
+    top: 35vh; // Empurra o menu mais para baixo no mobile para não sobrepor a lâmpada
+  }
+  .showConfigMenu {
+    transform: translateX(-5vw); // Centraliza e reduz o padding em telas pequenas
+  }
 }

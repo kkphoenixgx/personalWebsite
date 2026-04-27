@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Title, Meta } from '@angular/platform-browser';
 
 interface ICoverageData {
   total: {
@@ -13,7 +15,7 @@ interface ICoverageData {
 @Component({
   selector: 'app-health',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './health.component.html',
   styleUrl: './health.component.scss'
 })
@@ -29,12 +31,22 @@ export class HealthComponent implements OnInit, OnDestroy {
   private prevTime = performance.now();
 
   private http = inject(HttpClient);
+  private translate = inject(TranslateService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
 
   constructor() {}
 
   ngOnInit() {
     this.startFpsMonitor();
     this.fetchCoverage();
+
+    this.translate.get('HEALTH.TITLE').subscribe(title => {
+      this.titleService.setTitle(`${title} | K. Phoenix`);
+    });
+    this.translate.get('HEALTH.SUBTITLE').subscribe(subtitle => {
+      this.metaService.updateTag({ name: 'description', content: subtitle });
+    });
   }
 
   ngOnDestroy() {

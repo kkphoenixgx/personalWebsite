@@ -5,11 +5,12 @@ import { DarkModeControllerService } from '../../../../services/dark-mode-contro
 import { TheEyeComponent } from './partials/the-eye/the-eye.component';
 import { gsap } from 'gsap';
 import { Title, Meta } from '@angular/platform-browser';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-the-big-agent',
   standalone: true,
-  imports: [CommonModule, RouterModule, TheEyeComponent],
+  imports: [CommonModule, RouterModule, TheEyeComponent, TranslateModule],
   templateUrl: './the-big-agent.component.html',
   styleUrls: ['./the-big-agent.component.scss']
 })
@@ -18,21 +19,24 @@ export class TheBigAgentComponent implements OnInit, AfterViewInit, OnDestroy {
   private el = inject(ElementRef);
   private titleService = inject(Title);
   private metaService = inject(Meta);
+  private translate = inject(TranslateService);
   public isDarkMode$ = this.darkModeService.getDarkModeObserbable();
 
   private observer: IntersectionObserver | null = null;
   public techSpecs = [
-    { label: 'Agent Architecture', value: 'BDI (Belief-Desire-Intention)' },
-    { label: 'MAS Language', value: 'Jason / AgentSpeak(L)' },
-    { label: 'Emulated Hardware', value: 'DJI Mavic 2 Pro' },
-    { label: 'IoT Communication', value: 'ContextNet / ChonNet' },
-    { label: 'Middleware', value: 'ARGO & Javino' },
-    { label: 'Simulator', value: 'Webots 2023b' }
+    { label: 'PROJECT_BIG_AGENT.SPEC_1_LABEL', value: 'PROJECT_BIG_AGENT.SPEC_1_VALUE' },
+    { label: 'PROJECT_BIG_AGENT.SPEC_2_LABEL', value: 'PROJECT_BIG_AGENT.SPEC_2_VALUE' },
+    { label: 'PROJECT_BIG_AGENT.SPEC_3_LABEL', value: 'PROJECT_BIG_AGENT.SPEC_3_VALUE' },
+    { label: 'PROJECT_BIG_AGENT.SPEC_4_LABEL', value: 'PROJECT_BIG_AGENT.SPEC_4_VALUE' },
+    { label: 'PROJECT_BIG_AGENT.SPEC_5_LABEL', value: 'PROJECT_BIG_AGENT.SPEC_5_VALUE' },
+    { label: 'PROJECT_BIG_AGENT.SPEC_6_LABEL', value: 'PROJECT_BIG_AGENT.SPEC_6_VALUE' }
   ];
 
   public systemStates = [
-    'LANDED', 'UP', 'DOWN', 'MOVE RIGHT', 'MOVE LEFT', 
-    'MOVE FORWARD', 'MOVE BACKWARD', 'HOVERING', 'LANDING'
+    'PROJECT_BIG_AGENT.STATE_LANDED', 'PROJECT_BIG_AGENT.STATE_UP', 'PROJECT_BIG_AGENT.STATE_DOWN',
+    'PROJECT_BIG_AGENT.STATE_MOVE_RIGHT', 'PROJECT_BIG_AGENT.STATE_MOVE_LEFT', 
+    'PROJECT_BIG_AGENT.STATE_MOVE_FORWARD', 'PROJECT_BIG_AGENT.STATE_MOVE_BACKWARD',
+    'PROJECT_BIG_AGENT.STATE_HOVERING', 'PROJECT_BIG_AGENT.STATE_LANDING'
   ];
 
   ngOnInit() {
@@ -40,8 +44,12 @@ export class TheBigAgentComponent implements OnInit, AfterViewInit, OnDestroy {
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
-    this.titleService.setTitle('The BIG Agent | Engineering Showcase');
-    this.metaService.updateTag({ name: 'description', content: 'Case study: Utilization of Embedded Multi-Agent Systems in UAVs for Autonomous Operations.' });
+    this.translate.get('PROJECT_BIG_AGENT.SYSTEM_ONLINE').subscribe(title => {
+      this.titleService.setTitle(`${title} | Engineering Showcase`);
+    });
+    this.translate.get('PROJECT_BIG_AGENT.META_DESC').subscribe(desc => {
+      this.metaService.updateTag({ name: 'description', content: desc });
+    });
   }
 
   ngAfterViewInit() {

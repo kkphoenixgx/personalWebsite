@@ -4,21 +4,24 @@ import { RouterModule } from '@angular/router';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import gsap from "gsap";
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, NgOptimizedImage, TranslateModule],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   public text: string = "";
-  public animate: boolean = false; // Inicia false para evitar a piscada do DOM antes do serviço responder
+  public animate: boolean = false; 
   public isDarkMode: boolean = true;
   public readyToContent: boolean = false;
+  private typeWriterTimeoutId?: any;
+  private currentTypeWriterRun: number = 0;
   
   @ViewChild('helloBackground') helloBackgroundDiv!: ElementRef;
   @ViewChildren('bgImg') bgImages!: QueryList<ElementRef>;
@@ -30,120 +33,151 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   public tl: GSAPTimeline = gsap.timeline({});
   private destroy$ = new Subject<void>();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private platformId = inject(PLATFORM_ID);
   private animationService = inject(AnimationControllerService);
   private darkModeService = inject(DarkModeControllerService);
   private cdr = inject(ChangeDetectorRef);
+  private translateService = inject(TranslateService);
 
-  constructor() { 
-    this.startGsap();
-  }
+  constructor() { }
 
   public startGsap(){
-    if (this.tl) this.tl.kill();
-    this.tl = gsap.timeline({ 
-      delay: (this.animationService.animationDelayInMs/1000) + 2
-    });
+    if (this.tl) {
+      this.tl.kill();
+      this.tl.clear();
+    }
+    this.tl = gsap.timeline({});
   }
 
-  public typeWriter(txt: string, speed: number, i: number = 0): void {
-    // [Lighthouse/SEO Guard] Previne o loop de escrita de afogar a CPU durante auditorias
-    const isLighthouse = navigator.userAgent.includes('Lighthouse');
-    const isTesting = (window as any).__karma__;
+  public typeWriter(txt: string, speed: number, i: number = 0, runId: number = this.currentTypeWriterRun): void {
+    const isLighthouse = typeof navigator !== 'undefined' && navigator.userAgent.includes('Lighthouse');
+    const isTesting = typeof window !== 'undefined' && (window as any).__karma__;
 
     if (isLighthouse && !isTesting) return;
+    if (this.currentTypeWriterRun !== runId) return; 
 
     if (i < txt.length && !this.destroy$.isStopped) {
       this.text += txt.charAt(i);
       i++;
-      this.cdr.markForCheck(); // Atualiza a view apenas quando o texto muda
-      setTimeout(() => this.typeWriter(txt, speed, i), speed);
+      this.cdr.markForCheck(); 
+      this.typeWriterTimeoutId = setTimeout(() => this.typeWriter(txt, speed, i, runId), speed);
     }
   }
 
   public removeAnimations(): void {
     if (this.tl) {
+      this.tl.kill();
       this.tl.clear();
       this.tl.pause();
+    }
+    if (this.bgImages) {
+        this.bgImages.forEach(img => gsap.set(img.nativeElement, { clearProps: "all", opacity: 0 }));
     }
   }
 
   public animateBackground(): void {
-    if (!this.animate || !this.bgImages) {
-      this.removeAnimations();
+    if (!this.animate || !this.bgImages || this.bgImages.length === 0) {
       return;
     }
 
-    // [Lighthouse/SEO Guard] Previne o loop de animação de afogar a CPU durante auditorias
-    const isLighthouse = navigator.userAgent.includes('Lighthouse');
-    const isTesting = (window as any).__karma__;
-
+    const isLighthouse = typeof navigator !== 'undefined' && navigator.userAgent.includes('Lighthouse');
+    const isTesting = typeof window !== 'undefined' && (window as any).__karma__;
     if (isLighthouse && !isTesting) return;
 
-    this.startGsap(); // Reinicia a timeline limpando o estado/relógio anterior
-    const fallDistance = window.innerHeight + 100;
+    this.startGsap(); 
+    const fallDistance = window.innerHeight + 200;
 
-    setTimeout(() => {
-      if (this.destroy$.isStopped) return;
-      this.bgImages.forEach((imgRef) => {
-        const svg = imgRef.nativeElement;
-        gsap.set(svg, { pointerEvents: 'none' });
-
-        this.tl.fromTo(svg, 
-          {
-            y: -150,
-            x: () => gsap.utils.random(0, window.innerWidth),
-            opacity: () => gsap.utils.random(0.1, 0.5),
-            scale: () => gsap.utils.random(0.4, 0.9),
-            rotation: () => gsap.utils.random(-90, 90)
-          },
-          {
-            y: fallDistance,
-            rotation: () => gsap.utils.random(-360, 360),
-            duration: () => gsap.utils.random(10, 20), // Queda suave
-            ease: "none",
-            repeat: -1,
-            delay: () => gsap.utils.random(0, 10)
-          },
-          0 // Garante que todos os tweens sejam adicionados ao tempo 0 da timeline
-        );
+    // Distribuir ícones pelo viewport antes de começar a queda
+    this.bgImages.forEach((imgRef) => {
+      const svg = imgRef.nativeElement;
+      
+      // Configurações iniciais instantâneas
+      gsap.set(svg, { 
+        pointerEvents: 'none',
+        y: -150,
+        x: gsap.utils.random(0, window.innerWidth),
+        opacity: 0,
+        scale: gsap.utils.random(0.4, 0.8),
+        rotation: gsap.utils.random(-90, 90)
       });
-    }, 80);
+
+      // Animação de queda contínua
+      this.tl.to(svg, {
+        y: fallDistance,
+        rotation: gsap.utils.random(-360, 360),
+        duration: gsap.utils.random(12, 22), 
+        ease: "none",
+        repeat: -1,
+        // Delay escalonado para não caírem todos juntos, mas curto para não ficarem "presos"
+        delay: gsap.utils.random(0, 8),
+        onStart: () => {
+          // Só mostra o ícone quando ele REALMENTE começa a se mover
+          gsap.to(svg, { opacity: gsap.utils.random(0.15, 0.45), duration: 1 });
+        }
+      }, 0);
+    });
   }
 
   ngOnInit(): void {
     this.animationService.getAnimationObserbable().pipe(takeUntil(this.destroy$)).subscribe(state => {
+      const prevState = this.animate;
       this.animate = state;
-      if(!this.animate) this.removeAnimations();
-      if(this.readyToContent && this.animate) this.animateBackground();
+      
+      if(!this.animate) {
+        this.removeAnimations();
+      } else if (this.readyToContent && !prevState) {
+        setTimeout(() => this.animateBackground(), 100);
+      }
       this.cdr.markForCheck();
     });
+
     this.darkModeService.getDarkModeObserbable().pipe(takeUntil(this.destroy$)).subscribe(state => {
       this.isDarkMode = state;
       this.cdr.markForCheck();
     });
+
+    this.translateService.onLangChange.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      if (this.animate && this.readyToContent) {
+        clearTimeout(this.typeWriterTimeoutId);
+        this.text = ''; 
+        this.typeWriterWithTranslation();
+      }
+    });
+  }
+
+  private typeWriterWithTranslation(): void {
+    this.currentTypeWriterRun++; 
+    const runId = this.currentTypeWriterRun;
+
+    this.translateService.get("OLD_HERO.GREETING").pipe(take(1)).subscribe(fullText => {
+      if (this.currentTypeWriterRun === runId) {
+        this.typeWriter(fullText, 100, 0, runId);
+      }
+    });
   }
 
   ngAfterViewInit(): void {
-    const fullText: string = 
-      "Welcome!! My name is Kauã Alves Santos, I am a fullstack web developer. Please checkout my portfolio and enjoy my site.";
-  
+    this.bgImages?.changes.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      if (this.animate) {
+        this.animateBackground();
+      }
+    });
+
     setTimeout(() => {
       this.readyToContent = true;
-      this.cdr.markForCheck(); // Marca para renderizar o *ngIf do background
+      this.cdr.markForCheck(); 
 
-      if (this.animate) this.typeWriter(fullText, 100);
-      
-      // Observa quando as imagens do *ngFor forem renderizadas para iniciar a animação
-      this.bgImages.changes.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        if (this.animate) this.animateBackground();
-      });
-
+      if (this.animate) {
+        this.typeWriterWithTranslation();
+        // Garantir que os ícones comecem a se mover imediatamente se já estiverem no DOM
+        if (this.bgImages && this.bgImages.length > 0) {
+          this.animateBackground();
+        }
+      }
     }, this.animationService.animationDelayInMs);
   }
 
   ngOnDestroy(): void {
+    clearTimeout(this.typeWriterTimeoutId);
     this.destroy$.next();
     this.destroy$.complete();
     if (this.tl) {

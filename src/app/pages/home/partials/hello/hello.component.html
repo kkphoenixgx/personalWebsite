@@ -9,39 +9,55 @@
     <!-- Section 1: Hero -->
     <section class="step step-hero">
       <div class="content-block">
-        <h2 class="pre-title">KAUÃ ALVES SANTOS</h2>
+        <h2 class="pre-title">{{ 'HELLO.HERO.PRE_TITLE' | translate }}</h2>
         <h1 class="main-title">
-          Solid Software Architecture.<br>
-          <span class="gradient-text">Immersive Web Interfaces.</span>
+          {{ 'HELLO.HERO.TITLE_P1' | translate }}<br>
+          <span class="gradient-text">{{ 'HELLO.HERO.TITLE_P2' | translate }}</span>
         </h1>
-        <p class="desc">
-          Full Stack Developer focused on transforming complex systemic problems into scalable, high-performance solutions. From AWS infrastructure orchestration to reactive 3D graphics rendering in the browser.
-        </p>
+        <p class="desc" [innerHTML]="'HELLO.HERO.DESC' | translate"></p>
       </div>
     </section>
 
     <!-- Section 2: Core Value -->
     <section class="step step-value">
       <div class="content-block right">
-        <h2 class="section-title">Engineering Beyond Code</h2>
-        <p class="desc">
-          I don't just write scripts; I design architectures. My foundation is built upon <strong>Clean Architecture, Design Patterns, and DDD</strong>.
-        </p>
-        <p class="desc">
-          I build robust backends in <strong>Java (Spring)</strong> and <strong>Node.js</strong> with a strictly decoupled design, ensuring high cohesion, testability, and maintainability for any business rule.
-        </p>
+        <h2 class="section-title">{{ 'HELLO.VALUE.TITLE' | translate }}</h2>
+        <p class="desc" [innerHTML]="'HELLO.VALUE.DESC_1' | translate"></p>
+        <p class="desc" [innerHTML]="'HELLO.VALUE.DESC_2' | translate"></p>
       </div>
     </section>
 
     <!-- Section 3: Diferenciais -->
     <section class="step step-features">
       <div class="content-block full">
-        <h2 class="section-title center">The Technical Edge</h2>
+        <h2 class="section-title center">{{ 'HELLO.FEATURES.TITLE' | translate }}</h2>
         <div class="grid-features">
-          <div class="feature-card"><h3>Complex Front-End</h3><p>Mastery of robust SPAs with <strong>Angular</strong>. State management with <strong>RxJS</strong> and 3D integration using <strong>Three.js</strong> and <strong>Matter.js</strong> for high-performance interfaces and memory control.</p></div>
-          <div class="feature-card"><h3>Artificial Intelligence</h3><p>Researcher at the CHON Group. Hands-on experience designing <strong>Multi-Agent Systems (MAS)</strong> and <strong>BDI</strong> logic for autonomous drones.</p></div>
-          <div class="feature-card"><h3>LLM Integration</h3><p>Development of Java APIs that translate natural language in real-time to control robotic systems using local LLMs (Ollama).</p></div>
-          <div class="feature-card"><h3>End-to-End</h3><p>Systemic view of the lifecycle. Implementation of pipelines (CI/CD), data persistence (PostgreSQL), and infrastructure deployment on <strong>AWS</strong> with Docker.</p></div>
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_1.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_1.DESC' | translate"></p></div>
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_2.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_2.DESC' | translate"></p></div>
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_3.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_3.DESC' | translate"></p></div>
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_4.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_4.DESC' | translate"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3.2: Indie Game Project -->
+    <section class="step step-game">
+      <div class="content-block right indie-card">
+        <div class="indie-text">
+          <h2 class="pre-title">{{ 'HELLO.GAME.PRE_TITLE' | translate }}</h2>
+          <div class="title-container">
+            <h2 class="section-title">{{ 'HELLO.GAME.TITLE' | translate }}</h2>
+            <div class="indie-sprite">
+              <div class="pixel-art sprite-anim player-sprite" aria-label="Player Sprite"></div>
+            </div>
+          </div>
+          <p class="desc" [innerHTML]="'HELLO.GAME.DESC_1' | translate"></p>
+          <p class="desc" [innerHTML]="'HELLO.GAME.DESC_2' | translate"></p>
+          <div class="cta-actions" style="justify-content: center; margin-top: 2rem;">
+            <a [routerLink]="['/projects/rpg-roguelite-bullethell']" class="btn primary">
+              <span class="material-icons" style="vertical-align: sub; margin-right: 6px; font-size: 1.3rem;">sports_esports</span>{{ 'HELLO.GAME.CTA' | translate }}
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -49,16 +65,12 @@
     <!-- Section 3.5: Telemetry & Observability -->
     <section class="step step-telemetry">
       <div class="content-block">
-        <h2 class="section-title">Observability & Telemetry</h2>
-        <p class="desc">
-          High-performance 3D applications require strict resource management. I implement real-time monitoring to track <strong>WebGL FPS</strong>, GPU memory allocations, and network latency.
-        </p>
-        <p class="desc">
-          Explore the live health dashboard to see how this architecture behaves under the hood, ensuring zero memory leaks and smooth frame rates.
-        </p>
+        <h2 class="section-title">{{ 'HELLO.TELEMETRY.TITLE' | translate }}</h2>
+        <p class="desc" [innerHTML]="'HELLO.TELEMETRY.DESC_1' | translate"></p>
+        <p class="desc" [innerHTML]="'HELLO.TELEMETRY.DESC_2' | translate"></p>
         <div class="cta-actions" style="justify-content: flex-start; margin-top: 2rem;">
           <a [routerLink]="['/health']" class="btn secondary">
-            <span class="material-icons" style="vertical-align: sub; margin-right: 6px; font-size: 1.3rem;">monitor_heart</span>View System Health
+            <span class="material-icons" style="vertical-align: sub; margin-right: 6px; font-size: 1.3rem;">monitor_heart</span>{{ 'HELLO.TELEMETRY.CTA' | translate }}
           </a>
         </div>
       </div>
@@ -68,15 +80,11 @@
     <section class="step step-freelance">
       <div class="freelance-layout">
         <div class="content-block clear freelance-text">
-          <h2 class="section-title">Freelance & Consulting</h2>
-          <p class="desc">
-            Turning bold ideas into high-performance digital products. I am available for freelance projects, offering end-to-end development from immersive UI design to robust backend architecture.
-          </p>
-          <p class="desc">
-            Whether you need a modern <strong>Single Page Application</strong>, a custom <strong>3D web experience</strong>, or a scalable system built from scratch, I bring startup agility combined with enterprise-grade quality.
-          </p>
+          <h2 class="section-title">{{ 'HELLO.FREELANCE.TITLE' | translate }}</h2>
+          <p class="desc" [innerHTML]="'HELLO.FREELANCE.DESC_1' | translate"></p>
+          <p class="desc" [innerHTML]="'HELLO.FREELANCE.DESC_2' | translate"></p>
           <div class="cta-actions freelance-cta">
-            <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn primary">Contact Me</a>
+            <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn primary">{{ 'HELLO.FREELANCE.CTA' | translate }}</a>
           </div>
         </div>
 
@@ -85,8 +93,8 @@
           <div class="content-block clear showcase-item align-right">
             <img src="/assets/senco-locacoes-image.webp" alt="Senco Locações Preview" class="showcase-img" (click)="openImage('/assets/senco-locacoes-image.webp')">
             <div class="project-highlight">
-              <h3 class="highlight-cyan">Senco Locações</h3>
-              <p class="desc">A complete digital transformation. Custom management dashboard and landing page dockerized, check it out!.</p>
+              <h3 class="highlight-cyan">{{ 'HELLO.FREELANCE.SHOWCASE_1.TITLE' | translate }}</h3>
+              <p class="desc" [innerHTML]="'HELLO.FREELANCE.SHOWCASE_1.DESC' | translate"></p>
             </div>
           </div>
           
@@ -94,8 +102,8 @@
           <div class="content-block clear showcase-item align-left">
             <img src="/assets/restaurant-food-zero.webp" alt="FoodZero Preview" class="showcase-img" (click)="openImage('/assets/restaurant-food-zero.webp')">
             <div class="project-highlight">
-              <h3 class="highlight-purple">Restaurant FoodZero</h3>
-              <p class="desc">An immersive web experience for a premium restaurant dockerized, check it out!</p>
+              <h3 class="highlight-purple">{{ 'HELLO.FREELANCE.SHOWCASE_2.TITLE' | translate }}</h3>
+              <p class="desc" [innerHTML]="'HELLO.FREELANCE.SHOWCASE_2.DESC' | translate"></p>
             </div>
           </div>
         </div>
@@ -105,13 +113,11 @@
     <!-- Section 5: CTA -->
     <section class="step step-cta">
       <div class="content-block center">
-        <h2 class="main-title">Ready to Scale Your Engineering?</h2>
-        <p class="desc center">
-          Explore my complete portfolio or access the repository of my solutions. Well-architected systems start here.
-        </p>
+        <h2 class="main-title">{{ 'HELLO.CTA.TITLE' | translate }}</h2>
+        <p class="desc center" [innerHTML]="'HELLO.CTA.DESC' | translate"></p>
         <div class="cta-actions">
-          <a [routerLink]="['/projects']" class="btn primary">View Projects (Architecture)</a>
-          <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn secondary">Get in Touch</a>
+          <a [routerLink]="['/projects']" class="btn primary">{{ 'HELLO.CTA.BTN_1' | translate }}</a>
+          <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn secondary">{{ 'HELLO.CTA.BTN_2' | translate }}</a>
         </div>
       </div>
     </section>

@@ -162,26 +162,38 @@ export class HelloModelsFactory {
 
   private static createHexLattice() {
     const hexLattice = new THREE.Group();
-    const hexMat = new THREE.LineBasicMaterial({ color: 0x9100a6, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
-    const hexGeo = new THREE.RingGeometry(1, 1.05, 6);
-    const hexRadius = 1.05 * Math.sqrt(3);
-    for (let i = -2; i <= 2; i++) {
-        for (let j = -2; j <= 2; j++) {
-            if (Math.abs(i) + Math.abs(j) > 3) continue;
-            const hex = new THREE.LineSegments(hexGeo, hexMat);
-            hex.position.x = j * hexRadius;
-            hex.position.y = i * 1.5 * 1.05 + (j % 2 === 0 ? 0 : 0.75 * 1.05);
-            hex.rotation.z = Math.PI / 2;
-            hexLattice.add(hex);
-        }
+    const hexColor = 0xd47fe0;
+    const hexMat = new THREE.LineBasicMaterial({ color: hexColor, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
+    const solidMat = new THREE.MeshBasicMaterial({ color: hexColor, transparent: true, opacity: 0.1, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
+    
+    const hexGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.1, 6);
+    const edgesGeo = new THREE.EdgesGeometry(hexGeo);
+    
+    const coreHex = new THREE.Group();
+    coreHex.add(new THREE.LineSegments(edgesGeo, hexMat));
+    coreHex.add(new THREE.Mesh(hexGeo, solidMat));
+    hexLattice.add(coreHex);
+
+    const radius = 3.0;
+    for (let i = 0; i < 6; i++) {
+        const angle = i * (Math.PI / 3) + (Math.PI / 6);
+        const adapterHex = new THREE.Group();
+        adapterHex.add(new THREE.LineSegments(edgesGeo, hexMat));
+        adapterHex.add(new THREE.Mesh(hexGeo, solidMat));
+        
+        adapterHex.position.set(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
+        
+        const linkGeo = new THREE.BufferGeometry().setFromPoints([ new THREE.Vector3(0, 0, 0), adapterHex.position.clone() ]);
+        hexLattice.add(adapterHex);
+        hexLattice.add(new THREE.Line(linkGeo, hexMat));
     }
-    const hitGeo = new THREE.SphereGeometry(3.5, 16, 16);
+
+    const hitGeo = new THREE.SphereGeometry(5.0, 16, 16);
     const hitMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false });
     hexLattice.add(new THREE.Mesh(hitGeo, hitMat));
 
-    hexLattice.position.set(80, -20, -120);
-    hexLattice.userData = { baseX: 80, baseY: -20, baseZ: -120 };
-    hexLattice.rotation.set(0.5, 0, 0.2);
+    hexLattice.position.set(-60, -60, -100);
+    hexLattice.userData = { baseX: -60, baseY: -60, baseZ: -100 };
     return hexLattice;
   }
 

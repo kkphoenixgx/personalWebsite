@@ -12,19 +12,19 @@
 
     <div class="image-container">
       <div class="image-backgound">
-        <img ngSrc="/assets/logoCompleta.webp" alt="logo-Kauã-Alves-Santos" width="176" height="176" priority>
+        <img ngSrc="/assets/logoCompleta.webp" alt="logo-Kauã-Alves-Santos" width="220" height="176" priority>
       </div>
-      <p>Kauã Alves Santos</p>
-      <p>kkphoenix</p>
+      <p>{{ 'OLD_HERO.NAME' | translate }}</p>
+      <p>{{ 'OLD_HERO.NICKNAME' | translate }}</p>
     </div>
     <div class="text-effect-container">
       <!-- animated text -->
       <h1 *ngIf="animate">
-        <span class="sr-only">Welcome!! My name is Kauã Alves Santos, I am a fullstack web developer. Please checkout my portfolio and enjoy my site.</span>
+        <span class="sr-only">{{ 'OLD_HERO.GREETING' | translate }}</span>
         <span aria-hidden="true">{{text}}<span></span></span>
       </h1>
         <ng-template [ngIf]="!animate">
-          <h1>Welcome!! My name is Kauã Alves Santos, I am a fullstack web developer, please checkout my portfolio and enjoy my site.</h1>
+          <h1>{{ 'OLD_HERO.GREETING' | translate }}</h1>
         </ng-template>
 
       
@@ -32,7 +32,7 @@
 
         <a class="info-button" style="font-size: 1.2rem;" href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf">
           <img ngSrc="/assets/pdfIcon.webp" width="28" height="28" alt="">
-          <p>Download Resume</p>
+          <p>{{ 'OLD_HERO.DOWNLOAD_RESUME' | translate }}</p>
         </a>
 
         <a class="info-button" href="https://www.linkedin.com/in/kkphoenix/">
@@ -42,7 +42,7 @@
 
         <a class="info-button" href="https://github.com/kkphoenixgx">
           <img ngSrc="/assets/githubIcon.webp" width="28" height="28" alt="">
-          <p>GitHub</p>
+          <p>{{ 'OLD_HERO.GITHUB' | translate }}</p>
         </a>
 
 

@@ -3,32 +3,32 @@
   [style.visibility]="toogleSideBar ? 'visible' : 'hidden'"
   [ngClass]="{ 'darkMode': isDarkMode, 'whiteMode': !isDarkMode }"
 >
-  <div class="x-icon" role="button" tabindex="0" aria-label="Close Sidebar Menu" (click)="handleSideBarMenu()" (keydown.enter)="handleSideBarMenu()"></div>
+  <div class="x-icon" role="button" tabindex="0" [attr.aria-label]="'SIDE_MENU.CLOSE' | translate" (click)="handleSideBarMenu()" (keydown.enter)="handleSideBarMenu()"></div>
 
   <div *ngIf="isLoading" class="status-container loading">
     <div class="spinner"></div>
-    <p>Carregando...</p>
+    <p>{{ 'COMMON.LOADING' | translate }}</p>
   </div>
 
   <div *ngIf="hasError" class="status-container error">
     <div class="error-icon">!</div>
-    <p>Connection Error</p>
+    <p>{{ 'COMMON.CONNECTION_ERROR' | translate }}</p>
   </div>
 
   <ul class="link-to-pages">
-    <li> <a [routerLink]="['']" (click)="handleSideBarMenu()">Home</a></li>
-    <li> <a [routerLink]="['articles']" (click)="handleSideBarMenu()">Articles</a></li>
-    <li> <a [routerLink]="['projects']" (click)="handleSideBarMenu()">Projects</a></li>
+    <li> <a [routerLink]="['']" (click)="handleSideBarMenu()">{{ 'SIDE_MENU.HOME' | translate }}</a></li>
+    <li> <a [routerLink]="['articles']" (click)="handleSideBarMenu()">{{ 'SIDE_MENU.ARTICLES' | translate }}</a></li>
+    <li> <a [routerLink]="['projects']" (click)="handleSideBarMenu()">{{ 'SIDE_MENU.PROJECTS' | translate }}</a></li>
   </ul>
  
   <app-file-navigator *ngIf="!isLoading && !hasError && pagesResponse && pagesResponse.length > 0" [items]="pagesResponse"></app-file-navigator>
 
   <ul class="extra-links">
-    <li><a href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf" (click)="handleSideBarMenu()">Download Resume</a></li>
+    <li><a href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf" (click)="handleSideBarMenu()">{{ 'SIDE_MENU.DOWNLOAD_RESUME' | translate }}</a></li>
     <li><a href="https://www.linkedin.com/in/kkphoenix/" target="_blank" (click)="handleSideBarMenu()">LinkedIn</a></li>
     <li><a href="https://github.com/kkphoenixgx" target="_blank" (click)="handleSideBarMenu()">Github</a></li>
-    <li><a href="mailto:kauaalvesWorkplace@gmail.com" (click)="handleSideBarMenu()">Email</a></li>
-    <li><a href="https://server-poem-site-utqk.vercel.app/" target="_blank" (click)="handleSideBarMenu()">Poems site</a></li>
-    <li><a href="https://kkphoenixgx.github.io/react-exercises-site/" target="_blank" (click)="handleSideBarMenu()">React exercises</a></li>
+    <li><a href="mailto:kauaalvesWorkplace@gmail.com" (click)="handleSideBarMenu()">{{ 'SIDE_MENU.EMAIL' | translate }}</a></li>
+    <li><a href="https://server-poem-site-utqk.vercel.app/" target="_blank" (click)="handleSideBarMenu()">{{ 'SIDE_MENU.POEMS_SITE' | translate }}</a></li>
+    <li><a href="https://kkphoenixgx.github.io/react-exercises-site/" target="_blank" (click)="handleSideBarMenu()">{{ 'SIDE_MENU.REACT_EXERCISES' | translate }}</a></li>
   </ul>
 </nav>

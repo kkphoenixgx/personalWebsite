@@ -5,6 +5,7 @@ import { HistoryComponent } from './history.component';
 import * as THREE from 'three';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 class MockAnimationControllerService {
   getAnimationObserbable() { return of(true); }
@@ -16,7 +17,7 @@ describe('HistoryComponent (Performance & Metrics)', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HistoryComponent],
+      imports: [HistoryComponent, TranslateModule.forRoot()],
       providers: [
         { provide: AnimationControllerService, useClass: MockAnimationControllerService },
         { provide: PLATFORM_ID, useValue: 'browser' }
@@ -126,13 +127,5 @@ describe('HistoryComponent (Performance & Metrics)', () => {
 
     expect(destroyNextSpy).toHaveBeenCalled();
     expect(destroyCompleteSpy).toHaveBeenCalled();
-  });
-
-  it('[Métrica] should toggle isGreatingsInEnglish when handleChangeGreatings is called', () => {
-    expect(component.isGreatingsInEnglish).toBeFalse();
-    component.handleChangeGreatings();
-    expect(component.isGreatingsInEnglish).toBeTrue();
-    component.handleChangeGreatings();
-    expect(component.isGreatingsInEnglish).toBeFalse();
   });
 });

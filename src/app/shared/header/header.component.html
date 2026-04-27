@@ -14,7 +14,7 @@
         'darkMode': toogleDarkMode,
         'whiteMode': !toogleDarkMode
       }" 
-      aria-label="Toggle Sidebar menu"
+      [attr.aria-label]="'HEADER.TOGGLE_SIDEBAR' | translate"
       (click)="handleSideBarMenu()"
     >
       <mat-icon aria-hidden="true" focusable="false" tabindex="-1">menu</mat-icon>
@@ -43,7 +43,7 @@
           'darkMode': toogleDarkMode,
           'whiteMode': !toogleDarkMode
         }" 
-      aria-label="Open Settings Menu"
+      [attr.aria-label]="'HEADER.OPEN_SETTINGS' | translate"
       (click)="handleMenuClick()"
     >
       <mat-icon aria-hidden="true" focusable="false" tabindex="-1">settings</mat-icon>

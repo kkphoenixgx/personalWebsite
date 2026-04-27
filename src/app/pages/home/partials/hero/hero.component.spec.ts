@@ -6,6 +6,7 @@ import { AnimationControllerService } from '../../../../services/animation-contr
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HeroComponent', () => {
   let component: HeroComponent;
@@ -22,7 +23,7 @@ describe('HeroComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [HeroComponent],
+      imports: [HeroComponent, TranslateModule.forRoot()],
       providers: [
         provideRouter([]),
         { provide: AnimationControllerService, useValue: animationServiceMock },
@@ -48,13 +49,13 @@ describe('HeroComponent', () => {
   it('deve renderizar os links sociais (Resume, LinkedIn e GitHub)', () => {
     const links = fixture.debugElement.queryAll(By.css('.info-button'));
     expect(links.length).toBe(3);
-    expect(links[0].nativeElement.textContent).toContain('Download Resume');
+    expect(links[0].nativeElement.textContent).toContain('OLD_HERO.DOWNLOAD_RESUME');
     expect(links[1].nativeElement.textContent).toContain('LinkedIn');
-    expect(links[2].nativeElement.textContent).toContain('GitHub');
+    expect(links[2].nativeElement.textContent).toContain('OLD_HERO.GITHUB');
   });
 
   it('deve renderizar o texto estático de apresentação', () => {
     const heading = fixture.debugElement.query(By.css('.text-effect-container h1'));
-    expect(heading.nativeElement.textContent).toContain('Welcome!! My name is Kauã Alves Santos');
+    expect(heading.nativeElement.textContent).toContain('OLD_HERO.GREETING');
   });
 });

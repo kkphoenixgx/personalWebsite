@@ -6,6 +6,7 @@ import { FileNavigatorService } from '../../../../services/file-navigator-servic
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SideMenuComponent', () => {
   let component: SideMenuComponent;
@@ -23,7 +24,7 @@ describe('SideMenuComponent', () => {
     animationServiceMock.getAnimationObserbable.and.returnValue(of(true));
 
     TestBed.configureTestingModule({
-      imports: [SideMenuComponent],
+      imports: [SideMenuComponent, TranslateModule.forRoot()],
       providers: [
         provideRouter([]),
         { provide: FileNavigatorService, useValue: fileNavigatorServiceMock },

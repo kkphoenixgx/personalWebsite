@@ -5,11 +5,12 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })
@@ -21,8 +22,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   @ViewChildren('pFadeInY', { read: ElementRef }) centerParagraphs!: QueryList<ElementRef>;
   @ViewChildren('pFadeInX', { read: ElementRef }) fadeInXParagraphs!: QueryList<ElementRef>;
 
-  @ViewChild('pPortuguese', { static: true }) pPortuguese: ElementRef | undefined;
-  @ViewChild('pEnglish', { static: true }) pEnglish: ElementRef | undefined;
 
   private destroy$ = new Subject<void>();
   private resizeObserver: ResizeObserver | undefined;
@@ -38,8 +37,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
   public themeColor: number = 0xc7d4e8;
   public particlesColor: number = 0xc7d4e8;
   private isBrowser: boolean = false;
-
-  public isGreatingsInEnglish: boolean = false;
   public darkMode$: Observable<boolean>;
   public animate$: Observable<boolean>;
 
@@ -73,15 +70,16 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     });
 
     requestAnimationFrame(() => {
+      const isTesting = '__karma__' in window;
+      const delay = isTesting ? 0 : 500;
       setTimeout(() => {
         // [Lighthouse/SEO Guard] Não inicializa o Three.js pesado durante auditorias
         const isLighthouse = navigator.userAgent.includes('Lighthouse');
-        const isTesting = '__karma__' in window;
 
         if (!isLighthouse || isTesting) {
           this.initThreeJS();
         }
-      }, 500);
+      }, delay);
     });
 
     if (this.isBrowser && this.contentContainer?.nativeElement) {
@@ -263,12 +261,6 @@ export class HistoryComponent implements AfterViewInit, OnDestroy {
     this._scene.add(this._gridLines);
 
     this._camera.position.z = 500;
-  }
-
-  // ----------- UI Helpers -----------
-
-  public handleChangeGreatings(): void {
-    this.isGreatingsInEnglish = !this.isGreatingsInEnglish;
   }
 
 }

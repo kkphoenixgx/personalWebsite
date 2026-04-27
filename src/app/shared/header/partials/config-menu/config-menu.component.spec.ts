@@ -6,6 +6,7 @@ import { ConfigMenuComponent } from './config-menu.component';
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 class MockAnimationControllerService {
   getAnimationObserbable() { return of(true); }
@@ -23,7 +24,7 @@ describe('ConfigMenuComponent (Performance & Metrics)', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ConfigMenuComponent],
+      imports: [ConfigMenuComponent, TranslateModule.forRoot()],
       providers: [
         { provide: AnimationControllerService, useClass: MockAnimationControllerService },
         { provide: DarkModeControllerService, useClass: MockDarkModeControllerService }

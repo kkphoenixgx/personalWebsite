@@ -64,6 +64,13 @@ export class PdfExtractionService {
   }
 
   /**
+   * Wrapper para facilitar o mock nos testes unitários
+   */
+  public getDocument(params: any) {
+    return pdfjsLib.getDocument(params);
+  }
+
+  /**
    * Faz a leitura de um arquivo PDF local ou remoto e extrai todo o texto contido nele.
    * @param pdfUrl Caminho do arquivo (ex: 'assets/articles/meu-artigo.pdf')
    * @returns Promise contendo uma string gigante com todo o texto do documento em minúsculas
@@ -72,10 +79,10 @@ export class PdfExtractionService {
     try {
       // Faz o download nativo ignorando o motor problemático de Streams do PDF.js
       const response = await fetch(pdfUrl);
-      if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+      if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
       
       const arrayBuffer = await response.arrayBuffer();
-      const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) });
+      const loadingTask = this.getDocument({ data: new Uint8Array(arrayBuffer) });
       const pdf = await loadingTask.promise;
       let fullText = '';
 
@@ -92,7 +99,7 @@ export class PdfExtractionService {
       }
       return fullText.toLowerCase(); // Retornamos minúsculo para facilitar o "includes" na barra de pesquisa
     } catch (error) {
-      console.error(`Erro ao extrair texto do PDF (${pdfUrl}):`, error);
+      console.error(`Error extracting text from PDF (${pdfUrl}):`, error);
       return '';
     }
   }
@@ -104,19 +111,19 @@ export class PdfExtractionService {
   async renderPdfToImages(pdfUrl: string): Promise<string[]> {
     try {
       const response = await fetch(pdfUrl);
-      if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+      if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
       
       // Se o Angular não achou o arquivo, ele devolve o index.html (SPA Fallback). 
       // Isso previne que o PDF.js tente ler HTML como PDF.
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.includes('text/html')) {
-         throw new Error(`Arquivo PDF não encontrado. O servidor retornou uma página HTML.`);
+         throw new Error(`PDF file not found. The server returned an HTML page.`);
       }
 
       const arrayBuffer = await response.arrayBuffer();
       
       // CMAPs são obrigatórios para PDFs acadêmicos que usam fontes complexas (CID)
-      const loadingTask = pdfjsLib.getDocument({ 
+      const loadingTask = this.getDocument({ 
         data: new Uint8Array(arrayBuffer),
         cMapUrl: `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/cmaps/`,
         cMapPacked: true,
@@ -143,7 +150,7 @@ export class PdfExtractionService {
 
       return pageImages;
     } catch (error) {
-      console.error(`Erro ao renderizar o PDF visualmente (${pdfUrl}):`, error);
+      console.error(`Error rendering PDF visually (${pdfUrl}):`, error);
       throw error;
     }
   }

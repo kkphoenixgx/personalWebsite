@@ -5,6 +5,7 @@ import { AnimationControllerService } from '../../services/animation-controller.
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 import { of } from 'rxjs';
 import * as THREE from 'three';
+import { TranslateModule } from '@ngx-translate/core';
 
 class MockAnimationControllerService {
   animationDelayInMs = 0;
@@ -21,7 +22,7 @@ describe('FooterComponent (DOM Events & Raycasting)', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent],
+      imports: [FooterComponent, TranslateModule.forRoot()],
       providers: [
         { provide: AnimationControllerService, useClass: MockAnimationControllerService },
         { provide: DarkModeControllerService, useClass: MockDarkModeControllerService },

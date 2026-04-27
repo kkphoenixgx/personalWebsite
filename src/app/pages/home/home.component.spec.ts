@@ -7,6 +7,7 @@ import { DarkModeControllerService } from '../../services/dark-mode-controller.s
 import { of } from 'rxjs';
 import { PLATFORM_ID } from '@angular/core';
 import gsap from 'gsap';
+import { TranslateModule } from '@ngx-translate/core';
 
 // Stub do AnimationControllerService com delay reduzido para testes
 class AnimationControllerServiceStub {
@@ -50,7 +51,7 @@ describe('HomeComponent', () => {
     } as any);
 
     TestBed.configureTestingModule({
-      imports: [HomeComponent],
+      imports: [HomeComponent, TranslateModule.forRoot()],
       providers: [
         { provide: AnimationControllerService, useClass: AnimationControllerServiceStub },
         { provide: DarkModeControllerService, useClass: DarkModeControllerServiceStub },
