@@ -1,70 +1,123 @@
 @use "../../../../styles/variables.scss" as *;
 
-
 .container-hire-me {
-  width: 100vw;
-  height: 90vh;
+  width: 90%;
+  max-width: 900px;
+  height: 60vh;
+  min-height: 400px;
+  margin: 4rem auto;
   align-items: center;
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease;
+
+  .canvas-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
 
   .container-me-logo {
+    z-index: 2;
     img {
-      width: 200px;
+      width: 180px;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.2));
     }
     h3 {
-      font-size: 1rem;
+      font-size: 1.8rem;
       text-align: center;
+      margin-top: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
   }
 
   .container-me-info {
-    margin-left: 2vw;
+    z-index: 2;
+    margin-left: 4vw;
+    font-size: 1.15rem;
+    line-height: 1.6;
+
+    p {
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
     a {
       text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+      
+      &:hover {
+        transform: translateX(5px);
+        opacity: 0.8;
+      }
     }
   }
 }
 
-//? ----------- Helpers -----------
-
 // ----------- Darkmode -----------
 
 .darkMode {
-  background-color: $gray-second;
+  background-color: rgba($gray-second, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
   color: white;
 }
 .text-darkMode {
   color: white;
 }
 .link-darkMode {
-  color: $purple-default;
+  color: $purple-light;
 }
 
 // ----------- White mode -----------
 
 .whiteMode {
-  background-color: $offwhite-default;
-  color: black;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+  color: #1a202c;
 }
 .text-whiteMode {
-  color: black;
+  color: #1a202c;
 }
 .link-whiteMode {
   color: $blue-default;
 }
 
-
 // ----------- Responsividade -----------
 
-/* Smartphones (portrait) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   .container-hire-me {
     flex-direction: column;
+    height: auto;
+    padding: 3rem 1.5rem;
+    width: 95%;
+    margin: 2rem auto;
 
     .container-me-logo {
-      margin-bottom: 3%;
+      margin-bottom: 2rem;
+      img {
+        width: 140px;
+      }
     }
 
+    .container-me-info {
+      margin-left: 0;
+      text-align: center;
+      
+      a:hover {
+        transform: translateY(-3px);
+      }
+    }
   }
 }

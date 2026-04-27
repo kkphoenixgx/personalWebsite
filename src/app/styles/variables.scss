@@ -1,14 +1,50 @@
-$gray-default: #262626;
-$gray-second: #111;
-$gray-third: #2e2c2c;
+$gray-default: var(--gray-default, #262626);
+$gray-second: var(--gray-second, #111111);
+$gray-third: var(--gray-third, #2e2c2c);
 
-$offwhite-default: #c7d4e8;
+$offwhite-origin: #c7d4e8;
+$offwhite-default: var(--offwhite-default, #{$offwhite-origin});
 
-$purple-default: #9100a6;
+$purple-origin: #9100a6;
+$purple-default: var(--purple-default, #{$purple-origin});
+$purple-light: #d47fe0; // Variação clara para passar no WCAG AA em fundos escuros
 
-$blue-default: #9fadc4;
+// Variável para texto branco padrão (usado no menu)
+$text-light: var(--text-light, #f5f5f5);
+
+$blue-default: #2c3e50; // Cor escurecida para passar no WCAG AA em fundos claros
 
 $black-background: #0a0a0adb;
 $black-background-moreBlack: #0a0a0aec;
 
 $deep-slate: #1e2a38; // Fundo do footer para o tema claro (Dark Slate Blue)
+
+// --- Status & Utility Colors ---
+$status-error: #ff4444;
+$gray-light: #cccccc;
+$gray-accessible: #767676; // Cinza escurecido para contraste > 3:1 em UI
+$gray-medium: #333333;
+
+// --- Stanford Theme Colors ---
+$stanford-red: #8c1515;
+$stanford-dark-red: #820000;
+$paper-white: #fdfcf8;
+$text-dark: #2e2d29;
+
+// --- Shadows & Borders ---
+$shadow-medium: rgba(0, 0, 0, 0.3);
+$shadow-light: rgba(0, 0, 0, 0.2);
+$border-light: rgba(128, 128, 128, 0.2);
+
+// --- Indie Game Theme ---
+$indie-cyan-faint: rgba(0, 255, 204, 0.05);
+$indie-yellow: #ffcc00;
+$indie-yellow-glow: rgba(255, 204, 0, 0.2);
+$indie-glitch-red: #ff003c;
+$indie-gray-muted: #666;
+$indie-black-bg: #111;
+$indie-gray-text: #a0a0a0;
+$indie-gray-dark: #222;
+$indie-red-faint: rgba(255, 0, 51, 0.2);
+$indie-black-pure: #0a0a0a;
+$indie-gray-dim: #888;

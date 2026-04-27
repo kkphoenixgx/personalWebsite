@@ -3,14 +3,11 @@ import {
   Component,
   OnInit,
   ViewChild,
-  ViewContainerRef,
-  Injector,
-  ComponentRef,
   PLATFORM_ID,
-  Inject
+  inject
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { Text3dComponent } from './partials/text3d/text3d.component';
 import { SideMenuComponent } from './partials/side-menu/side-menu.component';
@@ -19,11 +16,12 @@ import { AnimationControllerService } from '../../services/animation-controller.
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 import { SideBarMenuControllerService } from '../../services/side-bar-menu-controller.service';
 import { ConfigMenuComponent } from './partials/config-menu/config-menu.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIconModule, CommonModule, Text3dComponent, SideMenuComponent, ConfigMenuComponent ],
+  imports: [MatIconModule, CommonModule, Text3dComponent, SideMenuComponent, ConfigMenuComponent, TranslateModule ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -44,12 +42,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   
   @ViewChild('configMenu') configMenu!: ConfigMenuComponent;
 
-  constructor(
-    private animateService: AnimationControllerService,
-    private darkModeService: DarkModeControllerService,
-    private sideBarService: SideBarMenuControllerService,
-    @Inject(PLATFORM_ID) private PLATAFORM_ID: Object,
-  ) {}
+  private animateService = inject(AnimationControllerService);
+  private darkModeService = inject(DarkModeControllerService);
+  private sideBarService = inject(SideBarMenuControllerService);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private PLATAFORM_ID = inject(PLATFORM_ID);
 
   // ----------- Lifecycle -----------
 

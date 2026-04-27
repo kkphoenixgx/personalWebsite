@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Text3dComponent } from './text3d.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -14,11 +15,11 @@ describe('Text3dComponent', () => {
   let text3dServiceMock: jasmine.SpyObj<Text3dService>;
 
   beforeEach(waitForAsync(() => {
-    darkModeServiceMock = jasmine.createSpyObj('DarkModeControllerService', ['getDarkModeState']);
+    darkModeServiceMock = jasmine.createSpyObj('DarkModeControllerService', ['getDarkModeObserbable']);
     animateServiceMock = jasmine.createSpyObj('AnimationControllerService', ['getAnimationObserbable']);
     text3dServiceMock = jasmine.createSpyObj('Text3dService', ['createText', 'updateTextColor']);
 
-    darkModeServiceMock.getDarkModeState.and.returnValue(of(true));
+    darkModeServiceMock.getDarkModeObserbable.and.returnValue(of(true));
     animateServiceMock.getAnimationObserbable.and.returnValue(of(true));
 
     TestBed.configureTestingModule({
@@ -49,7 +50,8 @@ describe('Text3dComponent', () => {
   });
 
   it('should update colors based on dark mode state', () => {
-    component.updateColors();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (component as any).updateColors();
     expect(text3dServiceMock.updateTextColor).toHaveBeenCalledWith(0xffffff);
   });
 

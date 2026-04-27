@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -9,14 +9,17 @@ import { ProfessionalHistoryComponent } from './partials/professional-history/pr
 import { PortifolioComponent } from './partials/portifolio/portifolio.component';
 // Importando HeroComponent explicitamente para uso no template
 import { HeroComponent } from './partials/hero/hero.component';
+import { HelloComponent } from './partials/hello/hello.component';
 import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, RouterModule,
     HireMeComponent, HistoryComponent, PortifolioComponent, ProfessionalHistoryComponent,
-    HeroComponent
+    HeroComponent, HelloComponent, TranslateModule
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
@@ -25,15 +28,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   @ViewChild('firstTab') firstTab!: ElementRef;
 
-  public lastTab! :HTMLElement;
-  public currentTab :string | undefined = "History";
+  public lastTab!: HTMLElement;
+  public currentTab: string | undefined = "Hello";
 
-  constructor(
-    public darkModeService: DarkModeControllerService
-  ) { }
+  public darkModeService = inject(DarkModeControllerService);
+  private translate = inject(TranslateService);
+  private titleService = inject(Title);
+
+  ngOnInit(): void {
+    this.translate.get('META.TITLE').subscribe(title => {
+      this.titleService.setTitle(title);
+    });
+  }
 
   public handleHistoryLiClick(event: Event): void {
-    const target = event.target as HTMLElement;
+    const target = event.currentTarget as HTMLElement; // currentTarget garante que será o <button> com o atributo data-tab
 
     if (this.lastTab) this.lastTab.classList.remove("currentTab");
     
@@ -44,9 +53,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   // ----------- Lifecycle -----------
-
-  ngOnInit(): void {
-  }
 
   ngAfterViewInit(): void {
     this.lastTab = this.firstTab.nativeElement;

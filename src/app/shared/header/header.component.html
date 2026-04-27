@@ -9,15 +9,16 @@
 
     <app-side-menu #sideMenu [style.left]="toogleSideBarMenu ? '0' : '-50vw' " class="sideMenu" ></app-side-menu>
 
-    <mat-icon style="margin-left: 2vw; cursor: pointer; user-select: none; -webkit-user-select: none;" 
+    <button class="icon-btn menu-btn"
       [ngClass]="{
         'darkMode': toogleDarkMode,
         'whiteMode': !toogleDarkMode
       }" 
+      [attr.aria-label]="'HEADER.TOGGLE_SIDEBAR' | translate"
       (click)="handleSideBarMenu()"
     >
-      menu
-    </mat-icon>
+      <mat-icon aria-hidden="true" focusable="false" tabindex="-1">menu</mat-icon>
+    </button>
     
     <ng-template [ngIf]="!toogleAnimations">
       <h1 class="h1-container"
@@ -34,7 +35,7 @@
       <app-text3d></app-text3d>
     </ng-template>
 
-    <mat-icon
+    <button class="icon-btn settings-btn"
       [ngClass]="
         { 
           'rotate-animation': ( toogleAnimations && toogleSettingsAnimate),
@@ -42,8 +43,11 @@
           'darkMode': toogleDarkMode,
           'whiteMode': !toogleDarkMode
         }" 
-      style="margin-right: 2vw; cursor: pointer; user-select: none; -webkit-user-select: none;" (click)="handleMenuClick()" 
-    >settings</mat-icon>
+      [attr.aria-label]="'HEADER.OPEN_SETTINGS' | translate"
+      (click)="handleMenuClick()"
+    >
+      <mat-icon aria-hidden="true" focusable="false" tabindex="-1">settings</mat-icon>
+    </button>
   </div>
 
   <app-config-menu #configMenu></app-config-menu>

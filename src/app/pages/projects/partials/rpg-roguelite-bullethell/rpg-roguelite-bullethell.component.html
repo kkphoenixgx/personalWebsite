@@ -1,0 +1,135 @@
+<article class="indie-showcase-container">
+  
+  <!-- HERO: O Impacto Inicial -->
+  <section class="indie-hero">
+    <nav class="top-nav">
+      <a routerLink="/projects" class="back-btn">
+        <span class="arrow">&larr;</span> 
+        <span class="text">{{ 'RPG.NAV.BACK' | translate }}</span>
+      </a>
+    </nav>
+    <div class="hero-background-grid"></div>
+    <div class="glitch-wrapper reveal-up">
+      <h1 class="mega-title glitch-text" [attr.data-text]="'RPG.HERO.TITLE' | translate">{{ 'RPG.HERO.TITLE' | translate }}</h1>
+    </div>
+    <div class="hero-sub reveal-up delay-1">
+      <p class="tagline" [innerHTML]="'RPG.HERO.TAGLINE' | translate"></p>
+      <div class="tech-badges">
+        <span>{{ 'RPG.HERO.BADGE_1' | translate }}</span>
+        <span>{{ 'RPG.HERO.BADGE_2' | translate }}</span>
+        <span>{{ 'RPG.HERO.BADGE_3' | translate }}</span>
+        <span>{{ 'RPG.HERO.BADGE_4' | translate }}</span>
+      </div>
+    </div>
+    <a href="https://github.com/vitoroliveiracg/project-roguelite-game" target="_blank" class="cyber-btn reveal-up delay-2">
+      <span class="btn-text">{{ 'RPG.HERO.INSPECT_BTN' | translate }}</span>
+      <span class="btn-glitch"></span>
+    </a>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+      <span>{{ 'RPG.HERO.SCROLL' | translate }}</span>
+    </div>
+  </section>
+
+  <!-- LORE & WORLD BUILDING -->
+  <section class="lore-section">
+    <div class="lore-grid observe-me">
+      <div class="lore-text">
+        <div class="feature-label">{{ 'RPG.LORE.LABEL' | translate }}</div>
+        <h2 class="impact-statement" [innerHTML]="'RPG.LORE.TITLE' | translate"></h2>
+        <p class="manifesto-body" [innerHTML]="'RPG.LORE.BODY' | translate"></p>
+      </div>
+      <div class="lore-image">
+        <div class="pixel-art sprite-anim player-sprite" aria-label="Player Sprite" title="Player Sprite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE SCROLL: O Trunfo Técnico -->
+  <section class="features-scroll-container">
+    
+    <div class="feature-story split-left observe-me">
+      <div class="feature-number">01</div>
+      <div class="feature-content">
+        <div class="feature-label">{{ 'RPG.FEATURE_1.LABEL' | translate }}</div>
+        <h3 class="feature-title" [innerHTML]="'RPG.FEATURE_1.TITLE' | translate"></h3>
+        <p class="feature-desc" [innerHTML]="'RPG.FEATURE_1.DESC' | translate"></p>
+      </div>
+    </div>
+
+    <div class="feature-story split-right observe-me">
+      <div class="feature-content">
+        <div class="feature-label">{{ 'RPG.FEATURE_2.LABEL' | translate }}</div>
+        <h3 class="feature-title" [innerHTML]="'RPG.FEATURE_2.TITLE' | translate"></h3>
+        <p class="feature-desc" [innerHTML]="'RPG.FEATURE_2.DESC' | translate"></p>
+      </div>
+      <div class="feature-number">02</div>
+    </div>
+
+    <div class="feature-story split-left observe-me">
+      <div class="feature-number">03</div>
+      <div class="feature-content">
+        <div class="feature-label">{{ 'RPG.FEATURE_3.LABEL' | translate }}</div>
+        <h3 class="feature-title" [innerHTML]="'RPG.FEATURE_3.TITLE' | translate"></h3>
+        <p class="feature-desc" [innerHTML]="'RPG.FEATURE_3.DESC' | translate"></p>
+      </div>
+    </div>
+
+    <div class="feature-story split-right observe-me">
+      <div class="feature-content">
+        <div class="feature-label">{{ 'RPG.FEATURE_4.LABEL' | translate }}</div>
+        <h3 class="feature-title" [innerHTML]="'RPG.FEATURE_4.TITLE' | translate"></h3>
+        <p class="feature-desc" [innerHTML]="'RPG.FEATURE_4.DESC' | translate"></p>
+      </div>
+      <div class="feature-number">04</div>
+      <div class="sprite-showcase">
+         <div class="pixel-art sprite-anim molor-sprite" aria-label="Diretor Molor" title="Diretor Molor"></div>
+      </div>
+    </div>
+
+    <div class="feature-story split-left observe-me">
+      <div class="feature-number">05</div>
+      <div class="feature-content">
+        <div class="feature-label">{{ 'RPG.FEATURE_5.LABEL' | translate }}</div>
+        <h3 class="feature-title" [innerHTML]="'RPG.FEATURE_5.TITLE' | translate"></h3>
+        <p class="feature-desc" [innerHTML]="'RPG.FEATURE_5.DESC' | translate"></p>
+      </div>
+    </div>
+
+    <div class="feature-story split-right observe-me">
+      <div class="feature-content">
+        <div class="feature-label">{{ 'RPG.FEATURE_6.LABEL' | translate }}</div>
+        <h3 class="feature-title" [innerHTML]="'RPG.FEATURE_6.TITLE' | translate"></h3>
+        <p class="feature-desc" [innerHTML]="'RPG.FEATURE_6.DESC_1' | translate"></p>
+        <p class="feature-desc" [innerHTML]="'RPG.FEATURE_6.DESC_2' | translate"></p>
+      </div>
+      <div class="feature-number">06</div>
+    </div>
+
+  </section>
+
+  <!-- INTEGRAÇÃO CONTÍNUA & ROADMAP -->
+  <section class="forge-section">
+    <div class="forge-grid observe-me">
+      <div class="forge-text">
+        <h2 class="forge-title">{{ 'RPG.FORGE.TITLE' | translate }}</h2>
+        <p class="forge-desc" [innerHTML]="'RPG.FORGE.DESC' | translate"></p>
+        <a href="https://github.com/vitoroliveiracg/project-roguelite-game/commits/main" target="_blank" class="cyber-link">
+          {{ 'RPG.FORGE.LINK' | translate }}
+        </a>
+      </div>
+      <div class="roadmap-box">
+        <div class="roadmap-header">{{ 'RPG.ROADMAP.HEADER' | translate }}</div>
+        <ul class="roadmap-list">
+          <li class="done" [innerHTML]="'RPG.ROADMAP.ITEM_1' | translate"></li>
+          <li class="done" [innerHTML]="'RPG.ROADMAP.ITEM_2' | translate"></li>
+          <li class="done" [innerHTML]="'RPG.ROADMAP.ITEM_3' | translate"></li>
+          <li class="done" [innerHTML]="'RPG.ROADMAP.ITEM_4' | translate"></li>
+          <li class="active" [innerHTML]="'RPG.ROADMAP.ITEM_5' | translate"></li>
+          <li class="pending" [innerHTML]="'RPG.ROADMAP.ITEM_6' | translate"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</article>

@@ -1,3 +1,5 @@
+/// <reference types="jasmine" />
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,7 +13,7 @@ export class DarkModeControllerServiceMock {
     this.darkModeState.next(state);
   }
 
-  getDarkModeState() {
+  getDarkModeObserbable() {
     return this.darkModeState.asObservable();
   }
 

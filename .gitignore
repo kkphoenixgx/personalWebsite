@@ -5,6 +5,11 @@
 /tmp
 /out-tsc
 /bazel-out
+logs/
+test-results/
+.stryker-tmp/
+playwright-report/
+reports/
 
 # Node
 /node_modules
@@ -36,6 +41,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+.context/
 
 # System files
 .DS_Store

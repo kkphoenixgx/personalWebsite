@@ -1,0 +1,107 @@
+$accent: #00ffcc;
+
+.eye-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+  vertical-align: middle;
+  cursor: pointer; // Mostra que é interativo
+}
+
+.eye {
+  width: 36px;
+  height: 20px;
+  background: rgba(0, 255, 204, 0.1); 
+  border: 1px solid rgba($accent, 0.8);
+  
+  // Forma do olho 
+  border-radius: 75% 15%; 
+  transform: rotate(45deg); 
+  
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba($accent, 0.5), inset 0 0 8px rgba($accent, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Animação de piscar errático e nervoso
+  animation: twitch-blink 7s infinite;
+}
+
+@keyframes twitch-blink {
+  0%, 78%, 84%, 100% { transform: rotate(45deg) scale(1); }
+  80% { transform: rotate(45deg) scale(0.1, 0.1); } // Fecha rápido
+  81% { transform: rotate(45deg) scale(1.1, 1.1); } // Abre arregalado
+  90%, 94% { transform: rotate(45deg) scale(1); }
+  92% { transform: rotate(45deg) scale(0.1, 0.1); } // Pisca duplo rápido
+}
+
+.pupil-mover {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.05s linear;
+}
+
+.pupil {
+  width: 4px;
+  height: 14px;
+  background: $accent;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #fff, 0 0 12px $accent;
+  
+  // Desfaz a rotação do container para a fenda ficar perfeitamente vertical na tela
+  transform: rotate(-45deg); 
+  
+  // Animação de dilatação esquisita (nervosa)
+  animation: pupil-dilate 4s infinite alternate;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+  }
+}
+
+@keyframes pupil-dilate {
+  0%, 100% { transform: rotate(-45deg) scaleX(1); }
+  10% { transform: rotate(-45deg) scaleX(2.5); } // Dilata quase virando um círculo
+  15% { transform: rotate(-45deg) scaleX(0.3); } // Contrai virando uma agulha
+  50% { transform: rotate(-45deg) scaleX(1.2); }
+}
+
+// Estado "Irritado" ao clicar
+.eye-container.angry {
+  animation: shake-angry 0.4s infinite;
+  
+  .eye {
+    background: rgba(255, 0, 51, 0.15);
+    border-color: rgba(255, 0, 51, 0.9);
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.6), inset 0 0 10px rgba(255, 0, 51, 0.5);
+  }
+  
+  .pupil {
+    background: #ff0033;
+    box-shadow: 0 0 8px #fff, 0 0 15px #ff0033;
+    animation: none; 
+    transform: rotate(-45deg) scaleX(0.15); // Pupila travada em modo fenda fina de alerta
+  }
+}
+
+@keyframes shake-angry {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+}

@@ -1,3 +1,5 @@
+/// <reference types="jasmine" />
+
 import { TestBed } from '@angular/core/testing';
 
 import { DarkModeControllerService } from '../dark-mode-controller.service';
@@ -12,5 +14,30 @@ describe('DarkModeControllerService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('deve emitir true por padrão (Dark Mode ativado na inicialização)', (done) => {
+    service.getDarkModeObserbable().subscribe(state => {
+      expect(state).toBeTrue();
+      done();
+    });
+  });
+
+  it('deve emitir false quando setDarkMode(false) for chamado', (done) => {
+    service.setDarkMode(false);
+    service.getDarkModeObserbable().subscribe(state => {
+      expect(state).toBeFalse();
+      done();
+    });
+  });
+
+  it('deve alternar o estado corretamente múltiplas vezes', (done) => {
+    service.setDarkMode(false);
+    service.setDarkMode(true);
+    service.setDarkMode(false);
+    service.getDarkModeObserbable().subscribe(state => {
+      expect(state).toBeFalse();
+      done();
+    });
   });
 });

@@ -1,41 +1,60 @@
 <div class="configMenu-container" 
-  [ngClass]=" {showConfigMenu : toggleConfigMenu,  hideConfigMenu: !toggleConfigMenu}"
+  [ngClass]="{
+    'showConfigMenu': toggleConfigMenu,
+    'hideConfigMenu': !toggleConfigMenu,
+    'darkMode': toggleDarkMode$ | async,
+    'whiteMode': !(toggleDarkMode$ | async)
+  }"
 >
-  <ul class="configMenu"
-  [style.background-color]=" (toggleDarkMode$ | async) ? '#707070' : '#9fadc4'"
+  <div class="configMenu"
+  role="region" [attr.aria-label]="'CONFIG.TITLE' | translate"
   >
-    <h3>Menu</h3>
-    <li class="itemMenuConfig">
+    <h2>{{ 'CONFIG.TITLE' | translate }}</h2>
+    
+    <div class="itemMenuConfig">
       
       <div class="toggleDarkModeItem"
         *ngIf="((toggleAnimations$ | async) && lampComponentRef); else elseTemplate" 
       >
-        <p>Destroy Lamp</p>
-        <button (click)="handleDestroyButton()" >Destroy!</button>
+        <span class="label-text">{{ 'CONFIG.DESTROY_LAMP' | translate }}</span>
+        <button (click)="handleDestroyButton()" [attr.aria-label]="'CONFIG.DESTROY_LAMP' | translate">{{ 'CONFIG.DESTROY_BTN' | translate }}</button>
       </div>
       
       <ng-template #elseTemplate class="toggleLampItem">
-        <p>Toggle Dark Mode</p>
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider" (click)="handleToggleDarkMode()" 
-            [ngClass]="{'slider-on': toggleDarkMode$ | async, 'slider-off': !(toggleDarkMode$ | async) }"
+        <div class="toggle-container">
+          <label class="label-text" for="dark-mode-toggle">{{ 'CONFIG.DARK_MODE' | translate }}</label>
+          <label class="switch" for="dark-mode-toggle">
+            <input type="checkbox" id="dark-mode-toggle" [checked]="toggleDarkMode$ | async" (change)="handleToggleDarkMode()" class="sr-only">
+            <span class="slider" 
+              [ngClass]="{'slider-on': toggleDarkMode$ | async, 'slider-off': !(toggleDarkMode$ | async) }"
+            ></span>
+          </label>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="itemMenuConfig">
+      <div class="toggle-container">
+        <label class="label-text" for="animations-toggle">{{ 'CONFIG.ANIMATIONS' | translate }}</label>
+        <label class="switch" for="animations-toggle">
+          <input type="checkbox" id="animations-toggle" [checked]="toggleAnimations$ | async" (change)="handleToggleAnimations()" class="sr-only">
+          <span class="slider"
+            [ngClass]="{'slider-on': (toggleAnimations$ | async), 'slider-off': !(toggleAnimations$ | async)}"
           ></span>
         </label>
-      </ng-template>
-    
-    </li>
-    <li class="itemMenuConfig">
-      <p>Toogle animations</p>
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider" (click)="handleToggleAnimations()"
-          [ngClass]="{'slider-on': (toggleAnimations$ | async), 'slider-off': !(toggleAnimations$ | async)}"
-        ></span>
-      </label>
-    </li>
-    
-  </ul>
+      </div>
+    </div>
+
+    <div class="itemMenuConfig">
+      <div class="toggle-container">
+        <label class="label-text">{{ 'CONFIG.LANGUAGE' | translate }}</label>
+        <button type="button" class="lang-toggle-btn" (click)="toggleLanguage()" [attr.aria-label]="'CONFIG.LANGUAGE' | translate">
+          <span [class.active]="currentLang === 'en'">EN</span>
+          <span [class.active]="currentLang === 'pt'">PT</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<ng-template #lampContainer></ng-template>
+<ng-container #lampContainer></ng-container>

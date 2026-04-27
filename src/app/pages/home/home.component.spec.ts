@@ -1,3 +1,4 @@
+/// <reference types="jasmine" />
 // home.component.spec.ts
 import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
@@ -6,6 +7,7 @@ import { DarkModeControllerService } from '../../services/dark-mode-controller.s
 import { of } from 'rxjs';
 import { PLATFORM_ID } from '@angular/core';
 import gsap from 'gsap';
+import { TranslateModule } from '@ngx-translate/core';
 
 // Stub do AnimationControllerService com delay reduzido para testes
 class AnimationControllerServiceStub {
@@ -41,13 +43,15 @@ describe('HomeComponent', () => {
   beforeEach(fakeAsync(() => {
     // Stub do gsap.timeline para evitar a execução real de animações (timeline infinito)
     // Agora inclui o método clear, que é chamado no componente
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     spyOn(gsap, 'timeline').and.returnValue({
       clear: () => {},
       to: () => {}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
 
     TestBed.configureTestingModule({
-      imports: [HomeComponent],
+      imports: [HomeComponent, TranslateModule.forRoot()],
       providers: [
         { provide: AnimationControllerService, useClass: AnimationControllerServiceStub },
         { provide: DarkModeControllerService, useClass: DarkModeControllerServiceStub },

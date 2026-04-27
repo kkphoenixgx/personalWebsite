@@ -3,8 +3,12 @@
   [class.whiteMode]="!(darkMode$ | async)" 
 >
 
+  <div class="canvas-background">
+    <canvas #hireMeCanvas></canvas>
+  </div>
+
   <div class="container-me-logo">
-    <img src="/assets/logoCompleta.png">
+    <img src="/assets/logoCompleta.webp" alt="Logo">
     <h3 
       [class.text-darkMode]=" darkMode$ | async" 
       [class.text-whiteMode]=" !(darkMode$ | async)" 
@@ -12,47 +16,49 @@
       kkphoenix
     </h3>
   </div>
+
   <div class="container-me-info"
     [class.text-darkMode]=" darkMode$ | async" 
     [class.text-whiteMode]=" !(darkMode$ | async)" 
   >
-    <p> Cellphone: 
+    <p> {{ 'HIRE_ME.CELLPHONE' | translate }} 
       <a href="tel:+5521993344251"
         [class.link-darkMode]=" darkMode$ | async" 
         [class.link-whiteMode]=" !(darkMode$ | async)" 
       >
-        {{"+55 (21)993344251"}}
+        {{"+55 (21) 99334-4251"}}
       </a> 
     </p>
 
-    <p>Email: 
-      <a href="mailto:kauaAlvesWorkplace@gmail.com"
+    <p>{{ 'HIRE_ME.EMAIL' | translate }} 
+      <a href="mailto:kauaalvesWorkplace@gmail.com"
         [class.link-darkMode]=" darkMode$ | async" 
         [class.link-whiteMode]=" !(darkMode$ | async)" 
       >
-        {{"kauaAlvesWorkplace@gmail.com"}}
+        {{"kauaalvesWorkplace@gmail.com"}}
       </a>
     </p>
 
-    <p>LinkedIn: 
+    <p>{{ 'HIRE_ME.LINKEDIN' | translate }} 
       <a href="https://www.linkedin.com/in/kkphoenix/"
         [class.link-darkMode]=" darkMode$ | async" 
         [class.link-whiteMode]=" !(darkMode$ | async)" 
+        target="_blank"
       >
-        {{"https://www.linkedin.com/in/kkphoenix/"}}
+        {{"linkedin.com/in/kkphoenix/"}}
       </a>
     </p>
 
-    <p>GitHub: 
+    <p>{{ 'HIRE_ME.GITHUB' | translate }} 
       <a href="https://github.com/kkphoenixgx"
         [class.link-darkMode]=" darkMode$ | async" 
         [class.link-whiteMode]=" !(darkMode$ | async)" 
+        target="_blank"
       >
-        {{"https://github.com/kkphoenixgx"}}
+        {{"github.com/kkphoenixgx"}}
       </a>
     </p>
 
   </div>
 
 </div>
-

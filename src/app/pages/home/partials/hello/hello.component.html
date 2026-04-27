@@ -1,0 +1,134 @@
+<div class="hello-container" [ngClass]="{ 'light-mode': !isDarkMode, 'no-animations': !isAnimated }">
+  
+  <!-- 3D Canvas Background -->
+  <div class="canvas-container" #canvasContainer></div>
+
+  <!-- Scrollable Content Journey -->
+  <div class="scroll-content">
+    
+    <!-- Section 1: Hero -->
+    <section class="step step-hero">
+      <div class="content-block">
+        <h2 class="pre-title">{{ 'HELLO.HERO.PRE_TITLE' | translate }}</h2>
+        <h1 class="main-title">
+          {{ 'HELLO.HERO.TITLE_P1' | translate }}<br>
+          <span class="gradient-text">{{ 'HELLO.HERO.TITLE_P2' | translate }}</span>
+        </h1>
+        <p class="desc" [innerHTML]="'HELLO.HERO.DESC' | translate"></p>
+      </div>
+    </section>
+
+    <!-- Section 2: Core Value -->
+    <section class="step step-value">
+      <div class="content-block right">
+        <h2 class="section-title">{{ 'HELLO.VALUE.TITLE' | translate }}</h2>
+        <p class="desc" [innerHTML]="'HELLO.VALUE.DESC_1' | translate"></p>
+        <p class="desc" [innerHTML]="'HELLO.VALUE.DESC_2' | translate"></p>
+      </div>
+    </section>
+
+    <!-- Section 3: Diferenciais -->
+    <section class="step step-features">
+      <div class="content-block full">
+        <h2 class="section-title center">{{ 'HELLO.FEATURES.TITLE' | translate }}</h2>
+        <div class="grid-features">
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_1.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_1.DESC' | translate"></p></div>
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_2.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_2.DESC' | translate"></p></div>
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_3.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_3.DESC' | translate"></p></div>
+          <div class="feature-card"><h3>{{ 'HELLO.FEATURES.CARD_4.TITLE' | translate }}</h3><p [innerHTML]="'HELLO.FEATURES.CARD_4.DESC' | translate"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3.2: Indie Game Project -->
+    <section class="step step-game">
+      <div class="content-block right indie-card">
+        <div class="indie-text">
+          <h2 class="pre-title">{{ 'HELLO.GAME.PRE_TITLE' | translate }}</h2>
+          <div class="title-container">
+            <h2 class="section-title">{{ 'HELLO.GAME.TITLE' | translate }}</h2>
+            <div class="indie-sprite">
+              <div class="pixel-art sprite-anim player-sprite" aria-label="Player Sprite"></div>
+            </div>
+          </div>
+          <p class="desc" [innerHTML]="'HELLO.GAME.DESC_1' | translate"></p>
+          <p class="desc" [innerHTML]="'HELLO.GAME.DESC_2' | translate"></p>
+          <div class="cta-actions" style="justify-content: center; margin-top: 2rem;">
+            <a [routerLink]="['/projects/rpg-roguelite-bullethell']" class="btn primary">
+              <span class="material-icons" style="vertical-align: sub; margin-right: 6px; font-size: 1.3rem;">sports_esports</span>{{ 'HELLO.GAME.CTA' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3.5: Telemetry & Observability -->
+    <section class="step step-telemetry">
+      <div class="content-block">
+        <h2 class="section-title">{{ 'HELLO.TELEMETRY.TITLE' | translate }}</h2>
+        <p class="desc" [innerHTML]="'HELLO.TELEMETRY.DESC_1' | translate"></p>
+        <p class="desc" [innerHTML]="'HELLO.TELEMETRY.DESC_2' | translate"></p>
+        <div class="cta-actions" style="justify-content: flex-start; margin-top: 2rem;">
+          <a [routerLink]="['/health']" class="btn secondary">
+            <span class="material-icons" style="vertical-align: sub; margin-right: 6px; font-size: 1.3rem;">monitor_heart</span>{{ 'HELLO.TELEMETRY.CTA' | translate }}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Freelance Pitch -->
+    <section class="step step-freelance">
+      <div class="freelance-layout">
+        <div class="content-block clear freelance-text">
+          <h2 class="section-title">{{ 'HELLO.FREELANCE.TITLE' | translate }}</h2>
+          <p class="desc" [innerHTML]="'HELLO.FREELANCE.DESC_1' | translate"></p>
+          <p class="desc" [innerHTML]="'HELLO.FREELANCE.DESC_2' | translate"></p>
+          <div class="cta-actions freelance-cta">
+            <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn primary">{{ 'HELLO.FREELANCE.CTA' | translate }}</a>
+          </div>
+        </div>
+
+        <div class="showcase-column">
+          <!-- Primeiro item: Alinhado à direita -->
+          <div class="content-block clear showcase-item align-right">
+            <img src="/assets/senco-locacoes-image.webp" alt="Senco Locações Preview" class="showcase-img" (click)="openImage('/assets/senco-locacoes-image.webp')">
+            <div class="project-highlight">
+              <h3 class="highlight-cyan">{{ 'HELLO.FREELANCE.SHOWCASE_1.TITLE' | translate }}</h3>
+              <p class="desc" [innerHTML]="'HELLO.FREELANCE.SHOWCASE_1.DESC' | translate"></p>
+            </div>
+          </div>
+          
+          <!-- Segundo item: Alinhado à esquerda -->
+          <div class="content-block clear showcase-item align-left">
+            <img src="/assets/restaurant-food-zero.webp" alt="FoodZero Preview" class="showcase-img" (click)="openImage('/assets/restaurant-food-zero.webp')">
+            <div class="project-highlight">
+              <h3 class="highlight-purple">{{ 'HELLO.FREELANCE.SHOWCASE_2.TITLE' | translate }}</h3>
+              <p class="desc" [innerHTML]="'HELLO.FREELANCE.SHOWCASE_2.DESC' | translate"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: CTA -->
+    <section class="step step-cta">
+      <div class="content-block center">
+        <h2 class="main-title">{{ 'HELLO.CTA.TITLE' | translate }}</h2>
+        <p class="desc center" [innerHTML]="'HELLO.CTA.DESC' | translate"></p>
+        <div class="cta-actions">
+          <a [routerLink]="['/projects']" class="btn primary">{{ 'HELLO.CTA.BTN_1' | translate }}</a>
+          <a href="mailto:kauaalvesWorkplace@gmail.com" class="btn secondary">{{ 'HELLO.CTA.BTN_2' | translate }}</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Image Modal Viewer -->
+  <div class="image-modal" [class.active]="selectedImage" (click)="closeImage()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img *ngIf="selectedImage" [src]="selectedImage" alt="Expanded Image">
+      <button class="close-btn" (click)="closeImage()"><span class="material-icons">close</span></button>
+    </div>
+  </div>
+</div>

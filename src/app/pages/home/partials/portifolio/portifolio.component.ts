@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
 import { Observable } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface PortfolioProject {
   title: string;
@@ -14,7 +15,7 @@ interface PortfolioProject {
 
 @Component({
   selector: 'app-portifolio',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './portifolio.component.html',
   styleUrl: './portifolio.component.scss'
 })
@@ -24,116 +25,109 @@ export class PortifolioComponent {
 
   projects: PortfolioProject[] = [
     {
-      title: 'The Big Agent (Embedded MAS)',
-      description: 'A multi-agent system inspired by George Orwell\'s 1984. One agent simulates a secretary sending paths to drones, while another agent is a drone navigating those paths. Cutting-edge AI embedded simulation.',
+      title: 'PORTFOLIO.PROJECTS.BIG_AGENT.TITLE',
+      description: 'PORTFOLIO.PROJECTS.BIG_AGENT.DESC',
       url: 'https://github.com/LabRedesCefetRJ/The-Big-Agent',
       type: 'carousel',
-      highlightText: 'Revolutionizing agent-based simulations with embedded AI.'
+      highlightText: 'PORTFOLIO.PROJECTS.BIG_AGENT.HIGHLIGHT'
     },
     {
-      title: 'Restaurant Food Zero (Vue Frontend)',
-      description: 'A modern restaurant website with blog, posts, and reservation system. Built with Vue.js for a smooth user experience.',
-      url: 'https://github.com/kkphoenixgx/RestaurantFoodZeroFrontEnd',
+      title: 'PORTFOLIO.PROJECTS.FOOD_ZERO.TITLE',
+      description: 'PORTFOLIO.PROJECTS.FOOD_ZERO.DESC',
+      url: 'https://github.com/kkphoenixgx/Restaurant-FoodZero',
       type: 'carousel',
-      highlightText: 'Elevating restaurant web presence with Vue.'
+      highlightText: 'PORTFOLIO.PROJECTS.FOOD_ZERO.HIGHLIGHT'
     },
     {
-      title: 'Restaurant Food Zero (Node Backend)',
-      description: 'The backend powering Food Zero, built with Node.js for fast and scalable restaurant management.',
-      url: 'https://github.com/kkphoenixgx/backendRestaurantFoodZero',
+      title: 'PORTFOLIO.PROJECTS.SENCO.TITLE',
+      description: 'PORTFOLIO.PROJECTS.SENCO.DESC',
+      url: 'https://github.com/kkphoenixgx/senco-locacoes-website',
       type: 'carousel',
-      highlightText: 'Robust backend for modern restaurant solutions.'
+      highlightText: 'PORTFOLIO.PROJECTS.SENCO.HIGHLIGHT'
     },
     {
-      title: 'Poem Site (React Frontend)',
-      description: 'A web app to create, edit, and perfect poems for mobile screens, making sharing on social media easier than ever.',
+      title: 'PORTFOLIO.PROJECTS.POEM.TITLE',
+      description: 'PORTFOLIO.PROJECTS.POEM.DESC',
       url: 'https://github.com/kkphoenixgx/Poem-site',
       type: 'carousel',
-      highlightText: 'Poetry meets technology for social sharing.'
+      highlightText: 'PORTFOLIO.PROJECTS.POEM.HIGHLIGHT'
     },
     {
-      title: 'Poem Site (Node Server)',
-      description: 'The Node.js server powering Poem Site, enabling seamless poem management and sharing.',
-      url: 'https://github.com/kkphoenixgx/server-poem-site',
-      type: 'carousel',
-      highlightText: 'Backend for creative expression.'
-    },
-    {
-      title: 'RandomQuiz Spring API',
-      description: 'A robust Spring Boot server for creating and saving random quizzes. Features Swagger documentation and MySQL integration for seamless quiz management.',
+      title: 'PORTFOLIO.PROJECTS.RANDOM_QUIZ_SPRING.TITLE',
+      description: 'PORTFOLIO.PROJECTS.RANDOM_QUIZ_SPRING.DESC',
       url: 'https://github.com/kkphoenixgx/RandomQuiz-Spring-API',
       type: 'side-left',
-      highlightText: 'Empowering quiz creation with enterprise-grade backend.'
+      highlightText: 'PORTFOLIO.PROJECTS.RANDOM_QUIZ_SPRING.HIGHLIGHT'
     },
     {
-      title: 'RandomQuiz Java EE',
-      description: 'Java Enterprise Edition version of RandomQuiz, fully dockerized, with JUnit tests and MySQL database. Built from scratch for maximum control and reliability.',
+      title: 'PORTFOLIO.PROJECTS.RANDOM_QUIZ_JAVA.TITLE',
+      description: 'PORTFOLIO.PROJECTS.RANDOM_QUIZ_JAVA.DESC',
       url: 'https://github.com/kkphoenixgx/prog-app-corporativas--Trabalho-',
       type: 'side-right',
-      highlightText: 'Enterprise-level quiz management with modern DevOps.'
+      highlightText: 'PORTFOLIO.PROJECTS.RANDOM_QUIZ_JAVA.HIGHLIGHT'
     },
     {
-      title: 'DropBox Clone',
-      description: 'A full-featured DropBox clone, demonstrating cloud storage concepts and file management.',
+      title: 'PORTFOLIO.PROJECTS.DROPBOX.TITLE',
+      description: 'PORTFOLIO.PROJECTS.DROPBOX.DESC',
       url: 'https://github.com/kkphoenixgx/DropBoxClone',
       type: 'side-left',
-      highlightText: 'Cloud storage, reimagined for learning.'
+      highlightText: 'PORTFOLIO.PROJECTS.DROPBOX.HIGHLIGHT'
     },
     {
-      title: 'Task Manager Angular',
-      description: 'A task management app built with Angular for productivity and organization.',
+      title: 'PORTFOLIO.PROJECTS.TASK_APP.TITLE',
+      description: 'PORTFOLIO.PROJECTS.TASK_APP.DESC',
       url: 'https://github.com/kkphoenixgx/TaskApp',
       type: 'card',
-      highlightText: 'Boost your productivity.'
+      highlightText: 'PORTFOLIO.PROJECTS.TASK_APP.HIGHLIGHT'
     },
     {
-      title: 'Custom Project Architecture CLI',
-      description: 'A Node.js CLI to create customizable project architectures.',
+      title: 'PORTFOLIO.PROJECTS.CLI_ARCH.TITLE',
+      description: 'PORTFOLIO.PROJECTS.CLI_ARCH.DESC',
       url: 'https://github.com/kkphoenixgx/createArchiteture',
       type: 'card',
-      highlightText: 'Structure your projects your way.'
+      highlightText: 'PORTFOLIO.PROJECTS.CLI_ARCH.HIGHLIGHT'
     },
     {
-      title: 'Node RESTful CRUD Server',
-      description: 'A RESTful CRUD server built with Node.js, demonstrating API fundamentals.',
+      title: 'PORTFOLIO.PROJECTS.NODE_CRUD.TITLE',
+      description: 'PORTFOLIO.PROJECTS.NODE_CRUD.DESC',
       url: 'https://github.com/kkphoenixgx/JavascriptCourse/tree/master/Projetos/ProjetoClientServer',
       type: 'side-right',
-      highlightText: 'Learn RESTful APIs by example.'
+      highlightText: 'PORTFOLIO.PROJECTS.NODE_CRUD.HIGHLIGHT'
     },
     {
-      title: 'Dark Theme Angular',
-      description: 'Angular app with dark theme, login system, and guards. A showcase of modern UI/UX and security.',
+      title: 'PORTFOLIO.PROJECTS.DARK_THEME.TITLE',
+      description: 'PORTFOLIO.PROJECTS.DARK_THEME.DESC',
       url: 'https://github.com/kkphoenixgx/darkThemeWithAngular',
       type: 'end-projects',
-      highlightText: 'Beautiful, secure, and user-friendly.'
+      highlightText: 'PORTFOLIO.PROJECTS.DARK_THEME.HIGHLIGHT'
     },
     {
-      title: 'Markdown Index Creator',
-      description: 'A Node.js CLI tool to create indexes of files in markdown format.',
+      title: 'PORTFOLIO.PROJECTS.MARKDOWN_INDEX.TITLE',
+      description: 'PORTFOLIO.PROJECTS.MARKDOWN_INDEX.DESC',
       url: 'https://github.com/kkphoenixgx/Create-a-index-of-files-in-md',
       type: 'card',
-      highlightText: 'Automate your documentation.'
+      highlightText: 'PORTFOLIO.PROJECTS.MARKDOWN_INDEX.HIGHLIGHT'
     },
     {
-      title: 'Snake Game',
-      description: 'A classic snake game built in JavaScript. Simple, fun, and nostalgic.',
+      title: 'PORTFOLIO.PROJECTS.SNAKE.TITLE',
+      description: 'PORTFOLIO.PROJECTS.SNAKE.DESC',
       url: 'https://github.com/kkphoenixgx/Snake-Game',
       type: 'end-projects',
-      highlightText: 'Retro gaming for web.'
+      highlightText: 'PORTFOLIO.PROJECTS.SNAKE.HIGHLIGHT'
     },
     {
-      title: 'Pokedex Angular',
-      description: 'A Pokédex built with Angular, featuring Pokémon data and search capabilities.',
+      title: 'PORTFOLIO.PROJECTS.POKEDEX.TITLE',
+      description: 'PORTFOLIO.PROJECTS.POKEDEX.DESC',
       url: 'https://github.com/kkphoenixgx/Pokedex-project',
       type: 'end-projects',
-      highlightText: 'Pokémon exploration with Angular.'
+      highlightText: 'PORTFOLIO.PROJECTS.POKEDEX.HIGHLIGHT'
     },
     {
-      title: 'Simple Calculator JS',
-      description: 'A simple calculator built in JavaScript for quick calculations.',
+      title: 'PORTFOLIO.PROJECTS.CALCULATOR.TITLE',
+      description: 'PORTFOLIO.PROJECTS.CALCULATOR.DESC',
       url: 'https://github.com/kkphoenixgx/CalculadoraJs',
       type: 'end-projects',
-      highlightText: 'Quick and easy calculations.'
+      highlightText: 'PORTFOLIO.PROJECTS.CALCULATOR.HIGHLIGHT'
     },
   ];
 

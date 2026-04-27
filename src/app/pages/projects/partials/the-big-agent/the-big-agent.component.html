@@ -1,0 +1,103 @@
+<main class="project-wrapper agent-theme" [ngClass]="{'dark-mode': isDarkMode$ | async, 'white-mode': !(isDarkMode$ | async)}">
+  
+  <nav class="top-nav">
+    <a routerLink="/projects" class="back-btn">
+      <span class="arrow">&larr;</span> 
+      <span class="text">{{ 'PROJECT_BIG_AGENT.NAV_BACK' | translate }}</span>
+    </a>
+    <div class="status-indicator">
+      <span class="dot"></span> {{ 'PROJECT_BIG_AGENT.SYSTEM_ONLINE' | translate }}
+      <app-the-eye></app-the-eye>
+    </div>
+  </nav>
+
+  <div class="hero-header">
+    <div class="header-content">
+      <div class="context-tag">{{ 'PROJECT_BIG_AGENT.CONTEXT_TAG' | translate }}</div>
+      <h1>THE BIG <span class="highlight">AGENT</span></h1>
+      <p class="tagline">{{ 'PROJECT_BIG_AGENT.TAGLINE' | translate }}<app-the-eye></app-the-eye></p>
+      <div class="article-link-container">
+        <a routerLink="/articles/the-big-agent-the-utilization-of-embedded-multi-agent-systems-in-unmanned-aerial-vehicles-for-autonomous-operations" class="discreet-link">{{ 'PROJECT_BIG_AGENT.READ_PUBLICATION' | translate }} &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    
+    <section class="section-card problem scroll-anim">
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_1_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_1_TITLE' | translate }} <app-the-eye></app-the-eye></h2>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.SECTION_1_DESC' | translate"></p>
+      <div class="stat-box">
+        <div class="stat"><span>58k+</span> {{ 'PROJECT_BIG_AGENT.STAT_THEFTS' | translate }}</div>
+        <div class="stat"><span>30k+</span> {{ 'PROJECT_BIG_AGENT.STAT_VEHICLE_THEFTS' | translate }}</div>
+        <small>{{ 'PROJECT_BIG_AGENT.STAT_NOTE' | translate }}</small>
+      </div>
+    </section>
+
+    <section class="section-card solution scroll-anim">
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_2_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_2_TITLE' | translate }}</h2>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.SECTION_2_DESC' | translate"></p>
+      
+      <div class="agent-split">
+        <div class="agent-item">
+          <div class="icon" role="img" aria-label="Eye">👁️</div>
+          <h3>{{ 'PROJECT_BIG_AGENT.AGENT_DRONE_TITLE' | translate }}</h3>
+          <p [innerHTML]="'PROJECT_BIG_AGENT.AGENT_DRONE_DESC' | translate"></p>
+        </div>
+        <div class="agent-item">
+          <div class="icon" role="img" aria-label="Brain">🧠</div>
+          <h3>{{ 'PROJECT_BIG_AGENT.AGENT_SECRETARY_TITLE' | translate }}</h3>
+          <p [innerHTML]="'PROJECT_BIG_AGENT.AGENT_SECRETARY_DESC' | translate"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card technical scroll-anim">
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_3_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_3_TITLE' | translate }}</h2>
+      <ul class="spec-grid">
+        <li *ngFor="let spec of techSpecs">
+          <span class="label">{{ spec.label | translate }}:</span>
+          <span class="value">{{ spec.value | translate }}</span>
+        </li>
+      </ul>
+      <div class="algorithm-info">
+        <h3>{{ 'PROJECT_BIG_AGENT.ALGORITHM_TITLE' | translate }}</h3>
+        <p [innerHTML]="'PROJECT_BIG_AGENT.ALGORITHM_DESC' | translate"></p>
+      </div>
+    </section>
+
+    <section class="section-card states scroll-anim">
+      <div class="section-label">{{ 'PROJECT_BIG_AGENT.SECTION_4_LABEL' | translate }}</div>
+      <h2>{{ 'PROJECT_BIG_AGENT.SECTION_4_TITLE' | translate }}</h2>
+      <div class="state-container">
+        <span *ngFor="let state of systemStates" class="state-tag">{{ state | translate }}</span><app-the-eye></app-the-eye>
+      </div>
+      <p class="note" [innerHTML]="'PROJECT_BIG_AGENT.FSM_NOTE' | translate"></p>
+    </section>
+
+    <!-- Deep Dive: Exaltação do Artigo -->
+    <article class="deep-dive-text scroll-anim">
+      <h2>{{ 'PROJECT_BIG_AGENT.DEEP_DIVE_TITLE' | translate }}</h2>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P1' | translate"></p>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P2' | translate"></p>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P3' | translate"></p>
+      <p [innerHTML]="'PROJECT_BIG_AGENT.DEEP_DIVE_P4' | translate"></p>
+    </article>
+
+  </div>
+
+  <div class="project-footer">
+    <div class="footer-line"></div>
+    <div class="footer-content">
+      <p [innerHTML]="'PROJECT_BIG_AGENT.VALIDATION_NOTE' | translate"></p>
+      <div class="authors">
+        SANTOS, K. | COSTA, D. | LAZARIN, N. | FREITAS, B. | PANTOJA, C. [cite: 4]
+        <app-the-eye></app-the-eye>
+      </div>
+    </div>
+  </div>
+
+</main>

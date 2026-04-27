@@ -1,0 +1,446 @@
+{
+  "META": {
+    "TITLE": "Kkphoenix - Desenvolvedor Fullstack",
+    "DESCRIPTION": "Portfólio de Kauã Alves Santos, desenvolvedor web fullstack especializado em Angular, Node.js e experiências web 3D."
+  },
+  "COMMON": {
+    "LOADING": "Carregando...",
+    "LOADING_UNIVERSE": "Carregando universo...",
+    "CONNECTION_ERROR": "Erro de Conexão",
+    "ALL_RIGHTS_RESERVED": "Todos os direitos reservados.",
+    "PAGE": "Página"
+  },
+  "HEADER": {
+    "TOGGLE_SIDEBAR": "Alternar menu lateral",
+    "OPEN_SETTINGS": "Abrir Menu de Configurações"
+  },
+  "SIDE_MENU": {
+    "HOME": "Início",
+    "ARTICLES": "Artigos",
+    "PROJECTS": "Projetos",
+    "DOWNLOAD_RESUME": "Baixar Currículo",
+    "EMAIL": "E-mail",
+    "POEMS_SITE": "Site de Poemas",
+    "REACT_EXERCISES": "Exercícios de React",
+    "CLOSE": "Fechar Menu Lateral"
+  },
+  "ARTICLES": {
+    "BACK_TO_PUBLICATIONS": "Voltar para Publicações",
+    "PARSING_PDF": "Convertendo PDF para estrutura HTML...",
+    "FAILED_LOAD": "Falha ao carregar o artigo",
+    "TITLE": "Artigos & Publicações",
+    "SUBTITLE": "Minhas pesquisas acadêmicas e artigos técnicos.",
+    "READ_MORE": "Ler Artigo",
+    "BIG_AGENT_TITLE": "O BIG Agent: A Utilização de Sistemas Multiagentes Embarcados em Veículos Aéreos Não Tripulados para Operações Autônomas",
+    "BIG_AGENT_DESC": "Inspirado pelas altas taxas de criminalidade no Brasil e pelo uso de drones em setores estratégicos, este trabalho apresenta uma integração de sistemas multiagentes (MAS) embarcados em veículos aéreos não tripulados (VANTs) para operações de rota autônomas e distribuídas."
+  },
+  "PROJECTS_PAGE": {
+    "TITLE": "ARQUITETURA_DO_SISTEMA",
+    "SUBTITLE": "// MERGULHOS PROFUNDOS EM ECOSSISTEMAS DE ENGENHARIA",
+    "THE_PROBLEM": "O_PROBLEMA",
+    "SOLUTION_TOPOLOGY": "TOPOLOGIA_DA_SOLUÇÃO",
+    "LOADED_MODULES": "MÓDULOS_CARREGADOS",
+    "INITIALIZE_STUDY": "INICIALIZAR_ESTUDO",
+    "P1_TITLE": "Site Pessoal com 3D",
+    "P1_CONTEXT": "Um portfólio altamente interativo que visa mesclar práticas padrão da web com gráficos 3D e física de ponta, criando uma experiência memorável sem sacrificar a acessibilidade ou a performance.",
+    "P1_ARCH": "Construído como uma SPA em Angular 19. Integra Three.js para renderização WebGL (incluindo pós-processamento com EffectComposer) e Matter.js para física 2D. Uso intensivo de RxJS para gerenciamento de estado (como Modo Escuro global e limites de animação) e limpeza de memória para evitar vazamentos de GPU durante transições de rota.",
+    "P2_TITLE": "The Big Agent (MAS Embarcado)",
+    "P2_CONTEXT": "Um sistema multiagente inspirado no 1984 de George Orwell. O objetivo era simular um ambiente onde os agentes possuem inteligência artificial embarcada capaz de navegação complexa, tomada de decisão e comunicação sem um orquestrador central.",
+    "P2_ARCH": "Desenvolvido com uma arquitetura fortemente desacoplada. O backend cognitivo foi construído em Python/Java para lidar com a lógica de agentes BDI (Belief-Desire-Intention), enquanto a camada de simulação física roda em Unity/Three.js. Eles se comunicam de forma assíncrona, respeitando as restrições estritas do ciclo sensor-atuador.",
+    "P3_TITLE": "A Marionete (RPG Roguelite Bullet-Hell)",
+    "P3_CONTEXT": "Um jogo indie atualmente em desenvolvimento ativo. Você joga como um boneco de pano do Gepeto, sobrevivendo a uma chuva de projéteis, frequentando a Academia de Magia e navegando entre o mundo real 3D e os sonhos do boneco. Possui um rico sistema de Multiclasse e NPCs controlados por Inteligência Artificial generativa.",
+    "P3_ARCH": "Engine 100% própria construída do zero em TypeScript puro. Para suportar milhares de elementos simultâneos a 60 FPS, utiliza uma arquitetura extrema de Zero-Garbage Collection (Zero-GC) e descarrega a matemática de colisões espaciais (SAT) em Web Workers paralelos."
+  },
+  "HOME": {
+    "TABS": {
+      "HELLO": "Início",
+      "HISTORY": "História",
+      "PROFESSIONAL": "Histórico Profissional",
+      "PORTFOLIO": "Portfólio",
+      "HIRE_ME": "Contato"
+    },
+    "ERROR": "Ops, algo deu errado"
+  },
+  "HISTORY": {
+    "WHO_I_AM": "Quem eu sou",
+    "PHOTO_DESC_1": "Sou um desenvolvedor full-stack com uma profunda paixão por programação e arquitetura de sistemas.",
+    "PHOTO_DESC_2": "Adoro criar conteúdo 3D e desenvolver belos detalhes que encantam os clientes através de interações envolventes!",
+    "PHOTO_DESC_3": "Um orgulhoso desenvolvedor brasileiro!!! 🇧🇷",
+    "ASTRONOMY_DESC": "<strong>Paixão pela Astronomia e Jornada para o Desenvolvimento de Software</strong>: Durante meus anos de escola, eu era profundamente apaixonado por astronomia. Fiquei cativado pela beleza das nebulosas, pelas descobertas científicas e pela busca implacável por entender o universe. No entanto, minha jornada tomou um rumo inesperado quando descobri a programação como um hobby e comecei a aprender de forma independente.",
+    "COVID_DESC": "Com o início da pandemia da COVID-19, meu país implementou lockdowns rigorosos, o que interrompeu meu acesso a uma educação adequada em física e outras disciplinas. Este período de isolamento me deu tempo para refletir sobre o meu futuro. Aproveitando minhas habilidades autodidatas, mergulhei mais fundo no desenvolvimento de software e comecei a vislumbrar uma carreira em arquitetura de software. Eu me dediquei a estudos rigorosos, dia e noite, para pavimentar meu caminho para o ensino superior.",
+    "PASSION_DESC": "<strong>Descobrindo Minha Verdadeira Paixão</strong>: Através dessa jornada, encontrei minha verdadeira vocação. A programação combina lógica pura com criatividade intelectual — dois elementos que valorizo profundamente. Ela oferece uma mistura perfeita de resolução de problemas, pensamento inovador e a oportunidade de entregar soluções impactantes para os clientes. Além disso, desenvolvi uma paixão por tecnologia voltada para negócios, onde a criatividade encontra a praticidade para alcançar resultados significativos.",
+    "ACADEMIC_CAREER": "Carreira Acadêmica",
+    "CIEP_DESC": "No ensino médio, aprendi muitas coisas e desenvolvi uma profunda paixão pelo empreendedorismo e negócios. Mergulhei profundamente no JavaScript, criei inúmeros projetos e aprendi várias linguagens e conceitos de programação enquanto estudava para o ENEM, CCAA e escola.",
+    "GREETING_PROF": "Gostaria de expressar minha sincera gratidão e dedicar uma nota especial ao Professor Ricardo, Professora Caroline Brito, Professor Canedo, Professora Cicília, Professor Marcelo, Diretora Maristela e a todos os professores que contribuíram para minha jornada até agora. A cada um de vocês, desejo nada menos que o melhor. Um grande abraço a todos vocês.",
+    "CEFET_DESC": "<strong>Na faculdade</strong>, estou cursando Sistemas de Informação em uma das melhores instituições federais do Brasil. Por que Sistemas de Informação? Acredito que posso entregar mais resultados entendendo a lógica de negócios de uma empresa e desenvolvendo soluções práticas, em vez de focar puramente em hardware e matemática teórica profunda como na Ciência da Computação. Prefiro fortemente uma abordagem prática, embora ainda ame profundamente lógica e matemática.",
+    "TCC_DESC": "Para meu trabalho de conclusão de curso (TCC), estou trabalhando em um projeto que facilitará o desenvolvimento de sistemas de IA embarcados, criando um ambiente simulado em 3D para agentes equipados com inteligência artificial."
+  },
+  "PROFESSIONAL_HISTORY": {
+    "SUBTITLE": "// REGISTROS DE CARREIRA",
+    "TITLE": "Histórico <span class=\"highlight\">Profissional</span>",
+    "COVER_TITLE": "Jornada de<br>Engenharia",
+    "PROLOGUE_TITLE": "Prólogo",
+    "PROLOGUE_DESC": "Estou em busca da equipe perfeita para escrever o próximo capítulo.",
+    "CLICK_HINT": "(Clique para virar as páginas)",
+    "NOTES_HINT": "// Vamos construir o futuro juntos.",
+    "TALK_TITLE": "Vamos Conversar!",
+    "HIRE_HINT": "Entre em contato para tornar esta página realidade.",
+    "JOB_MOCK_COMPANY": "Sua Empresa",
+    "JOB_MOCK_ROLE": "Engenheiro Full-Stack / Frontend",
+    "JOB_MOCK_PERIOD": "2026 - Futuro",
+    "JOB_MOCK_DESC": "Estou pronto para arquitetar e desenvolver soluções digitais escaláveis para o seu negócio, unindo o abismo entre UI imersiva e engenharia de software sólida.",
+    "JOB_MOCK_ACH_1": "Desenvolver experiências web 3D interativas",
+    "JOB_MOCK_ACH_2": "Arquitetar ecossistemas Angular robustos",
+    "JOB_MOCK_ACH_3": "Otimizar performance e eliminar dívida técnica"
+  },
+  "HIRE_ME": {
+    "CELLPHONE": "Celular:",
+    "EMAIL": "E-mail:",
+    "LINKEDIN": "LinkedIn:",
+    "GITHUB": "GitHub:"
+  },
+  "HEALTH": {
+    "LIVE_TELEMETRY": "TELEMETRIA EM TEMPO REAL",
+    "TITLE": "Saúde do Sistema",
+    "SUBTITLE": "Rastreamento em tempo real de métricas de QA e performance WebGL",
+    "QA_METRICS": "Métricas de Qualidade e Performance",
+    "STATEMENTS_LINES": "Instruções / Linhas",
+    "FUNCTIONS_METHODS": "Funções e Métodos",
+    "LOGICAL_BRANCHES": "Ramos Lógicos",
+    "WEBGL_ENGINE": "Motor WebGL",
+    "EXCELLENT": "Excelente",
+    "FLAWLESS": "Impecável",
+    "HIGHLY_TESTED": "Altamente Testado",
+    "FLUID": "Fluido",
+    "DEGRADED": "Degradado",
+    "CHECKING": "Verificando...",
+    "QA_STRATEGY": "Estratégia de Garantia de Qualidade",
+    "CHAOS_TITLE": "Engenharia de Caos e Testes de Mutação",
+    "CHAOS_DESC": "Cobertura tradicional mente. Eu utilizo Stryker Mutator para injetar bugs artificiais (mutantes) no código-fonte durante o CI para garantir que os testes realmente detectem falhas, provando a resiliência das regras de negócio.",
+    "HARDWARE_TITLE": "Emulação de Hardware e Game Loop",
+    "HARDWARE_DESC": "Motores WebGL e de Física (Three.js/Matter.js) ignoram o DOM padrão. Eu uso Playwright para emular eventos reais de hardware de mouse e Raycasters, garantindo que o pipeline 3D funcione fora de ambientes locais.",
+    "MEMORY_TITLE": "Guardas de Memória e Isolamento de DOM",
+    "MEMORY_DESC": "Single Page Applications degradam se os buffers da GPU não forem limpos. Pipelines customizados de Karma/Jasmine rastreiam performance.memory para capturar vazamentos de memória VRAM em hooks ngOnDestroy automaticamente.",
+    "HEXAGONAL_TITLE": "Fiscal de Arquitetura Hexagonal",
+    "HEXAGONAL_DESC": "Arquitetura Limpa é facilmente quebrada por importações ruins. Eu utilizo Dependency-Cruiser e ESLint para proibir estritamente que elementos de UI vazem para os Serviços, bloqueando injeções circulares no momento do build.",
+    "SECURITY_TITLE": "Testes de Penetração Automatizados (DAST)",
+    "SECURITY_DESC": "O pipeline de CI/CD executa auditorias de segurança automatizadas testando o DomSanitizer do Angular contra payloads de Cross-Site Scripting (XSS) e verificando o servidor AWS para vazamento de headers sensíveis de infraestrutura."
+  },
+  "CONFIG": {
+    "TITLE": "Configurações",
+    "DESTROY_LAMP": "Destruir Física da Lâmpada",
+    "DESTROY_BTN": "Destruir",
+    "DARK_MODE": "Modo Escuro",
+    "ANIMATIONS": "Animações",
+    "LANGUAGE": "Idioma"
+  },
+  "HELLO": {
+    "HERO": {
+      "PRE_TITLE": "KAUÃ ALVES SANTOS",
+      "TITLE_P1": "Arquitetura de Software Sólida.",
+      "TITLE_P2": "Interfaces Web Imersivas.",
+      "DESC": "Desenvolvedor Full Stack focado em transformar problemas sistêmicos complexos em soluções escaláveis e de alta performance. Da orquestração de infraestrutura AWS à renderização reativa de gráficos 3D no navegador."
+    },
+    "VALUE": {
+      "TITLE": "Engenharia Além do Código",
+      "DESC_1": "Eu não apenas escrevo scripts; eu projeto arquiteturas. Minha base é construída sobre <strong>Arquitetura Limpa, Design Patterns e DDD</strong>.",
+      "DESC_2": "Eu construo backends robustos em <strong>Java (Spring)</strong> e <strong>Node.js</strong> com um design estritamente desacoplado, garantindo alta coesão, testabilidade e manutenibilidade para qualquer regra de negócio."
+    },
+    "FEATURES": {
+      "TITLE": "O Diferencial Técnico",
+      "CARD_1": {
+        "TITLE": "Front-End Complexo",
+        "DESC": "Domínio de SPAs robustas com <strong>Angular</strong>. Gerenciamento de estado com <strong>RxJS</strong> e integração 3D usando <strong>Three.js</strong> e <strong>Matter.js</strong> para interfaces de alta performance e controle de memória."
+      },
+      "CARD_2": {
+        "TITLE": "Inteligência Artificial",
+        "DESC": "Pesquisador no Grupo CHON. Experiência prática projetando <strong>Sistemas Multiagentes (SMA)</strong> e lógica <strong>BDI</strong> para drones autônomos."
+      },
+      "CARD_3": {
+        "TITLE": "Integração com LLM",
+        "DESC": "Desenvolvimento de APIs Java que traduzem linguagem natural em tempo real para controlar sistemas robóticos usando LLMs locais (Ollama)."
+      },
+      "CARD_4": {
+        "TITLE": "Ponta a Ponta",
+        "DESC": "Visão sistêmica do ciclo de vida. Implementação de pipelines (CI/CD), persistência de dados (PostgreSQL) e deploy de infraestrutura na <strong>AWS</strong> com Docker."
+      }
+    },
+    "GAME": {
+      "PRE_TITLE": "PROJETO EM DESTAQUE",
+      "TITLE": "Engine de Jogo Zero-GC",
+      "DESC_1": "Para demonstrar minha capacidade de resolver problemas complexos de engenharia de baixo nível, construí um <strong>RPG Roguelite de alta performance</strong> do zero usando TypeScript puro. Sem Unity, sem Unreal.",
+      "DESC_2": "Ele apresenta uma arquitetura personalizada de <strong>Zero-Garbage Collection</strong>, detecção de colisão multi-threaded via Web Workers, um Parser Lexical de Magias e um ecossistema dinâmico de NPCs alimentado por LLMs locais (Ollama).",
+      "CTA": "Inspecionar Arquitetura"
+    },
+    "TELEMETRY": {
+      "TITLE": "Observabilidade e Telemetria",
+      "DESC_1": "Aplicações 3D de alta performance exigem um gerenciamento rigoroso de recursos. Eu implemento monitoramento em tempo real para rastrear <strong>FPS do WebGL</strong>, alocações de memória da GPU e latência de rede.",
+      "DESC_2": "Explore o painel de saúde ao vivo para ver como esta arquitetura se comporta nos bastidores, garantindo zero vazamentos de memória e taxas de quadros fluidas.",
+      "CTA": "Ver Saúde do Sistema"
+    },
+    "FREELANCE": {
+      "TITLE": "Freelance e Consultoria",
+      "DESC_1": "Transformando ideias ousadas em produtos digitais de alta performance. Estou disponível para projetos freelance, oferecendo desenvolvimento de ponta a ponta, desde o design de UI imersiva até a arquitetura de backend robusta.",
+      "DESC_2": "Se você precisa de uma <strong>Single Page Application</strong> moderna, uma <strong>experiência web 3D</strong> personalizada ou um sistema escalável construído do zero, eu trago agilidade de startup combinada com qualidade de nível corporativo.",
+      "CTA": "Entre em Contato",
+      "SHOWCASE_1": {
+        "TITLE": "Senco Locações",
+        "DESC": "Uma transformação digital completa. Painel de gerenciamento personalizado e landing page dockerizada, confira!"
+      },
+      "SHOWCASE_2": {
+        "TITLE": "Restaurant FoodZero",
+        "DESC": "Uma experiência web imersiva para um restaurante premium dockerizada, confira!"
+      }
+    },
+    "CTA": {
+      "TITLE": "Pronto para Escalar sua Engenharia?",
+      "DESC": "Explore meu portfólio completo ou acesse o repositório das minhas soluções. Sistemas bem arquitetados começam aqui.",
+      "BTN_1": "Ver Projetos (Arquitetura)",
+      "BTN_2": "Fale Comigo"
+    }
+  },
+  "PORTFOLIO": {
+    "SECTION_1": {
+      "TITLE": "Projetos em Destaque",
+      "DESC": "Confira meus principais projetos, construídos com tecnologias modernas e foco na experiência do usuário."
+    },
+    "SECTION_2": {
+      "TITLE": "Projetos Secundários",
+      "DESC": "Projetos de suporte, estudo e experimentais utilizando diferentes stacks e arquiteturas."
+    },
+    "SECTION_3": {
+      "TITLE": "Projetos Pessoais",
+      "DESC": "Iniciativas pessoais, experiências de aprendizado e experimentos criativos."
+    },
+    "VISIT_BTN": "Visitar",
+    "PROJECTS": {
+      "BIG_AGENT": {
+        "TITLE": "The Big Agent (MAS Embarcado)",
+        "DESC": "Um sistema multiagente inspirado no 1984 de George Orwell. Um agente simula uma secretária enviando caminhos para drones, enquanto outro agente é um drone navegando por esses caminhos. Simulação de IA embarcada de ponta.",
+        "HIGHLIGHT": "Revolucionando simulações baseadas em agentes com IA embarcada."
+      },
+      "FOOD_ZERO": {
+        "TITLE": "Restaurant Food Zero",
+        "DESC": "Site de restaurante moderno dockerizado e fácil de rodar com blog, posts e sistema de reserva, construído com Vue.js para uma experiência de usuário suave e Node.js com Swagger para gerenciamento de restaurante rápido, escalável e documentado.",
+        "HIGHLIGHT": "Sistema robusto para um restaurante moderno."
+      },
+      "SENCO": {
+        "TITLE": "Senco Locações",
+        "DESC": "Site Angular SPA moderno dockerizado e fácil de rodar com autenticação correta, login, conexão com e-mail, painel de administrador, rotas, backend, testes, docs e muito mais!",
+        "HIGHLIGHT": "Sistema robusto para uma empresa real."
+      },
+      "POEM": {
+        "TITLE": "Poem Site",
+        "DESC": "Um web app SPA React para criar, editar e aperfeiçoar poemas para telas móveis usando o banco de dados Google Firebase, tornando o compartilhamento em redes sociais mais fácil do que nunca.",
+        "HIGHLIGHT": "Poesia encontra tecnologia para compartilhamento social."
+      },
+      "RANDOM_QUIZ_SPRING": {
+        "TITLE": "RandomQuiz Spring API",
+        "DESC": "Um servidor Spring Boot robusto para criar e salvar quizzes aleatórios. Apresenta documentação Swagger e integração MySQL para gerenciamento de quizzes contínuo.",
+        "HIGHLIGHT": "Capacitando a criação de quizzes com backend de nível empresarial."
+      },
+      "RANDOM_QUIZ_JAVA": {
+        "TITLE": "RandomQuiz Java EE",
+        "DESC": "Versão Java Enterprise Edition do RandomQuiz, totalmente dockerizada, com testes JUnit e banco de dados MySQL. Construída do zero para máximo controle e confiabilidade.",
+        "HIGHLIGHT": "Gerenciamento de quizzes de nível empresarial com DevOps moderno."
+      },
+      "DROPBOX": {
+        "TITLE": "Clone do DropBox",
+        "DESC": "Um clone completo do DropBox, demonstrando conceitos de armazenamento em nuvem e gerenciamento de arquivos.",
+        "HIGHLIGHT": "Armazenamento em nuvem, reimaginado para aprendizado."
+      },
+      "TASK_APP": {
+        "TITLE": "Gerenciador de Tarefas Angular",
+        "DESC": "Um app de gerenciamento de tarefas construído com Angular para produtividade e organização.",
+        "HIGHLIGHT": "Aumente sua produtividade."
+      },
+      "CLI_ARCH": {
+        "TITLE": "CLI de Arquitetura de Projeto Personalizada",
+        "DESC": "Uma CLI Node.js para criar arquiteturas de projeto personalizáveis.",
+        "HIGHLIGHT": "Estruture seus projetos do seu jeito."
+      },
+      "NODE_CRUD": {
+        "TITLE": "Servidor CRUD RESTful Node",
+        "DESC": "Um servidor CRUD RESTful construído com Node.js, demonstrando fundamentos de API.",
+        "HIGHLIGHT": "Aprenda APIs RESTful pelo exemplo."
+      },
+      "DARK_THEME": {
+        "TITLE": "Tema Escuro Angular",
+        "DESC": "App Angular com tema escuro, sistema de login e guards. Uma vitrine de UI/UX moderna e segurança.",
+        "HIGHLIGHT": "Bonito, seguro e amigável ao usuário."
+      },
+      "MARKDOWN_INDEX": {
+        "TITLE": "Criador de Índice Markdown",
+        "DESC": "Uma ferramenta CLI Node.js para criar índices de arquivos em formato markdown.",
+        "HIGHLIGHT": "Automatize sua documentação."
+      },
+      "SNAKE": {
+        "TITLE": "Jogo da Cobrinha",
+        "DESC": "Um clássico jogo da cobrinha construído em JavaScript. Simples, divertido e nostálgico.",
+        "HIGHLIGHT": "Jogos retrô para a web."
+      },
+      "POKEDEX": {
+        "TITLE": "Pokedex Angular",
+        "DESC": "Uma Pokédex construída com Angular, apresentando dados de Pokémon e capacidades de busca.",
+        "HIGHLIGHT": "Exploração de Pokémon com Angular."
+      },
+      "CALCULATOR": {
+        "TITLE": "Calculadora Simples JS",
+        "DESC": "Uma calculadora simples construída em JavaScript para cálculos rápidos.",
+        "HIGHLIGHT": "Cálculos rápidos e fáceis."
+      }
+    }
+  },
+  "RPG": {
+    "NAV": {
+      "BACK": "VOLTAR PARA PROJETOS"
+    },
+    "HERO": {
+      "TITLE": "CÓDIGO. MAGIA. SOBREVIVÊNCIA.",
+      "TAGLINE": "Um RPG Roguelite Bullet-Hell onde seu teclado molda a realidade.",
+      "BADGE_1": "TYPESCRIPT PURO",
+      "BADGE_2": "WEB-WORKERS",
+      "BADGE_3": "ZERO-GC",
+      "BADGE_4": "LLM",
+      "INSPECT_BTN": "[ INSPECIONAR_CÓDIGO ]",
+      "SCROLL": "ROLE PARA A LORE"
+    },
+    "LORE": {
+      "LABEL": "// LORE_",
+      "TITLE": "Um mundo de caos.<br>Uma alma feita de <span class=\"highlight-cyan\">pano</span>.",
+      "BODY": "Você não é o herói da profecia. Você é uma abominação viva esculpida por Gepeto, um portal entre o mundo dos sonhos e a realidade. Acordado e livre, você entra nos corredores esquecidos da <strong>Academia de Magia</strong>, nos palácios do castelo da luz e em muitos outros lugares únicos através dos sonhos. Em um ecossistema onde feitiços são forjados com sua própria alma, onde cada classe é única, você precisará dominar a alquimia, negociar com criaturas insanas e sobreviver a uma verdadeira chuva de projéteis (Bullet-Hell)."
+    },
+    "FEATURE_1": {
+      "LABEL": "// SISTEMA DE CLASSES",
+      "TITLE": "Forje seu <span class=\"highlight-cyan\">Destino</span>",
+      "DESC": "Não se limite a um único caminho. Nosso expansivo sistema <strong>Multiclasse</strong> permite que você roube, absorva e combine habilidades de diferentes linhagens perdidas pelo vasto mundo dos sonhos. Seja um mago de batalha brutal, um necromante, um piromaníaco louco por fogo ou uma anomalia nunca antes vista. A árvore de habilidades é sua tela em branco."
+    },
+    "FEATURE_2": {
+      "LABEL": "// MAGIA PROCEDURAL",
+      "TITLE": "A Sintaxe é <span class=\"highlight-purple\">Sua Arma</span>",
+      "DESC": "Esqueça botões de ataque automatizados. Cada <strong>classe é única</strong>! Compile feitiços e habilidades caóticas dinamicamente enquanto desvia de balas. A magia exige foco, ritmo e a sintaxe perfeita. O combate exige habilidade e sabedoria. Atirar exige sanidade e muita mira."
+    },
+    "FEATURE_3": {
+      "LABEL": "// SISTEMA DE COMBATE",
+      "TITLE": "Alquimia <span class=\"highlight-crimson\">Sistêmica</span>",
+      "DESC": "Não é apenas subtrair HP. É termodinâmica. Dano de fogo evapora Água. Inimigos molhados (<em>WetStatus</em>) conduzem Eletricidade e recebem dano amplificado de magia Sombria. Dano Sagrado purifica os mortos-vivos. Cada entidade herda e sobrescreve um ecossistema complexo de vulnerabilidades <em>Ao Atingir</em>."
+    },
+    "FEATURE_4": {
+      "LABEL": "// INTELIGÊNCIA ARTIFICIAL",
+      "TITLE": "O mundo <span class=\"highlight-cyan\">Respira</span>",
+      "DESC": "Os corredores da academia abrigam seres como o icônico <strong>Diretor Molor</strong>. Aqui, árvores de diálogo estáticas estão mortas. Nossos NPCs têm <em>crenças, desejos e intenções</em> processados dinamicamente por uma IA Generativa Local (Ollama). Converse com eles livremente e veja como a IA manipula o mundo físico do jogo gerando scripts interativos. Pergunte, diga, interaja, comande e obedeça cérebros simulados."
+    },
+    "FEATURE_5": {
+      "LABEL": "// ENGINE PURA",
+      "TITLE": "Engine Construída <span class=\"highlight-purple\">Do Zero</span>",
+      "DESC": "Não usamos Unity ou Unreal. Esta experiência foi forjada 100% em código. Construímos nossa própria TypeScript Engine baseada em <strong>Zero-Garbage Collection</strong> (para que você nunca sinta um engasgo) e delegamos cálculos de caixas de colisão para <strong>Web Workers</strong> em paralelo. Uma monstruosidade de engenharia de software projetada para manter 60 FPS travados."
+    },
+    "FEATURE_6": {
+      "LABEL": "// ARQUITETURA HEXAGONAL",
+      "TITLE": "O Visual é Apenas um <span class=\"highlight-purple\">Adaptador</span>",
+      "DESC_1": "A maior armadilha no desenvolvimento de software é acoplar a interface visual às regras de negócio. Para provar meu domínio em <strong>Systems Design e DDD</strong>, o <em>Core</em> deste RPG foi construído em estrita <strong>Arquitetura Hexagonal (Ports & Adapters)</strong>.",
+      "DESC_2": "Física de colisão, algoritmos de inventário e lógica de IA existem em um vácuo matemático puramente TypeScript. O motor gráfico WebGL que você vê na tela? É literalmente um <em>Adaptador</em> de saída. Se eu quiser rodar este jogo em um terminal de linha de comando ou migrar a UI para React amanhã, o cérebro do sistema permanece completamente intocado."
+    },
+    "FORGE": {
+      "TITLE": "O CÓDIGO É ABERTO.",
+      "DESC": "Este jogo é uma evolução técnica constante. Levamos a engenharia a sério: suítes de teste Vitest simulam estresse <em>Headless</em> extremo a cada commit, e assinaturas criptográficas bloqueiam quaisquer falhas físicas antes que cheguem a você.<br><br>Toda a arquitetura, o Mage Parser e as simulações BDI da IA têm portas abertas.",
+      "LINK": "> [ ACESSAR_PIPELINE_DE_COMMIT ]"
+    },
+    "ROADMAP": {
+      "HEADER": "/// REGISTRO DE EXPANSÃO_",
+      "ITEM_1": " Pipeline Zero-GC Integrado",
+      "ITEM_2": " WebWorker de Física QuadTree & SAT",
+      "ITEM_3": " Lexical Spell Parser (FIFO)",
+      "ITEM_4": " WebGL Shaders Pós-Processamento",
+      "ITEM_5": " Colisão de mundo",
+      "ITEM_6": " Multiplayer P2P WebRTC"
+    }
+  },
+  "PROJECT_PERSONAL": {
+    "NAV_BACK": "VOLTAR PARA PROJETOS",
+    "HERO_TITLE": "Projetando uma<br><span class=\"text-gradient\">Mente Digital.</span>",
+    "HERO_DESC": "Mais do que uma página estática. Um ecossistema Full-Stack vivo, projetado para espelhar meu 'Segundo Cérebro' em tempo real através de Integração Contínua (CI).",
+    "INSPECT_CODE": "Inspecionar Código-Fonte",
+    "ARCH_TITLE_1": "Git-como-Banco-de-Dados e Design Hexagonal",
+    "ARCH_DESC_1": "A atualização de conteúdo não ocorre via painéis engessados. Minhas notas de estudo são forjadas no <strong>Obsidian</strong> e versionadas no GitHub. Um núcleo <strong>Java Spring Boot</strong> em Arquitetura Hexagonal rodando em instâncias AWS EC2 captura as mudanças, realiza o parsing da sintaxe Markdown e entrega uma árvore topológica de grafos via REST. A publicação é orgânica e orientada a dados.",
+    "ARCH_TITLE_2": "WebGL, Física Dinâmica e Zero-GC",
+    "ARCH_DESC_2": "A interface dissolve a barreira entre UI e simulação. Utilizamos <strong>Three.js</strong> para renderizar Sistemas Solares com <em>Raycasting</em> nativo, e injetamos <strong>Matter.js</strong> para gerar uma lâmpada física sujeita à gravidade no DOM.",
+    "ARCH_DESC_3": "Para proteger a GPU, laços de renderização são geridos cirurgicamente por <code>IntersectionObservers</code> e componentes pesados nascem por <strong>Lazy Loading</strong> via <code>ViewContainerRef</code>, descarregando a memória (Zero Garbage Collection Thrashing) quando invisíveis.",
+    "METRICS_TITLE": "O Cinturão de Métricas",
+    "METRICS_DESC": "Arquiteturas bonitas são frágeis sem observabilidade. O Frontend é blindado por suítes contínuas de <strong>Karma/Jasmine</strong> rodando asserções profundas na DOM e na Memória.",
+    "TERMINAL_START": "Executando Suíte Global de Métricas de Software...",
+    "TERMINAL_VELOCITY": "✓ [Velocidade] Render Base da SPA: 112ms (ÓTIMO)",
+    "TERMINAL_ARCH": "✓ [Arquitetura] Payload Budget: Lazy Load confirmado.",
+    "TERMINAL_ZERO_GC": "✓ [Zero-GC] Three.js Memory Leak Check: 0 leaks.",
+    "TERMINAL_SCAN": "motor axe-core escaneando o DOM...",
+    "TERMINAL_ACCESSIBILITY": "✓ [Acessibilidade] Conformidade WCAG AA: 100% Aprovado.",
+    "TERMINAL_FOOTER_1": "Suítes de Teste: 14 passadas, 14 total",
+    "TERMINAL_FOOTER_2": "Snapshots: 0 total",
+    "TERMINAL_FOOTER_3": "Tempo: 2.45s",
+    "FOOTER_COMMENT": "// Pronto para construir o futuro?",
+    "INITIALIZE_CONTACT": "Inicializar Contato"
+  },
+  "PROJECT_BIG_AGENT": {
+    "NAV_BACK": "VOLTAR PARA PROJETOS",
+    "SYSTEM_ONLINE": "SISTEMA ONLINE: THE BIG AGENT V1.0",
+    "TAGLINE": "Utilização de Sistemas Multiagentes Embarcados em VANTs para Operações Autônomas.",
+    "META_DESC": "Estudo de caso: Utilização de Sistemas Multiagentes Embarcados em VANTs para Operações Autônomas.",
+    "CONTEXT_TAG": "WESAAC 2025 // PROJETO DE PESQUISA",
+    "READ_PUBLICATION": "Ler a publicação completa",
+    "SECTION_1_LABEL": "01 // CONTEXTO",
+    "SECTION_1_TITLE": "O Desafio da Segurança Pública",
+    "SECTION_1_DESC": "As altas taxas de criminalidade no Brasil exigem vigilância constante. No entanto, os sistemas centralizados tradicionais falham devido à <strong>sobrecarga de dados</strong>, baixa escalabilidade e custos de manutenção exorbitantes.",
+    "STAT_THEFTS": "Furtos",
+    "STAT_VEHICLE_THEFTS": "Roubos de Veículos",
+    "STAT_NOTE": "*Dados SSP-RJ 2025 citados no estudo",
+    "SECTION_2_LABEL": "02 // ARQUITETURA",
+    "SECTION_2_TITLE": "Descentralização via SMA",
+    "SECTION_2_DESC": "A solução propõe um sistema distribuído onde os drones não são apenas ferramentas, mas <strong>agentes autônomos</strong> capazes de perceber o ambiente e agir colaborativamente.",
+    "AGENT_DRONE_TITLE": "Agente Drone (Olho)",
+    "AGENT_DRONE_DESC": "Controla o hardware, motores e GPS diretamente via arquitetura <strong>ARGO</strong>.",
+    "AGENT_SECRETARY_TITLE": "Secretário de Segurança",
+    "AGENT_SECRETARY_DESC": "Atua como o mestre de decisão, definindo rotas estratégicas e se comunicando via <strong>ContextNet</strong>.",
+    "SECTION_3_LABEL": "03 // ESPECIFICAÇÕES",
+    "SECTION_3_TITLE": "Como Resolvemos",
+    "ALGORITHM_TITLE": "Estabilização Proporcional-Derivativa (PD)",
+    "ALGORITHM_DESC": "Garantimos um voo estável através de um loop de feedback contínuo processando taxas de roll, pitch e yaw em tempo real.",
+    "SECTION_4_LABEL": "04 // LÓGICA DE CONTROLE",
+    "SECTION_4_TITLE": "MEF: Máquina de Estados",
+    "FSM_NOTE": "O sistema alterna automaticamente para <strong>HOVERING</strong> entre as ações para compensar a latência de comunicação entre os agentes.",
+    "SPEC_1_LABEL": "Arquitetura de Agentes",
+    "SPEC_1_VALUE": "BDI (Crença-Desejo-Intenção)",
+    "SPEC_2_LABEL": "Linguagem SMA",
+    "SPEC_2_VALUE": "Jason / AgentSpeak(L)",
+    "SPEC_3_LABEL": "Hardware Emulado",
+    "SPEC_3_VALUE": "DJI Mavic 2 Pro",
+    "SPEC_4_LABEL": "Comunicação IoT",
+    "SPEC_4_VALUE": "ContextNet / ChonNet",
+    "SPEC_5_LABEL": "Middleware",
+    "SPEC_5_VALUE": "ARGO & Javino",
+    "SPEC_6_LABEL": "Simulador",
+    "SPEC_6_VALUE": "Webots 2023b",
+    "STATE_LANDED": "POUSADO",
+    "STATE_UP": "SUBIR",
+    "STATE_DOWN": "DESCER",
+    "STATE_MOVE_RIGHT": "DIREITA",
+    "STATE_MOVE_LEFT": "ESQUERDA",
+    "STATE_MOVE_FORWARD": "FRENTE",
+    "STATE_MOVE_BACKWARD": "TRÁS",
+    "STATE_HOVERING": "HOVERING",
+    "STATE_LANDING": "POUSANDO",
+    "DEEP_DIVE_TITLE": "Estrutura Lógica e Escalabilidade do The BIG Agent",
+    "DEEP_DIVE_P1": "O <em>The BIG Agent</em> propõe uma arquitetura focada na decomposição do controle de Veículos Aéreos Não Tripulados (VANTs). O sistema fragmenta o problema em dois Sistemas Multiagentes (SMA) fundamentais: um responsável pela interface física e atuação direta no hardware de voo, e um nó central que processa o planejamento de rotas e orquestração tática. A validação, executada no simulador Webots utilizando um modelo DJI Mavic 2 Pro, comprova a viabilidade do mapeamento de comandos lógicos para operações físicas de segurança.",
+    "DEEP_DIVE_P2": "O pilar principal do projeto é o desacoplamento estrito de camadas. A percepção física e o controle motor são isolados da comunicação de rede externa, que opera sobre o middleware ContextNet. Ao remover a sintaxe de hardware de baixo nível das responsabilidades da camada tática BDI, o sistema alcança a modularidade necessária para garantir que atualizações ou falhas ocasionais não corrompam a arquitetura de controle.",
+    "DEEP_DIVE_P3": "A modelagem resolve a incompatibilidade estrutural entre o raciocínio discreto dos agentes e a física contínua do ambiente. Para lidar com a latência inerente ao envio de dados, a estabilidade aerodinâmica é gerida por um algoritmo interno Proporcional-Derivativo (PD) que força o VANT a retornar a um estado de voo estacionário (<em>hovering</em>) entre a execução de cada pacote de movimento. Esta mecânica prioriza a precisão da premissa sobre a fluidez, garantindo previsibilidade.",
+    "DEEP_DIVE_P4": "Finalmente, a capacidade de expansão é intrínseca à topologia da rede. A arquitetura de comunicação utiliza <em>ilocuções</em> baseadas em UUIDs únicos, definindo um padrão rigoroso de identificação e troca de mensagens. Esta taxonomia constrói a fundação necessária para que a solução saia do controle unitário e suporte o escalonamento para enxames (swarms) de VANTs, conectando a lógica sólida de SMA à execução prática nas fronteiras da Edge AI.",
+    "VALIDATION_NOTE": "Validado em simulação <strong>Webots</strong> com física realista (ODE)."
+  },
+  "OLD_HERO": {
+    "NAME": "Kauã Alves Santos",
+    "NICKNAME": "kkphoenix",
+    "GREETING": "Bem-vindo!! Meu nome é Kauã Alves Santos, sou um desenvolvedor web fullstack. Por favor, confira meu portfólio e aproveite meu site.",
+    "DOWNLOAD_RESUME": "Baixar Currículo",
+    "LINKEDIN": "LinkedIn",
+    "GITHUB": "GitHub"
+  }
+}

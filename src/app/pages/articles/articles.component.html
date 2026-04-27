@@ -1,1 +1,53 @@
-<p>articles works!</p>
+<div class="articles-container stanford-theme" role="main">
+
+  <!-- Modo Leitor (Reader Mode) - HTML Nativo Gerado a partir do PDF -->
+  <div class="article-reader" *ngIf="selectedArticle; else gridMode">
+    <button class="back-button" (click)="goBackToPublications()">&larr; {{ 'ARTICLES.BACK_TO_PUBLICATIONS' | translate }}</button>
+    
+    <div class="reader-header">
+      <span class="reader-date">{{ selectedArticle.date }}</span>
+      <h1>{{ selectedArticle.title | translate }}</h1>
+    </div>
+
+    <div class="loading-content" *ngIf="isLoadingContent">
+      <div class="spinner"></div>
+      <p>{{ 'ARTICLES.PARSING_PDF' | translate }}</p>
+    </div>
+
+    <div class="error-content" *ngIf="!isLoadingContent && loadingError">
+      <p class="error-message">{{ 'ARTICLES.FAILED_LOAD' | translate }}</p>
+      <p class="error-details">{{ loadingError }}</p>
+    </div>
+
+    <div class="reader-content" *ngIf="!isLoadingContent && !loadingError">
+      <!-- Aqui as páginas entram com visual PERFEITO (incluindo imagens e fontes do PDF) -->
+      <img class="pdf-page" *ngFor="let pageImg of articlePages; let i = index" 
+           [src]="pageImg" 
+           [alt]="('COMMON.PAGE' | translate) + ' ' + (i + 1)">
+    </div>
+  </div>
+
+  <!-- Modo Grid (Galeria) -->  
+  <ng-template #gridMode>
+  <div class="grid-mode">
+    <div class="stanford-header">
+      <h1 class="stanford-title">{{ 'ARTICLES.TITLE' | translate }}</h1>
+      <p class="stanford-subtitle">{{ 'ARTICLES.SUBTITLE' | translate }}</p>
+    </div>
+
+    <div class="articles-grid">
+      <a class="article-card" *ngFor="let article of articles" [routerLink]="['/articles', article.slug]">
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-date">{{ article.date }}</span>
+          </div>
+          <h2>{{ article.title | translate }}</h2>
+          <p class="article-description">{{ article.description | translate }}</p>
+          
+          <span class="read-more">{{ 'ARTICLES.READ_MORE' | translate }} &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  </ng-template>
+</div>

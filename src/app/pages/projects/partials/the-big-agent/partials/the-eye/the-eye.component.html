@@ -1,0 +1,7 @@
+<div class="eye-container" #eyeContainer [class.angry]="isAngry" role="button" tabindex="0" aria-label="Interact with The Eye" (click)="onClick()" (keydown.enter)="onClick()">
+  <div class="eye">
+    <div class="pupil-mover" [style.transform]="pupilTransform">
+      <div class="pupil"></div>
+    </div>
+  </div>
+</div>

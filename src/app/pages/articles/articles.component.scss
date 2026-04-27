@@ -1,0 +1,260 @@
+@use "../../styles/variables.scss" as *;
+
+:host {
+  display: block;
+  width: 100vw;
+  min-height: 85vh;
+}
+.articles-container {
+  min-height: 85vh;
+  padding: 15vh 10vw 10vh 10vw;
+  font-family: "Merriweather", "Georgia", serif;
+  background-color: transparent; 
+  color: $text-dark;
+
+  // READER MODE (HTML GERADO DO PDF)
+  .article-reader {
+    max-width: 850px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease-out;
+
+    .back-button {
+      background: none;
+      border: none;
+      color: $stanford-red;
+      font-size: 1.1rem;
+      font-weight: bold;
+      font-family: sans-serif;
+      cursor: pointer;
+      margin-bottom: 3rem;
+      padding: 0;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $stanford-dark-red;
+        text-decoration: underline;
+      }
+    }
+
+    .reader-header {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid rgba($stanford-red, 0.2);
+      padding-bottom: 2rem;
+
+      .reader-date {
+        font-family: sans-serif;
+        font-weight: bold;
+        color: $stanford-red;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        line-height: 1.2;
+        color: $text-dark;
+      }
+    }
+
+    .loading-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-style: italic;
+      color: $gray-medium;
+      margin-top: 5rem;
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba($stanford-red, 0.15);
+        border-top-color: $stanford-red;
+        border-radius: 50%;
+        animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .error-content {
+      text-align: center;
+      margin-top: 5rem;
+      padding: 3rem;
+      background-color: rgba($stanford-red, 0.03);
+      border: 1px dashed rgba($stanford-red, 0.2);
+      border-radius: 8px;
+
+      .error-message {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: $stanford-dark-red;
+        margin-bottom: 1rem;
+      }
+
+      .error-details {
+        font-family: sans-serif;
+        font-size: 1rem;
+        color: $gray-medium;
+        line-height: 1.6;
+      }
+    }
+
+    .reader-content {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: $gray-medium;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem; // Espaço entre as páginas
+
+      .pdf-page {
+        width: 100%;
+        max-width: 850px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        background-color: white;
+      }
+    }
+  }
+
+  // GRID MODE (STANFORD)
+  .grid-mode {
+    animation: fadeIn 0.4s ease-out;
+
+    .stanford-header {
+      text-align: center;
+      margin-bottom: 5rem;
+      border-bottom: 2px solid rgba($stanford-red, 0.2);
+      padding-bottom: 2rem;
+
+      .stanford-title {
+        font-size: 3.5rem;
+        color: $stanford-red;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+      }
+
+      .stanford-subtitle {
+        font-size: 1.2rem;
+        color: $gray-medium;
+        font-style: italic;
+      }
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      gap: 3rem;
+
+      .article-card {
+        text-decoration: none;
+        color: inherit;
+        background-color: white;
+        border-top: 4px solid $stanford-red;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 12px 24px rgba(140, 21, 21, 0.15);
+
+          .read-more {
+            color: $stanford-red;
+            text-decoration: underline;
+          }
+        }
+
+        .article-content {
+          padding: 2.5rem 2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+
+          .article-meta {
+            margin-bottom: 1rem;
+            
+            .article-date {
+              font-size: 0.85rem;
+              font-family: sans-serif;
+              color: $stanford-red;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              font-weight: bold;
+            }
+          }
+
+          h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            color: $text-dark;
+          }
+
+          .article-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: $gray-medium;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+          }
+
+          .read-more {
+            font-size: 0.9rem;
+            font-family: sans-serif;
+            font-weight: bold;
+            color: $stanford-red;
+            transition: color 0.2s ease;
+          }
+        }
+      }
+    }
+  } // Fechamento correto do .grid-mode
+
+  // --- RESPONSIVIDADE MOBILE ---
+  @media (max-width: 768px) {
+    padding: 12vh 5vw 5vh 5vw;
+
+    .article-reader .reader-header {
+      text-align: center;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .grid-mode {
+      .stanford-header {
+        margin-bottom: 3rem;
+        .stanford-title {
+          font-size: clamp(1.8rem, 8vw, 2.2rem);
+          word-break: break-word;
+        }
+      }
+
+      .articles-grid {
+        gap: 1.5rem;
+        .article-card .article-content {
+          padding: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,88 @@
+<div class="health-dashboard">
+  <div class="glow-ambient"></div>
+
+  <header class="dashboard-header">
+    <div class="live-indicator">
+      <span class="pulse"></span> {{ 'HEALTH.LIVE_TELEMETRY' | translate }}
+    </div>
+    <h1 class="gradient-text">{{ 'HEALTH.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'HEALTH.SUBTITLE' | translate }}</p>
+  </header>
+
+  <h2 class="section-heading"><span class="material-icons">verified_user</span> {{ 'HEALTH.QA_METRICS' | translate }}</h2>
+  
+  <div class="metrics-grid">
+    <div class="metric-card coverage">
+      <h3>{{ 'HEALTH.STATEMENTS_LINES' | translate }}</h3>
+      <div class="circular-chart">
+        <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="linesOffset"></circle></svg>
+        <div class="inner-value"><span class="number">{{ covLines }}</span><span class="unit">%</span></div>
+      </div>
+      <div class="status-badge up-blue">{{ 'HEALTH.EXCELLENT' | translate }}</div>
+    </div>
+
+    <div class="metric-card coverage">
+      <h3>{{ 'HEALTH.FUNCTIONS_METHODS' | translate }}</h3>
+      <div class="circular-chart">
+        <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="functionsOffset"></circle></svg>
+        <div class="inner-value"><span class="number">{{ covFunctions }}</span><span class="unit">%</span></div>
+      </div>
+      <div class="status-badge up-blue">{{ 'HEALTH.FLAWLESS' | translate }}</div>
+    </div>
+
+    <div class="metric-card coverage">
+      <h3>{{ 'HEALTH.LOGICAL_BRANCHES' | translate }}</h3>
+      <div class="circular-chart">
+        <svg><circle class="bg" cx="60" cy="60" r="40"></circle><circle class="progress blue" cx="60" cy="60" r="40" [style.stroke-dashoffset]="branchesOffset"></circle></svg>
+        <div class="inner-value"><span class="number">{{ covBranches }}</span><span class="unit">%</span></div>
+      </div>
+      <div class="status-badge up-blue">{{ 'HEALTH.HIGHLY_TESTED' | translate }}</div>
+    </div>
+
+    <div class="metric-card">
+      <h3>{{ 'HEALTH.WEBGL_ENGINE' | translate }}</h3>
+      <div class="circular-chart">
+        <svg>
+          <circle class="bg" cx="60" cy="60" r="40"></circle>
+          <circle class="progress" cx="60" cy="60" r="40" [style.stroke-dashoffset]="fpsOffset" [attr.stroke]="fps >= 30 ? '#00ffcc' : (fps > 0 ? '#ffcc00' : '#888')"></circle>
+        </svg>
+        <div class="inner-value"><span class="number">{{ fps }}</span><span class="unit">FPS</span></div>
+      </div>
+      <div class="status-badge" [ngClass]="{'up': fps >= 30, 'warning': fps > 0 && fps < 30, 'checking': fps === 0}">{{ fps >= 30 ? ('HEALTH.FLUID' | translate) : (fps === 0 ? ('HEALTH.CHECKING' | translate) : ('HEALTH.DEGRADED' | translate)) }}</div>
+    </div>
+  </div>
+
+  <h2 class="section-heading mt-5"><span class="material-icons">architecture</span> {{ 'HEALTH.QA_STRATEGY' | translate }}</h2>
+  <div class="strategy-grid">
+    
+    <div class="strategy-card">
+      <h3>{{ 'HEALTH.CHAOS_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.CHAOS_DESC' | translate }}</p>
+      <div class="badge-list"><span class="badge">Stryker</span> <span class="badge">Mutation Score</span></div>
+    </div>
+
+    <div class="strategy-card">
+      <h3>{{ 'HEALTH.HARDWARE_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.HARDWARE_DESC' | translate }}</p>
+      <div class="badge-list"><span class="badge">Playwright</span> <span class="badge">E2E</span> <span class="badge">WebGL Raycasting</span></div>
+    </div>
+
+    <div class="strategy-card">
+      <h3>{{ 'HEALTH.MEMORY_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.MEMORY_DESC' | translate }}</p>
+      <div class="badge-list"><span class="badge">Karma</span> <span class="badge">Jasmine</span> <span class="badge">Garbage Collection</span></div>
+    </div>
+
+    <div class="strategy-card">
+      <h3>{{ 'HEALTH.HEXAGONAL_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.HEXAGONAL_DESC' | translate }}</p>
+      <div class="badge-list"><span class="badge">Dependency Cruiser</span> <span class="badge">ESLint</span> <span class="badge">AST Parsing</span></div>
+    </div>
+
+    <div class="strategy-card full-width">
+      <h3>{{ 'HEALTH.SECURITY_TITLE' | translate }}</h3>
+      <p>{{ 'HEALTH.SECURITY_DESC' | translate }}</p>
+      <div class="badge-list"><span class="badge">OWASP Baselines</span> <span class="badge">npm audit</span> <span class="badge">Payload Injection</span></div>
+    </div>
+  </div>
+</div>

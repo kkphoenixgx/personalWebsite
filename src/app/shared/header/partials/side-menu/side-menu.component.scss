@@ -11,18 +11,29 @@ $x-line-thickness: 5px;
   transition: ease-in-out 0.5s;
   top: 0;
   overflow-y: auto; /* Permite scroll se o conteúdo estourar a altura */
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3); /* Sombra para destacar o menu */
+  box-shadow: 4px 0 15px $shadow-medium; /* Sombra para destacar o menu */
 
   &.darkMode {
     background-color: $gray-default;
-    .extra-links li a { color: white; }
+    
+    .extra-links li a { 
+      color: white; 
+      &:hover { color: $purple-light; }
+    }
+    
+    .link-to-pages li a {
+      color: #f5f5f5;
+      &:hover { color: $purple-light; }
+    }
+
     .x-icon::before, .x-icon::after { background-color: white; }
     .status-container { color: white; }
   }
 
   &.whiteMode {
-    background-color: #f5f5f5;
-    .extra-links li a { color: black; }
+    background-color: $text-light;
+    .extra-links li a { color: black; &:hover { color: $purple-default; } }
+    .link-to-pages li a { color: black; &:hover { color: $purple-default; } }
     .x-icon::before, .x-icon::after { background-color: black; }
     .status-container { color: black; }
   }
@@ -36,6 +47,7 @@ $x-line-thickness: 5px;
   margin-top: 5%;
   user-select: none;
   -webkit-user-select: none;
+  margin-bottom: 3%;
 
   &::before,
   &::after {
@@ -71,7 +83,7 @@ $x-line-thickness: 5px;
     .spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid rgba(128, 128, 128, 0.2);
+      border: 3px solid $border-light;
       border-radius: 50%;
       border-top-color: $purple-default;
       animation: spin 1s ease-in-out infinite;
@@ -88,17 +100,40 @@ $x-line-thickness: 5px;
     .error-icon {
       font-size: 3rem;
       font-weight: bold;
-      color: #ff4444;
+      color: $status-error;
       margin-bottom: 0.5rem;
       animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite;
     }
     p {
-      color: #ff4444;
       font-weight: bold;
     }
   }
 }
 
+.link-to-pages{
+  list-style: none;
+  padding: 2rem 2rem 0rem 2rem;
+  margin: 0;
+  border-top: 2px solid $gray-third;
+  text-align: center;
+
+  li {
+    margin-bottom: 1rem;
+    text-align: center;
+    
+    a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: ease-in-out 0.3s;
+      color: $text-light;
+
+      &:hover {
+        color: $purple-default;
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
 
 /* Espaçamento para o navegador de arquivos ficar mais clean */
 app-file-navigator {

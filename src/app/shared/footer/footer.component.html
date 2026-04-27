@@ -3,7 +3,7 @@
 >
 
   <ng-container *ngIf="loading; else notLoading">
-    <div class="loading-indicator">Carregando universo...</div>
+    <div class="loading-indicator">{{ 'COMMON.LOADING_UNIVERSE' | translate }}</div>
   </ng-container>
 
   <ng-template #notLoading>
@@ -14,7 +14,7 @@
 
   <ng-template #staticFooter>
     <div class="static-footer-content">
-      &copy; 2025 Kauã Santos. All rights reserved.
+      &copy; 2025 Kauã Santos. {{ 'COMMON.ALL_RIGHTS_RESERVED' | translate }}
     </div>
   </ng-template>
 

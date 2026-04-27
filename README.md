@@ -1,90 +1,68 @@
-# PersonalWebsite
+# Personal Website - Kkphoenix
 
-## ISSUES
+[![Angular Version](https://img.shields.io/badge/Angular-19-dd0031.svg?style=flat&logo=angular)](https://angular.dev)
+[![Three.js](https://img.shields.io/badge/Three.js-r173-black.svg?style=flat&logo=three.js)](https://threejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- [ ] listando sync conflicts e .excalidraw no quartz
-- [ ] Tá dando erro 404 para pegar as imagens
-- [ ] Tem que fazer aquele negócio das provas
-- [ ] Refatorar scss
-- [ ] Melhorar a UI para deixar mais impressionante
-- [ ] Sessão dos artigos
-- [ ] Testes para o footer
-- [ ] window sem focus tira o animate
-- [ ] Change mouse. Opção para desativar isso.
-- [~] profissional-history partial
-- [ ] Profissional history vai ser um livro
-- [ ] Github API para listar os repositórios em algum lugar
+An interactive, high-performance personal portfolio built with **Angular 19**. This project merges traditional web development with advanced 3D graphics and physics engines to create a unique, immersive user experience.
 
-- [ ] Sugestão: O botão de "Toggle Animations" que vi no seu código (<app-config-menu>) precisa funcionar perfeitamente. Se detectar FPS baixo, sugira desligar a física automaticamente ou mostre um aviso.
+![Current Architecture](./current_architecture.png)
 
-### Sub projetos
+## 🚀 Features
 
-- [ ] - excalidraw no site
-  - Google desenhos exporta para pdf com resulição vetorial de zoom de 1000x
+- **3D Interactive Elements**: Integrated **Three.js** for 3D text in the header, an interactive particle background in the history section, and a mini-solar system in the footer.
+- **2D Physics Engine**: An interactive "Dark Mode" toggle lamp powered by **Matter.js**.
+- **Dynamic Animations**: Smooth transitions and effects using **GSAP** (GreenSock Animation Platform).
+- **Second Brain Integration**: A file navigator that pulls notes and projects from a custom backend API.
+- **PDF Research Hub**: A dedicated section for academic papers with a built-in PDF renderer.
+- **Global State Management**: Reactive dark mode and animation control system using **RxJS**.
+- **Performance Optimized**: Uses `IntersectionObserver` to pause heavy 3D renders when out of view, and `OnPush` change detection for complex components.
+- **Health Dashboard**: Real-time FPS monitoring and automated test coverage visualization.
 
-### Completed
+## 🛠 Tech Stack
 
-- [X] listando sync conflicts e .excalidraw
-- [X] Quando acontece um resize aumentando a tela acima de 890px e abaixo de 1260 - o canvas não ocupa 100% do history
-- [X] Se eu ligo a animação pelo menos 3 vezes (6 clicks no toogle animation) o container do tree.js no history buga e dá erro na criação do container com tema escuro e continua com o fumdo claro, tornando impossível ler o texto
-- [X] A color não tá mudando quando desliga a animação 
-- [X] Lamp não está funcionando no mobile
-- [X] Menu fallbacks
-- [X] File explorer clicka e fica tudo azul
-- [X] Links da hero não tão mudando na mudança para o dark mode
-- [X] A hero não tá funcionando do jeito que precisa
-- [X] O history ainda buga ( Se eu dou resize na página, o canvas as vezes buga e não fica do tamanho correto )
-- [X] Tira o TCC project por enquanto
-- [X] Ajeita o menu
-- [X] Backend Java
-- [X] Full screen o texto buga
-- [X] Responsividade do Portifólio ( & Margin no portifólio)
-- [X] Responsividade do Hire Me
-- [X] Responsividade do footer
-- [X] hire-me partial
-- [X] portifolio partial
-- [X] planetas do footer na esfera
-- [X] Pointer events and css Header components
-- [X] abaixo de 700px -> hello container quebra
-- [?] Fazer Mobile para os componetes já existentes
-- [?] Module logic refactored
-- [X] Perfromance No app Component
-- [X] Fazer o zoom do text ser atualizado de acordo com a tela do usuário
-- [X] Definir o tamanho correto do header
-- [X] Diminuir o tempo de load dos componentes
-- [X] Alterar animation-service para definir tempo de loading para os componentes
-- [X] Testes unitários para os componentes: Certeza que os compoenentes three não estão deixando garbage
-- [X] Refactoring: "Reecomponentizar"
-- [X] Ajustar os ícones do hello component
-- [X] History resize with background
-- [X] Mobile do header
-- [X] Mobile do Home
-- [X] Mobile do History
+- **Framework**: Angular 19 (Standalone Components)
+- **3D/Physics**: Three.js, Matter.js
+- **Animations**: GSAP
+- **Styling**: SCSS (Global Variables, BEM-ish)
+- **Testing**: Karma, Jasmine, Playwright, Stryker (Mutation Testing)
+- **CI/CD**: Custom pipeline scripts for auditing, testing, and building.
 
+## 📦 Installation & Setup
 
-## Running unit tests
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/kkphoenix/personal-website.git
+   cd personal-website/frontend-personal-website
+   ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-```bash
-ng test
-```
+3. **Run the development server**:
+   ```bash
+   npm start
+   ```
+   Navigate to `http://localhost:4200/`.
 
-### Running end-to-end tests
+## 🧪 Testing
 
-For end-to-end (e2e) testing, run:
+The project maintains a rigorous testing standard, including unit, E2E, and mutation testing.
 
-```bash
-ng e2e
-```
+- **Unit Tests**: `npm test`
+- **End-to-End (Playwright)**: `npm run e2e`
+- **Mutation Testing (Stryker)**: `npm run mutate`
+- **CI Pipeline Simulation**: `npm run pipeline`
 
-## Current Architeture
+## 📖 Documentation
 
-![architeture](./current_architecture.png)
+Detailed documentation is available in the `docs/` folder:
+- [Architecture Overview](./docs/Architecture.md)
+- [Testing Strategy & Coverage](./docs/Tests_Coverage.md)
+- [Project Roadmap](./docs/Todo.md)
 
-## Simple Notes
+---
 
-O + enter
-
-ng serve --host 0.0.0.0 --port 4200
-
+Developed with ❤️ by [Kkphoenix](https://github.com/kkphoenix)
