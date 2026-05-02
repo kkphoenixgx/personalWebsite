@@ -1,4 +1,6 @@
-<article class="indie-showcase-container">
+<article class="indie-showcase-container"
+  [ngClass]="{ 'darkMode': isDarkMode$ | async, 'whiteMode': !(isDarkMode$ | async) }"
+>
   
   <!-- HERO: O Impacto Inicial -->
   <section class="indie-hero">

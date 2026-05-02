@@ -2,20 +2,27 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
 
 import { HealthComponent } from './health.component';
+import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 
 describe('HealthComponent', () => {
   let component: HealthComponent;
   let fixture: ComponentFixture<HealthComponent>;
   let httpMock: HttpTestingController;
+  let darkModeServiceMock: jasmine.SpyObj<DarkModeControllerService>;
 
   beforeEach(async () => {
+    darkModeServiceMock = jasmine.createSpyObj('DarkModeControllerService', ['getDarkModeObserbable']);
+    darkModeServiceMock.getDarkModeObserbable.and.returnValue(of(true));
+
     await TestBed.configureTestingModule({
       imports: [HealthComponent, TranslateModule.forRoot()],
       providers: [
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        { provide: DarkModeControllerService, useValue: darkModeServiceMock }
       ]
     })
     .compileComponents();

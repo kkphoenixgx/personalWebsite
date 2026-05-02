@@ -124,7 +124,7 @@
     "HEXAGONAL_TITLE": "Fiscal de Arquitetura Hexagonal",
     "HEXAGONAL_DESC": "Arquitetura Limpa é facilmente quebrada por importações ruins. Eu utilizo Dependency-Cruiser e ESLint para proibir estritamente que elementos de UI vazem para os Serviços, bloqueando injeções circulares no momento do build.",
     "SECURITY_TITLE": "Testes de Penetração Automatizados (DAST)",
-    "SECURITY_DESC": "O pipeline de CI/CD executa auditorias de segurança automatizadas testando o DomSanitizer do Angular contra payloads de Cross-Site Scripting (XSS) e verificando o servidor AWS para vazamento de headers sensíveis de infraestrutura."
+    "SECURITY_DESC": "O pipeline de CI/CD executa auditorias de segurança automatizadas testando o DomSanitizer do Angular contra payloads de Cross-Site Scripting (XSS) e verificando o servidor Hetzner (anteriormente AWS) para vazamento de headers sensíveis de infraestrutura."
   },
   "CONFIG": {
     "TITLE": "Configurações",
@@ -139,7 +139,7 @@
       "PRE_TITLE": "KAUÃ ALVES SANTOS",
       "TITLE_P1": "Arquitetura de Software Sólida.",
       "TITLE_P2": "Interfaces Web Imersivas.",
-      "DESC": "Desenvolvedor Full Stack focado em transformar problemas sistêmicos complexos em soluções escaláveis e de alta performance. Da orquestração de infraestrutura AWS à renderização reativa de gráficos 3D no navegador."
+      "DESC": "Desenvolvedor Full Stack focado em transformar problemas sistêmicos complexos em soluções escaláveis e de alta performance. Da orquestração de infraestrutura (anteriormente AWS, agora Hetzner) à renderização reativa de gráficos 3D no navegador."
     },
     "VALUE": {
       "TITLE": "Engenharia Além do Código",
@@ -162,7 +162,7 @@
       },
       "CARD_4": {
         "TITLE": "Ponta a Ponta",
-        "DESC": "Visão sistêmica do ciclo de vida. Implementação de pipelines (CI/CD), persistência de dados (PostgreSQL) e deploy de infraestrutura na <strong>AWS</strong> com Docker."
+        "DESC": "Visão sistêmica do ciclo de vida. Implementação de pipelines (CI/CD), persistência de dados (PostgreSQL) e deploy de infraestrutura na <strong>Hetzner</strong> (anteriormente AWS) com Docker."
       }
     },
     "GAME": {
@@ -362,7 +362,7 @@
     "HERO_DESC": "Mais do que uma página estática. Um ecossistema Full-Stack vivo, projetado para espelhar meu 'Segundo Cérebro' em tempo real através de Integração Contínua (CI).",
     "INSPECT_CODE": "Inspecionar Código-Fonte",
     "ARCH_TITLE_1": "Git-como-Banco-de-Dados e Design Hexagonal",
-    "ARCH_DESC_1": "A atualização de conteúdo não ocorre via painéis engessados. Minhas notas de estudo são forjadas no <strong>Obsidian</strong> e versionadas no GitHub. Um núcleo <strong>Java Spring Boot</strong> em Arquitetura Hexagonal rodando em instâncias AWS EC2 captura as mudanças, realiza o parsing da sintaxe Markdown e entrega uma árvore topológica de grafos via REST. A publicação é orgânica e orientada a dados.",
+    "ARCH_DESC_1": "A atualização de conteúdo não ocorre via painéis engessados. Minhas notas de estudo são forjadas no <strong>Obsidian</strong> e versionadas no GitHub. Um núcleo <strong>Java Spring Boot</strong> em Arquitetura Hexagonal rodando em instâncias Hetzner (anteriormente AWS EC2) captura as mudanças, realiza o parsing da sintaxe Markdown e entrega uma árvore topológica de grafos via REST. A publicação é orgânica e orientada a dados.",
     "ARCH_TITLE_2": "WebGL, Física Dinâmica e Zero-GC",
     "ARCH_DESC_2": "A interface dissolve a barreira entre UI e simulação. Utilizamos <strong>Three.js</strong> para renderizar Sistemas Solares com <em>Raycasting</em> nativo, e injetamos <strong>Matter.js</strong> para gerar uma lâmpada física sujeita à gravidade no DOM.",
     "ARCH_DESC_3": "Para proteger a GPU, laços de renderização são geridos cirurgicamente por <code>IntersectionObservers</code> e componentes pesados nascem por <strong>Lazy Loading</strong> via <code>ViewContainerRef</code>, descarregando a memória (Zero Garbage Collection Thrashing) quando invisíveis.",
@@ -431,7 +431,7 @@
     "DEEP_DIVE_TITLE": "Estrutura Lógica e Escalabilidade do The BIG Agent",
     "DEEP_DIVE_P1": "O <em>The BIG Agent</em> propõe uma arquitetura focada na decomposição do controle de Veículos Aéreos Não Tripulados (VANTs). O sistema fragmenta o problema em dois Sistemas Multiagentes (SMA) fundamentais: um responsável pela interface física e atuação direta no hardware de voo, e um nó central que processa o planejamento de rotas e orquestração tática. A validação, executada no simulador Webots utilizando um modelo DJI Mavic 2 Pro, comprova a viabilidade do mapeamento de comandos lógicos para operações físicas de segurança.",
     "DEEP_DIVE_P2": "O pilar principal do projeto é o desacoplamento estrito de camadas. A percepção física e o controle motor são isolados da comunicação de rede externa, que opera sobre o middleware ContextNet. Ao remover a sintaxe de hardware de baixo nível das responsabilidades da camada tática BDI, o sistema alcança a modularidade necessária para garantir que atualizações ou falhas ocasionais não corrompam a arquitetura de controle.",
-    "DEEP_DIVE_P3": "A modelagem resolve a incompatibilidade estrutural entre o raciocínio discreto dos agentes e a física contínua do ambiente. Para lidar com a latência inerente ao envio de dados, a estabilidade aerodinâmica é gerida por um algoritmo interno Proporcional-Derivativo (PD) que força o VANT a retornar a um estado de voo estacionário (<em>hovering</em>) entre a execução de cada pacote de movimento. Esta mecânica prioriza a precisão da premissa sobre a fluidez, garantindo previsibilidade.",
+    "DEEP_DIVE_P3": "A modelagem resolve a incompatibilidade estrutural entre o raciocínio discreto dos agentes e a física contínua do ambiente. Para lidar com a latência inerente ao envio de dados, a estabilidade aerodinâmica é gerida por um algoritmo interno Proporcional-Derivativa (PD) que força o VANT a retornar a um estado de voo estacionário (<em>hovering</em>) entre a execução de cada pacote de movimento. Esta mecânica prioriza a precisão da premissa sobre a fluidez, garantindo previsibilidade.",
     "DEEP_DIVE_P4": "Finalmente, a capacidade de expansão é intrínseca à topologia da rede. A arquitetura de comunicação utiliza <em>ilocuções</em> baseadas em UUIDs únicos, definindo um padrão rigoroso de identificação e troca de mensagens. Esta taxonomia constrói a fundação necessária para que a solução saia do controle unitário e suporte o escalonamento para enxames (swarms) de VANTs, conectando a lógica sólida de SMA à execução prática nas fronteiras da Edge AI.",
     "VALIDATION_NOTE": "Validado em simulação <strong>Webots</strong> com física realista (ODE)."
   },

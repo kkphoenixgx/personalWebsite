@@ -9,10 +9,12 @@
   min-height: 85vh;
   padding: 15vh 10vw 10vh 10vw;
   font-family: "Merriweather", "Georgia", serif;
-  background-color: transparent; 
+  background-color: #fdfcf8; 
   color: $text-dark;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   // READER MODE (HTML GERADO DO PDF)
+
   .article-reader {
     max-width: 850px;
     margin: 0 auto;

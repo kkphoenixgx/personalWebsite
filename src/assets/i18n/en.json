@@ -124,7 +124,7 @@
     "HEXAGONAL_TITLE": "Hexagonal Architecture Enforcer",
     "HEXAGONAL_DESC": "Clean Architecture is easily broken by bad imports. I utilize Dependency-Cruiser and ESLint to strictly forbid UI elements from leaking into Services, blocking circular injections at build time.",
     "SECURITY_TITLE": "Automated Penetration Testing (DAST)",
-    "SECURITY_DESC": "The CI/CD pipeline executes automated security audits testing the Angular DomSanitizer against Cross-Site Scripting (XSS) payloads and checking the backend AWS server for sensitive infrastructure headers leakage."
+    "SECURITY_DESC": "The CI/CD pipeline executes automated security audits testing the Angular DomSanitizer against Cross-Site Scripting (XSS) payloads and checking the backend Hetzner server (formerly AWS) for sensitive infrastructure headers leakage."
   },
   "CONFIG": {
     "TITLE": "Settings",
@@ -139,7 +139,7 @@
       "PRE_TITLE": "KAUÃ ALVES SANTOS",
       "TITLE_P1": "Solid Software Architecture.",
       "TITLE_P2": "Immersive Web Interfaces.",
-      "DESC": "Full Stack Developer focused on transforming complex systemic problems into scalable, high-performance solutions. From AWS infrastructure orchestration to reactive 3D graphics rendering in the browser."
+      "DESC": "Full Stack Developer focused on transforming complex systemic problems into scalable, high-performance solutions. From infrastructure orchestration (formerly AWS, now Hetzner) to reactive 3D graphics rendering in the browser."
     },
     "VALUE": {
       "TITLE": "Engineering Beyond Code",
@@ -162,7 +162,7 @@
       },
       "CARD_4": {
         "TITLE": "End-to-End",
-        "DESC": "Systemic view of the lifecycle. Implementation of pipelines (CI/CD), data persistence (PostgreSQL), and infrastructure deployment on <strong>AWS</strong> with Docker."
+        "DESC": "Systemic view of the lifecycle. Implementation of pipelines (CI/CD), data persistence (PostgreSQL), and infrastructure deployment on <strong>Hetzner</strong> (formerly AWS) with Docker."
       }
     },
     "GAME": {
@@ -339,7 +339,7 @@
       "LABEL": "// HEXAGONAL ARCHITECTURE",
       "TITLE": "The Visuals are Just an <span class=\"highlight-purple\">Adapter</span>",
       "DESC_1": "The biggest trap in software development is coupling the visual interface to the business rules. To prove my mastery of <strong>Systems Design and DDD</strong>, the <em>Core</em> of this RPG was built in strict <strong>Hexagonal Architecture (Ports & Adapters)</strong>.",
-      "DESC_2": "Collision physics, inventory algorithms, and AI logic exist in a purely TypeScript mathematical vacuum. The WebGL graphics engine you see on the screen? It's literally an output <em>Adapter</em>. If I want to run this game in a command-line terminal or migrate the UI to React tomorrow, the system's brain remains completely untouched."
+      "DESC_2": "Collision physics, inventory algorithms, and AI logic exist in a purely TypeScript mathematical vacuum. The WebGL graphics engine you see on the screen? It's literally an output <em>Adapter</em>. If I want to run this game in a command-line terminal or migrate the UI to React tomorrow, the system's brain remains completely intocado."
     },
     "FORGE": {
       "TITLE": "THE CODE IS OPEN.",
@@ -362,7 +362,7 @@
     "HERO_DESC": "More than a static page. A living Full-Stack ecosystem, designed to mirror my 'Second Brain' in real-time through Continuous Integration (CI).",
     "INSPECT_CODE": "Inspect Source Code",
     "ARCH_TITLE_1": "Git-as-a-Database & Hexagonal Design",
-    "ARCH_DESC_1": "Content updates don't happen via rigid panels. My study notes are forged in <strong>Obsidian</strong> and versioned on GitHub. A <strong>Java Spring Boot</strong> core in Hexagonal Architecture running on AWS EC2 instances captures changes, parses Markdown syntax, and delivers a topological graph tree via REST. Publication is organic and data-driven.",
+    "ARCH_DESC_1": "Content updates don't happen via rigid panels. My study notes are forged in <strong>Obsidian</strong> and versioned on GitHub. A <strong>Java Spring Boot</strong> core in Hexagonal Architecture running on Hetzner instances (formerly AWS EC2) captures changes, parses Markdown syntax, and delivers a topological graph tree via REST. Publication is organic and data-driven.",
     "ARCH_TITLE_2": "WebGL, Dynamic Physics, and Zero-GC",
     "ARCH_DESC_2": "The interface dissolves the barrier between UI and simulation. We use <strong>Three.js</strong> to render Solar Systems with native <em>Raycasting</em>, and inject <strong>Matter.js</strong> to generate a physical lamp subject to gravity in the DOM.",
     "ARCH_DESC_3": "To protect the GPU, rendering loops are surgically managed by <code>IntersectionObservers</code> and heavy components are born via <strong>Lazy Loading</strong> through <code>ViewContainerRef</code>, offloading memory (Zero Garbage Collection Thrashing) when invisible.",

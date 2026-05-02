@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
+import { Subject, takeUntil } from 'rxjs';
 
 interface ICoverageData {
   total: {
@@ -26,6 +28,9 @@ export class HealthComponent implements OnInit, OnDestroy {
   covFunctions = 0;
   covBranches = 0;
 
+  public isDarkMode = true;
+  private destroy$ = new Subject<void>();
+
   private animationFrameId: number = 0;
   private frames = 0;
   private prevTime = performance.now();
@@ -34,12 +39,21 @@ export class HealthComponent implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
   private titleService = inject(Title);
   private metaService = inject(Meta);
+  private cdr = inject(ChangeDetectorRef);
+  public darkModeService = inject(DarkModeControllerService);
 
   constructor() {}
 
   ngOnInit() {
     this.startFpsMonitor();
     this.fetchCoverage();
+
+    this.darkModeService.getDarkModeObserbable()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(state => {
+        this.isDarkMode = state;
+        this.cdr.markForCheck();
+      });
 
     this.translate.get('HEALTH.TITLE').subscribe(title => {
       this.titleService.setTitle(`${title} | K. Phoenix`);
@@ -51,6 +65,8 @@ export class HealthComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     cancelAnimationFrame(this.animationFrameId);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private fetchCoverage() {

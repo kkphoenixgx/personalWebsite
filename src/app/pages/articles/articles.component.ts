@@ -3,9 +3,10 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { PdfExtractionService } from '../../services/pdf-extraction.service';
 import { gsap } from 'gsap';
 import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router'; // Importar RouterModule, Router, ActivatedRoute e ParamMap
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, take } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 
 export interface IArticle {
   title: string;
@@ -41,12 +42,19 @@ export class ArticlesComponent implements OnInit, OnDestroy { // Removido AfterV
 
   private pdfExtractionService = inject(PdfExtractionService);
   private translate = inject(TranslateService);
+  private darkModeService = inject(DarkModeControllerService);
+  private previousDarkMode: boolean = true;
 
   constructor() { }
 
   async ngOnInit() {
-    this.document.body.style.backgroundColor = '#fdfcf8'; // Off-white de Stanford
+    this.darkModeService.getDarkModeObserbable().pipe(take(1)).subscribe(state => {
+      this.previousDarkMode = state;
+    });
+    this.darkModeService.setDarkMode(false);
+
     this.document.body.style.transition = 'background-color 0.5s ease';
+    this.document.body.style.backgroundColor = '#fdfcf8';
     
     this.translate.get('ARTICLES.TITLE').subscribe(title => {
       this.titleService.setTitle(`${title} | K. Phoenix`);
@@ -106,6 +114,7 @@ export class ArticlesComponent implements OnInit, OnDestroy { // Removido AfterV
 
 
   ngOnDestroy(): void {
+    this.darkModeService.setDarkMode(this.previousDarkMode);
     this.document.body.style.backgroundColor = '';
     this.destroy$.next(); // Emite um valor para quebrar todas as subscrições
     this.destroy$.complete(); // Completa o Subject

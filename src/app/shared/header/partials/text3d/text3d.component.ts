@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -22,10 +23,13 @@ export class Text3dComponent implements OnInit {
   private renderer?: THREE.WebGLRenderer;
   private scene?: THREE.Scene;
   private camera?: THREE.PerspectiveCamera;
+  private raycaster = new THREE.Raycaster();
+  private mouse = new THREE.Vector2();
 
   public darkModeService = inject(DarkModeControllerService);
   public animateService = inject(AnimationControllerService);
   private text3dService = inject(Text3dService);
+  private router = inject(Router);
 
   // ----------- LifeCycle -----------
 
@@ -49,6 +53,7 @@ export class Text3dComponent implements OnInit {
     this.createThreeJs();
     this.createBackground();
     this.createText();
+    this.initEventListeners();
     this.animate();
   }
 
@@ -63,6 +68,30 @@ export class Text3dComponent implements OnInit {
 
     if (this.isAnimating && canvas) {
       canvas.appendChild(this.renderer.domElement);
+    }
+  }
+
+  private initEventListeners(): void {
+    if (!this.renderer) return;
+    this.renderer.domElement.addEventListener('dblclick', (event) => this.onDoubleClick(event));
+  }
+
+  private onDoubleClick(event: MouseEvent): void {
+    if (!this.renderer || !this.camera || !this.scene) return;
+
+    // Calcula posição do mouse em coordenadas normalizadas (-1 a +1)
+    const rect = this.renderer.domElement.getBoundingClientRect();
+    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+
+    const textMesh = this.text3dService.getTextMesh();
+    if (textMesh) {
+      const intersects = this.raycaster.intersectObject(textMesh);
+      if (intersects.length > 0) {
+        this.router.navigate(['/']);
+      }
     }
   }
 

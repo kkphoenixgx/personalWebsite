@@ -45,4 +45,12 @@ export class ProfessionalHistoryComponent {
   setPage(index: number) {
     this.activePage = index;
   }
+
+  get isBookOpen(): boolean {
+    return this.activePage > 0 && this.activePage <= this.jobs.length + 1;
+  }
+
+  get isBookClosedBack(): boolean {
+    return this.activePage > this.jobs.length + 1;
+  }
 }

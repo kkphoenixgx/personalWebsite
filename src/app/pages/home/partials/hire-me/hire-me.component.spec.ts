@@ -1,32 +1,42 @@
 /// <reference types="jasmine" />
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HireMeComponent } from './hire-me.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DarkModeControllerService } from '../../../../services/dark-mode-controller.service';
-import { of } from 'rxjs';
+import { AnimationControllerService } from '../../../../services/animation-controller.service';
+import { of, BehaviorSubject } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 describe('HireMeComponent', () => {
   let component: HireMeComponent;
   let fixture: ComponentFixture<HireMeComponent>;
+  let mockDarkModeService: any;
+  let mockAnimationService: any;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    mockDarkModeService = {
+      getDarkModeObserbable: () => of(true)
+    };
+
+    mockAnimationService = {
+      getAnimationObserbable: () => new BehaviorSubject<boolean>(false).asObservable(),
+      animationDelayInMs: 500
+    };
+
+    await TestBed.configureTestingModule({
       imports: [HireMeComponent, TranslateModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        { provide: DarkModeControllerService, useValue: { getDarkModeObserbable: () => of(true) } }
+        { provide: DarkModeControllerService, useValue: mockDarkModeService },
+        { provide: AnimationControllerService, useValue: mockAnimationService }
       ]
-    })
-    .compileComponents()
-    .then(() => {
-      fixture = TestBed.createComponent(HireMeComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-  }));
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HireMeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -1,4 +1,6 @@
-<article class="engineering-showcase">
+<article class="engineering-showcase"
+  [ngClass]="{ 'darkMode': isDarkMode$ | async, 'whiteMode': !(isDarkMode$ | async) }"
+>
   
   <!-- HERO: O Blueprint (Planta Baixa) -->
   <header class="blueprint-hero">
@@ -47,7 +49,7 @@
         <div class="diagram-panel">
           <div class="diagram-node">Obsidian MD</div>
           <div class="diagram-arrow">↓ <span>Git Sync</span></div>
-          <div class="diagram-node highlight">AWS EC2 (Spring)</div>
+          <div class="diagram-node highlight">Hetzner (formerly AWS) (Spring)</div>
           <div class="diagram-arrow">↓ <span>JSON Tree</span></div>
           <div class="diagram-node">Angular 19</div>
         </div>
