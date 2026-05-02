@@ -1,4 +1,4 @@
-<div class="articles-container stanford-theme" [ngClass]="{'darkMode': isDarkMode$ | async, 'whiteMode': !(isDarkMode$ | async)}" role="main">
+<div class="articles-container stanford-theme" role="main">
 
   <!-- Modo Leitor (Reader Mode) - HTML Nativo Gerado a partir do PDF -->
   <div class="article-reader" *ngIf="selectedArticle; else gridMode">
