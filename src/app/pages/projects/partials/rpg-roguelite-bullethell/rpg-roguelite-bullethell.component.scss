@@ -6,6 +6,79 @@
   font-family: 'Courier New', Courier, monospace;
   overflow-x: hidden;
   width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.whiteMode {
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+
+    .indie-hero {
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+      
+      .hero-background-grid {
+        background-image: 
+          linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+      }
+
+      .mega-title {
+        color: #111;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        &::before { text-shadow: -2px 0 #ff3366; }
+        &::after { text-shadow: -2px 0 #33ccff; }
+      }
+
+      .tagline { color: #444; }
+
+      .tech-badges span {
+        border-color: #ddd;
+        color: #008877;
+        background: #e6f9f5;
+      }
+
+      .scroll-indicator { color: #888; }
+    }
+
+    .cyber-btn {
+      color: #008877;
+      border-color: #008877;
+      &:hover { background: rgba(0, 136, 119, 0.1); box-shadow: 0 0 15px rgba(0, 136, 119, 0.2); }
+    }
+
+    .lore-section {
+      background: #eee;
+      border-bottom-color: rgba(0, 0, 0, 0.05);
+      .impact-statement { color: #000; }
+      .manifesto-body { color: #333; }
+    }
+
+    .feature-story {
+      .feature-title { 
+        color: #111; 
+        .highlight-cyan { color: #007766; }
+        .highlight-purple { color: #9933aa; }
+        .highlight-crimson { color: #cc0022; }
+      }
+      .feature-desc { color: #444; strong { color: #000; } }
+      .feature-number { -webkit-text-stroke: 2px rgba(0, 0, 0, 0.05); }
+    }
+
+    .forge-section {
+      background: #eee;
+      border-top-color: rgba(0, 0, 0, 0.1);
+      .forge-title { color: #000; }
+      .forge-desc { color: #333; }
+    }
+
+    .roadmap-box {
+      background: #fff;
+      border-color: #ddd;
+      .roadmap-header { border-bottom-color: #ddd; }
+      .roadmap-list .done { color: #008877; }
+      .roadmap-list .active { color: #111; &::before { color: #cc0022; } }
+    }
+  }
 }
 
 /* --- REVEAL CLASSES (Usadas pelo TypeScript) --- */

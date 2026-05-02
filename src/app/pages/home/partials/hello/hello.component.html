@@ -128,7 +128,7 @@
   <div class="image-modal" [class.active]="selectedImage" (click)="closeImage()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <img *ngIf="selectedImage" [src]="selectedImage" alt="Expanded Image">
-      <button class="close-btn" (click)="closeImage()"><span class="material-icons">close</span></button>
+      <button class="close-btn" (click)="closeImage()" aria-label="Close image viewer"><span class="material-icons">close</span></button>
     </div>
   </div>
 </div>

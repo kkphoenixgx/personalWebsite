@@ -30,17 +30,17 @@
       
       <div class="links">
 
-        <a class="info-button" style="font-size: 1.2rem;" href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf">
+        <a class="info-button" style="font-size: 1.2rem;" href="/assets/Curriculo-English.pdf" download="Curriculo-English.pdf" [attr.aria-label]="'OLD_HERO.DOWNLOAD_RESUME' | translate">
           <img ngSrc="/assets/pdfIcon.webp" width="28" height="28" alt="">
           <p>{{ 'OLD_HERO.DOWNLOAD_RESUME' | translate }}</p>
         </a>
 
-        <a class="info-button" href="https://www.linkedin.com/in/kkphoenix/">
+        <a class="info-button" href="https://www.linkedin.com/in/kkphoenix/" aria-label="LinkedIn Profile">
           <img ngSrc="/assets/linkedIn.webp" width="28" height="28" alt="">
           <p>LinkedIn</p>
         </a>
 
-        <a class="info-button" href="https://github.com/kkphoenixgx">
+        <a class="info-button" href="https://github.com/kkphoenixgx" [attr.aria-label]="'OLD_HERO.GITHUB' | translate">
           <img ngSrc="/assets/githubIcon.webp" width="28" height="28" alt="">
           <p>{{ 'OLD_HERO.GITHUB' | translate }}</p>
         </a>

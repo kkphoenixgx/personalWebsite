@@ -11,6 +11,45 @@
   font-family: "Merriweather", "Georgia", serif;
   background-color: transparent; 
   color: $text-dark;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.whiteMode {
+    background-color: #fdfcf8;
+  }
+
+  &.darkMode {
+    background-color: #0b1120;
+    color: #cbd5e1;
+
+    .article-reader {
+      .reader-header {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+        h1 { color: #f8fafc; }
+      }
+      .loading-content { color: #94a3b8; }
+      .reader-content .pdf-page {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    .grid-mode {
+      .stanford-header {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+        .stanford-title { color: #ef4444; } // Um tom de vermelho mais vivo para o dark mode
+        .stanford-subtitle { color: #94a3b8; }
+      }
+      .article-card {
+        background-color: #1e293b;
+        border-top-color: #ef4444;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        h3 { color: #f8fafc; }
+        .article-description { color: #94a3b8; }
+        &:hover {
+          box-shadow: 0 12px 24px rgba(239, 68, 68, 0.2);
+        }
+      }
+    }
+  }
 
   // READER MODE (HTML GERADO DO PDF)
   .article-reader {

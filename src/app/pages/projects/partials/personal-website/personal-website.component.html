@@ -1,4 +1,6 @@
-<article class="engineering-showcase">
+<article class="engineering-showcase"
+  [ngClass]="{ 'darkMode': isDarkMode$ | async, 'whiteMode': !(isDarkMode$ | async) }"
+>
   
   <!-- HERO: O Blueprint (Planta Baixa) -->
   <header class="blueprint-hero">

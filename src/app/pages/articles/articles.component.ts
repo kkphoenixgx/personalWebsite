@@ -6,6 +6,7 @@ import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router'
 import { Subject, takeUntil } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DarkModeControllerService } from '../../services/dark-mode-controller.service';
 
 export interface IArticle {
   title: string;
@@ -41,11 +42,12 @@ export class ArticlesComponent implements OnInit, OnDestroy { // Removido AfterV
 
   private pdfExtractionService = inject(PdfExtractionService);
   private translate = inject(TranslateService);
+  private darkModeService = inject(DarkModeControllerService);
+  public isDarkMode$ = this.darkModeService.getDarkModeObserbable();
 
   constructor() { }
 
   async ngOnInit() {
-    this.document.body.style.backgroundColor = '#fdfcf8'; // Off-white de Stanford
     this.document.body.style.transition = 'background-color 0.5s ease';
     
     this.translate.get('ARTICLES.TITLE').subscribe(title => {

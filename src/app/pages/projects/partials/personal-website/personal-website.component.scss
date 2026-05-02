@@ -6,6 +6,101 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
   width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.whiteMode {
+    background-color: #f8fafc;
+    color: #334155;
+
+    .blueprint-hero {
+      border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+      
+      .blueprint-grid {
+        background-image: 
+          linear-gradient(to right, rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(14, 165, 233, 0.1) 1px, transparent 1px);
+      }
+
+      .structural-lines .line {
+        background: rgba(14, 165, 233, 0.2);
+      }
+
+      .elegant-title { color: #0f172a; }
+      .hero-description { color: #64748b; }
+      .code-comment { color: #94a3b8; }
+    }
+
+    .btn-architect {
+      background: rgba(255, 255, 255, 0.8);
+      color: #0ea5e9;
+      border-color: #0ea5e9;
+      
+      &:hover {
+        background: #0ea5e9;
+        color: #fff;
+        .icon { color: #fff; }
+      }
+
+      &.solid {
+        background: #0ea5e9;
+        color: #fff;
+        &:hover { background: #0284c7; }
+      }
+    }
+
+    .system-architecture {
+      .ide-window {
+        background: #fff;
+        border-color: #e2e8f0;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      }
+
+      .window-header {
+        background: #f1f5f9;
+        border-bottom-color: #e2e8f0;
+        .window-title { color: #94a3b8; }
+      }
+
+      .panel-title { color: #0f172a; }
+      p { 
+        color: #475569; 
+        code { background: #f1f5f9; color: #0f172a; }
+      }
+
+      .diagram-panel {
+        background: #f8fafc;
+        border-color: #e2e8f0;
+      }
+      .diagram-node {
+        background: #fff;
+        border-color: #cbd5e1;
+        color: #64748b;
+        &.highlight { border-color: #0ea5e9; color: #0ea5e9; }
+      }
+    }
+
+    .telemetry-section {
+      background: #f1f5f9;
+      .elegant-title { color: #0f172a; }
+      .section-desc { color: #64748b; }
+    }
+
+    .terminal-window {
+      background: #fff;
+      border-color: #e2e8f0;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      
+      .term-header { background: #e2e8f0; color: #64748b; }
+      .term-line { color: #334155; }
+      .prompt { color: #6366f1; }
+      .blinking-cursor { background: #334155; }
+    }
+
+    .footer-cta {
+      background: #f8fafc;
+      border-top-color: #e2e8f0;
+    }
+  }
 }
 
 /* --- REVEAL CLASSES --- */
