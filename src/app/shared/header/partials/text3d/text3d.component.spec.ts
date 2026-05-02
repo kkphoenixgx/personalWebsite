@@ -1,4 +1,3 @@
-/// <reference types="jasmine" />
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Text3dComponent } from './text3d.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -6,6 +5,7 @@ import { DarkModeControllerService } from '../../../../services/dark-mode-contro
 import { AnimationControllerService } from '../../../../services/animation-controller.service';
 import { Text3dService } from '../../../../services/text3d.service.service'; 
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 describe('Text3dComponent', () => {
   let component: Text3dComponent;
@@ -13,21 +13,24 @@ describe('Text3dComponent', () => {
   let darkModeServiceMock: jasmine.SpyObj<DarkModeControllerService>;
   let animateServiceMock: jasmine.SpyObj<AnimationControllerService>;
   let text3dServiceMock: jasmine.SpyObj<Text3dService>;
+  let routerMock: jasmine.SpyObj<Router>;
 
   beforeEach(waitForAsync(() => {
     darkModeServiceMock = jasmine.createSpyObj('DarkModeControllerService', ['getDarkModeObserbable']);
     animateServiceMock = jasmine.createSpyObj('AnimationControllerService', ['getAnimationObserbable']);
-    text3dServiceMock = jasmine.createSpyObj('Text3dService', ['createText', 'updateTextColor']);
+    text3dServiceMock = jasmine.createSpyObj('Text3dService', ['createText', 'updateTextColor', 'getTextMesh']);
+    routerMock = jasmine.createSpyObj('Router', ['navigate']);
 
     darkModeServiceMock.getDarkModeObserbable.and.returnValue(of(true));
     animateServiceMock.getAnimationObserbable.and.returnValue(of(true));
 
     TestBed.configureTestingModule({
-      imports: [Text3dComponent], // Importando o componente aqui
+      imports: [Text3dComponent],
       providers: [
         { provide: DarkModeControllerService, useValue: darkModeServiceMock },
         { provide: AnimationControllerService, useValue: animateServiceMock },
         { provide: Text3dService, useValue: text3dServiceMock },
+        { provide: Router, useValue: routerMock }
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -36,6 +39,23 @@ describe('Text3dComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(Text3dComponent);
     component = fixture.componentInstance;
+    
+    // Mockando initThreejs para evitar falhas de WebGL no Karma
+    spyOn(component as any, 'initThreejs').and.callFake(() => {
+      (component as any).renderer = { 
+        dispose: () => {},
+        setSize: () => {},
+        domElement: document.createElement('canvas')
+      };
+      (component as any).scene = {};
+      (component as any).camera = {
+        updateProjectionMatrix: () => {},
+        position: { z: 0 }
+      };
+      (component as any).updateColors();
+      (component as any).createText();
+    });
+    
     fixture.detectChanges();
   });
 
@@ -60,7 +80,7 @@ describe('Text3dComponent', () => {
   });
 
   afterEach(() => {
-    // Cleanup THREE.js renderer to avoid memory leaks
+    // Cleanup mock renderer
     if (component['renderer']) {
       component['renderer'].dispose();
     }

@@ -72,4 +72,8 @@ export class Text3dService {
   resetRotationProgress(){
     this.rotationProgress = 0;
   }
+
+  getTextMesh() {
+    return this.textMesh;
+  }
 }

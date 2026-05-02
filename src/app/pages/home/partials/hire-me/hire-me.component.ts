@@ -35,7 +35,8 @@ export class HireMeComponent implements AfterViewInit, OnDestroy {
   private accentLight!: THREE.PointLight;
   
   private clock = new THREE.Clock();
-  private animationFrameId!: number;
+  private animationFrameId: number = 0;
+  private resizeObserver!: ResizeObserver;
   
   private isBrowser = false;
   private destroy$ = new Subject<void>();
@@ -54,22 +55,30 @@ export class HireMeComponent implements AfterViewInit, OnDestroy {
       this.updateTheme(isDark);
     });
 
-    // Pequeno delay para garantir que o contêiner tenha dimensões
-    setTimeout(() => {
-        this.initThreeJs();
-        this.updateTheme(this.currentIsDarkMode);
-    }, 100);
+    this.initThreeJs();
+    this.updateTheme(this.currentIsDarkMode);
     
-    this.isAnimated$.pipe(takeUntil(this.destroy$)).subscribe(animate => {
-      if (!animate && this.animationFrameId) {
-        cancelAnimationFrame(this.animationFrameId);
-      } else if (animate && this.isBrowser && this.threeInitialized) {
+    // Dá a partida no motor de animação independentemente da emissão inicial do RxJS.
+    // Se o serviço estiver em silêncio (aguardando mudança de estado), isso garante a renderização inicial.
+    if (this.isBrowser && this.threeInitialized && !this.animationFrameId) {
+      this.ngZone.runOutsideAngular(() => {
         this.animate();
-      }
-    });
+      });
+    }
 
-    this.ngZone.runOutsideAngular(() => {
-      this.animate();
+    this.isAnimated$.pipe(takeUntil(this.destroy$)).subscribe(animate => {
+      if (!animate) {
+        if (this.animationFrameId) {
+          cancelAnimationFrame(this.animationFrameId);
+          this.animationFrameId = 0;
+        }
+      } else if (animate && this.isBrowser && this.threeInitialized) {
+        if (!this.animationFrameId) {
+          this.ngZone.runOutsideAngular(() => {
+            this.animate();
+          });
+        }
+      }
     });
   }
 
@@ -78,8 +87,9 @@ export class HireMeComponent implements AfterViewInit, OnDestroy {
     const container = canvas.parentElement;
     if (!container) return;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    // O recuo de 1px previne o engine WebGL de crashar os rects de viewport
+    const width = container.clientWidth || 1;
+    const height = container.clientHeight || 1;
 
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     this.renderer.setSize(width, height);
@@ -89,7 +99,7 @@ export class HireMeComponent implements AfterViewInit, OnDestroy {
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     this.camera.position.z = 50;
 
-    const planeGeo = new THREE.PlaneGeometry(300, 300, 100, 100);
+    const planeGeo = new THREE.PlaneGeometry(300, 300, 35, 35);
     const planeMat = new THREE.MeshStandardMaterial({
       color: 0x334455,
       metalness: 0.9,
@@ -116,7 +126,19 @@ export class HireMeComponent implements AfterViewInit, OnDestroy {
     this.accentLight.position.set(50, 40, 20);
     this.scene.add(this.accentLight);
 
-    window.addEventListener('resize', this.onResize);
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const newWidth = entry.contentRect.width;
+        const newHeight = entry.contentRect.height;
+        if (newWidth > 0 && newHeight > 0) {
+          this.camera.aspect = newWidth / newHeight;
+          this.camera.updateProjectionMatrix();
+          this.renderer.setSize(newWidth, newHeight);
+        }
+      }
+    });
+    this.resizeObserver.observe(container);
+
     this.threeInitialized = true;
   }
 
@@ -137,21 +159,26 @@ export class HireMeComponent implements AfterViewInit, OnDestroy {
 
   private animate = () => {
     if (!this.isBrowser || !this.renderer || !this.scene || !this.camera) return;
+    
     this.animationFrameId = requestAnimationFrame(this.animate);
+
+    const canvas = this.renderer.domElement;
+    if (canvas.clientWidth === 0 || canvas.clientHeight === 0) return;
 
     const elapsedTime = this.clock.getElapsedTime();
 
     if (this.fluidPlane) {
       const pos = this.fluidPlane.geometry.attributes['position'] as THREE.BufferAttribute;
+      const array = pos.array;
       for (let i = 0; i < pos.count; i++) {
-        const x = pos.getX(i);
-        const y = pos.getY(i);
+        const x = array[i * 3];
+        const y = array[i * 3 + 1];
         
         const z = Math.sin(x * 0.05 + elapsedTime * 0.5) * 5 +
                   Math.cos(y * 0.05 + elapsedTime * 0.5) * 5 +
                   Math.sin((x + y) * 0.02 + elapsedTime * 0.3) * 8;
         
-        pos.setZ(i, z);
+        array[i * 3 + 2] = z;
       }
       pos.needsUpdate = true;
       this.fluidPlane.geometry.computeVertexNormals();
@@ -160,25 +187,17 @@ export class HireMeComponent implements AfterViewInit, OnDestroy {
     this.renderer.render(this.scene, this.camera);
   };
 
-  private onResize = () => {
-    if (!this.canvasRef) return;
-    const container = this.canvasRef.nativeElement.parentElement;
-    if (container && this.camera && this.renderer) {
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(width, height);
-    }
-  };
-
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
     
     if (this.isBrowser) {
-      cancelAnimationFrame(this.animationFrameId);
-      window.removeEventListener('resize', this.onResize);
+      if (this.animationFrameId) {
+        cancelAnimationFrame(this.animationFrameId);
+      }
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect();
+      }
       
       if (this.fluidPlane) {
         this.fluidPlane.geometry.dispose();

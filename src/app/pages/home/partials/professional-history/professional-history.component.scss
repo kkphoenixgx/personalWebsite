@@ -103,6 +103,9 @@
     &.is-open {
       transform: translateX(50%);
     }
+    &.is-closed-back {
+      transform: translateX(100%);
+    }
   }
 
   .page {
